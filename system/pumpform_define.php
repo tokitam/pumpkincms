@@ -1,0 +1,23 @@
+<?php
+
+define('PUMPFORM_PRIMARY_ID', 1);
+define('PUMPFORM_SITE_ID', 2);
+define('PUMPFORM_INT', 3);
+define('PUMPFORM_TIME', 4);
+define('PUMPFORM_USER', 5);
+define('PUMPFORM_TEXT', 6);
+define('PUMPFORM_TEXTAREA', 7);
+define('PUMPFORM_EMAIL', 8);
+define('PUMPFORM_PASSWORD', 9);
+define('PUMPFORM_CHECKBOX', 10);
+define('PUMPFORM_IMAGE', 11);
+define('PUMPFORM_FILE', 12);
+define('PUMPFORM_IPADDRESS', 13);
+define('PUMPFORM_BOOLEAN', 14);
+define('PUMPFORM_URL', 15);
+define('PUMPFORM_ADDRESS_AND_GMAP', 16);
+define('PUMPFORM_MULTI_CHECKBOX', 17);
+define('PUMPFORM_RADIO', 18);
+define('PUMPFORM_SELECT', 19);
+define('PUMPFORM_TINYMCE', 20);
+define('PUMPFORM_YOUTUBE', 21);
