@@ -1,4 +1,4 @@
-# pumpkincms
+# PumpkinCMS
 
 PumpkinCMS is general CMS system.
 * Multi site manage
