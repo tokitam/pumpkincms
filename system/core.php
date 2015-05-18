@@ -28,7 +28,5 @@ require_once PUMPCMS_SYSTEM_PATH . '/wp_compatible.php';
 require_once PUMPCMS_APP_PATH . '/module/user/class/actionlog.php';
 require_once PUMPCMS_SYSTEM_PATH . '/debug.php';
 
-//PC_Benchmark::check('start');
-
 $router = new PC_Router();
 $router->run();

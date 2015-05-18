@@ -1,7 +1,5 @@
 <?php
 
-$pc_config = array();
-
 $pc_config['debug_mode'] = true;
 
 $pc_config['site_list'] = array(
