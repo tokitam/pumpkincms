@@ -224,7 +224,7 @@ class PumpForm {
 		    
 		    if (count($error) == 0) {
 
-				if (self::edit_pre_process != null) {
+				if (self::$edit_pre_process != null) {
 					$func = self::$edit_pre_process;
 					$func();
 				}

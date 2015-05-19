@@ -8,6 +8,7 @@ class PC_Db_pdo extends PC_Db {
 	private $_sth;
 	private $_sql;
 	private $_driver;
+	private $_row_count = 0;
 	
 	const MYSQL = 'mysql';
 	const SQLITE = 'sqlite';
@@ -118,6 +119,9 @@ class PC_Db_pdo extends PC_Db {
 		}
 	}
 
+	/**
+	 * for SELECT, DELETE
+	 */ 
 	function query($sql, $values=array(), $types=array()) {
 		PC_Debug::log($sql, __FILE__, __LINE__);
 		
@@ -133,14 +137,19 @@ class PC_Db_pdo extends PC_Db {
 		if ($result == false ) {
 			$this->abort($sql);
 		}
+
+		$this->_row_count = $this->_stmt->rowCount();
 	}
 
+	/**
+	 * for INSERT, UPDATE
+	 */ 
 	function exec($sql, $values, $types) {
 		PC_Debug::log('sql:' . $sql, __FILE__, __LINE__);
 		PC_Debug::log('values:' . print_r($values, true), __FILE__, __LINE__);
 		PC_Debug::log('types:' . print_r($types, true), __FILE__, __LINE__);
 		
-		$sth = $this->_con->prepare($sql);
+		$this->_stmt = $this->_con->prepare($sql);
 
 		foreach ($values as $key => $value) {
 			$type = PC_Db::T_STRING;
@@ -151,14 +160,16 @@ class PC_Db_pdo extends PC_Db {
 			} else if($types[$key] == PC_Db::T_BLOB) {
 				$type = PDO::PARAM_LOB;
 			}
-			$sth->bindParam($key, $value, $type);
+			$this->_stmt->bindParam($key, $value, $type);
 		}
 
-		$ret = $sth->execute($values);	
+		$ret = $this->_stmt->execute($values);	
 		if ($ret == false) {
-		    $tmp = $sth->errorInfo();
+		    $tmp = $this->_stmt->errorInfo();
 		    $this->abort($sql, $tmp[2]);
 		}
+
+		$this->_row_count = $this->_stmt->rowCount();
 	}
 
 	function fetch_row($sql) {
@@ -193,6 +204,10 @@ class PC_Db_pdo extends PC_Db {
     function insert_id($sequence_obj_name='') {
 	    $id = $this->_con->lastInsertId($sequence_obj_name);
 	    return $id;
+	}
+
+	function row_count() {
+		return $this->_row_count;
 	}
     
     function escape($str) {

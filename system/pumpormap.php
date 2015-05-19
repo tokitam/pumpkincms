@@ -5,6 +5,7 @@ require_once PUMPCMS_SYSTEM_PATH . '/pumpfile.php';
 
 class PumpORMAP {
     var $form_config;
+    private $_row_count = 0;
     
 	static $_ormap = array();
 
@@ -264,6 +265,8 @@ class PumpORMAP {
 
 	    $db->exec($sql, $values, $types);
 
+	    $this->_row_count = $db->row_count();
+
 		if ($db->get_driver() == PC_Db_pdo::PGSQL) {
 			$insert_id = $db->insert_id($db->prefix($table) . '_id_seq');
 		} else {
@@ -289,7 +292,7 @@ class PumpORMAP {
 		return $insert_id;
     }
 
-    public function update($id) {
+    public function update($id, $where='') {
 		$db = PC_DBSet::get();
 
 		$table = $this->get_table();
@@ -430,10 +433,15 @@ class PumpORMAP {
 		    array_push($columns, $s);
 		}
 		$sql .= implode(', ', $columns);
-		$sql .= ' WHERE id = ' . intval($id);
+		if ($where == '') {
+			$sql .= ' WHERE id = ' . intval($id);			
+		} else {
+			$sql .= ' WHERE ' . $where;
+		}
 
 		$db->exec($sql, $values, $types);
 
+	    $this->_row_count = $db->row_count();
     }
 
     
@@ -448,9 +456,7 @@ class PumpORMAP {
 		$sql .= ' = ' . intval($id);
 
 		$db->query($sql);
-
     }
-
     
     public function delete_where($where) {
 		$db = PC_DBSet::get();
@@ -462,7 +468,10 @@ class PumpORMAP {
 	    $sql .= $where;
 
 		$db->query($sql);
+    }
 
+    public function row_count() {
+    	return $this->_row_count;
     }
 }
 

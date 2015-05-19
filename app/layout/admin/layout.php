@@ -432,6 +432,11 @@ selector:'.pump_tinymce'
                            </a>
                         </li>
                         <li class="active">
+                            <a href="<?php echo PC_Config::url() ?>/admin/config/">
+                                <i class="fa fa-edit"></i> <span>全体設定</span>
+                           </a>
+                        </li>
+                        <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/user/">
                                 <i class="fa fa-edit"></i> <span>ユーザ管理</span>
                            </a>

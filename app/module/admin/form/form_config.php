@@ -24,6 +24,48 @@ $pumpform_config['admin']['config'] = array(
 			'type' => PUMPFORM_USER,
 			'visible' => 0),
 
+		'name' => array('name' => 'name',
+			'title' => 'name',
+			'type' => PUMPFORM_TEXT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,),
+		'value' => array('name' => 'value',
+			'title' => 'value',
+			'type' => PUMPFORM_TEXT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,),
+    ),
+);
+
+
+$pumpform_config['admin']['config_form'] = array(
+	'module' => 'admin',
+	'title' => 'config',
+	'table' => 'config_form',
+	'column' => array(
+		array('name' => 'id',
+			'type' => PUMPFORM_PRIMARY_ID,
+			'visible' => 0),
+		array('name' => 'site_id',
+			'type' => PUMPFORM_SITE_ID,
+			'visible' => 0),
+		array('name' => 'reg_time',
+			'type' => PUMPFORM_TIME,
+			'visible' => 0),
+		array('name' => 'mod_time',
+			'type' => PUMPFORM_TIME,
+			'visible' => 0),
+		array('name' => 'reg_user',
+			'type' => PUMPFORM_USER,
+			'visible' => 0),
+		array('name' => 'mod_user',
+			'type' => PUMPFORM_USER,
+			'visible' => 0),
+
 		'title' => array('name' => 'title',
 			'title' => 'title',
 			'type' => PUMPFORM_TEXT,
@@ -68,3 +110,6 @@ $pumpform_config['admin']['config'] = array(
 			),
     ),
 );
+
+
+

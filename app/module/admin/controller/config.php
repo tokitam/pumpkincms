@@ -9,7 +9,7 @@ class admin_config extends PC_Controller {
 
 		$this->_flg_scaffold = true;
 		$this->_module = 'admin';
-		$this->_table = 'config';
+		$this->_table = 'config_form';
 
 		PumpForm::$add_pre_process = function() {
 			echo ' OK ';
@@ -17,19 +17,46 @@ class admin_config extends PC_Controller {
 		};
 
 		PumpForm::$edit_pre_process = function() {
-			echo ' OK ';
-			exit();
+			function update_or_insert($name, $value) {
+				$_POST['name'] = $name;
+				$_POST['value'] = $value;
+				$db = PC_Dbset::get();
+				$ormap = PumpORMAP_Util::get('admin', 'config');
+				$ormap->update(null, "name = " . $db->escape($name));
+
+				if ($ormap->row_count() == 0) {
+					$ormap->insert($_POST);
+				}
+			}
+
+			$data = $_POST;
+			$list = array(
+				'title',
+				'description',
+				'debag_mode',
+				'site_close'
+			);
+			foreach ($list as $value) {
+				update_or_insert($value, $data[$value]);
+			}
+			PC_Notification::set(_MD_PUMPFORM_UPDATED);
+
+			PC_Util::redirect(PC_Config::url() . '/admin/config/');
 		};
 
 		PumpForm::$edit_load_process = function($target_id) {
-			return array(
-				'title' => 'site title',
-				'description' => 'desc name',
-			);
+			$ormap = PumpORMAP_Util::get('admin', 'config');
+			$list = $ormap->get_list('site_id = ' . intval(PC_Config::get('site_id')));
+
+			$tmp = array();
+			foreach ($list as $key => $value) {
+				$tmp[$value['name']] = $value['value'];
+			}
+			return $tmp;
 		};
     }
 
     public function index() {
-    	// do nothing
+    	self::edit();
     }
 }
