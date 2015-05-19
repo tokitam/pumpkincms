@@ -17,7 +17,10 @@ class PumpForm {
     static $scaffold_base_url = '';
     static $edit_url = '';
     static $delete_url = '';
+    static $add_pre_process = null;
     static $add_post_process = null;
+    static $edit_load_process = null;
+    static $edit_pre_process = null;
 
     static $call_after_update = null;
     static $pagenavi = null;
@@ -172,7 +175,12 @@ class PumpForm {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	    	$error = $this->validate($module, $table);
 
-		    if (count($error) == 0) {
+			if (count($error) == 0) {
+				if (self::$add_pre_process != null) {
+					$func = self::$add_pre_process;
+					$func();
+				}
+
 				$form_config = $pumpform_config[$module][$table];
 				$pumpormap = new PumpORMAP($form_config);
 				self::$insert_id = $pumpormap->insert();
@@ -215,6 +223,11 @@ class PumpForm {
 		    $error = $this->validate($module, $table);
 		    
 		    if (count($error) == 0) {
+
+				if (self::edit_pre_process != null) {
+					$func = self::$edit_pre_process;
+					$func();
+				}
 		    		
 		    	$pumpormap = new PumpORMAP($form_config);
 		    	if (self::$target_id) {
@@ -248,8 +261,13 @@ class PumpForm {
 				$target_id = PC_Config::get('dir4');
 			}
 
-			$ormap = new PumpORMAP($form_config);
-			$data['item'] = $ormap->get_one($target_id);
+			if (self::$edit_load_process == null) {
+				$ormap = new PumpORMAP($form_config);
+				$data['item'] = $ormap->get_one($target_id);
+			} else {
+				$func = self::$edit_load_process;
+				$data['item'] = $func($target_id);
+			}
 		}
 
 		$this->form = $form;
