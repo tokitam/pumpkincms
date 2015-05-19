@@ -5,7 +5,7 @@ class PumpSelfDiagnosis {
     static public function diagnosis() {
         $message = '';
         if (self::diagnosis_config() == false) {
-            self::start_installer();
+            //self::start_installer();
             $message .= "APP/config/config.php not readalbe<br />";
         }
         if (self::diagnosis_default() == false) {
