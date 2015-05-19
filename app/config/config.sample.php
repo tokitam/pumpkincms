@@ -9,31 +9,31 @@ $pc_config['site_list'] = array(
 $pc_config['site_config_catchall'] = 1;
 
 $pc_config['site_config'] = array(
-1 => array('site_title' => 'foo1 test',
-  'default_layout' => 'foo1',
+1 => array('site_title' => 'PumpkinCMS',
+  'default_layout' => 'default',
   'db_no' => 1,
 
-  // メール送信時に、from:ヘッダーへセットされるメールアドレス
-  'from_email' => 'foo1 test<pumpcmsfrom1@pumpup.jp>',
+  // from header mail address at sending
+  'from_email' => 'admin<example@example.com>',
 
-  // ユーザアイコンをデフォルトから変更する
-  'under_construction_image' => PUMPCMS_PUBLIC_PATH . '/themes/idoldd/uc.png',
+  // custom default user icon url
+  //'under_construction_image' => PUMPCMS_PUBLIC_PATH . '/themes/uc.png',
 
-  // 背景画像
-  'bg_image_url' => 'http://dev11.idoldd.com/image/i/659_imo4rwqc.jpg',
+  // custom background url
+  //'bg_image_url' => 'http://example.com/sample.jpg',
 
   'blog' => array(
-    1 => array('dir' => 'news', 'title' => 'ニュース'),
-    2 => array('dir' => 'info', 'title' => 'インフォメーション'),
-    3 => array('dir' => 'blog', 'title' => 'ブログ'),
+    1 => array('dir' => 'news', 'title' => 'NEWS'),
+    2 => array('dir' => 'info', 'title' => 'INFORMATION'),
+    3 => array('dir' => 'blog', 'title' => 'BLOG'),
     ),
 
-  // 電話認証 twilio の設定
+  // telauth twilio setting
   'twilio_account_sid' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   'twilio_auth_token' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   'twilio_from_telno' => '+819999999999',
 
-  // AWS の設定
+  // AWS setting
   'aws_access_key' => 'XXXXXXXXXXXXXXXXXXXX',
   'aws_secret_key' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   'aws_s3_bucket_name' => 'samplebucket',
@@ -43,19 +43,14 @@ $pc_config['site_config'] = array(
   'db_no' => 1,
   'from_email' => 'testlayout admin<pumpcmsfrom2@pumpup.jp>',
   ),
-3 => array('site_title' => 'gouhouloli.jp',
-  'default_layout' => 'testlayout',
-  'db_no' => 2,
-  'from_email' => 'gouhouloli.jp<pumpcmsfrom3@pumpup.jp>',
-  ),
-4 => array('site_title' => 'example',
+3 => array('site_title' => 'example',
   'default_layout' => 'shop',
   'db_no' => 1,
   'from_email' => 'gouhouloli.jp<pumpcmsfrom3@pumpup.jp>',
   ),
 );
 
-// 読み込むルーターの設定
+// routing setting
 $pc_config['router'][1][1] = 'shop';
 $pc_config['router'][1][2] = 'blog';
 
