@@ -29,6 +29,7 @@ class PC_Router {
 		$this->setup();
 		$this->check_site();
 		$this->check_lang();
+		$this->load_config();
 		$this->render = new PC_Render();
 		$this->analyze_url();
 		$this->execute();
@@ -42,8 +43,10 @@ class PC_Router {
 	function setup() {
 		mb_language('Japanese');
 		mb_internal_encoding('UTF-8');
-		//ini_set('upload_max_filesize', '10M');
-		//ini_set('post_max_size', '10M');
+	}
+
+	function load_config() {
+		PC_Config::load_config();
 	}
 
 	function check_site() {

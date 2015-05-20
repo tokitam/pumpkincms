@@ -1,6 +1,15 @@
 <?php
 
 class PC_Config {
+	public static function load_config() {
+		
+		$ormap = PumpORMAP_Util::get('admin', 'config');
+		$list = $ormap->get_list();
+		foreach ($list as $key => $value) {
+			self::set($value['name'], $value['value']);
+		}
+	}
+
 	public static function get($key1, $key2=null) {
 		global $pc_config;
 
@@ -17,8 +26,9 @@ class PC_Config {
     
 	public static function set($key, $value) {
 		global $pc_config;
-	    
-	        $pc_config[$key] = $value;
+
+		$pc_config[$key] = $value;
+		SiteInfo::set($key, $value);
 	}
     
     public static function url() {
@@ -35,6 +45,3 @@ class PC_Config {
 		return self::get('css_url');
     }
 }
-
-
-

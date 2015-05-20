@@ -31,7 +31,7 @@ class admin_config extends PC_Controller {
 
 			$data = $_POST;
 			$list = array(
-				'title',
+				'site_title',
 				'description',
 				'debag_mode',
 				'site_close'
