@@ -130,7 +130,7 @@ if (@$form_config['1n_link_id']) {
 				if (@$column['crop']) {
 					$o['crop'] = 1;
 				}
-				$html .= PumpImage::get_tag($value, 150, 150, $o);
+				$html .= PumpImage::get_tag($value, 60, 60, $o);
 			} else {
 			    $html .= htmlspecialchars(mb_substr($value, 0, 20, 'utf8'));
 			}
@@ -143,8 +143,9 @@ if (@$form_config['1n_link_id']) {
 		$html .= '<td class="odd">';
 	    }
 
-	    $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "'><nobr>" . _MD_PUMPFORM_DETAIL . "</nobr></a> ";
-	    $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
+            $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" ._MD_PUMPFORM_DETAIL . "</a>";
+	    $html .= "&nbsp;";
+	    $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
 	    //$html .= "<a href=''>" . _MD_PUMPFORM_DELETE . "</a> ";
 	    $html .= "</td>\n";
 	    $html .= "</tr>\n";

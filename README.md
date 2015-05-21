@@ -11,4 +11,4 @@ PumpkinCMS is general CMS system.
 http://idoldd.com/
 
 ### license
-MIT Lincense
+MIT License
