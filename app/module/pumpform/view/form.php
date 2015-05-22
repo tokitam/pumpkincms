@@ -298,6 +298,18 @@ $form_html .= "</fieldset>\n";
 //$form_html .= "<input type='submit' >\n";
 //$form_html .= "<input type='reset' >\n";
 
+echo $form_html;
+$form_html = '';
+?>
+
+<?php if (PumpForm::$redirect_url) : ?>
+<a href="<?php echo PumpForm::$redirect_url; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
+<?php else : ?>
+<a href="<?php echo PC_Config::get('base_url') . '/' . PC_Config::get('dir1') . '/' . PC_Config::get('dir2') . '/'; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
+<?php endif ; ?>
+
+<?php
+
 if (PC_Config::get('dir3') == 'edit' && is_numeric(PC_Config::get('dir4')) || PumpForm::$file == 'edit') {
 if (PumpForm::$delete_url) {
 	$delete_url = sprintf(PumpForm::$delete_url, $item['id']);
@@ -307,17 +319,11 @@ if (PumpForm::$delete_url) {
 	$delete_url = $module_url . '/delete/' . $item['id'] . '/';
 }
 
-$form_html .= "&nbsp;&nbsp;&nbsp;\n";
-$form_html .= "<input type='button' onclick='javascript:location.href=\"" . $delete_url . "\";' value='" . _MD_PUMPFORM_DELETE . "' ><br />\n";
+//$form_html .= "&nbsp;&nbsp;&nbsp;\n";
+$form_html .= "<input type='button' onclick='javascript:location.href=\"" . $delete_url . "\";' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'><br />\n";
 }
 
 $form_html .= "</form>\n";
 
 echo $form_html;
-?>
 
-<?php if (PumpForm::$redirect_url) : ?>
-<a href="<?php echo PumpForm::$redirect_url; ?>"><?php echo _MD_PUMPFORM_BACK ?></a>
-<?php else : ?>
-<a href="<?php echo PC_Config::get('base_url') . '/' . PC_Config::get('dir1') . '/' . PC_Config::get('dir2') . '/'; ?>"><?php echo _MD_PUMPFORM_BACK ?></a>
-<?php endif ; ?>

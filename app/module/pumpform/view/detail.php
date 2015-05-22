@@ -113,7 +113,7 @@ if (UserInfo::is_master_admin() || UserInfo::is_site_admin()) {
 	if (PumpForm::$edit_url) {
 		$form_html .= sprintf('<a href="' . PumpForm::$edit_url . '">' . _MD_PUMPFORM_EDIT . '</a>', $item['id']);
 	} else {
-		$form_html .= "[<a href='" . PC_Config::get('base_url') . '/' . PC_Config::get('dir1') . '/' . PC_Config::get('dir2') . "/edit/" . PC_Config::get('dir4') . "/'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a>] ";
+		$form_html .= "<a href='" . PC_Config::get('base_url') . '/' . PC_Config::get('dir1') . '/' . PC_Config::get('dir2') . "/edit/" . PC_Config::get('dir4') . "/' class='btn btn-default'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
 	}
 }
 $form_html .= "<br />\n";
@@ -124,8 +124,8 @@ echo $form_html;
 </div>
 
 <?php if (PumpForm::$redirect_url) : ?>
-<a href="<?php echo PumpForm::$redirect_url; ?>"><?php echo _MD_PUMPFORM_BACK ?></a>
+<a href="<?php echo PumpForm::$redirect_url; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
 <?php else : ?>
-<a href="<?php echo $module_url; ?>"><?php echo _MD_PUMPFORM_BACK ?></a>
+<a href="<?php echo $module_url; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
 <?php endif ; ?>
 <?php echo PumpForm::$redirect_url ?>

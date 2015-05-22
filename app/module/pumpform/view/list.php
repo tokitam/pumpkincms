@@ -26,7 +26,7 @@ if (@$form_config['1n_link_id']) {
 
 		$html = '';
 
-		$html .= "[<a href='" . $module_url . "/add/" . $url_option . "'>" . _MD_PUMPFORM_ADD . "</a>]\n";
+		$html .= "<a href='" . $module_url . "/add/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
                 $html .= "<br />\n";
 
 		$html .= $pn->get_page_link();
@@ -143,9 +143,9 @@ if (@$form_config['1n_link_id']) {
 		$html .= '<td class="odd">';
 	    }
 
-            $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" ._MD_PUMPFORM_DETAIL . "</a>";
+        $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" ._MD_PUMPFORM_DETAIL . "</a>";
 	    $html .= "&nbsp;";
-	    $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
+	    $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_EDIT . "</a> ";
 	    //$html .= "<a href=''>" . _MD_PUMPFORM_DELETE . "</a> ";
 	    $html .= "</td>\n";
 	    $html .= "</tr>\n";
@@ -156,7 +156,7 @@ if (@$form_config['1n_link_id']) {
 		$html .= $pn->get_page_link();
 		$html .= "<br />\n";
 
-		$html .= "[<a href='" . $module_url . "/add/" . $url_option . "'>" . _MD_PUMPFORM_ADD . "</a>]\n";
+		$html .= "<a href='" . $module_url . "/add/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
 	
 	echo $html;
 
