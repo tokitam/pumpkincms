@@ -3,8 +3,9 @@
 $pc_config['debug_mode'] = true;
 
 $pc_config['site_list'] = array(
-'example.com' => array('site_id' => 1),
-'127.0.0.1/pumpcms/public' => array('site_id' => 2),
+'127.0.0.1/pumpkincms/public' => array('site_id' => 1),
+'example.com' => array('site_id' => 2),
+'example.net' => array('site_id' => 3),
 );
 $pc_config['site_config_catchall'] = 1;
 
@@ -12,6 +13,9 @@ $pc_config['site_config'] = array(
 1 => array('site_title' => 'PumpkinCMS',
   'default_layout' => 'default',
   'db_no' => 1,
+
+  // css_url setting
+  //'css_url' => 'http://127.0.0.1/pumpkincms/public',
 
   // from header mail address at sending
   'from_email' => 'admin<example@example.com>',
@@ -51,8 +55,8 @@ $pc_config['site_config'] = array(
 );
 
 // routing setting
-$pc_config['router'][1][1] = 'shop';
-$pc_config['router'][1][2] = 'blog';
+//$pc_config['router'][1][1] = 'shop';
+//$pc_config['router'][1][2] = 'blog';
 
 // MySQL setting
 $pc_config['database'][1]['db_type'] = 'pdo';
