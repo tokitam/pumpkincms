@@ -12,3 +12,6 @@ http://idoldd.com/
 
 ### license
 MIT License
+
+### Install
+See https://github.com/tokitam/pumpkincms/wiki/Install
