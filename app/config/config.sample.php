@@ -1,7 +1,5 @@
 <?php
 
-$pc_config['debug_mode'] = true;
-
 $pc_config['site_list'] = array(
 '127.0.0.1/pumpkincms/public' => array('site_id' => 1),
 'example.com' => array('site_id' => 2),

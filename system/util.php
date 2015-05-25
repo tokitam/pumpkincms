@@ -107,6 +107,42 @@ class PC_Util {
 	static function get_useragent() {
 		return @$_SERVER['HTTP_USER_AGENT'];
 	}
+    
+        static function get_service_base_path() {
+	    if ($_SERVER['REQUEST_URI'] == '' ||
+		$_SERVER['REQUEST_URI'] == '/') {
+		return '';
+	    } else if ($_SERVER['QUERY_STRING'] == '') {
+		preg_match('@(.+)/?@', $_SERVER['REQUEST_URI'], $r);
+		return self::cut_tail_slash($r[1]);
+	    } else {
+		$q = self::cut_tail_slash($_SERVER['QUERY_STRING']);
+		if (strstr($q, '=')) {
+		    $arr = explode('=', $q);
+		    $q = $arr[1];
+		}
+		$req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
+//echo "<br />\n";		
+//echo "<br />\n";		
+//echo "<br />\n";		
+//		echo " q: " . $q . "\n";
+//		echo " req: " . $req . "\n"; 
+
+		preg_match('@(.+)/' . $q . '$@', $req, $r);
+//var_dump($r);
+//		var_dump($_SERVER);
+		return $r[1];
+	    }
+	}
+    
+        static function cut_tail_slash($s) {
+	    $l = substr($s, -1, 1);
+	    if ($l == '/') {
+		return substr($s, 0, -1);
+	    }
+	    
+	    return $s;
+	}
 
 	static function strip_tags($str) {
 		$tags = array('a', 'p', 'span', 'em', 'iframe', 'img', 'li', 

@@ -12,6 +12,7 @@ class PC_MultiSite {
         }
 	
 	$host = strtolower(@$_SERVER['HTTP_HOST']);
+	PC_Config::set('REQUEST_URI', $_SERVER['REQUEST_URI']);
 	
         foreach ($site_list as $site => $site_data) {
             $site_id = $site_data['site_id'];
@@ -36,9 +37,10 @@ class PC_MultiSite {
         $catchall = PC_Config::get('site_config_catchall');
         $site_data = $site_config[$catchall];
         $site_data['site_id'] = $catchall;
-        self::set_site_info($site_data);
         PC_Config::set('site_id', $catchall);
-
+	$service_url = PC_Util::get_service_base_path();
+	PC_Config::set('base_url', 'http://' . $_SERVER['SERVER_NAME'] . $service_url);
+        self::set_site_info($site_data);
     }
     
     static function set_site_info($data) {

@@ -63,10 +63,12 @@ class PC_Router {
 	function analyze_url() {
 		global $site_info;
 
-		if (preg_match('@^(.+)\?(.*)$@', $_SERVER['REQUEST_URI'], $r)) {
+	    //PC_Config::set('REQUEST_URI', $_SERVER['REQUEST_URI']);
+
+	    if (preg_match('@^(.+)\?(.*)$@', $_SERVER['REQUEST_URI'], $r)) {
 			$request_uri = @$r[1];
 		} else {
-			$request_uri = $_SERVER['REQUEST_URI'];
+		    $request_uri = $_SERVER['REQUEST_URI'];
 		}
 
 		$base_path = SiteInfo::get_path();
@@ -210,7 +212,7 @@ class PC_Router {
 		$this->render->module = $module;
 		$this->render->class = $classname;
 		$this->render->method = $method;
-
+	    
 		ob_start();
 		$this->render->module_execute();
 		$this->render->module_output = ob_get_contents();

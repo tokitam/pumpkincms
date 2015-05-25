@@ -354,7 +354,7 @@ selector:'.pump_tinymce'
                                 <li class="user-header bg-light-blue">
                                     <?php /* <img src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/img/avatar3.png" class="img-circle" alt="User Image" /> */ ?>
 <?php if (0 < UserInfo::get('image_id')) : ?>
-                                    <img src="<?php echo PumpImage::get_url(UserInfo::get('image_id'), 215, 215) ?>" class="image-circle" />
+                                    <img src="<?php echo PumpImage::get_url(UserInfo::get('image_id'), 215, 215, array('crop' => 1)) ?>" class="image-circle" />
 <?php else : ?>
                                     <img src="<?php echo SiteInfo::get_css_url() ?>/image/no_image.png" class="image-circle" />
 <?php endif ; ?>                                    
