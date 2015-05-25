@@ -361,7 +361,7 @@ selector:'.pump_tinymce'
                                     <p>
                                         <?php echo UserInfo::get('name') ?>
                                         <!-- <small>登録日時 <?php echo strftime('%Y/%m/%d %H:%M', UserInfo::get('reg_time')) ?></small>-->
-                                        <small>最終ログイン <?php echo strftime('%Y/%m/%d %H:%M', UserInfo::get('last_login_time')) ?></small>
+                                        <small><?php echo _MD_ADMIN_LAST_LOGIN ?> <?php echo strftime('%Y/%m/%d %H:%M', UserInfo::get('last_login_time')) ?></small>
                                     </p>
                                 </li>
                                 <?php /*
@@ -381,10 +381,10 @@ selector:'.pump_tinymce'
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="<?php echo PC_Config::url() ?>/user/" class="btn btn-default btn-flat">プロフィール</a>
+                                        <a href="<?php echo PC_Config::url() ?>/user/" class="btn btn-default btn-flat"><?php echo _MD_ADMIN_PROFILE ?></a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="<?php echo PC_Config::url() ?>/user/logout" class="btn btn-default btn-flat">ログアウト</a>
+                                        <a href="<?php echo PC_Config::url() ?>/user/logout" class="btn btn-default btn-flat"><?php echo _MD_ADMIN_LOGOUT ?></a>
                                     </div>
                                 </li>
                             </ul>
@@ -428,32 +428,32 @@ selector:'.pump_tinymce'
                     <ul class="sidebar-menu">
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/">
-                                <i class="fa fa-dashboard"></i> <span>管理トップ</span>
+                                <i class="fa fa-dashboard"></i> <span><?php echo _MD_ADMIN_TOP ?></span>
                            </a>
                         </li>
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/config/">
-                                <i class="fa fa-edit"></i> <span>全体設定</span>
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_SETTING ?></span>
                            </a>
                         </li>
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/user/">
-                                <i class="fa fa-edit"></i> <span>ユーザ管理</span>
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_USER ?></span>
                            </a>
                         </li>
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/image/">
-                                <i class="fa fa-edit"></i> <span>画像管理</span>
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_IMAGE ?></span>
                            </a>
                         </li>
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/page/">
-                                <i class="fa fa-edit"></i> <span>ページ管理</span>
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_PAGE ?></span>
                            </a>
                         </li>
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/diralias/">
-                                <i class="fa fa-edit"></i> <span>diralias管理</span>
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_DIRALIAS ?></span>
                            </a>
                         </li>
 <?php
@@ -476,7 +476,7 @@ if ($dh = opendir($dir)) {
 ?>
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/blog/">
-                                <i class="fa fa-edit"></i> <span>ブログ管理</span>
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_BLOG ?></span>
                            </a>
                         </li>
                         <!--
@@ -488,7 +488,7 @@ if ($dh = opendir($dir)) {
                     -->
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/">
-                                <i class="fa fa-edit"></i> <span>ウェブサイト</span>
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_WEBSITE ?></span>
                            </a>
                         </li>
                         <?php /* menu off 
