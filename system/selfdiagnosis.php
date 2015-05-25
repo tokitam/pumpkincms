@@ -6,10 +6,10 @@ class PumpSelfDiagnosis {
         $message = '';
         if (self::diagnosis_config() == false) {
             //self::start_installer();
-            $message .= "APP/config/config.php not readalbe<br />";
+            $message .= "APP/config/config.php not readable<br />";
         }
         if (self::diagnosis_default() == false) {
-            $message .= "APP/config/default.php not readalbe<br />";
+            $message .= "APP/config/default.php not readable<br />";
         }
         if (self::diagnosis_auth_cache() == false) {
             $message .= "APP/cache/ not writable [ # chmod 777 cache ]<br />";
