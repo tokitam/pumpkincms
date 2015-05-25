@@ -122,15 +122,9 @@ class PC_Util {
 		    $q = $arr[1];
 		}
 		$req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
-//echo "<br />\n";		
-//echo "<br />\n";		
-//echo "<br />\n";		
-//		echo " q: " . $q . "\n";
-//		echo " req: " . $req . "\n"; 
 
 		preg_match('@(.+)/' . $q . '$@', $req, $r);
-//var_dump($r);
-//		var_dump($_SERVER);
+
 		return $r[1];
 	    }
 	}
