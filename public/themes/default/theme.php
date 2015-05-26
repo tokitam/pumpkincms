@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (defined('PUMPCMS_ROOT_PATH') == false) { exit(); } ?><!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">

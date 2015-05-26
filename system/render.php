@@ -51,7 +51,7 @@ class PC_Render {
 		} else {
 			ob_start();
 			$file1 = PUMPCMS_PUBLIC_PATH . '/wpthemes/'  . PC_Config::get('layout') . '/index.php';
-			$file2 = PUMPCMS_APP_PATH . '/layout/' . PC_Config::get('layout') . '/layout.php';
+			$file1 = PUMPCMS_PUBLIC_PATH . '/themes/'  . PC_Config::get('layout') . '/theme.php';
 			if (is_readable($file1)) {
 				include $file1;
 			} else {
