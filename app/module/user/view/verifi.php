@@ -1,5 +1,5 @@
 <div class="twelve columns">
-<h2 id="heading3"><?php echo _MD_USER_REGISTER ?></h2>
+<h3><?php echo _MD_USER_REGISTER ?></h3>
 <p>
 
 <?php echo $this->message; ?><br />
