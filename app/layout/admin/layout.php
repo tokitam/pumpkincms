@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php echo PC_Config::get('site_title') ?> | マスター管理画面</title>
+        <title><?php echo PC_Config::get('site_title') ?> | Master Admin</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
