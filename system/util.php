@@ -121,11 +121,15 @@ class PC_Util {
 		    $arr = explode('=', $q);
 		    $q = $arr[1];
 		}
+
 		$req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
 
 		preg_match('@(.+)/' . $q . '$@', $req, $r);
-
-		return $r[1];
+		if (isset($r[1])) {
+		    return $r[1];
+		} else {
+		    return '';
+		}
 	    }
 	}
     
