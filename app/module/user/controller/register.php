@@ -9,7 +9,7 @@ class user_register extends PC_Controller {
     public function index() {
 	    
 	if (UserInfo::is_logined()) {
-	    PC_Util::redirect(PC_Config::url() . '/');
+	    PC_Util::redirect_top();
 	}
 	
 	$this->error = array();

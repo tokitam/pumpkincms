@@ -4,7 +4,7 @@ class admin_entry extends PC_Controller {
     public function __construct() {
 
     	if (UserInfo::is_site_admin() == false) {
-			PC_Util::redirect(PC_Config::get('base_url') . '/');
+			PC_Util::redirect_top();
 		}
 
 		PumpForm::$redirect_url = PC_Config::url() . '/admin/shop/';
@@ -30,7 +30,7 @@ class admin_entry extends PC_Controller {
 
 		preg_match('@admin/entry/publish/([0-9]+)@', $service_url, $r);
 		if (is_numeric($r[1]) == false) {
-			PC_Util::redirect(PC_Config::url() . '/');
+			PC_Util::redirect_top();
 		}
 		$entry_id = $r[1];
 

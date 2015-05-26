@@ -65,7 +65,7 @@ class PC_Controller {
 		$form_config = PumpFormConfig::get_config($module, $table);
 	    
 		if (@$form_config['master_admin_only'] && UserInfo::is_master_admin() == false) {
-			PC_Util::redirect(PC_Config::url() . '/');
+			PC_Util::redirect_top();
 		}
 
 		$pump_form = new PumpForm();	

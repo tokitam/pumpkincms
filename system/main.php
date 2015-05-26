@@ -85,7 +85,7 @@ class PC_Main {
 				UserInfo::is_master_admin() == false) {
 				$user_model = new user_model();
 				$user_model->logout();
-				PC_Util::redirect(PC_Config::url());
+				PC_Util::redirect_top();
 			}
 
 			if (UserInfo::is_master_admin()) {

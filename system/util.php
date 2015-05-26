@@ -6,6 +6,11 @@ class PC_Util {
 		exit();
 	}
     
+	static function redirect_top() {
+		header('Location: ' . PC_Config::url());
+		exit();
+	}
+    
 	static function is_email($email) {
 		if (preg_match('|^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$|', $email)) {
 			return true;

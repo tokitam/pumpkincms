@@ -9,7 +9,7 @@ class admin_index extends PC_Controller {
 
 		if (UserInfo::is_site_admin() == false) {
 			PC_Notification::set(_MD_USER_LOGOUT);
-			PC_Util::redirect(PC_Config::get('base_url') . '/');
+			PC_Util::redirect_top();
 		}
 
 	    $this->message = array();

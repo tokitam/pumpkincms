@@ -4,7 +4,7 @@ class admin_ad extends PC_Controller {
     public function __construct() {
 
     	if (UserInfo::is_site_admin() == false) {
-			PC_Util::redirect(PC_Config::get('base_url') . '/');
+			PC_Util::redirect_top();
 		}
 
 		PC_Util::include_language_file('shop');
