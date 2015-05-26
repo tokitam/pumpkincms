@@ -47,7 +47,7 @@ class PC_Render {
 		}
 	    
 		if (SiteInfo::get('dir1') == 'admin') {
-			include PUMPCMS_APP_PATH . '/layout/admin/layout.php';
+			include PUMPCMS_PUBLIC_PATH . '/themes/admin/theme.php';
 		} else {
 			ob_start();
 			$file1 = PUMPCMS_PUBLIC_PATH . '/wpthemes/'  . PC_Config::get('layout') . '/index.php';

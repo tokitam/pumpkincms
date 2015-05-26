@@ -20,7 +20,14 @@ class PC_Controller {
 		    $class = $s[1];
 		}
 
-	    $file = PUMPCMS_APP_PATH . '/module/' . $module . '/view/' . $class . '.php';
+		$theme_template = PUMPCMS_PUBLIC_PATH . '/themes/' . PC_Config::get('layout') . '/template/' . $module . '_' . $class . '.php';
+
+		if (is_readable($theme_template)) {
+			$file = $theme_template;
+		} else {
+		    $file = PUMPCMS_APP_PATH . '/module/' . $module . '/view/' . $class . '.php';
+		}
+
 	    if (is_readable($file) == false) {
 		    die('File not found:' . $file . ' ' . __FILE__ .':' . __LINE__);
 		}
@@ -61,6 +68,7 @@ class PC_Controller {
 		//PC_Debug::log('PC_Controller::scaffold()', __FILE__, __LINE__);
 
 		PC_Util::include_language_file($module);
+		$module_org = $module;
 		
 		$form_config = PumpFormConfig::get_config($module, $table);
 	    
@@ -105,7 +113,13 @@ class PC_Controller {
 			}
 		}
 
-		$file = PUMPCMS_APP_PATH . '/module/' . $module . '/view/' . $class . '.php';
+		$theme_template = PUMPCMS_PUBLIC_PATH . '/themes/' . PC_Config::get('layout') . '/template/' . $module_org . '_' . $class . '.php';
+
+		if (is_readable($theme_template)) {
+			$file = $theme_template;
+		} else {
+			$file = PUMPCMS_APP_PATH . '/module/' . $module . '/view/' . $class . '.php';
+		}
 
 		if (is_readable($file) == false) {
 			die('File not found:' . $file . ' ' . __FILE__ .':' . __LINE__);
