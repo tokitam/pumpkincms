@@ -5,9 +5,9 @@
     <title><?php echo SiteInfo::get('site_title'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/themes/<?php echo SiteInfo::get('default_layout') ?>/bootstrap.css" media="screen">
-    <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/themes/<?php echo SiteInfo::get('default_layout') ?>/assets/css/bootswatch.css">
-    <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/themes/<?php echo SiteInfo::get('default_layout') ?>/custom.css">
+    <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/assets/css/bootswatch.css">
+    <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/custom.css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
@@ -46,7 +46,7 @@
 <?php if (PC_Config::get('bg_image_url')) : ?>  
   <body style='background-image: url("<?php echo PC_Config::get('bg_image_url') ?>"); background-repeat: repeat;'>
 <?php else : ?>    
-  <body style='background-image: url("<?php echo SiteInfo::get_css_url(); ?>/themes/<?php echo SiteInfo::get('default_layout') ?>/pattern8-pattern-26b.png");'>
+  <body style='background-image: url("<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/pattern8-pattern-26b.png");'>
 <?php endif ; ?>  
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -187,8 +187,8 @@
 
     <!--</div>-->
 
-    <script src="<?php echo SiteInfo::get_css_url() ?>/themes/default/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo SiteInfo::get_css_url() ?>/themes/default/assets/js/bootswatch.js"></script>
+    <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/assets/js/bootswatch.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify.min.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify_func.js"></script>
   </body>
