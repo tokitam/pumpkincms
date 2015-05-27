@@ -45,13 +45,13 @@ class PC_Render {
 		if (isset($_GET['system_layout'])) {
 			PC_Config::set('layout', $_GET['system_layout']);
 		}
-	    
+
 		if (SiteInfo::get('dir1') == 'admin') {
-			include PUMPCMS_PUBLIC_PATH . '/themes/admin/theme.php';
+			include PUMPCMS_PUBLIC_PATH . '/theme/admin/theme.php';
 		} else {
 			ob_start();
-			$file1 = PUMPCMS_PUBLIC_PATH . '/wpthemes/'  . PC_Config::get('layout') . '/index.php';
-			$file1 = PUMPCMS_PUBLIC_PATH . '/themes/'  . PC_Config::get('layout') . '/theme.php';
+			$file1 = PUMPCMS_PUBLIC_PATH . '/wptheme/'  . PC_Config::get('theme') . '/index.php';
+			$file2 = PUMPCMS_PUBLIC_PATH . '/theme/'  . PC_Config::get('theme') . '/theme.php';
 			if (is_readable($file1)) {
 				include $file1;
 			} else {

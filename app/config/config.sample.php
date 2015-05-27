@@ -9,7 +9,7 @@ $pc_config['site_config_catchall'] = 1;
 
 $pc_config['site_config'] = array(
 1 => array('site_title' => 'PumpkinCMS',
-  'default_layout' => 'default',
+  'default_theme' => 'default',
   'db_no' => 1,
 
   // css_url setting
@@ -41,12 +41,12 @@ $pc_config['site_config'] = array(
   'aws_s3_bucket_name' => 'samplebucket',
   ),
 2 => array('site_title' => 'testlayout', 
-  'default_layout' => 'testlayout',
+  'default_theme' => 'testlayout',
   'db_no' => 1,
   'from_email' => 'testlayout admin<pumpcmsfrom2@pumpup.jp>',
   ),
 3 => array('site_title' => 'example',
-  'default_layout' => 'shop',
+  'default_theme' => 'shop',
   'db_no' => 1,
   'from_email' => 'gouhouloli.jp<pumpcmsfrom3@pumpup.jp>',
   ),

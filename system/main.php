@@ -126,9 +126,9 @@ class PC_Main {
 			$this->_module = $ret['module'];
 			$this->_controller = $ret['controller'];
 			$this->_method = $ret['method'];
-			$layout = @$ret['layout'];
-			if ($layout != '') {
-				PC_Config::set('layout', $layout);
+			$theme = @$ret['theme'];
+			if ($theme != '') {
+				PC_Config::set('theme', $theme);
 			}
 
 			return;

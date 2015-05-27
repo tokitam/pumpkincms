@@ -50,7 +50,7 @@ class PC_MultiSite {
 	
         $site_config = PC_Config::get('site_config');
         $info = $site_config[$site_id];
-        PC_Config::set('layout', @$info['default_layout']);
+        PC_Config::set('theme', @$info['theme']);
         PC_Config::set('site_title', @$info['site_title']);
         if (@$data['css_url']) {
             $info['css_url'] = $data['css_url'];
