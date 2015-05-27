@@ -19,3 +19,4 @@ define('_MD_ADMIN_DEBUG_MODE', 'Debug mode');
 define('_MD_ADMIN_SITE_CLOSE', 'Site close');
 define('_MD_ADMIN_SITE_CLOSE_ON', 'OPEN');
 define('_MD_ADMIN_SITE_CLOSE_OFF', 'CLOES');
+define('_MD_ADMIN_SITE_CLOSE_MESSAGE', 'Site close Message');

@@ -103,6 +103,9 @@ class PC_Main {
 		$ret = null;
 		if (is_array($router_list)) {
 			foreach ($router_list as $module) {
+			    if (is_array($module)) {
+				continue;
+			    }
 				$file = PUMPCMS_APP_PATH . '/module/' . $module . '/router/' . $module . '_router.php';
 				if (is_readable($file)) {
 					require_once $file;

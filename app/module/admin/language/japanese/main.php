@@ -19,3 +19,4 @@ define('_MD_ADMIN_DEBUG_MODE', 'デバッグモード');
 define('_MD_ADMIN_SITE_CLOSE', 'サイト閉鎖');
 define('_MD_ADMIN_SITE_CLOSE_ON', '公開');
 define('_MD_ADMIN_SITE_CLOSE_OFF', '閉鎖');
+define('_MD_ADMIN_SITE_CLOSE_MESSAGE', 'サイト閉鎖メッセージ');

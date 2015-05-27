@@ -108,6 +108,20 @@ $pumpform_config['admin']['config_form'] = array(
 				1 => _MD_ADMIN_SITE_CLOSE_OFF,
 				)
 			),
+		'site_close_message' => array('name' => 'site_close_message',
+			'title' => _MD_ADMIN_SITE_CLOSE_MESSAGE,
+			'type' => PUMPFORM_TEXTAREA,
+			//'placeholder' => _MD_SHOP_STATUS,
+			'required' => 0,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 0,
+			'option' => array(
+				0 => _MD_ADMIN_SITE_CLOSE_ON,
+				1 => _MD_ADMIN_SITE_CLOSE_OFF,
+				)
+			),
     ),
 );
 

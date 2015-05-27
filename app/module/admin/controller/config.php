@@ -34,7 +34,8 @@ class admin_config extends PC_Controller {
 				'site_title',
 				'description',
 				'debag_mode',
-				'site_close'
+				'site_close',
+				'site_close_message'
 			);
 			foreach ($list as $value) {
 				update_or_insert($value, $data[$value]);
