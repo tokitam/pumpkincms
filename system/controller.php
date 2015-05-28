@@ -20,7 +20,7 @@ class PC_Controller {
 		    $class = $s[1];
 		}
 
-		$theme_template = PUMPCMS_PUBLIC_PATH . '/themes/' . PC_Config::get('layout') . '/template/' . $module . '_' . $class . '.php';
+		$theme_template = PUMPCMS_PUBLIC_PATH . '/theme/' . PC_Config::get('theme') . '/template/' . $module . '_' . $class . '.php';
 
 		if (is_readable($theme_template)) {
 			$file = $theme_template;
@@ -113,7 +113,7 @@ class PC_Controller {
 			}
 		}
 
-		$theme_template = PUMPCMS_PUBLIC_PATH . '/themes/' . PC_Config::get('layout') . '/template/' . $module_org . '_' . $class . '.php';
+		$theme_template = PUMPCMS_PUBLIC_PATH . '/theme/' . PC_Config::get('theme') . '/template/' . $module_org . '_' . $class . '.php';
 
 		if (is_readable($theme_template)) {
 			$file = $theme_template;

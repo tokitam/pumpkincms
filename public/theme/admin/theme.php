@@ -5,23 +5,23 @@
         <title><?php echo PC_Config::get('site_title') ?> | Master Admin</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- font Awesome -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- Morris chart -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/morris/morris.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/morris/morris.css" rel="stylesheet" type="text/css" />
         <!-- jvectormap -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
         <!-- Date Picker -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
         <!-- Daterange picker -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <!-- bootstrap wysihtml5 - text editor -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
-        <link href="<?php echo SiteInfo::get_css_url() ?>/themes/admin/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo SiteInfo::get_css_url() ?>/theme/admin/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
         <link href="<?php echo SiteInfo::get_css_url(); ?>/css/pumpcms.css" rel="stylesheet" type="text/css" />
 
@@ -32,7 +32,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo SiteInfo::get_css_url(); ?>/themes/shop/images/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo SiteInfo::get_css_url(); ?>/theme/shop/images/favicon.ico" />
 
 
 
@@ -41,38 +41,38 @@
         <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>-->
         <script src="<?php echo SiteInfo::get_css_url(); ?>/js/jquery-2.1.1.js"></script>
         <!-- jQuery UI 1.10.3 -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- Morris.js charts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/morris/morris.min.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/morris/morris.min.js" type="text/javascript"></script>
         <!-- Sparkline -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
         <!-- jvectormap -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
         <!-- jQuery Knob Chart -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
         <!-- daterangepicker -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
         <!-- datepicker -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
         <!-- Bootstrap WYSIHTML5 -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <!-- iCheck -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 
         <!-- AdminLTE App -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/AdminLTE/app.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/AdminLTE/app.js" type="text/javascript"></script>
 
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <!--
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/AdminLTE/dashboard.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/AdminLTE/dashboard.js" type="text/javascript"></script>
         -->
 
         <!-- AdminLTE for demo purposes -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/js/AdminLTE/demo.js" type="text/javascript"></script>
+        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/AdminLTE/demo.js" type="text/javascript"></script>
 
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="<?php echo SiteInfo::get_css_url() ?>/js/pump_gmap.js"></script>
@@ -162,7 +162,7 @@ selector:'.pump_tinymce'
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
-                                    <?php /* <img src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/img/avatar3.png" class="img-circle" alt="User Image" /> */ ?>
+                                    <?php /* <img src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/img/avatar3.png" class="img-circle" alt="User Image" /> */ ?>
 <?php if (0 < UserInfo::get('image_id')) : ?>
                                     <img src="<?php echo PumpImage::get_url(UserInfo::get('image_id'), 215, 215, array('crop' => 1)) ?>" class="image-circle" />
 <?php else : ?>
@@ -212,7 +212,7 @@ selector:'.pump_tinymce'
                     <div class="user-panel">
                         <?php /*
                         <div class="pull-left image">
-                            <img src="<?php echo SiteInfo::get_css_url() ?>/themes/admin/img/avatar3.png" class="img-circle" alt="User Image" />
+                            <img src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         */ ?>
                         <div class="pull-left info">
