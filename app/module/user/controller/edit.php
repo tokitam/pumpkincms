@@ -13,7 +13,7 @@ class user_edit extends PC_Controller {
 
     public function index() {
     	if (UserInfo::is_logined() == false) {
-    		PC_Util::redirect(PC_Config::url());
+    		PC_Util::redirect_top();
     	}
 
     	$method = 'edit';

@@ -1,5 +1,10 @@
 <?php
 
+define('_MD_PUMPFORM_LAST_LOGIN', 'Last login');
+define('_MD_PUMPFORM_PROFILE', 'Profile');
+define('_MD_PUMPFORM_LOGOUT', 'Logout');
+define('_MD_PUMPFORM_SIGNUP', 'Sign up');
+define('_MD_PUMPFORM_SIGNIN', 'Sign in');
 define('_MD_PUMPFORM_EDIT', 'EDIT');
 define('_MD_PUMPFORM_DELETE', 'DELETE');
 define('_MD_PUMPFORM_DETAIL', 'DETAIL');

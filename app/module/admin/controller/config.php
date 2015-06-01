@@ -4,7 +4,7 @@ class admin_config extends PC_Controller {
     public function __construct() {
 
 		if (UserInfo::is_site_admin() == false) {
-			PC_Util::redirect(PC_Config::get('base_url') . '/');
+			PC_Util::redirect_top();
 		}
 
 		$this->_flg_scaffold = true;
@@ -34,7 +34,8 @@ class admin_config extends PC_Controller {
 				'site_title',
 				'description',
 				'debag_mode',
-				'site_close'
+				'site_close',
+				'site_close_message'
 			);
 			foreach ($list as $value) {
 				update_or_insert($value, $data[$value]);

@@ -1,5 +1,10 @@
 <?php
 
+define('_MD_PUMPFORM_LAST_LOGIN', '最終ログイン');
+define('_MD_PUMPFORM_PROFILE', 'プロフィール');
+define('_MD_PUMPFORM_LOGOUT', 'ログアウト');
+define('_MD_PUMPFORM_SIGNUP', '新規登録');
+define('_MD_PUMPFORM_SIGNIN', 'ログイン');
 define('_MD_PUMPFORM_EDIT', '編集');
 define('_MD_PUMPFORM_DELETE', '削除');
 define('_MD_PUMPFORM_DETAIL', '詳細');

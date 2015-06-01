@@ -6,6 +6,11 @@ class PC_Util {
 		exit();
 	}
     
+	static function redirect_top() {
+		header('Location: ' . PC_Config::url());
+		exit();
+	}
+    
 	static function is_email($email) {
 		if (preg_match('|^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$|', $email)) {
 			return true;
@@ -106,6 +111,40 @@ class PC_Util {
 
 	static function get_useragent() {
 		return @$_SERVER['HTTP_USER_AGENT'];
+	}
+    
+        static function get_service_base_path() {
+	    if ($_SERVER['REQUEST_URI'] == '' ||
+		$_SERVER['REQUEST_URI'] == '/') {
+		return '';
+	    } else if ($_SERVER['QUERY_STRING'] == '') {
+		preg_match('@(.+)/?@', $_SERVER['REQUEST_URI'], $r);
+		return self::cut_tail_slash($r[1]);
+	    } else {
+		$q = self::cut_tail_slash($_SERVER['QUERY_STRING']);
+		if (strstr($q, '=')) {
+		    $arr = explode('=', $q);
+		    $q = $arr[1];
+		}
+
+		$req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
+
+		preg_match('@(.+)/' . $q . '$@', $req, $r);
+		if (isset($r[1])) {
+		    return $r[1];
+		} else {
+		    return '';
+		}
+	    }
+	}
+    
+        static function cut_tail_slash($s) {
+	    $l = substr($s, -1, 1);
+	    if ($l == '/') {
+		return substr($s, 0, -1);
+	    }
+	    
+	    return $s;
 	}
 
 	static function strip_tags($str) {

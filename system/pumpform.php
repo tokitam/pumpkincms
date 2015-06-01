@@ -69,7 +69,7 @@ class PumpForm {
     		if (@$_GET[$form['1n_link_id']]) {
     			//l ok
     		} else {
-    			PC_Util::redirect(PC_Config::get('base_url') . '/');
+    			PC_Util::redirect_top();
     		}
     	}
     }

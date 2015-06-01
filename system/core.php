@@ -10,7 +10,7 @@ require_once PUMPCMS_SYSTEM_PATH . '/db_pdo.php';
 require_once PUMPCMS_SYSTEM_PATH . '/benchmark.php';
 require_once PUMPCMS_SYSTEM_PATH . '/config.php';
 require_once PUMPCMS_SYSTEM_PATH . '/model.php';
-require_once PUMPCMS_SYSTEM_PATH . '/router.php';
+require_once PUMPCMS_SYSTEM_PATH . '/main.php';
 require_once PUMPCMS_SYSTEM_PATH . '/controller.php';
 require_once PUMPCMS_SYSTEM_PATH . '/abort.php';
 require_once PUMPCMS_SYSTEM_PATH . '/dbset.php';
@@ -28,5 +28,5 @@ require_once PUMPCMS_SYSTEM_PATH . '/wp_compatible.php';
 require_once PUMPCMS_APP_PATH . '/module/user/class/actionlog.php';
 require_once PUMPCMS_SYSTEM_PATH . '/debug.php';
 
-$router = new PC_Router();
-$router->run();
+$main = new PC_Main();
+$main->run();

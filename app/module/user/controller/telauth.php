@@ -11,7 +11,7 @@ class user_telauth extends PC_Controller {
 
 	public function auth() {
 	    if (UserInfo::is_logined() == false) {
-		PC_Util::redirect(PC_Config::url());
+		PC_Util::redirect_top();
 	    }
 
 	    if (@$_POST['tel_code'] == '' ||

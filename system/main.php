@@ -5,7 +5,7 @@ require_once PUMPCMS_SYSTEM_PATH . '/multi_lang.php';
 require_once PUMPCMS_SYSTEM_PATH . '/multi_site.php';
 require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
 
-class PC_Router {
+class PC_Main {
 	var $_dir1 = '';
 	var $_dir2 = '';
 	var $_dir3 = '';
@@ -63,10 +63,12 @@ class PC_Router {
 	function analyze_url() {
 		global $site_info;
 
-		if (preg_match('@^(.+)\?(.*)$@', $_SERVER['REQUEST_URI'], $r)) {
+	    //PC_Config::set('REQUEST_URI', $_SERVER['REQUEST_URI']);
+
+	    if (preg_match('@^(.+)\?(.*)$@', $_SERVER['REQUEST_URI'], $r)) {
 			$request_uri = @$r[1];
 		} else {
-			$request_uri = $_SERVER['REQUEST_URI'];
+		    $request_uri = $_SERVER['REQUEST_URI'];
 		}
 
 		$base_path = SiteInfo::get_path();
@@ -83,7 +85,7 @@ class PC_Router {
 				UserInfo::is_master_admin() == false) {
 				$user_model = new user_model();
 				$user_model->logout();
-				PC_Util::redirect(PC_Config::url());
+				PC_Util::redirect_top();
 			}
 
 			if (UserInfo::is_master_admin()) {
@@ -101,6 +103,9 @@ class PC_Router {
 		$ret = null;
 		if (is_array($router_list)) {
 			foreach ($router_list as $module) {
+			    if (is_array($module)) {
+				continue;
+			    }
 				$file = PUMPCMS_APP_PATH . '/module/' . $module . '/router/' . $module . '_router.php';
 				if (is_readable($file)) {
 					require_once $file;
@@ -121,9 +126,9 @@ class PC_Router {
 			$this->_module = $ret['module'];
 			$this->_controller = $ret['controller'];
 			$this->_method = $ret['method'];
-			$layout = @$ret['layout'];
-			if ($layout != '') {
-				PC_Config::set('layout', $layout);
+			$theme = @$ret['theme'];
+			if ($theme != '') {
+				PC_Config::set('theme', $theme);
 			}
 
 			return;
@@ -210,7 +215,7 @@ class PC_Router {
 		$this->render->module = $module;
 		$this->render->class = $classname;
 		$this->render->method = $method;
-
+	    
 		ob_start();
 		$this->render->module_execute();
 		$this->render->module_output = ob_get_contents();

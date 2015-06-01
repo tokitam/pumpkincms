@@ -40,7 +40,7 @@ class User_Model extends PC_Model {
 		    $_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $this->_user_data;
 			PC_Notification::set(_MD_USER_LOGINED);
 			ActionLog::log(ActionLog::LOGIN);
-	        PC_Util::redirect(PC_Config::url());
+	        PC_Util::redirect_top();
 		} else {
 			return $error;
 		}
@@ -50,7 +50,7 @@ class User_Model extends PC_Model {
 		ActionLog::log(ActionLog::LOGOUT);
 		unset($_SESSION['pump_'. PC_Config::get('site_id')]);
 		PC_Notification::set(_MD_USER_LOGOUT);
-		PC_Util::redirect(PC_Config::get('base_url'));
+		PC_Util::redirect_top();
 	}
 
 	function admin_mode($flg) {

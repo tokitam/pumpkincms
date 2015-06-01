@@ -56,7 +56,8 @@
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url() ?>/user/login">
               	<input type="hidden" name="login" value="1">
                 <fieldset>
-                  <legend><?php echo htmlspecialchars(PC_Config::get('site_title')) . ' ' . _MD_UESR_SITE_CLOSE ?></legend>
+                  <legend><?php echo htmlspecialchars(PC_Config::get('site_title')) ?></legend>
+                  <?php echo PC_Config::get('site_close_message') ?>
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-3 control-label"><?php echo _MD_LOGIN_EMAIL ?></label>
                     <div class="col-lg-9">
