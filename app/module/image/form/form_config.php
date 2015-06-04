@@ -6,6 +6,7 @@ $pumpform_config['image']['image'] = array(
     'table' => 'image',
 
 	'list_php' => 'list',
+	'default_sort' => 'd_id',				   
 
     'column' => array(
         array('name' => 'id',
