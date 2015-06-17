@@ -27,6 +27,7 @@ require_once PUMPCMS_SYSTEM_PATH . '/notification.php';
 require_once PUMPCMS_SYSTEM_PATH . '/wp_compatible.php';
 require_once PUMPCMS_APP_PATH . '/module/user/class/actionlog.php';
 require_once PUMPCMS_SYSTEM_PATH . '/debug.php';
+require_once PUMPCMS_ROOT_PATH . '/external/password_compat/lib/password.php';
 
 $main = new PC_Main();
 $main->run();
