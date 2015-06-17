@@ -32,3 +32,6 @@ $pc_config['log_dir'] = PUMPCMS_APP_PATH . '/log';
 
 $pc_config['session.cookie_lifetime'] = (60 * 60 * 24 * 365);
 $pc_config['session.gc_maxlifetime'] = (60 * 60 * 24 * 365);
+
+//$pc_config['password_hash'] = 'MD5';
+
