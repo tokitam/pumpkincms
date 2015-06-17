@@ -94,7 +94,14 @@ class User_Model extends PC_Model {
 		
 		if (count($error) == 0) {
 			$this->_user_data = $this->select_user();
-			if ($this->_user_data == false) {
+		    
+		    if (PC_Util::password_verify($_POST['password'], $this->_user_data['password'])) {
+			$pass_check = true;
+		    } else {
+			$pass_check = false;
+		    }
+		    
+			if ($this->_user_data == false || $pass_check == false) {
 				//array_unshift($error, _MD_USER_ERROR_NOTFOUND . '(7)');
 				$error['email'] = _MD_USER_ERROR_NOTFOUND . '(7)';
 			}
@@ -184,9 +191,8 @@ class User_Model extends PC_Model {
 		
 		$sql = 'SELECT * FROM ' . $db->prefix($this->table_name);
 		$sql .= " WHERE ";
-	    $sql .= 'site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
-		$sql .= " email = " . $db->escape($_POST['email']) . " AND ";
-		$sql .= " password = '" . md5($_POST['password']). "'";
+	        $sql .= 'site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
+		$sql .= " email = " . $db->escape($_POST['email']);
 
 		return $db->fetch_row($sql);
 	}
@@ -276,7 +282,7 @@ class User_Model extends PC_Model {
 		
 		$sql = 'UPDATE ' . $db->prefix($this->table_name);
 		$sql .= " SET ";
-		$sql .= " password= " . $db->escape(md5($password)) . " ";
+	        $sql .= " password= " . $db->escape(PC_Util::password_hash($password)) . " ";
 	        $sql .= " WHERE id = '" . intval($id) . "' ";
 
 	        return $db->query($sql);

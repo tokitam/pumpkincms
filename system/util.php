@@ -249,4 +249,27 @@ class PC_Util {
 
 		return $r[1];
 	}
+    
+    static function password_hash($password) {
+	if (PC_Config::get('password_hash') == 'MD5') {
+	    return md5($password);
+	}
+	
+	$a = password_hash($password, PASSWORD_BCRYPT);
+	//echo " a $a ";
+	//exit();
+	return $a;
+    }
+    
+    static function password_verify($password, $hash) {
+	if (PC_Config::get('password_hash') == 'MD5') {
+	    if (md5($password) == $hash) {
+		return true;
+	    } else {
+		return false;
+	    }
+	}
+	
+	return password_verify($password, $hash);
+    }
 }
