@@ -365,7 +365,8 @@ class PumpForm {
 						$error[$column['name']] = _MD_PUMPFORM_FILE_SIEZ_ORVER;
 						continue;						
 					}
-					if (@$_FILES[$column['name']]['error'] != UPLOAD_ERR_OK) {
+					if (@$_FILES[$column['name']]['error'] != UPLOAD_ERR_NO_FILE &&
+					    @$_FILES[$column['name']]['error'] != UPLOAD_ERR_OK) {
 						$error[$column['name']] = _MD_PUMPFORM_UPLOAD_FAILURE;
 						continue;						
 					}
