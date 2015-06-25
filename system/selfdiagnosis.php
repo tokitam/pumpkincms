@@ -17,6 +17,9 @@ class PumpSelfDiagnosis {
         if (self::diagnosis_auth_upload() == false) {
             $message .= "APP/upload/ not writable [ # chmod 777 upload ]<br />";
         }
+        if (self::diagnosis_auth_log() == false) {
+            $message .= "APP/log/ not writable [ # chmod 777 log ]<br />";
+        }
         if (self::diagnosis_auth_image() == false) {
             $message .= "PUBLIC/image/ not writable [ # chmod 777 image ]<br />";
         }
@@ -37,8 +40,8 @@ class PumpSelfDiagnosis {
         $installer = new Installer();
         $installer->run();
     }
-
-    static public function diagnosis_config() {
+ 
+   static public function diagnosis_config() {
         $config_file = PUMPCMS_APP_PATH . '/config/config.php';
         if (is_readable($config_file) == false) {
             return false;
@@ -68,6 +71,15 @@ class PumpSelfDiagnosis {
     static public function diagnosis_auth_upload() {
         $upload_dir = PUMPCMS_APP_PATH . '/upload';
         if (is_writable($upload_dir) == false) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    static public function diagnosis_auth_log() {
+        $log_dir = PUMPCMS_APP_PATH . '/upload';
+        if (is_writable($log_dir) == false) {
             return false;
         }
 
