@@ -12,4 +12,3 @@ class admin_user extends PC_Controller {
 		$this->_table = 'user';
     }
 }
-

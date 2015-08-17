@@ -78,7 +78,7 @@ class PumpSelfDiagnosis {
     }
     
     static public function diagnosis_auth_log() {
-        $log_dir = PUMPCMS_APP_PATH . '/upload';
+        $log_dir = PUMPCMS_APP_PATH . '/log';
         if (is_writable($log_dir) == false) {
             return false;
         }
