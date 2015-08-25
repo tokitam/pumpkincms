@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS `xzqb_admin_config` (
   `reg_user` int(11) NOT NULL,
   `mod_user` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `xzqb_blog_blog` (
