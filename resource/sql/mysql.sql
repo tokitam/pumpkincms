@@ -1,6 +1,6 @@
 
 CREATE TABLE IF NOT EXISTS `xzqb_admin_config` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `site_id` int(11) NOT NULL,
   `reg_time` int(11) NOT NULL,
   `mod_time` int(11) NOT NULL,
