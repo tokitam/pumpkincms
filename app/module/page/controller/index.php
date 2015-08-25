@@ -21,7 +21,7 @@ class page_index extends PC_Controller {
 	    
     }
 
-    public function mkdir() {
+    private function mkdir() {
     	$dir = PUMPCMS_APP_PATH . '/cache/page';
     	if (is_dir($dir) == false) {
     		mkdir($dir);
@@ -33,7 +33,7 @@ class page_index extends PC_Controller {
     	}
     }
 
-    public function get_dir() {
+    private function get_dir() {
     	$dir = PUMPCMS_APP_PATH . '/cache/page/' . PC_Config::get('site_id');
     	return $dir;
     }
