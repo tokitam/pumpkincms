@@ -10,6 +10,16 @@ class PC_Util {
 		header('Location: ' . PC_Config::url());
 		exit();
 	}
+
+	static function redirect_if_not_site_admin($url='') {
+		if (UserInfo::is_site_admin() == false) {
+			if ($url == '') {
+				self::redirect_top();
+			} else {
+				self::redirect($url);
+			}
+		}
+	}
     
 	static function is_email($email) {
 		if (preg_match('|^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$|', $email)) {

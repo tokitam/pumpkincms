@@ -2,9 +2,8 @@
 
 class admin_blog extends PC_Controller {
     public function __construct() {
-		if (UserInfo::is_site_admin() == false) {
-			PC_Util::redirect_top();
-		}
+    	
+		PC_Util::redirect_if_not_site_admin();
 
 		PumpForm::$redirect_url = PC_Config::url() . '/admin/blog/';
 	

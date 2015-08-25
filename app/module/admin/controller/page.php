@@ -5,10 +5,8 @@ require_once PUMPCMS_APP_PATH . '/module/page/model/page_model.php';
 class admin_page extends PC_Controller {
     public function __construct() {
 
-		if (UserInfo::is_site_admin() == false) {
-			PC_Util::redirect_top();
-		}
-
+		PC_Util::redirect_if_not_site_admin();
+		
 		$this->_flg_scaffold = true;
 		$this->_module = 'page';
 		$this->_table = 'page';
