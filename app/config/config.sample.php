@@ -9,7 +9,7 @@ $pc_config['site_config_catchall'] = 1;
 
 $pc_config['site_config'] = array(
 1 => array('site_title' => 'PumpkinCMS',
-  'default_theme' => 'default',
+  'theme' => 'default',
   'db_no' => 1,
 
   // css_url setting
