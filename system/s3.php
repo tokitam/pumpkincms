@@ -44,10 +44,8 @@ class PC_S3 {
 		self::connect();
 
 		self::$_s3->deleteObjectFile(
-			$upload_file, 
 			PC_Config::get('aws_s3_bucket_name'), 
-			$s3_file, 
-			S3::ACL_PUBLIC_READ
+			$s3_file
 			);
 	}
 }
