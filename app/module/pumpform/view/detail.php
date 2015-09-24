@@ -19,9 +19,9 @@ foreach ($form as $column) {
 	}
 	echo '<div class="form-group">' . "\n";
 
-	echo '<label class="col-lg-2 control-label">' . $column['title'] . '</label>' . "\n";
+	echo '<label class="col-lg-3 col-md-3 col-sm-3 control-label">' . $column['title'] . '</label>' . "\n";
 
-	$form_html = '<div class="col-lg-10 control-item">' . "\n";
+	$form_html = '<div class="col-lg-9 col-md-9 col-sm-9 control-item">' . "\n";
 	$value = @$item[$column['name']];
 
 	if ($column['type'] == PUMPFORM_PASSWORD) {
