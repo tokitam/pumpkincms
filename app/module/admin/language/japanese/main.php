@@ -20,3 +20,7 @@ define('_MD_ADMIN_SITE_CLOSE', 'サイト閉鎖');
 define('_MD_ADMIN_SITE_CLOSE_ON', '公開');
 define('_MD_ADMIN_SITE_CLOSE_OFF', '閉鎖');
 define('_MD_ADMIN_SITE_CLOSE_MESSAGE', 'サイト閉鎖メッセージ');
+define('_MD_ADMIN_ALLOW_REGISTER', 'ユーザ登録を許可する');
+define('_MD_ADMIN_ALLOW_REGISTER_OK', '許可');
+define('_MD_ADMIN_ALLOW_REGISTER_NG', '許可しない');
+

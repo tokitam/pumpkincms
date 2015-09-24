@@ -1,5 +1,7 @@
 <?php
 
+require_once PUMPCMS_ROOT_PATH . '/external/parsedown/Parsedown.php';
+
 $module_url = PC_Util::get_module_url();
 
 $form = $GLOBALS['pumpform_config'][$this->_module][$this->_table]['column'];
@@ -81,6 +83,9 @@ foreach ($form as $column) {
 		}
 	} else if ($column['type'] == PUMPFORM_TEXTAREA) {
 		$form_html .= nl2br(htmlspecialchars($value));
+	} else if ($column['type'] == PUMPFORM_MARKDOWN) {
+		$Parsedown = new Parsedown();
+		$form_html .= $Parsedown->text($value); 
 	} else if ($column['type'] == PUMPFORM_TINYMCE) {
 		$form_html .= PC_Util::strip_tags($value);
 	} else if ($column['type'] == PUMPFORM_YOUTUBE) {

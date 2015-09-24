@@ -122,6 +122,19 @@ $pumpform_config['admin']['config_form'] = array(
 				1 => _MD_ADMIN_SITE_CLOSE_OFF,
 				)
 			),
+                'allow_register' => array('name' => 'allow_register',
+                        'title' => _MD_ADMIN_ALLOW_REGISTER,
+                        'type' => PUMPFORM_SELECT,
+                        'required' => 0,
+                        'visible' => 1,
+                        'registable' => 1,
+                        'editable' => 1,
+                        'list_visible' => 0,
+                        'option' => array(
+                                0 => _MD_ADMIN_ALLOW_REGISTER_OK,
+                                1 => _MD_ADMIN_ALLOW_REGISTER_NG,
+                                )
+                        ),
     ),
 );
 

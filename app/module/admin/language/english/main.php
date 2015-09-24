@@ -20,3 +20,7 @@ define('_MD_ADMIN_SITE_CLOSE', 'Site close');
 define('_MD_ADMIN_SITE_CLOSE_ON', 'OPEN');
 define('_MD_ADMIN_SITE_CLOSE_OFF', 'CLOES');
 define('_MD_ADMIN_SITE_CLOSE_MESSAGE', 'Site close Message');
+define('_MD_ADMIN_ALLOW_REGISTER', 'Allow register user');
+define('_MD_ADMIN_ALLOW_REGISTER_OK', 'Allow');
+define('_MD_ADMIN_ALLOW_REGISTER_NG', 'deny');
+

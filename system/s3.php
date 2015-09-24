@@ -39,4 +39,13 @@ class PC_S3 {
 			S3::ACL_PUBLIC_READ
 			);
 	}
+
+	static public function delete($upload_file, $s3_file) {
+		self::connect();
+
+		self::$_s3->deleteObjectFile(
+			PC_Config::get('aws_s3_bucket_name'), 
+			$s3_file
+			);
+	}
 }

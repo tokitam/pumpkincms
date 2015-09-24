@@ -41,7 +41,9 @@ foreach ($form as $column) {
 //		$form_html .= '<p>' . $column['hint'] . "</p>\n";
 //	}
 
-	if ($column['type'] == PUMPFORM_TEXTAREA || $column['type'] == PUMPFORM_TINYMCE) {
+	if ($column['type'] == PUMPFORM_TEXTAREA || 
+		$column['type'] == PUMPFORM_TINYMCE ||
+		$column['type'] == PUMPFORM_MARKDOWN) {
 		$form_html .= "<textarea ";
 		if ($column['type'] == PUMPFORM_TEXTAREA) {
 			$form_html .= "class='form-control' ";

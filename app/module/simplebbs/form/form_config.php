@@ -36,7 +36,7 @@ $pumpform_config['simplebbs']['simplebbs'] = array(
 		      
 	array('name' => 'body',
 	      'title' => 'body',
-	      'type' => PUMPFORM_TINYMCE,
+	      'type' => PUMPFORM_MARKDOWN,
 	      'cols' => 50,
 	      'rows' => 5,
 	      'required' => 0,
