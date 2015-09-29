@@ -26,7 +26,8 @@ class PC_Render {
 			$method = $this->method;
 			$obj->set_variable();
 
-			if ($class != 'image_i' && method_exists($obj, $method) == false) {
+			if (method_exists($obj, $method) == false && 
+			    method_exists($obj, '__call') == false) {
 				// mehtod not found
 				require_once PUMPCMS_APP_PATH . '/module/index/controller/notfound.php';
 				$obj = new index_notfound();
