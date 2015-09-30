@@ -266,8 +266,7 @@ class PC_Util {
 	}
 	
 	$a = password_hash($password, PASSWORD_BCRYPT);
-	//echo " a $a ";
-	//exit();
+
 	return $a;
     }
     
