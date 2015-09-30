@@ -18,7 +18,7 @@ class Temp_Model extends PC_Model {
 	    $sql .= intval(SiteInfo::get_site_id()) . ', ';
 	    $sql .= $db->escape($name) . ", ";
 	    $sql .= $db->escape($mail) . ", ";
-	    $sql .= $db->escape(md5($password)) . ", ";
+	    $sql .= $db->escape(PC_Util::password_hash($password)) . ", ";
 	    $sql .= "'" . intval($type) . "', ";
 	    $sql .= ' 0, ';
 	    $sql .= $db->escape($code) . ", ";
