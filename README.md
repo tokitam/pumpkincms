@@ -1,6 +1,6 @@
 # PumpkinCMS
 
-PumpkinCMS is general CMS system.
+PumpkinCMS is general simple CMS.
 * Multi site manage
 * Multi user
 * Multi language
