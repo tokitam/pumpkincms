@@ -80,7 +80,7 @@ $pumpform_config['admin']['config_form'] = array(
 			'registable' => 1,
 			'editable' => 1,
 			'list_visible' => 1,),
-		'debag_mode' => array('name' => 'debug_mode',
+		'debug_mode' => array('name' => 'debug_mode',
 			'title' => _MD_ADMIN_DEBUG_MODE,
 			'type' => PUMPFORM_SELECT,
 			//'placeholder' => _MD_SHOP_STATUS,

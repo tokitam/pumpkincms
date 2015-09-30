@@ -31,9 +31,10 @@ class admin_config extends PC_Controller {
 			$list = array(
 				'site_title',
 				'description',
-				'debag_mode',
+				'debug_mode',
 				'site_close',
-				'site_close_message'
+				'site_close_message',
+				'allow_register'
 			);
 			foreach ($list as $value) {
 				update_or_insert($value, $data[$value]);
