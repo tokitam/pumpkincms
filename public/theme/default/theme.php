@@ -46,7 +46,7 @@
 <?php if (PC_Config::get('bg_image_url')) : ?>  
   <body style='background-image: url("<?php echo PC_Config::get('bg_image_url') ?>"); background-repeat: repeat;'>
 <?php else : ?>    
-  <body style='background-image: url("<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/pattern8-pattern-26b.png");'>
+  <body>
 <?php endif ; ?>  
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
