@@ -665,3 +665,10 @@ footer a:active {
 .control-label {
 	font-weight: bold;
 }
+
+.image-circle {
+  /* border-radius: 50%; */
+  border-radius: 15px;
+}
+
+
