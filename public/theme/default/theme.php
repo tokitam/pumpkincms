@@ -114,7 +114,11 @@
       <div class="page-header" id="banner">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main_content">
+            <?php if (isset($this)) : ?>
             <?php $this->module_render(); ?>  
+            <?php else : ?>
+            <?php echo @$error_message; ?>
+            <?php endif ; ?>
           </div>
           <div class="col-xs-4 col-sm-4 visible-xs visible-sm invisible-md invisible-lg ">
     <br />
