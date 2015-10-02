@@ -3533,3 +3533,11 @@ fieldset[disabled] .btn-vk.active {
   color: #587ea3;
   background-color: #ffffff;
 }
+
+// ---------------------------------
+
+.image-circle {
+  /* border-radius: 50%; */
+  border-radius: 15px;
+}
+
