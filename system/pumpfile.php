@@ -43,7 +43,6 @@ class PumpFile extends PumpUpload {
 			'filename' => $_FILES[$target]['name'],
 		);
 
-		$file_id = $pumpormap->insert($data);
 		$src_file = $_FILES[$target]['tmp_name'];
 
 		if (self::get_type() == self::STORE_TYPE_LOCAL) {
@@ -51,41 +50,56 @@ class PumpFile extends PumpUpload {
 
 			move_uploaded_file($src_file, $dest_file);
 		} else if (self::get_type() == self::STORE_TYPE_DB) {
-			$db = PC_DBSet::get();
-			$table = $pumpormap->get_table();
-			$sql = sprintf(
-				'INSERT INTO %s ' . 
-				'(site_id, code, ip_address, filename, ' .
-				' file, size, reg_time, reg_user) VALUES ' .
-				'(?, ?, ?, ?, ?, ?, ?, ?)', $db->prefix($table));
-
-			$stmt = $db->prepare($sql);
-
 			$fp = fopen($_FILES[$target]['tmp_name'], 'rb');
 
 			$site_id = PC_Config::get('site_id');
-			$type = $this->_type;
 			$ip_address = PC_Util::get_ip_address();
 			$reg_time = time();
 			$reg_user = UserInfo::get_id();
 
-			$stmt->bindParam(1, $site_id);
-			$stmt->bindParam(2, $code);
-			$stmt->bindParam(3, $ip_address);
-			$stmt->bindParam(4, $_FILES[$target]['name']);
-			$stmt->bindParam(5, $fp, PDO::PARAM_LOB);
-			$stmt->bindParam(6, $size);
-			$stmt->bindParam(7, $reg_time);
-			$stmt->bindParam(8, $reg_user);
+			$db = PC_DBSet::get();
+			$table = $pumpormap->get_table();
 
-			$db->beginTransaction();
+			if (PC_DBSet::get_db_type() == 'mysql') {
+				$image_column = '?';
+			} else {
+				// PDO
+				$image_column = ':file';
+			}
+
+			$sql = sprintf(
+				'INSERT INTO %s ' . 
+				'(site_id, code, ip_address, filename, ' .
+				' file, size, reg_time, reg_user) VALUES ' .
+				"(%d, %s, %s, %s, %s, %d, %d, %d)", 
+				$db->prefix($table),
+				$site_id,
+				$db->escape($code),
+				$db->escape($ip_address),
+				$db->escape($_FILES[$target]['name']),
+				$image_column,
+				$size,
+				$reg_time,
+				$reg_user
+				);
+
+			$stmt = $db->prepare($sql);
+
+			if (PC_DBSet::get_db_type() == 'mysql') {
+				$tmp = file_get_contents($_FILES[$target]['tmp_name']);
+				$null = NULL;
+				$stmt->bind_param('b', $null);
+				$stmt->send_long_data(0, $tmp);
+			} else {
+				$stmt->bindParam(':file', $fp, PDO::PARAM_LOB);
+			}
+
 			$ret1 = $stmt->execute();
 			if ($db->get_driver() == PC_Db_pdo::PGSQL) {
 				$file_id = $db->insert_id($db->prefix($table) . '_id_seq');
 			} else {
 				$file_id = $db->insert_id();
 			}
-			$ret2 = $db->commit();
 		} else if (self::get_type() == self::STORE_TYPE_S3) {
 			$dest_file =  $dir . '/' . $file_id . '_' . $code;			
 			PC_S3::put($src_file, basename($dest_file));
