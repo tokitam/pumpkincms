@@ -151,7 +151,6 @@
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/assets/js/bootswatch.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify.min.js"></script>
-    <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify_func.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/pumpform.js"></script>
   </body>
 </html>
