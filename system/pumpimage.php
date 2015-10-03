@@ -153,16 +153,24 @@ class PumpImage extends PumpUpload {
 			$reg_time = time();
 			$reg_user = UserInfo::get_id();
 
+			if (PC_DBSet::get_db_type() == 'mysql') {
+				$image_column = '?';
+			} else {
+				// PDO
+				$image_column = ':image';
+			}
+
 			$sql = sprintf(
 				'INSERT INTO %s ' . 
 				'(site_id, type, code, ip_address, ' . 
 				'image, reg_time, reg_user) VALUES ' .
-				'(%d, %d, \'%s\', %d, :image, %d, %d)', 
+				'(%d, %d, \'%s\', %d, %s, %d, %d)', 
 				$db->prefix($table),
 				$site_id,
 				$type,
 				$code,
 				$ip_address,
+				$image_column,
 				$reg_time,
 				$reg_user
 				);
@@ -170,8 +178,6 @@ class PumpImage extends PumpUpload {
 			$stmt = $db->prepare($sql);
 			
 			$fp = fopen($_FILES[$target]['tmp_name'], 'rb');
-
-
 
 			try {
 				/*
@@ -183,7 +189,14 @@ class PumpImage extends PumpUpload {
 				$stmt->bindParam(6, $reg_time);
 				$stmt->bindParam(7, $reg_user);
 				*/
-				$stmt->bindParam(':image', $fp, PDO::PARAM_LOB);
+				if (PC_DBSet::get_db_type() == 'mysql') {
+					$tmp = file_get_contents($_FILES[$target]['tmp_name']);
+					$null = NULL;
+					$stmt->bind_param('b', $null);
+					$stmt->send_long_data(0, $tmp);
+				} else {
+					$stmt->bindParam(':image', $fp, PDO::PARAM_LOB);
+				}
 
 				//$db->beginTransaction();
 				$ret1 = $stmt->execute();

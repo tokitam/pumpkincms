@@ -35,5 +35,14 @@ class PC_DBSet {
 		return self::$_db_list[$no];
 	}
 	
+	public static function get_db_type() {
+		global $pc_config;
+	    
+	    $no = PC_Config::get('db_no');
+		
+		$db_type = $pc_config['database'][$no]['db_type'];
+
+		return $db_type;
+	}
 }
 

@@ -4,6 +4,9 @@ class PC_Db_mysql extends PC_Db {
 	private $_con;
 	private $_result;
 	private $_config;
+	private $_row_count = 0;
+
+	const MYSQLI = 'mysqli';
 	
 	function __construct() {
 	}
@@ -24,7 +27,11 @@ class PC_Db_mysql extends PC_Db {
 	    
 	    $this->_con->set_charset('utf8');
 	}
-	
+
+	function get_driver() {
+		return self::MYSQLI;
+	}
+
 	function prefix($table) {
 		return $this->_config['db_prefix'] . '_' . $table;
 	}
@@ -32,6 +39,23 @@ class PC_Db_mysql extends PC_Db {
 	function close() {
 		$this->_con->close();
 	}
+
+	function prepare($sql) {
+		PC_Debug::log($sql, __FILE__, __LINE__);
+
+		try {
+			$this->_stmt = $this->_con->prepare($sql);
+		} catch (Exception $e) {
+			$this->abort($sql);
+		}
+
+		if ($this->_stmt == false) {
+			$this->abort($sql, __FILE__ . ':' . __LINE__ . ' ' . print_r($this->_con->errno, true) . ':' . print_r($this->_con->error, true));
+		}
+
+		return $this->_stmt;
+	}
+
 	/*
 	function query($sql) {
 		PC_Debug::log($sql, __FILE__, __LINE__);
@@ -69,7 +93,7 @@ class PC_Db_mysql extends PC_Db {
 			$t .= $types[$key];
 			array_push($v, $value);
 		}
-		//$stmt->bind_param($t, $v);
+
 		$p = array_merge(array($t), $v);
 		if (0 < count($values)) {
 			call_user_func_array(array($stmt, 'bind_param'), PC_Util::ref_values($p));
@@ -86,8 +110,7 @@ class PC_Db_mysql extends PC_Db {
 
 		$this->_result = $stmt->get_result();
 
-		//$stmt->close();
-
+		$this->_row_count = $this->_con->affected_rows;
 	}
 
 	function exec($sql, $values, $types) {
@@ -125,6 +148,8 @@ class PC_Db_mysql extends PC_Db {
 		}
 
 		$stmt->close();
+
+		$this->_row_count = $this->_con->affected_rows;
 	}
 
 	function execute_with_upload($sql, $upload) {
@@ -186,9 +211,31 @@ class PC_Db_mysql extends PC_Db {
     function insert_id() {
 	    return $this->_con->insert_id;
 	}
-    
+
+	function row_count() {
+		return $this->_row_count;
+	}
+
     function escape($str) {
 		return "'" . $this->_con->real_escape_string($str) . "'"; 
 	}
-}
 
+    function column_escape($str) {
+		$s = $this->_con->real_escape_string($str);
+
+		return '`' . $s . '`';
+	}
+
+	function abort($sql='', $err='') {
+	    $str = 'Query Error (' . @$this->_con->errno . ') ' . @$this->_con->error;
+
+	    if (UserInfo::is_master_admin()) {
+			$str .= ' ' . $this->_sql . ' ' . $sql;
+			$str .= ' err:' . $err . ' ';
+
+			PC_Debug::log('err:' . $str, __FILE__, __LINE__);
+			PC_Debug::log(print_r(debug_backtrace(), true), __FILE__, __LINE__);
+	    }
+	    PC_Abort::abort();
+	}
+}
