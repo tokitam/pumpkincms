@@ -20,7 +20,7 @@ $form = $form_config['column'];
 //var_dump($error);
 //var_dump($form);
 $form_html = '';        
-$form_html .= "<form class='form-horizontal' method='post' enctype='multipart/form-data'>\n";
+$form_html .= "<form id='main_form' class='form-horizontal' method='post' enctype='multipart/form-data'>\n";
 $form_html .= '<input type="hidden" name="MAX_FILE_SIZE" value="' . PumpFile::get_max_size() . '" />' . "\n";
 
 $form_html .= "<fieldset>\n";
@@ -291,15 +291,12 @@ $form_html .= "
         <!--<button class='btn btn-default'>Cancel</button>-->
         <input type='reset' class='btn btn-default'>
         <!--<button type='submit' class='btn btn-primary'>Submit</button>-->
-	<input type='submit' class='btn btn-primary'>
+        <input type='submit' class='btn btn-primary' id='submit_button'>
       </div>
     </div>\n";
 
 $form_html .= "</fieldset>\n";
 	
-//$form_html .= "<input type='submit' >\n";
-//$form_html .= "<input type='reset' >\n";
-
 echo $form_html;
 $form_html = '';
 ?>

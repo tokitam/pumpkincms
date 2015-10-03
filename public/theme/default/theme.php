@@ -143,7 +143,7 @@
 
             <p><a href="http://pumpkincms.com/">PumpkinCMS</a> Lightweight CMS</p>
             <p>&nbsp;</p>
-            <p>&copy; 2015 <a href="https://github.com/tokitam">tokitam</a></p>
+            <p>&copy; 2015 <a href="https://github.com/tokitamx">tokitam</a></p>
           </div>
         </div>
       </footer>
@@ -152,5 +152,6 @@
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/assets/js/bootswatch.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify.min.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify_func.js"></script>
+    <script src="<?php echo SiteInfo::get_css_url() ?>/js/pumpform.js"></script>
   </body>
 </html>
