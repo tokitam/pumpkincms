@@ -180,15 +180,6 @@ class PumpImage extends PumpUpload {
 			$fp = fopen($_FILES[$target]['tmp_name'], 'rb');
 
 			try {
-				/*
-				$stmt->bindParam(1, $site_id);
-				$stmt->bindParam(2, $type);
-				$stmt->bindParam(3, $code);
-				$stmt->bindParam(4, $ip_address);
-				$stmt->bindParam(5, $fp, PDO::PARAM_LOB);
-				$stmt->bindParam(6, $reg_time);
-				$stmt->bindParam(7, $reg_user);
-				*/
 				if (PC_DBSet::get_db_type() == 'mysql') {
 					$tmp = file_get_contents($_FILES[$target]['tmp_name']);
 					$null = NULL;
@@ -198,7 +189,6 @@ class PumpImage extends PumpUpload {
 					$stmt->bindParam(':image', $fp, PDO::PARAM_LOB);
 				}
 
-				//$db->beginTransaction();
 				$ret1 = $stmt->execute();
 
 				if ($db->get_driver() == PC_Db_pdo::PGSQL) {
@@ -207,7 +197,6 @@ class PumpImage extends PumpUpload {
 					$image_id = $db->insert_id();
 				}
 
-				//$ret2 = $db->commit();
 			} catch (Exception $e) {
 				echo $e->getMessage();
 			}
