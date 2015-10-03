@@ -125,44 +125,10 @@
           </div>
 
           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-
-            <p>
-            <?php //include PUMPCMS_APP_PATH . '/module/shop/view/ad_300x250_1.php' ?>
-            <?php //include PUMPCMS_APP_PATH . '/module/shop/view/ad_300x250_2.php' ?>
-            </p>
-            <br />
-
-            <div class="vote_rank_content">
-<!--              
-<script>
-  (function() {
-    var cx = '014342331845379084623:_dklgh2sroq';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:search></gcse:search>
--->
-            </div>
-            <br />
+            <!-- site content here -->
           </div>
 
-            <?php if (PC_Config::get('service_url') == '') : ?>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-            <div class="vote_rank_content">
-             <?php //include PUMPCMS_APP_PATH . '/module/shop/view/shop_vote_ranking_block.php'; ?>
-            </div>
-  <br />
-            <div class="vote_rank_content">
-             <?php //include PUMPCMS_APP_PATH . '/module/shop/view/sns_button.php'; ?>
-            </div>
-            <?php endif ; ?>
-          </div> <!-- side -->      
+          <!-- side -->      
         </div> <!-- main_content -->
       </div> <!-- page-header -->
     </div> <!-- container main -->
@@ -173,23 +139,14 @@
           <div class="col-lg-12">
             <ul class="list-unstyled">
               <li class="pull-right"><a href="#top">Back to top</a></li>
-              <li><a href="http://news.bootswatch.com" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
-              <li><a href="http://feeds.feedburner.com/bootswatch">RSS</a></li>
-              <li><a href="https://twitter.com/bootswatch">Twitter</a></li>
-              <li><a href="https://github.com/thomaspark/bootswatch/">GitHub</a></li>
-              <li><a href="../help/#api">API</a></li>
-              <li><a href="../help/#support">Support</a></li>
             </ul>
-            
-            <p>Made by <a href="http://thomaspark.me" rel="nofollow">Thomas Park</a>. Contact him at <a href="mailto:thomas@bootswatch.com">thomas@bootswatch.com</a>.</p>
-            <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE">MIT License</a>.</p>
-            <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+
+            <p><a href="http://pumpkincms.com/">PumpkinCMS</a> Lightweight CMS</p>
+            <p>&nbsp;</p>
+            <p>&copy; 2015 <a href="https://github.com/tokitam">tokitam</a></p>
           </div>
         </div>
       </footer>
-
-
-    <!--</div>-->
 
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/assets/js/bootswatch.js"></script>
