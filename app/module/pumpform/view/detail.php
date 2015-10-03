@@ -145,4 +145,3 @@ echo $form_html;
 <?php else : ?>
 <a href="<?php echo $module_url; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
 <?php endif ; ?>
-<?php echo PumpForm::$redirect_url ?>
