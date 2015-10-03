@@ -83,7 +83,7 @@
         -->
         <script src="<?php echo SiteInfo::get_css_url(); ?>/js/tinymce/tinymce.min.js"></script>
         <script src="<?php echo SiteInfo::get_css_url(); ?>/js/notify.min.js"></script>
-        <script src="<?php echo SiteInfo::get_css_url(); ?>/js/notify_func.js"></script>
+        <script src="<?php echo SiteInfo::get_css_url(); ?>/js/pumpform.js"></script>
     
         <script type="text/javascript">
 
