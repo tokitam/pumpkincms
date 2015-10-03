@@ -95,9 +95,11 @@
                       </ul>
                     </li>
 <?php else : ?>
+            <?php if (PC_Config::get('allow_register')) : ?>
             <li>
               <a href="<?php echo PC_Config::url() ?>/user/register"><?php echo _MD_PUMPFORM_SIGNUP ?></a>
             </li>                    
+            <?php endif ; ?>
             <li>
               <a href="<?php echo PC_Config::url() ?>/user/"><?php echo _MD_PUMPFORM_SIGNIN ?></a>
             </li>                    
@@ -143,8 +145,9 @@
 
             <p><a href="http://pumpkincms.com/">PumpkinCMS</a> Lightweight CMS</p>
             <p>&nbsp;</p>
-            <p>&copy; 2015 <a href="https://github.com/tokitamx">tokitam</a></p>
+            <p>&copy; 2015 <a href="https://github.com/tokitam">tokitam</a></p>
           </div>
+        </div>
         </div>
       </footer>
 

@@ -131,8 +131,8 @@ $pumpform_config['admin']['config_form'] = array(
                         'editable' => 1,
                         'list_visible' => 0,
                         'option' => array(
-                                0 => _MD_ADMIN_ALLOW_REGISTER_OK,
-                                1 => _MD_ADMIN_ALLOW_REGISTER_NG,
+                                1 => _MD_ADMIN_ALLOW_REGISTER_OK,
+                                0 => _MD_ADMIN_ALLOW_REGISTER_NG,
                                 )
                         ),
     ),
