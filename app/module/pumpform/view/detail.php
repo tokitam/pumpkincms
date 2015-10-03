@@ -10,7 +10,7 @@ $item = $this->_data['item'];
 ?>
 
 <div>
-<form class="form-horizontal">
+<!--<form class="form-horizontal">-->
 <fieldset>
 <legend><?php echo htmlspecialchars($this->title) ?></legend>
 <?php
@@ -104,15 +104,27 @@ foreach ($form as $column) {
 
 }
 ?>
+<?php 
+if (@PC_Config::get('dir3') == 'delete' || PumpForm::$file == 'delete') {
+	echo '<div class="form-group">' . "\n";
+	echo '<label for="inputEmail" class="col-lg-3 col-md-3 col-sm-3 control-label"></label>' . "\n";
+	echo '<div class="col-lg-9 col-md-9 col-sm-9 ">' . "\n";
+	echo "<form method='post'>\n";
+	echo "<input type='submit' onclick='return confirm(\"" . _MD_PUMPFORM_DELETE_CONFIRM . "\");' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'>";
+	echo "</form>\n";
+	echo "</div>\n";
+	echo "</div>\n";
+}
+?>
 </fieldset>
-</form>
+<!--</form>-->
 <?php
 $form_html = '';
-if (@PC_Config::get('dir3') == 'delete' || PumpForm::$file == 'delete') {
-	$form_html .= "<form method='post'>\n";
-	$form_html .= "<input type='submit' onclick='return confirm(\"" . _MD_PUMPFORM_DELETE_CONFIRM . "\");' value='" . _MD_PUMPFORM_DELETE . "'>";
-	$form_html .= "</form>\n";
-}
+//if (@PC_Config::get('dir3') == 'delete' || PumpForm::$file == 'delete') {
+//	$form_html .= "<form method='post'>\n";
+//	$form_html .= "<input type='submit' onclick='return confirm(\"" . _MD_PUMPFORM_DELETE_CONFIRM . "\");' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'>";
+//	$form_html .= "</form>\n";
+//}
 
 if (UserInfo::is_master_admin() || UserInfo::is_site_admin()) {
 	if (PumpForm::$edit_url) {
