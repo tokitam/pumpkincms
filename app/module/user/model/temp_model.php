@@ -26,7 +26,15 @@ class Temp_Model extends PC_Model {
 	    $sql .= ',  0, 0, 0 )';
 	    
 	    $db->query($sql);
-	    return $db->insert_id();
+
+		if ($db->get_driver() == PC_Db_pdo::PGSQL) {
+			PC_Debug::log(' seq:' . $db->prefix($this->table_name) . '_id_seq', __FILE__, __LINE__);
+			$insert_id = $db->insert_id($db->prefix($this->table_name) . '_id_seq');
+		} else {
+			$insert_id = $db->insert_id();
+		}
+
+		return $insert_id;
 	}
 
     function get_user_data($id_str) {
