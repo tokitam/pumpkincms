@@ -265,6 +265,10 @@ class PC_Util {
 	    return md5($password);
 	}
 	
+	if (PC_Config::get('password_hash') == 'SHA1') {
+	    return sha1($password);
+	}
+	
 	$a = password_hash($password, PASSWORD_BCRYPT);
 
 	return $a;
@@ -273,6 +277,14 @@ class PC_Util {
     static function password_verify($password, $hash) {
 	if (PC_Config::get('password_hash') == 'MD5') {
 	    if (md5($password) == $hash) {
+		return true;
+	    } else {
+		return false;
+	    }
+	}
+	
+	if (PC_Config::get('password_hash') == 'SHA1') {
+	    if (sha1($password) == $hash) {
 		return true;
 	    } else {
 		return false;
