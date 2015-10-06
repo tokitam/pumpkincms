@@ -15,11 +15,12 @@ $module_url = PC_Util::get_module_url();
 
 $error = @$this->_data['error'];
 $item = @$this->_data['item'];
+$target_id = $item['id'];
 $form_config = $GLOBALS['pumpform_config'][$this->_module][$this->_table];
 $form = $form_config['column'];
-//var_dump($error);
-//var_dump($form);
+
 $form_html = '';        
+$form_html .= "<input type='hidden' name='target_id' id='target_id' value='" . intval($target_id) . "'>\n";
 $form_html .= "<form id='main_form' class='form-horizontal' method='post' enctype='multipart/form-data'>\n";
 $form_html .= '<input type="hidden" name="MAX_FILE_SIZE" value="' . PumpFile::get_max_size() . '" />' . "\n";
 
@@ -310,16 +311,18 @@ $form_html = '';
 <?php
 
 if (PC_Config::get('dir3') == 'edit' && is_numeric(PC_Config::get('dir4')) || PumpForm::$file == 'edit') {
-if (PumpForm::$delete_url) {
-	$delete_url = sprintf(PumpForm::$delete_url, $item['id']);
-} else if (PC_Config::get('dir3') == 'edit' && is_numeric(PC_Config::get('dir4')))	 {
-	$delete_url = $module_url . '/delete/' . PC_Config::get('dir4') . '/';
-} else {
-	$delete_url = $module_url . '/delete/' . $item['id'] . '/';
-}
+	if (PumpForm::$delete_url) {
+		$delete_url = sprintf(PumpForm::$delete_url, $item['id']);
+	} else if (PC_Config::get('dir3') == 'edit' && is_numeric(PC_Config::get('dir4')))	 {
+		$delete_url = $module_url . '/delete/' . PC_Config::get('dir4') . '/';
+	} else {
+		$delete_url = $module_url . '/delete/' . $item['id'] . '/';
+	}
 
-//$form_html .= "&nbsp;&nbsp;&nbsp;\n";
-$form_html .= "<input type='button' onclick='javascript:location.href=\"" . $delete_url . "\";' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'><br />\n";
+	$form_html .= "<input type='hidden' id='pumpform_delete_confirm' value='" . htmlspecialchars(_MD_PUMPFORM_DELETE_CONFIRM) . "'>\n";
+	$form_html .= "<input type='hidden' id='pumpform_module_url' value='" . $module_url . "/'>\n";
+	$form_html .= "<input type='hidden' id='pumpform_delte_url' value='" . $delete_url . "'>\n";
+	$form_html .= "<input type='button' id='pumpform_delete_button' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'><br />\n";
 }
 
 $form_html .= "</form>\n";

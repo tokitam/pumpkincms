@@ -10,7 +10,7 @@ $item = $this->_data['item'];
 ?>
 
 <div>
-<!--<form class="form-horizontal">-->
+<form class="form-horizontal">
 <fieldset>
 <legend><?php echo htmlspecialchars($this->title) ?></legend>
 <?php
@@ -117,7 +117,7 @@ if (@PC_Config::get('dir3') == 'delete' || PumpForm::$file == 'delete') {
 }
 ?>
 </fieldset>
-<!--</form>-->
+</form>
 <?php
 $form_html = '';
 //if (@PC_Config::get('dir3') == 'delete' || PumpForm::$file == 'delete') {
