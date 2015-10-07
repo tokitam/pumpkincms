@@ -15,12 +15,16 @@ $module_url = PC_Util::get_module_url();
 
 $error = @$this->_data['error'];
 $item = @$this->_data['item'];
-$target_id = $item['id'];
+if (isset($item['id'])) {
+    $target_id = $item['id'];
+}
 $form_config = $GLOBALS['pumpform_config'][$this->_module][$this->_table];
 $form = $form_config['column'];
 
 $form_html = '';        
-$form_html .= "<input type='hidden' name='target_id' id='target_id' value='" . intval($target_id) . "'>\n";
+if (isset($target_id)) {
+    $form_html .= "<input type='hidden' name='target_id' id='target_id' value='" . intval($target_id) . "'>\n";
+}
 $form_html .= "<form id='main_form' class='form-horizontal' method='post' enctype='multipart/form-data'>\n";
 $form_html .= '<input type="hidden" name="MAX_FILE_SIZE" value="' . PumpFile::get_max_size() . '" />' . "\n";
 
