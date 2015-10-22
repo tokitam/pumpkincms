@@ -3,6 +3,7 @@
 require_once PUMPCMS_SYSTEM_PATH . '/pumpimage.php';
 
 $pc_config['debug_mode'] = true;
+$pc_config['allow_register'] = true;
 
 $pc_config['default_module'] = 'index';
 $pc_config['default_controller'] = 'index';
