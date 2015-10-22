@@ -68,7 +68,8 @@ function get_option() {
 function have_posts() {
 	global $blog_list;
 
-echo ' test1 ';
+	return false;
+
 	if (isset($blog_list) && is_array($blog_list)) {
 		if (0 < count($blog_list)) {
 			return true;
@@ -305,7 +306,25 @@ printf('<article id="post-1" class="post-1 post type-post status-publish format-
 	</article><!-- #post-## -->', $blog['title'], $blog['body']);
 
 	} else {
-		echo PC_Render::$module_output_static;
+		printf('<article id="post-4" class="post-4 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">test title</h1>
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>%s</p>
+			</div><!-- .entry-content -->
+</article><!-- #post-## -->
+
+				
+			
+		</main><!-- #main -->
+	</div><!-- #primary -->', PC_Render::$module_output_static);
+	// 	echo '';
+	// 	echo PC_Render::$module_output_static;
+	// 	echo '</p>
+	// 		</div><!-- .entry-content -->
+	// </article><!-- #post-## -->';
 	}
 }
 
@@ -336,4 +355,12 @@ function wp_nav_menu() {
 
 function the_posts_pagination($setting) {
 
+}
+
+function wp_page_menu() {
+
+}
+
+function esteem_render_header_image() {
+	
 }
