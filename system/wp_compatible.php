@@ -2,9 +2,9 @@
 
 function bloginfo($key) {
 	if ($key == 'stylesheet_url') {
-		echo PC_Config::get('base_url') . '/wpthemes/' . PC_Config::get('layout') . '/style.css';
+		echo PC_Config::get('base_url') . '/wptheme/' . PC_Config::get('theme') . '/style.css';
 	} else if ($key == 'stylesheet_directory') {
-		echo PC_Config::get('base_url') . '/wpthemes/' . PC_Config::get('layout');
+		echo PC_Config::get('base_url') . '/wptheme/' . PC_Config::get('theme');
 	} else if ($key == 'name') {
 		echo PC_Config::get('site_title');
 	} else if ($key == 'description') {
@@ -22,7 +22,7 @@ function __($s) {
 }
 
 function get_header() {
-	$file = PUMPCMS_PUBLIC_PATH . '/wpthemes/'  . PC_Config::get('layout') . '/header.php';
+	$file = PUMPCMS_PUBLIC_PATH . '/wptheme/'  . PC_Config::get('theme') . '/header.php';
 	include $file;
 }
 
@@ -43,13 +43,10 @@ function wp_enqueue_script() {
 }
 
 function wp_head() {
-    printf('<link href="%s/wpthemes/%s/style.css" type="text/css" rel="stylesheet" />', PC_Config::url(), PC_Config::get('default_layout'));
-    printf('<link href="%s/themes/idoldd/custom.css" type="text/css" rel="stylesheet" />', PC_Config::url(), PC_Config::get('default_layout'));
-    echo '
-	   <link rel="stylesheet" href="http://idoldd.com/themes/idoldd/bootstrap.css" media="screen">
-        <link rel="stylesheet" href="http://idoldd.com/themes/idoldd/assets/css/bootswatch.min.css">
-          <link rel="stylesheet" href="http://idoldd.com/themes/idoldd/custom.css">
-      ';
+    printf('<link href="%s/wptheme/%s/style.css" type="text/css" rel="stylesheet" />' ."\n", PC_Config::url(), PC_Config::get('theme'));
+	printf('<link rel="stylesheet" href="%s/theme/%s/bootstrap.css" media="screen">' ."\n", PC_Config::url(), PC_Config::get('theme'));
+    printf('<link rel="stylesheet" href="%s/theme/%s/assets/css/bootswatch.min.css">' ."\n", PC_Config::url(), PC_Config::get('theme'));
+    printf('<link rel="stylesheet" href="%s/theme/%s/custom.css">' ."\n", PC_Config::url(), PC_Config::get('theme'));
 }
 
 function wp_footer() {
@@ -69,6 +66,29 @@ function get_option() {
 }
 
 function have_posts() {
+	global $blog_list;
+
+echo ' test1 ';
+	if (isset($blog_list) && is_array($blog_list)) {
+		if (0 < count($blog_list)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	$blog_ormap = PumpORMAP_Util::get('blog', 'blog');
+
+	$blog_list = $blog_ormap->get_list();
+//var_dump($blog_list);
+
+	if (0 < count($blog_list)) {
+		return true;
+	} else {
+		return false;
+	}
+
+
 /*
 	global $blog_list;
 
@@ -94,8 +114,9 @@ function have_posts() {
 function the_post() {
 	global $blog_list;
 	global $blog;
-
 	$blog = array_shift($blog_list);
+
+	//var_dump($blog);
 }
 
 function the_tags() {
@@ -175,12 +196,12 @@ function get_search_form() {
 }
 
 function get_sidebar() {
-	$file = PUMPCMS_PUBLIC_PATH . '/wpthemes/'  . PC_Config::get('layout') . '/sidebar.php';
+	$file = PUMPCMS_PUBLIC_PATH . '/wptheme/'  . PC_Config::get('theme') . '/sidebar.php';
 	include $file;
 }
 
 function get_footer() {
-	$file = PUMPCMS_PUBLIC_PATH . '/wpthemes/'  . PC_Config::get('layout') . '/footer.php';
+	$file = PUMPCMS_PUBLIC_PATH . '/wptheme/'  . PC_Config::get('theme') . '/footer.php';
 	include $file;
 }
 
@@ -238,7 +259,7 @@ function esc_url($url, $protocols=null, $context='display') {
 }
 
 function get_template_directory_uri() {
-    return PC_Config::url() . '/themes/' . PC_Config::get('default_layout');
+    return PC_Config::url() . '/themes/' . PC_Config::get('default_theme');
 }
 
 function is_front_page() {
@@ -258,8 +279,34 @@ function has_nav_menu() {
 function is_active_sidebar() {
 }
 
-function get_template_part() {
-    echo PC_Render::$module_output_static;
+function get_template_part($arg1, $arg2) {
+	global $blog;
+
+	if (isset($blog) && is_array($blog)) {
+		//var_dump($blog);
+
+printf('<article id="post-1" class="post-1 post type-post status-publish format-standard hentry category-1">
+	<header class="entry-header">
+		<h1 class="entry-title"><a href="http://127.0.0.1/wordpress/2015/10/10/hello-world/" rel="bookmark">%s</a></h1>
+			<div class="entry-meta entry-header-meta">
+		<span class="posted-on">
+			<a href="http://127.0.0.1/wordpress/2015/10/10/hello-world/" rel="bookmark"><time class="entry-date published" datetime="2015-10-10T18:27:22+00:00">2015年10月10日</time></a>		</span>
+				<span class="byline"><span class="meta-sep"> / </span>
+			<span class="author vcard">
+				<a class="url fn n" href="http://127.0.0.1/wordpress/author/tokitapumpup-jp/">tokita@pumpup.jp</a>			</span>
+		</span>
+						<span class="comments-link"><span class="meta-sep"> / </span> <a href="http://127.0.0.1/wordpress/2015/10/10/hello-world/#comments">1件のコメント</a></span>
+					</div><!-- .entry-meta -->
+				</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>%s</p>
+			</div><!-- .entry-content -->
+	</article><!-- #post-## -->', $blog['title'], $blog['body']);
+
+	} else {
+		echo PC_Render::$module_output_static;
+	}
 }
 
 function get_post_format() {
@@ -283,5 +330,10 @@ function get_header_image() {
 function get_theme_mod() {
 }
 
+function wp_nav_menu() {
 
+}
 
+function the_posts_pagination($setting) {
+
+}
