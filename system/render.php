@@ -54,6 +54,11 @@ class PC_Render {
 			$file1 = PUMPCMS_PUBLIC_PATH . '/wptheme/'  . PC_Config::get('theme') . '/index.php';
 			$file2 = PUMPCMS_PUBLIC_PATH . '/theme/'  . PC_Config::get('theme') . '/theme.php';
 			if (is_readable($file1)) {
+				$GLOBALS['wp_version'] = '2.0';
+				$function_file = PUMPCMS_PUBLIC_PATH . '/wptheme/'  . PC_Config::get('theme') . '/functions.php';
+				if (is_readable($function_file)) {
+					include $function_file;
+				}
 				include $file1;
 			} else {
 				include $file2;

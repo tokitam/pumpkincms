@@ -43,10 +43,10 @@ function wp_enqueue_script() {
 }
 
 function wp_head() {
+	printf('<link rel="stylesheet" href="%s/theme/default/bootstrap.css" media="screen">' ."\n", PC_Config::url());
+    printf('<link rel="stylesheet" href="%s/theme/default/assets/css/bootswatch.min.css">' ."\n", PC_Config::url());
+    printf('<link rel="stylesheet" href="%s/theme/default/custom.css">' ."\n", PC_Config::url());
     printf('<link href="%s/wptheme/%s/style.css" type="text/css" rel="stylesheet" />' ."\n", PC_Config::url(), PC_Config::get('theme'));
-	printf('<link rel="stylesheet" href="%s/theme/%s/bootstrap.css" media="screen">' ."\n", PC_Config::url(), PC_Config::get('theme'));
-    printf('<link rel="stylesheet" href="%s/theme/%s/assets/css/bootswatch.min.css">' ."\n", PC_Config::url(), PC_Config::get('theme'));
-    printf('<link rel="stylesheet" href="%s/theme/%s/custom.css">' ."\n", PC_Config::url(), PC_Config::get('theme'));
 }
 
 function wp_footer() {
@@ -259,8 +259,20 @@ function esc_url($url, $protocols=null, $context='display') {
     }
 }
 
+function add_action($arg1, $arg2, $arg3=null) {
+
+}
+
+function add_filter($arg1, $arg2, $arg3=null, $arg4=null) {
+
+}
+
+function get_template_directory() {
+    return PUMPCMS_PUBLIC_PATH . '/wptheme/' . PC_Config::get('theme');
+}
+
 function get_template_directory_uri() {
-    return PC_Config::url() . '/themes/' . PC_Config::get('default_theme');
+    return PC_Config::url() . '/wptheme/' . PC_Config::get('theme');
 }
 
 function is_front_page() {
@@ -280,7 +292,7 @@ function has_nav_menu() {
 function is_active_sidebar() {
 }
 
-function get_template_part($arg1, $arg2) {
+function get_template_part($arg1, $arg2=null) {
 	global $blog;
 
 	if (isset($blog) && is_array($blog)) {
@@ -328,6 +340,10 @@ printf('<article id="post-1" class="post-1 post type-post status-publish format-
 	}
 }
 
+function is_top_follows_visible() {
+
+}
+
 function get_post_format() {
 }
 
@@ -363,4 +379,8 @@ function wp_page_menu() {
 
 function esteem_render_header_image() {
 	
+}
+
+function is_admin() {
+	return UserInfo::is_site_admin();
 }
