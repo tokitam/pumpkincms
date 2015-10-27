@@ -10,7 +10,67 @@ class PumpORMAP {
 	static $_ormap = array();
 
     public function __construct($form_data) {
-		$this->form_config = $form_data;
+		$this->form_config = $this->normalization($form_data);
+    }
+
+    private function normalization($form_data) {
+    	$column_list = $form_data['column'];
+    	$map = array();
+    	foreach ($column_list as $key => $value) {
+    		$map[$value['name']] = 1;
+    	}
+
+    	if (isset($map['id']) == false) {
+    		$c = 
+    		array('name' => 'id',
+			      'type' => PUMPFORM_PRIMARY_ID,
+			      'visible' => 0,
+			      'list_visible' => 0);
+    		$column_list = array_merge($c, $column_list);
+    	}
+
+    	if (isset($map['site_id']) == false) {
+        	$column_list['site_id'] = 
+        		array('name' => 'site_id',
+           		   'type' => PUMPFORM_SITE_ID,
+           		   'visible' => 0);
+    	}
+
+    	if (isset($map['reg_time']) == false) {
+        	$column_list['reg_time'] = 
+    	        array('name' => 'reg_time',
+	              'type' => PUMPFORM_TIME,
+	              'visible' => 0,
+	              'list_visible' => 0);
+		}
+
+    	if (isset($map['mod_time']) == false) {
+        	$column_list['mod_time'] = 
+    	        array('name' => 'mod_time',
+	              'type' => PUMPFORM_TIME,
+	              'visible' => 0,
+	              'list_visible' => 0);
+		}
+
+    	if (isset($map['reg_user']) == false) {
+        	$column_list['reg_user'] = 
+    	        array('name' => 'reg_user',
+	              'type' => PUMPFORM_TIME,
+	              'visible' => 0,
+	              'list_visible' => 0);
+		}
+
+    	if (isset($map['mod_user']) == false) {
+        	$column_list['mod_user'] = 
+    	        array('name' => 'mod_user',
+	              'type' => PUMPFORM_TIME,
+	              'visible' => 0,
+	              'list_visible' => 0);
+		}
+
+		$form_data['column'] = $column_list;
+
+		return $form_data;
     }
     
     public function get_table() {
