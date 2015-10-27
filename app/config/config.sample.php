@@ -25,9 +25,9 @@ $pc_config['site_config'] = array(
   //'bg_image_url' => 'http://example.com/sample.jpg',
 
   'blog' => array(
-    1 => array('dir' => 'news', 'title' => 'NEWS'),
-    2 => array('dir' => 'info', 'title' => 'INFORMATION'),
-    3 => array('dir' => 'blog', 'title' => 'BLOG'),
+    1 => array('dir' => 'blog', 'title' => 'BLOG'),
+    2 => array('dir' => 'news', 'title' => 'NEWS'),
+    3 => array('dir' => 'info', 'title' => 'INFORMATION'),
     ),
 
   // telauth twilio setting
