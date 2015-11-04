@@ -34,7 +34,8 @@ class admin_config extends PC_Controller {
 				'debug_mode',
 				'site_close',
 				'site_close_message',
-				'allow_register'
+				'allow_register',
+				'bg_image_url',
 			);
 			foreach ($list as $value) {
 				update_or_insert($value, $data[$value]);

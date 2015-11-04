@@ -135,6 +135,13 @@ $pumpform_config['admin']['config_form'] = array(
                                 0 => _MD_ADMIN_ALLOW_REGISTER_NG,
                                 )
                         ),
+		'bg_image_url' => array('name' => 'bg_image_url',
+			'title' => 'bg_image_url',
+			'type' => PUMPFORM_TEXT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,),
     ),
 );
 

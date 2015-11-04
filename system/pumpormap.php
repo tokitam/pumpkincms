@@ -481,9 +481,9 @@ class PumpORMAP {
 				}
 				continue;
 	    	} else {
-				if (@$_POST[$column['name']] == '') {
-			    	continue;
-				}
+				//if (@$_POST[$column['name']] == '') {
+			    	//continue;
+				//}
 		
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
 				$values[$p] = $_POST[$column['name']];
