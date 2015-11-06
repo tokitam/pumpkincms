@@ -7,6 +7,10 @@ PumpkinCMS is general simple CMS.
 * Telephone auth
 * Total image mange/Total file upload manage
 
+
+### homepage
+http://pumpkincms.com/
+
 ### example
 http://idoldd.com/
 
