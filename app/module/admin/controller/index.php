@@ -4,6 +4,7 @@ require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
 
 class admin_index extends PC_Controller {
     var $message;
+    var $list;
 
 	public function index() {
 
@@ -22,6 +23,9 @@ class admin_index extends PC_Controller {
 	    } else {
 			array_unshift($this->message, _MD_ADMIN_NO_AUTH);
 	    }
+
+	    $actionlog = PumpORMAP_Util::get('user', 'actionlog');
+	    $this->list = $actionlog->get_list('', 0, 20, 'id', true);
 	
 		$this->render('message');
 
