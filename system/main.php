@@ -24,8 +24,6 @@ class PC_Main {
 	function run() {
 		global $site_info;
 
-		PC_Debug::log('PC_Router::run() start', __FILE__, __LINE__);
-
 		$this->setup();
 		$this->check_site();
 		$this->check_lang();
