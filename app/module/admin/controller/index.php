@@ -7,12 +7,8 @@ class admin_index extends PC_Controller {
     var $list;
 
 	public function index() {
-
-		if (UserInfo::is_site_admin() == false) {
-			PC_Notification::set(_MD_USER_LOGOUT);
-			PC_Util::redirect_top();
-		}
-
+		PC_Util::redirect_if_not_site_admin();
+	
 	    $this->message = array();
 
 	    $user_model = new User_Model();
@@ -29,6 +25,12 @@ class admin_index extends PC_Controller {
 	
 		$this->render('message');
 
+	}
+
+	public function phpinfo() {
+		PC_Util::redirect_if_not_site_admin();
+	
+		phpinfo();
 	}
 }
 
