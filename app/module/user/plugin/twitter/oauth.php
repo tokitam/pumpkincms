@@ -1,11 +1,32 @@
 <?php
 
-require_once PUMPCMS_ROOT_PATH . '/external/twitteroauth/autoload.php';
-
-use Abraham\TwitterOAuth\TwitterOAuth;
+//require_once PUMPCMS_ROOT_PATH . '/external/twitteroauth/autoload.php';
+require_once PUMPCMS_ROOT_PATH . '/external/twitteroauth.php';
 
 class OAuth {
 	public function get() {
+
+		$consumer_key = PC_Config::get('twitter_consumer_key');
+		$consumer_secret = PC_Config::get('twitter_consumer_secret');
+		$callback = PC_Config::url() . '/';
+
+	    $_SESSION['consumer_key'] = $consumer_key;
+	    $_SESSION['consumer_secret'] = $consumer_secret;
+
+echo ' consumer_key : ' . $_SESSION['consumer_key'];
+echo ' consumer_secret : ' . $_SESSION['consumer_secret'];
+echo ' callback : ' . $callback;
+		$connection = new TwitterOAuth($_SESSION['consumer_key'], $_SESSION['consumer_secret']);
+	    $request_token = $connection->getRequestToken($callback);
+	    $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
+	    $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+
+	    $url = $connection->getAuthorizeURL($token, false);
+
+	    echo ' url : ' . $url;
+	}
+
+	public function get2() {
 		echo ' OK ';
 
 		$consumer_key = PC_Config::get('twitter_consumer_key');
@@ -20,8 +41,8 @@ echo ' callback : ' . $callback;
 		$connection = new TwitterOAuth($consumer_key, $consumer_secret);
 var_dump($connection);
 		//コールバックURLをここでセット
-		$request_token = $connection->oauth('oauth/request_token');
-		//$request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $callback));
+		//$request_token = $connection->oauth('oauth/request_token');
+		$request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $callback));
 
 		//callback.phpで使うのでセッションに入れる
 		$_SESSION['oauth_token'] = $request_token['oauth_token'];
