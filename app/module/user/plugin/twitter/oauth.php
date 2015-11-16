@@ -1,14 +1,14 @@
 <?php
 
-//require_once PUMPCMS_ROOT_PATH . '/external/twitteroauth/autoload.php';
 require_once PUMPCMS_ROOT_PATH . '/external/twitteroauth.php';
 
 class OAuth {
+	const ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token';
 	public function get() {
 
 		$consumer_key = PC_Config::get('twitter_consumer_key');
 		$consumer_secret = PC_Config::get('twitter_consumer_secret');
-		$callback = PC_Config::url() . '/';
+		$callback = PC_Config::url() . '/user/oauth/callback';
 
 	    $_SESSION['consumer_key'] = $consumer_key;
 	    $_SESSION['consumer_secret'] = $consumer_secret;
@@ -26,31 +26,23 @@ echo ' callback : ' . $callback;
 	    echo ' url : ' . $url;
 	}
 
-	public function get2() {
-		echo ' OK ';
+	public function callback() {
+		$request_token = array();
+		$request_token['oauth_token'] = $_SESSION['oauth_token'];
+		$request_token['oauth_token_secret'] = $_SESSION['oauth_token_secret'];
+
+		if (isset($_REQUEST['oauth_token']) && $request_token['oauth_token'] !== $_REQUEST['oauth_token']) {
+ 		   die( 'Error!' );
+		}
 
 		$consumer_key = PC_Config::get('twitter_consumer_key');
 		$consumer_secret = PC_Config::get('twitter_consumer_secret');
-		$callback = PC_Config::url() . '/user/oauth/oob';
+		$callback = PC_Config::url() . '/';
 
-echo ' consumer_key : ' . $consumer_key;
-echo ' consumer_secret : ' . $consumer_secret;
-echo ' callback : ' . $callback;
+		$connection = new TwitterOAuth($consumer_key, $consumer_secret, 
+			$request_token['oauth_token'], $request_token['oauth_token_secret']);
+		$_SESSION['access_token'] = $connection->oAuthRequest(self::ACCESS_TOKEN_URL, 'GET', array('oauth_verifier' => $_REQUEST['oauth_verifier']));
 
-		//TwitterOAuth をインスタンス化
-		$connection = new TwitterOAuth($consumer_key, $consumer_secret);
-var_dump($connection);
-		//コールバックURLをここでセット
-		//$request_token = $connection->oauth('oauth/request_token');
-		$request_token = $connection->oauth('oauth/request_token', array('oauth_callback' => $callback));
-
-		//callback.phpで使うのでセッションに入れる
-		$_SESSION['oauth_token'] = $request_token['oauth_token'];
-		$_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
-
-		//Twitter.com 上の認証画面のURLを取得( この行についてはコメント欄も参照 )
-		$url = $connection->url('oauth/authenticate', array('oauth_token' => $request_token['oauth_token']));
-
-		echo ' url : ' . $url;
+		echo ' access_token: ' . print_r($_SESSION['access_token'], true);
 	}
 }
