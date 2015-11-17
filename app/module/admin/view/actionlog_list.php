@@ -7,7 +7,7 @@
 	<td><?php echo $actionlog['type'] ?></td>
 	<td><?php echo long2ip($actionlog['ip_address']) ?></td>
 	<td><?php echo htmlspecialchars($actionlog['desc']) ?></td>	
-	<td><?php echo PC_Util::mb_truncate($actionlog['user_agent']) ?></td>
+	<td><a rel="tooltip" data-toggle="tooltip" data-placement="bottom" title="<?php echo htmlspecialchars($actionlog['user_agent']) ?>"><?php echo htmlspecialchars(PC_Util::mb_truncate($actionlog['user_agent'], 40)) ?></a></td>
 </tr>
 <?php endforeach ; ?>
 </tbody>
