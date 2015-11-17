@@ -9,8 +9,11 @@ class user_oauth extends PC_Controller {
 		$oauth->get();
 	}
 
-	public function oob() {
-		echo 'oob';
-		exit();
+	public function callback() {
+		$oauth = new OAuth();
+
+		$oauth->callback();
+
+		$this->render('sns_register');
 	}
 }

@@ -30,6 +30,10 @@ $pc_config['site_config'] = array(
     3 => array('dir' => 'info', 'title' => 'INFORMATION'),
     ),
 
+  // twitter setting
+  'twitter_consumer_key' => 'XXXXXXXXXXXXXXXXXXXXXXXXX',
+  'twitter_consumer_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+
   // telauth twilio setting
   'twilio_account_sid' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   'twilio_auth_token' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
