@@ -14,7 +14,8 @@
                     <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_LOGIN_ID ?></label>
                     <div class="col-lg-9">
                       <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_INPUT_ID ?>" name="name" value="<?php echo htmlspecialchars(@$_POST['name']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_INPUT_ID_FORMAT ?>"><br />
-                      <span class="label label-danger" id="input_id_label" style="display: none;">* Input ID</span>
+                      <span class="label label-danger" id="input_id_label" style="display: none;">* Input ID<br /></span>
+                      <span class="label label-danger" id="duplicate_id_label" style="display: none;">* Duplicate ID<br /></span>
                 			<small><?php echo _MD_USER_INPUT_ID_FORMAT ?></small>
                       <?php
                       if (@$this->error['name']) {

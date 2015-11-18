@@ -42,9 +42,14 @@ $(document).ready(function(){
             }).done(function(data){
                     //obj = eval('(' + data + ')');
                     //alert( 'OK');
-                    alert(' data ' + data);
+                    //alert(' data ' + data);
                     console.log(data);
-                    alert(' exists: ' + data.exists);
+                    //alert(' exists: ' + data.exists);
+                    if (data.exists == 1) {
+                        $('#duplicate_id_label').show();
+                    } else {
+                        $('#duplicate_id_label').hide();
+                    }
             }).fail(function(data){
                     alert('Error : ' + errorThrown);
             });
