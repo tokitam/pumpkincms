@@ -1,6 +1,7 @@
 <?php
 
 require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
+require_once PUMPCMS_SYSTEM_PATH. '/version.php';
 
 class admin_index extends PC_Controller {
     var $message;
