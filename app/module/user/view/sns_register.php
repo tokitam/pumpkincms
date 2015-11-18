@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-lg-10 col-lg-offset-2">
                       <!--<button class="btn btn-default">Cancel</button>-->
-                      <button type="submit" class="btn btn-primary"><?php echo _MD_USER_CONFIRM_REGISTER ?></button>
+                      <button button="submit" id="submit_button" class="btn btn-primary"><?php echo _MD_USER_CONFIRM_REGISTER ?></button>
                     </div>
                   </div>
                 </fieldset>

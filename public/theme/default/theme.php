@@ -155,5 +155,6 @@
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/assets/js/bootswatch.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify.min.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/pumpform.js"></script>
+    <script src="<?php echo SiteInfo::get_css_url() ?>/js/user_module.js"></script>
   </body>
 </html>
