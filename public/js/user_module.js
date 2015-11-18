@@ -18,13 +18,13 @@ $(document).ready(function(){
     	if (true) {
 			var data = {id: id};
             var base_url = $('#base_url').val();
-            var url = base_url + '/user/oauth/check_id'; //?id=' + encodeURIComponent(id);
-            alert(' url '  + url);
+            var url = base_url + '/user/oauth/check_id?id=' + encodeURIComponent(id);
+            //alert(' url '  + url);
 
             $.ajax({
                 type: 'GET',
                 url: url,
-                data: data,
+                data: data  /*,
 
                 success: function(data, dataType)
                 {
@@ -38,6 +38,15 @@ $(document).ready(function(){
                 {
                     alert('Error : ' + errorThrown);
                 }
+                */
+            }).done(function(data){
+                    //obj = eval('(' + data + ')');
+                    //alert( 'OK');
+                    alert(' data ' + data);
+                    console.log(data);
+                    alert(' exists: ' + data.exists);
+            }).fail(function(data){
+                    alert('Error : ' + errorThrown);
             });
     	}
 
