@@ -3,6 +3,7 @@
           <div class="col-lg-12">
             <!--<div class="well bs-component">-->
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/register/">
+                <input type="hidden" id="base_url" value="<?php echo PC_Config::url() ?>">
               	<input type="hidden" name="post" value="1">
               	<?php if (@$_GET['type'] || @$_POST['type']) : ?>
               	<input type="hidden" name="type" value="<?php echo intval(@$_GET['type'] || @$_POST['type']) ?>">
@@ -13,7 +14,8 @@
                     <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_LOGIN_ID ?></label>
                     <div class="col-lg-9">
                       <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_INPUT_ID ?>" name="name" value="<?php echo htmlspecialchars(@$_POST['name']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_INPUT_ID_FORMAT ?>"><br />
-			<small><?php echo _MD_USER_INPUT_ID_FORMAT ?></small>
+                      <span class="label label-danger" id="input_id_label" style="display: none;">* Input ID</span>
+                			<small><?php echo _MD_USER_INPUT_ID_FORMAT ?></small>
                       <?php
                       if (@$this->error['name']) {
                         echo $this->error['name'];
@@ -25,6 +27,7 @@
                     <label for="inputEmail" class="col-lg-3 control-label"><?php echo _MD_LOGIN_EMAIL ?></label>
                     <div class="col-lg-9">
                       <input required type="email" class="form-control" id="inputEmail" placeholder="<?php echo _MD_USER_INPUT_EMAIL ?>" name="email" value="<?php echo htmlspecialchars(@$_POST['email']); ?>">
+                      <span class="label label-danger" id="input_email_label" style="display: none;">* Input Email</span>
                       <?php
                       if (@$this->error['email']) {
                         echo $this->error['email'];

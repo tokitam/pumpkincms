@@ -2,24 +2,36 @@
 $(document).ready(function(){
 
     $('#submit_button').click(function (){
-        alert(' OK ');
-        /*
-		var confirm_text = $('#pumpform_delete_confirm').val();
+		var id = $('#inputId').val();
+        var email = $('#inputEmail').val()
 
-    	if (confirm(confirm_text)) {
-			id = $('#target_id').val();
+        if (id == '') {
+            $('#input_id_label').show();
+            return;
+        }
+
+        if (email == '') {
+            $('#input_email_label').show();
+            return;
+        }
+
+    	if (true) {
 			var data = {id: id};
-			var url = $('#pumpform_delte_url').val();
-			var ret_url = $('#pumpform_module_url').val();
+            var base_url = $('#base_url').val();
+            var url = base_url + '/user/oauth/check_id'; //?id=' + encodeURIComponent(id);
+            alert(' url '  + url);
 
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: url,
                 data: data,
 
                 success: function(data, dataType)
                 {
-                    location.href = ret_url;
+                    obj = eval('(' + data + ')');
+                    alert( 'OK');
+                    alert(' data ' + data);
+                    alert(' exists: ' + obj.exists);
                 },
 
                 error: function(XMLHttpRequest, textStatus, errorThrown)
@@ -28,6 +40,7 @@ $(document).ready(function(){
                 }
             });
     	}
-        */
+
+        return false;
     });
 });
