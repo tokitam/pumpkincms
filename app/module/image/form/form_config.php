@@ -9,25 +9,7 @@ $pumpform_config['image']['image'] = array(
 	'default_sort' => 'd_id',				   
 
     'column' => array(
-        array('name' => 'id',
-	      'type' => PUMPFORM_PRIMARY_ID,
-	      'visible' => 0),
-        array('name' => 'site_id',
-              'type' => PUMPFORM_SITE_ID,
-              'visible' => 0),
-        array('name' => 'reg_time',
-              'type' => PUMPFORM_TIME,
-              'visible' => 0),
-        array('name' => 'mod_time',
-              'type' => PUMPFORM_TIME,
-              'visible' => 0),
-        array('name' => 'reg_user',
-              'type' => PUMPFORM_USER,
-              'visible' => 0),
-        array('name' => 'mod_user',
-              'type' => PUMPFORM_USER,
-              'visible' => 0),
-		      
+
 	array('name' => 'width',
 	      'title' => _MD_IMAGE_WIDTH,
 	      'type' => PUMPFORM_INT,

@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-    $('#submit_button').click(function (){
+    $('#user_submit_button').click(function (){
 		var id = $('#inputId').val();
         var email = $('#inputEmail').val()
 
