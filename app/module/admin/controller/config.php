@@ -36,6 +36,8 @@ class admin_config extends PC_Controller {
 				'site_close_message',
 				'allow_register',
 				'bg_image_url',
+				'cookie_lifetime',
+				'gc_maxlifetime',
 			);
 			foreach ($list as $value) {
 				update_or_insert($value, $data[$value]);

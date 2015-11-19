@@ -29,7 +29,7 @@ $pumpform_config['admin']['config_form'] = array(
 	'title' => _MD_ADMIN_SETTING,
 	'table' => 'config_form',
 	'column' => array(
-		
+
 		'title' => array('name' => 'site_title',
 			'title' => _MD_ADMIN_SITE_TITLE,
 			'type' => PUMPFORM_TEXT,
@@ -106,6 +106,22 @@ $pumpform_config['admin']['config_form'] = array(
 			'registable' => 1,
 			'editable' => 1,
 			'list_visible' => 1,),
+		'cookie_lifetime' => array('name' => 'cookie_lifetime',
+			'title' => 'cookie_lifetime',
+			'type' => PUMPFORM_TEXT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,
+			'default' => (60 * 60 * 24 * 365)),
+		'gc_maxlifetime' => array('name' => 'gc_maxlifetime',
+			'title' => 'gc_maxlifetime',
+			'type' => PUMPFORM_TEXT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,
+			'default' => (60 * 60 * 24 * 365),),
     ),
 );
 
