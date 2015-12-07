@@ -9,7 +9,7 @@ $pumpform_config['note']['note'] = array(
 
     'list_limit' => 4,
     'default_sort' => 'd_id',
-    'has_active_tag' = true,
+    'has_active_tag' => true,
 
     'column' => array(
 

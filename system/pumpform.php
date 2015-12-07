@@ -232,7 +232,7 @@ class PumpForm {
 		    	$pumpormap = new PumpORMAP($form_config);
 		    	if (self::$target_id) {
 		    		$target_id = self::$target_id;
-		    		self::$target_id = 0;
+		    		self::$target_id = 2;
 		    	} else {
 		    		$target_id = PC_Config::get('dir4');
 		    	}
@@ -403,11 +403,11 @@ class PumpForm {
 				}
 			}
 	    
-			if (@$column['minlength'] && strlen($data) < $column['minlength']) {
-				$error[$column['name']] = sprintf(_MD_PUMPFORM_NG_LENGTH, intval(@$column['minlength']), intval(@$column['maxlength']));
+			if (@$column['minlength'] && mb_strlen($data) < $column['minlength']) {
+				$error[$column['name']] = sprintf(_MD_PUMPFORM_NG_LENGTH . '(1)', intval(@$column['minlength']), intval(@$column['maxlength']));
 			}
-			if (@$column['maxlength'] && $column['maxlength'] < strlen($data)) {
-				$error[$column['name']] = sprintf(_MD_PUMPFORM_NG_LENGTH, intval(@$column['minlength']), intval(@$column['maxlength']));
+			if (@$column['maxlength'] && $column['maxlength'] < mb_strlen($data)) {
+				$error[$column['name']] = sprintf(_MD_PUMPFORM_NG_LENGTH . '(2)', intval(@$column['minlength']), intval(@$column['maxlength']));
 			}
 
 			if (@$column['type'] == PUMPFORM_PASSWORD) {
