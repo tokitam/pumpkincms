@@ -65,6 +65,9 @@ foreach ($form as $column) {
 		if (@$column['required']) {
 		    $form_html .= ' required ';
 		}
+	        if (@$column['maxlength']) {
+		    $form_html .= " maxlength='" . intval($column['maxlength']) . "' ";
+		}
 		$form_html .= ">";
 		if (@$_POST[$column['name']]) {
 		    $form_html .= htmlspecialchars($_POST[$column['name']]);
