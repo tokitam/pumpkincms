@@ -41,6 +41,7 @@ class PC_Main {
 	function setup() {
 		mb_language('Japanese');
 		mb_internal_encoding('UTF-8');
+		date_default_timezone_set('UTC');
 	}
 
 	function load_config() {
