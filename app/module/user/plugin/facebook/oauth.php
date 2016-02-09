@@ -1,7 +1,6 @@
 <?php
 
 require_once PUMPCMS_ROOT_PATH . '/external/twitteroauth.php';
-require_once PUMPCMS_APP_PATH . '/module/user/plugin/twitter/oauth_twitter_model.php';
 
 class OAuth {
 	const ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token';
@@ -9,7 +8,7 @@ class OAuth {
 	public function get_tag() {
 		$url = PC_Config::url() . '/user/oauth?type=twitter';
 		$code = sprintf("location.href = '%s';", $url);
-		$tag = sprintf('<button class="btn btn-default" onclick="%s">twitter認証</button>', $code);
+		$tag = sprintf('<button class="btn btn-default" onclick="%s">facebook認証</button>', $code);
 
 		return $tag;
 	}
@@ -18,7 +17,7 @@ class OAuth {
 
 		$consumer_key = PC_Config::get('twitter_consumer_key');
 		$consumer_secret = PC_Config::get('twitter_consumer_secret');
-		$callback = PC_Config::url() . '/user/oauth/callback?type=twitter';
+		$callback = PC_Config::url() . '/user/oauth/callback';
 
 	    $_SESSION['consumer_key'] = $consumer_key;
 	    $_SESSION['consumer_secret'] = $consumer_secret;
@@ -55,10 +54,5 @@ class OAuth {
 		$_SESSION['access_token'] = $connection->oAuthRequest(self::ACCESS_TOKEN_URL, 'GET', array('oauth_verifier' => $_REQUEST['oauth_verifier']));
 
 		echo ' access_token: ' . print_r($_SESSION['access_token'], true);
-	}
-
-	public function verifi($user_id) {
-		$oauth_twitter_model = new OAuth_twitter_Model();
-		$oauth_twitter_model->register($user_id, $_SESSION['access_token'], $_SESSION['acess_token_secret']);
 	}
 }

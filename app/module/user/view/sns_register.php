@@ -2,7 +2,7 @@
         <div class="row">
           <div class="col-lg-12">
             <!--<div class="well bs-component">-->
-              <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/register/">
+              <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/oauth/register/">
                 <input type="hidden" id="base_url" value="<?php echo PC_Config::url() ?>">
               	<input type="hidden" name="post" value="1">
               	<?php if (@$_GET['type'] || @$_POST['type']) : ?>
