@@ -37,10 +37,10 @@ class User_Model extends PC_Model {
 		
 		if (count($error) == 0) {
 			$this->update_last_login_time($this->_user_data['id']);
-		    $_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $this->_user_data;
+			$_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $this->_user_data;
 			PC_Notification::set(_MD_USER_LOGINED);
 			ActionLog::log(ActionLog::LOGIN);
-	        PC_Util::redirect_top();
+			PC_Util::redirect_top();
 		} else {
 			return $error;
 		}

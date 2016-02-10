@@ -67,12 +67,17 @@ class OAuth {
 	public function get_user() {
 		parse_str($_SESSION['access_token'], $param);
 		$twitter_id = @$param['user_id'];
-
+		
 		if (empty($twitter_id)) {
 			return false;
 		}
 
 		$oauth_twitter_model = new OAuth_twitter_Model();
 		return $oauth_twitter_model->get_user($twitter_id);
+	}
+
+	public function login($twitter_user) {
+		$oauth_twitter_model = new OAuth_twitter_Model();
+		$oauth_twitter_model->login($twitter_user);
 	}
 }
