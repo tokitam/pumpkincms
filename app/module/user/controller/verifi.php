@@ -44,7 +44,7 @@ class user_verifi extends PC_Controller {
 		$admin_subject = '[admin info] register finish';
 		$admin_message = "[admin info]\r\n\r\nuser: " . $user['name'];
 
-		$type = $_GET['type'];
+		$type = @$_GET['type'];
 		if (@$type && preg_match('/[a-z]+/', $type)) {
 			$file = PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth_' . $type . '_model.php';
 			if (is_readable($file)) {
