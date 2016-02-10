@@ -32,9 +32,8 @@ class user_verifi extends PC_Controller {
 		    return;
 		}
 	    
-		$user_model->register($user);
+		$user_id = $user_model->register($user);
 		$db = PC_DBSet::get();
-		$user_id = $db->insert_id();
 		$temp_model->update_flg_process($_GET['id']);
 		    
 		$this->message = _MD_USER_REGISTER_OK;

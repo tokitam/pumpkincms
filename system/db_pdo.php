@@ -137,8 +137,13 @@ class PC_Db_pdo extends PC_Db {
 		if ($result == false ) {
 			$this->abort($sql);
 		}
+	    
+	    $insert_id = $this->insert_id();
 
 		$this->_row_count = $this->_stmt->rowCount();
+	    
+	    
+	    return $insert_id;
 	}
 
 	/**
