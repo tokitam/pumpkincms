@@ -98,7 +98,7 @@ class user_oauth extends PC_Controller {
 				PC_Util::mail($admin_mail, $admin_subject, $admin_message);
 						
 				ActionLog::log(ActionLog::REGISTER_TEMP);
-						
+
 				$this->render('register_do');
 				return;
 				    

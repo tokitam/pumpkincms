@@ -57,8 +57,17 @@ class OAuth {
 		echo ' access_token: ' . print_r($_SESSION['access_token'], true);
 	}
 
-	public function verifi($user_id) {
+	public function register($user_id) {
+		if (empty($_SESSION['access_token'])) {
+			throw new Exception('Invalid access: oauth twitter token');
+		}
+
+		parse_str($_SESSION['access_token'], $param);
 		$oauth_twitter_model = new OAuth_twitter_Model();
-		$oauth_twitter_model->register($user_id, $_SESSION['access_token'], $_SESSION['acess_token_secret']);
+		$oauth_twitter_model->register($user_id, 
+			$param['oauth_token'], 
+			$param['oauth_token_secret'], 
+			$param['user_id'], 
+			$param['screen_name']);
 	}
 }

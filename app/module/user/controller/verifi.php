@@ -46,11 +46,11 @@ class user_verifi extends PC_Controller {
 
 		$type = @$_GET['type'];
 		if (@$type && preg_match('/[a-z]+/', $type)) {
-			$file = PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth_' . $type . '_model.php';
+			$file = PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth.php';
 			if (is_readable($file)) {
 				require_once $file;
-				$oauth_user_model = new OAuth_twitter_Model();
-				$oauth_user_model->register($user_id);
+				$oauth = new OAuth();
+				$oauth->register($user_id);
 			}
 		}
 

@@ -11,6 +11,8 @@ CREATE TABLE `xzqb_user_twitter` (
 
   `access_token` varchar(64) NOT NULL,
   `access_token_secret` varchar(64) NOT NULL,
+  `twitter_id` bigint NOT NULL,
+  `screen_name` varchar(64) NOT NULL,
 
   PRIMARY KEY (`id`),
   KEY `site_id` (`site_id`),
