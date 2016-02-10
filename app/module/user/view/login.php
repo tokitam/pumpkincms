@@ -64,7 +64,6 @@ if (SiteInfo::is_site_close()) {
                     <div class="col-lg-10 col-lg-offset-2">
                     <?php foreach ($this->oauth_tag as $tag) : ?>
                       <?php echo $tag ?>
-                      <button class="btn btn-default" onclick="location.href = 'http://www.yahoo.co.jp/';">twitter認証</button>
                     <?php endforeach; ?>
                     </div>
           </div> <!-- end col-lg-12 -->
