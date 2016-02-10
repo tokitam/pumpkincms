@@ -23,9 +23,6 @@ class OAuth {
 	    $_SESSION['consumer_key'] = $consumer_key;
 	    $_SESSION['consumer_secret'] = $consumer_secret;
 
-//echo ' consumer_key : ' . $_SESSION['consumer_key'];
-//echo ' consumer_secret : ' . $_SESSION['consumer_secret'];
-//echo ' callback : ' . $callback;
 		$connection = new TwitterOAuth($_SESSION['consumer_key'], $_SESSION['consumer_secret']);
 	    $request_token = $connection->getRequestToken($callback);
 	    $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
@@ -33,7 +30,6 @@ class OAuth {
 
 	    $url = $connection->getAuthorizeURL($token, false);
 
-	    //echo ' url : ' . $url;
 	    header('Location: ' . $url);
 	}
 
@@ -48,13 +44,10 @@ class OAuth {
 
 		$consumer_key = PC_Config::get('twitter_consumer_key');
 		$consumer_secret = PC_Config::get('twitter_consumer_secret');
-		$callback = PC_Config::url() . '/';
 
 		$connection = new TwitterOAuth($consumer_key, $consumer_secret, 
 			$request_token['oauth_token'], $request_token['oauth_token_secret']);
 		$_SESSION['access_token'] = $connection->oAuthRequest(self::ACCESS_TOKEN_URL, 'GET', array('oauth_verifier' => $_REQUEST['oauth_verifier']));
-
-		echo ' access_token: ' . print_r($_SESSION['access_token'], true);
 	}
 
 	public function register($user_id) {
@@ -69,5 +62,17 @@ class OAuth {
 			$param['oauth_token_secret'], 
 			$param['user_id'], 
 			$param['screen_name']);
+	}
+
+	public function get_user() {
+		parse_str($_SESSION['access_token'], $param);
+		$twitter_id = @$param['user_id'];
+
+		if (empty($twitter_id)) {
+			return false;
+		}
+
+		$oauth_twitter_model = new OAuth_twitter_Model();
+		return $oauth_twitter_model->get_user($twitter_id);
 	}
 }

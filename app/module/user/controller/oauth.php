@@ -26,8 +26,13 @@ class user_oauth extends PC_Controller {
 		}
 
 		$oauth = new OAuth();
-
 		$oauth->callback();
+		$user = $oauth->get_user();
+
+		if (! empty($user)) {
+			echo ' login ';
+			return;
+		}
 
 		$this->render('sns_register');
 	}

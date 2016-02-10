@@ -26,4 +26,15 @@ class OAuth_twitter_Model extends PC_Model {
 	    
 	    $db->query($sql);
 	}
+
+	function get_user($twitter_id) {
+		$db = PC_DBSet::get();
+
+		$sql = ' SELECT * FROM ' . $db->prefix($this->table_name);
+		$sql .= sprintf(' WHERE site_id = %d AND twitter_id = %d ', SiteInfo::get_site_id(), $twitter_id);
+		$sql .= ' ORDER BY id DESC ';
+		$sql .= ' LIMIT 1 OFFSET 0 ';
+
+		return $db->fetch_row($sql);
+	}
 }
