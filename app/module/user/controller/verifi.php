@@ -2,6 +2,7 @@
 
 require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
 require_once PUMPCMS_APP_PATH . '/module/user/model/temp_model.php';
+require_once PUMPCMS_APP_PATH . '/module/user/class/oauth_util.php';
 
 class user_verifi extends PC_Controller {
     public $error = null;
@@ -45,12 +46,8 @@ class user_verifi extends PC_Controller {
 
 		$type = @$_GET['type'];
 		if (@$type && preg_match('/^[a-z]+$/', $type)) {
-			$file = PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth.php';
-			if (is_readable($file)) {
-				require_once $file;
-				$oauth = new OAuth();
-				$oauth->register($user_id);
-			}
+			$oauth = OAuth_util::load_oauth_class();
+			$oauth->register($user_id);
 		}
 
 		PC_Util::mail($admin_mail, $admin_subject, $admin_message);

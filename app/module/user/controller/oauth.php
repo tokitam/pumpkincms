@@ -2,30 +2,32 @@
 
 require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
 require_once PUMPCMS_APP_PATH . '/module/user/model/temp_model.php';
+require_once PUMPCMS_APP_PATH . '/module/user/class/oauth_util.php';
 
 class user_oauth extends PC_Controller {
 	public function index() {
 
+		/*
 		if (@$_GET['type'] == 'twitter') {
 			$_SESSION['oauth_type'] = 'twitter';
 			require_once PUMPCMS_APP_PATH . '/module/user/plugin/twitter/oauth.php';
 		} else {
 			die();
 		}
-
-		$oauth = new OAuth();
-
+		*/
+		$oauth = Oauth_util::load_oauth_class();
 		$oauth->get();
 	}
 
 	public function callback() {
+		/*
 		if (@$_SESSION['oauth_type'] == 'twitter') {
 			require_once PUMPCMS_APP_PATH . '/module/user/plugin/twitter/oauth.php';
 		} else {
 			die();
 		}
-
-		$oauth = new OAuth();
+		*/
+		$oauth = Oauth_util::load_oauth_class();
 		$oauth->callback();
 		$user = $oauth->get_user();
 
