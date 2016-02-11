@@ -11,17 +11,17 @@ class OAuth_util {
 	static public function load_oauth_class() {
 		if (@$_SESSION['oauth_type'] && preg_match('/^[a-z]+$/', $_SESSION['oauth_type'])) {
 			$type = $_SESSION['oauth_type'];
-			$file =  PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth.php';
-			require_once $file;
+			self::require_file($type);
 			return self::get_object($type);
 		}
 
 		if (@$_GET['type'] && preg_match('/^[a-z]+$/', $_GET['type'])) {
 			$type = $_GET['type'];
-			$file =  PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth.php';
-			require_once $file;
+			self::require_file($type);
 			return self::get_object($type);
 		}
+
+		throw new Exception('Not found oauth class');
 	}
 
 	static public function require_file($type) {
@@ -29,10 +29,13 @@ class OAuth_util {
 			throw new Exception('Not found oauth class:' . $type);
 		}
 
-		$file =  PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth.php';
-		if (is_readable($file)) {
-			require_once $file;
+		$file =  PUMPCMS_APP_PATH . '/module/user/plugin/' . $type . '/oauth_' . $type . '.php';
+
+		if (! is_readable($file)) {
+			throw new Exception('Not found oauth class:' . $file);
 		}
+
+		require_once $file;
 	}
 
 	static public function get_object($type) {

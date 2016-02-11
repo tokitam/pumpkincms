@@ -44,13 +44,14 @@ class user_verifi extends PC_Controller {
 		$admin_subject = '[admin info] register finish';
 		$admin_message = "[admin info]\r\n\r\nuser: " . $user['name'];
 
+		PC_Util::mail($admin_mail, $admin_subject, $admin_message);
+
+		// SNS login
 		$type = @$_GET['type'];
 		if (@$type && preg_match('/^[a-z]+$/', $type)) {
 			$oauth = OAuth_util::load_oauth_class();
 			$oauth->register($user_id);
 		}
-
-		PC_Util::mail($admin_mail, $admin_subject, $admin_message);
 
 		$this->render();
     }

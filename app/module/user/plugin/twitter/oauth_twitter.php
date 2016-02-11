@@ -78,6 +78,6 @@ class OAuth_twitter {
 
 	public function login($twitter_user) {
 		$oauth_twitter_model = new OAuth_twitter_Model();
-		$oauth_twitter_model->login($twitter_user);
+		$oauth_twitter_model->login($twitter_user['user_id']);
 	}
 }

@@ -26,4 +26,3 @@ class user_index extends PC_Controller {
 	}
 
 }
-

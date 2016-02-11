@@ -40,12 +40,11 @@ class OAuth_twitter_Model extends PC_Model {
 		return $db->fetch_row($sql);
 	}
 
-	function login($twitter_user) {
-		if (! empty($twitter_user['user_id'])) {
-			$user_id = $twitter_user['user_id'];
+	function login($twitter_id) {
+		if (! empty($twitter_id)) {
 			$user_model = new user_model();
-			$user = $user_model->get_user_by_id($user_id);
-			$user_model->update_last_login_time($user_id);
+			$user = $user_model->get_user_by_id($twitter_id);
+			$user_model->update_last_login_time($twitter_id);
 			$_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $user;
 			PC_Notification::set(_MD_USER_LOGINED);
 			ActionLog::log(ActionLog::LOGIN);
