@@ -34,6 +34,10 @@ $pc_config['site_config'] = array(
   'twitter_consumer_key' => 'XXXXXXXXXXXXXXXXXXXXXXXXX',
   'twitter_consumer_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
 
+  // facebook setting
+  'facebook_app_id' => 'XXXXXXXXXXXXXXX',
+  'facebook_app_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+
   // telauth twilio setting
   'twilio_account_sid' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   'twilio_auth_token' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',

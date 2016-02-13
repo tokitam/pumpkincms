@@ -3,9 +3,28 @@
 class OAuth_util {
 	static public function get_tag() {
 		// ここでディレクトリを読んでループ
-		self::require_file('twitter');
-		$oauth = self::get_object('twitter');
-		return array($oauth->get_tag());
+		//self::require_file('twitter');
+		//$oauth = self::get_object('twitter');
+
+		$tag_list = [];
+
+		$dir = PUMPCMS_APP_PATH . '/module/user/plugin';
+
+		if (is_dir($dir)) {
+			if ($dh = opendir($dir)) {
+				while (($file = readdir($dh)) !== false) {
+					if (preg_match('/^[a-z]+$/', $file)) {
+						self::require_file($file);
+						$oauth = self::get_object($file);
+						array_push($tag_list, $oauth->get_tag());
+					}
+				}
+				closedir($dh);
+			}
+		}
+
+		//return array($oauth->get_tag());
+		return $tag_list;
 	}
 
 	static public function load_oauth_class() {

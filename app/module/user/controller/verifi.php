@@ -51,10 +51,10 @@ class user_verifi extends PC_Controller {
 		if (@$type && preg_match('/^[a-z]+$/', $type)) {
 			$oauth = OAuth_util::load_oauth_class();
 			$oauth->register($user_id);
-			$twitter_user = $oauth->get_user();
-			var_dump($twitter_user);
-			if (isset($twitter_user['id'])) {
-				$oauth->login($twitter_user);
+			$sns_user = $oauth->get_user();
+			var_dump($sns_user);
+			if (isset($sns_user['id'])) {
+				$oauth->login($sns_user);
 				PC_Notification::set(_MD_USER_LOGINED);
 				ActionLog::log(ActionLog::LOGIN);
 			}
