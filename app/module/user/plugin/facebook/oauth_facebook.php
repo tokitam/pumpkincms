@@ -22,6 +22,11 @@ class OAuth_facebook {
 		);
 		$facebook = new Facebook($config);
 
+		if ($facebook->getUser()) {
+			$callback = PC_Config::url() . '/user/oauth/callback?type=facebook';
+			PC_Util::redirect($callback);
+		}
+
 		$url = $facebook->getLoginUrl();
 
 	    header('Location: ' . $url);
