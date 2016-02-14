@@ -62,7 +62,7 @@ class PC_Util {
 		  'Content-Transfer-Encoding: 7bit' . "\r\n" .
 		  'Content-Type: text/plain; charset="iso-2022-jp"' . "\r\n";
 		  
-		mail($to, $subject, $message, $headers);
+		@mail($to, $subject, $message, $headers);
 	    
 	}
 
@@ -124,10 +124,10 @@ class PC_Util {
 	}
     
         static function get_service_base_path() {
-	    if ($_SERVER['REQUEST_URI'] == '' ||
+	    if (@$_SERVER['REQUEST_URI'] == '' ||
 		$_SERVER['REQUEST_URI'] == '/') {
 		return '';
-	    } else if ($_SERVER['QUERY_STRING'] == '') {
+	    } else if (@$_SERVER['QUERY_STRING'] == '') {
 		preg_match('@(.+)/?@', $_SERVER['REQUEST_URI'], $r);
 		return self::cut_tail_slash($r[1]);
 	    } else {

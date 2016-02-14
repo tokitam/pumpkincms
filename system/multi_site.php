@@ -8,11 +8,11 @@ class PC_MultiSite {
         $site_list = PC_Config::get('site_list');
 
         if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-             $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+             $_SERVER['HTTP_HOST'] = @$_SERVER['HTTP_X_FORWARDED_HOST'];
         }
 	
 	$host = strtolower(@$_SERVER['HTTP_HOST']);
-	PC_Config::set('REQUEST_URI', $_SERVER['REQUEST_URI']);
+	PC_Config::set('REQUEST_URI', @$_SERVER['REQUEST_URI']);
 	
         foreach ($site_list as $site => $site_data) {
             $site_id = $site_data['site_id'];
@@ -23,7 +23,7 @@ class PC_MultiSite {
             $path = substr($path, 0, strlen($path) - 1);
 	    
             if (@$host == $urls['host'] &&
-                preg_match('@' . $path . '@', $_SERVER['REQUEST_URI'])) {
+                preg_match('@' . $path . '@', @$_SERVER['REQUEST_URI'])) {
 		    
                 PC_Config::set('site_id', $site_id);
                 PC_Config::set('base_url', 'http://' . $site);
@@ -39,7 +39,7 @@ class PC_MultiSite {
         $site_data['site_id'] = $catchall;
         PC_Config::set('site_id', $catchall);
 	$service_url = PC_Util::get_service_base_path();
-	PC_Config::set('base_url', 'http://' . $_SERVER['SERVER_NAME'] . $service_url);
+	PC_Config::set('base_url', 'http://' . @$_SERVER['SERVER_NAME'] . $service_url);
         self::set_site_info($site_data);
     }
     
