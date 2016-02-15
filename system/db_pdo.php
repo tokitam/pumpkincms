@@ -31,21 +31,16 @@ class PC_Db_pdo extends PC_Db {
 
 		try {
 		    if ($c['db_driver'] == self::MYSQL) {
-				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'];
+				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'] . ';charset=utf8';
 				$user = $c['db_user'];
 				$pass = $c['db_pass'];
-				//$options = array(
-				//	 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-				//	 ); 
 				$options = [];
 				$this->_con = new PDO($dsn, $user, $pass, $options);
 		    } else if ($c['db_driver'] == self::PGSQL) {
-				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'];
+				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'] . ';charset=utf8';
 				$user = $c['db_user'];
 				$pass = $c['db_pass'];
-				$options = array(
-					 //PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-					 ); 
+				$options = [];
 				$this->_con = new PDO($dsn, $user, $pass, $options);
 		    } else if ($c['db_driver'] == self::SQLITE) {
 		    	if (preg_match('%/%', $c['db_name'])) {
