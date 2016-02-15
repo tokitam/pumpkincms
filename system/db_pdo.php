@@ -34,13 +34,13 @@ class PC_Db_pdo extends PC_Db {
 				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'] . ';charset=utf8';
 				$user = $c['db_user'];
 				$pass = $c['db_pass'];
-				$options = [];
+				$options = array();
 				$this->_con = new PDO($dsn, $user, $pass, $options);
 		    } else if ($c['db_driver'] == self::PGSQL) {
 				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'] . ';charset=utf8';
 				$user = $c['db_user'];
 				$pass = $c['db_pass'];
-				$options = [];
+				$options = array();
 				$this->_con = new PDO($dsn, $user, $pass, $options);
 		    } else if ($c['db_driver'] == self::SQLITE) {
 		    	if (preg_match('%/%', $c['db_name'])) {
