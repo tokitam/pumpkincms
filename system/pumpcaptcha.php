@@ -61,15 +61,15 @@
 
 //session_start();
 
-$pumpcaptcha = new PumpCaptcha(PUMPCMS_ROOT_PATH . '/resource/OpenSans-Regular.ttf');
-$pumpcaptcha->output_image();
-exit();
+//$pumpcaptcha = new PumpCaptcha(PUMPCMS_ROOT_PATH . '/resource/OpenSans-Regular.ttf');
+//$pumpcaptcha->output_image();
+//exit();
 
 class PumpCaptcha 
 {
     var $width = 150;
     var $height = 70;
-    var $font = 'OpenSans-Regular.ttf';
+    var $font = 'Existence-Light.otf';
     var $border = 5;
     var $pumpcaptcha_text = 'pumpcaptcha_text';
     
@@ -79,48 +79,78 @@ class PumpCaptcha
             $this->font = $font;
         }
     }
+
+    static public function is_operable()
+    {
+        $list = array(
+            'imagecreate',
+            'iamgettftext',
+            'imagecolorallocate',
+            'imageline',
+            'imagejpeg',
+            'ImageCreateTrueColor',
+            );
+        foreach ($list as $func) {
+            if (function_exists($func) == false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
     
     public function output_image() 
     {
-	$im = imagecreate($this->width, $this->height);
-	imagecolorallocate($im, 255, 255, 255);
+        if ($this->is_operable() == false) {
+            return;
+        }
+
+        $im = imagecreate($this->width, $this->height);
+        imagecolorallocate($im, 255, 255, 255);
         $black = imagecolorallocate($im, 0, 0, 0);
         $gray  = imagecolorallocate($im, 146 + rand(-30, 30), 146 + rand(-30, 30), 146 + rand(-30, 30));
         $white  = imagecolorallocate($im, 255, 255, 255);
-	imagefilledrectangle($im, 0, 0, $this->width, $this->height, $gray);
-	imagefilledrectangle($im, $this->border - 1, $this->border - 1, $this->width - $this->border, $this->height - $this->border, $white);
+        imagefilledrectangle($im, 0, 0, $this->width, $this->height, $gray);
+        imagefilledrectangle($im, $this->border - 1, $this->border - 1, $this->width - $this->border, $this->height - $this->border, $white);
 
         for($i=0; $i<10; $i++) {
-	    imageline($im, rand(0, $this->width - 1), rand(0, $this->height - 1), rand(0, $this->width - 1), rand(0, $this->height - 1), $gray);
-	}
+            imageline($im, rand(0, $this->width - 1), rand(0, $this->height - 1), rand(0, $this->width - 1), rand(0, $this->height - 1), $gray);
+        }
 
-	$x = 10 + rand(0, 40);
-	$y = 40 + rand(0, 15);
-	$font = $this->get_font_path();
-	$font_size = 30;
-	$text = $this->generate_string();
-	$_SESSION[$this->pumpcaptcha_text] = $text;
-    //echo ' font: ' . $font;
- 	imagettftext($im, $font_size, 0, $x, $y, $gray, $font, $text);
-	
+        $x = 10 + rand(0, 40);
+        $y = 40 + rand(0, 15);
+        $font = $this->get_font_path();
+        $font_size = 30;
+        $text = $this->generate_string();
+        $_SESSION[$this->pumpcaptcha_text] = $text;
+
+        imagettftext($im, $font_size, 0, $x, $y, $gray, $font, $text);
+
         header('Content-type: image/jpeg');
         imagejpeg($im, null, 20);
     }
     
     private function generate_string()
     {
-	$string = '345689' .
-	  'abefghjkmnprstwxy';
-	$len = strlen($string);
-	
-	return substr($string, rand(0, $len - 1), 1) . 
-	  substr($string, rand(0, $len - 1), 1) . 
-	  substr($string, rand(0, $len - 1), 1);
+        if ($this->is_operable() == false) {
+            return;
+        }
+
+        $string = '345689' .
+        'abefghjkmnprstwxy';
+        $len = strlen($string);
+
+        return substr($string, rand(0, $len - 1), 1) . 
+            substr($string, rand(0, $len - 1), 1) . 
+            substr($string, rand(0, $len - 1), 1);
     }
     
     private function get_font_path()
     {
-	//return './' . $this->font;
+        if ($this->is_operable() == false) {
+            return;
+        }
+
         return $this->font;
     }
     
