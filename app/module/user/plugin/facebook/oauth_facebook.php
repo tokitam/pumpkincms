@@ -83,7 +83,7 @@ class OAuth_facebook {
 		}
 
 		$oauth_facebook_model = new OAuth_facebook_Model();
-		return $oauth_facebook_model->get_user($facebook_id);
+		return $oauth_facebook_model->get_user($user['id']);
 	}
 
 	public function login($facebook_user) {
