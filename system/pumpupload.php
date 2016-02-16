@@ -5,11 +5,11 @@ class PumpUpload {
 	const STORE_TYPE_DB = 2;
 	const STORE_TYPE_S3 = 3;
 
-	public function mkdir_upload($code, $subdir='image') {
+	static public function mkdir_upload($code, $subdir='image') {
 		return $this->mkdir_raw($code, 'upload', $subdir);
 	}
 
-	public function mkdir_raw($code, $dirname, $subdir='image') {
+	static public function mkdir_raw($code, $dirname, $subdir='image') {
 		$dir = PUMPCMS_APP_PATH . '/' . $dirname . '/' . $subdir . '/';
 		if (is_dir($dir) == false) {
 			mkdir($dir);

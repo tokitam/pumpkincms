@@ -111,7 +111,7 @@ class PumpImage extends PumpUpload {
 		}
 	}
 
-	function upload($target) {
+	static function upload($target) {
 		global $pumpform_config;
 
 		$this->_target = $target;
@@ -130,7 +130,7 @@ class PumpImage extends PumpUpload {
 		$code = PC_Util::random_code(8);
 
     	//if (self::get_type() == self::STORE_TYPE_LOCAL) {
-			$dir = $this->mkdir_upload($code);
+			$dir = @$this->mkdir_upload($code);
 		//}
 
 		$db = PC_DBSet::get();
@@ -214,7 +214,7 @@ class PumpImage extends PumpUpload {
 		return $image_id;
 	}
 
-	public function display_image($name) {
+	static public function display_image($name) {
 		if (preg_match('/^nc.png$/', $name)) {
 			$this->display_not_found_image();
 			return;
@@ -267,18 +267,18 @@ class PumpImage extends PumpUpload {
 		exit();
 	}
 
-	public function create_cache_file($image_id, $code, $ext, $r_width, $r_height, $method='i') {
-    	$this->mkdir_cache($code);
+	static public function create_cache_file($image_id, $code, $ext, $r_width, $r_height, $method='i') {
+		$this->mkdir_cache($code);
 
-    	$dest_image = $this->get_cache_image($image_id, $code, $ext, $r_width, $r_height, $method);
+		$dest_image = $this->get_cache_image($image_id, $code, $ext, $r_width, $r_height, $method);
 
-    	if (1600 < $r_width || 1600 < $r_height) {
-    		PC_Abort::error('Image size over');
-    	}
+		if (1600 < $r_width || 1600 < $r_height) {
+			PC_Abort::error('Image size over');
+		}
 
-    	if (@$_GET['nocache']=='' && is_readable($dest_image)) {
-    		return $dest_image;
-    	}
+		if (@$_GET['nocache']=='' && is_readable($dest_image)) {
+			return $dest_image;
+		}
 
     	if (self::get_type() == self::STORE_TYPE_DB) {
 			$src_image = tempnam(sys_get_temp_dir(), 'tmpimage');
@@ -434,18 +434,18 @@ class PumpImage extends PumpUpload {
 		return $dest_image;
 	}
 
-	public function mkdir_upload($code) {
-		return $this->mkdir_raw($code, 'upload');
+	static public function mkdir_upload($code, $subdir='image') {
+		return @$this->mkdir_raw($code, 'upload');
 	}
 
-	public function mkdir_cache($code) {
+	static public function mkdir_cache($code) {
 		$dir = PUMPCMS_PUBLIC_PATH . '/image/i/';
 		if (is_dir($dir) == false) {
 			mkdir($dir);
 		}
 	}
 
-	public function mkdir_raw($code, $dirname) {
+	static public function mkdir_raw($code, $dirname, $subdir='image') {
 		$dir = PUMPCMS_APP_PATH . '/' . $dirname . '/image/';
 		if (is_dir($dir) == false) {
 			mkdir($dir);
