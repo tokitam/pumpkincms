@@ -5,9 +5,8 @@
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/oauth/register/">
                 <input type="hidden" id="base_url" value="<?php echo PC_Config::url() ?>">
               	<input type="hidden" name="post" value="1">
-              	<?php if (@$_GET['type'] || @$_POST['type']) : ?>
-              	<input type="hidden" name="type" value="<?php echo intval(@$_GET['type'] || @$_POST['type']) ?>">
-              	<?php endif ; ?>
+              	<input type="hidden" name="type" value="<?php echo htmlspecialchars(@$this->type) ?>">
+                type : <?php echo @$this->type ?>
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
                   <div class="form-group">
@@ -24,6 +23,7 @@
                       ?>
                     </div>
                   </div>
+                  <?php if ($this->oauth->input_email) : ?>
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-3 control-label"><?php echo _MD_LOGIN_EMAIL ?></label>
                     <div class="col-lg-9">
@@ -36,6 +36,8 @@
                       ?>
                     </div>
                   </div>
+                  <?php endif ; ?>
+                  <?php if ($this->oauth->input_password) : ?>
                   <div class="form-group">
                     <label for="inputPassword" class="col-lg-3 control-label"><?php echo _MD_USER_PASSWORD ?></label>
                     <div class="col-lg-9">
@@ -54,9 +56,12 @@
                   		-->
                     </div>
                   </div>
+                  <?php endif ; ?>
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
+                  <?php if ($this->oauth->input_email) : ?>
 		      <?php echo _MD_UESR_MAIL_DOMAIN_SETTING ?><br />
+                  <?php endif ; ?>
                       <a href="<?php echo PC_Config::url() ?>/terms" target="_blank" style="font-size: 20px;"><?php echo _MD_USER_TERMS ?></a>
                     </div>
                     <div class="col-lg-10 col-lg-offset-2">

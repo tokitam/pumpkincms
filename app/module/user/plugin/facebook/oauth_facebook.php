@@ -5,6 +5,8 @@ require_once PUMPCMS_APP_PATH . '/module/user/plugin/facebook/oauth_facebook_mod
 
 class OAuth_facebook {
 	const ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token';
+	public $input_email = false;
+	public $input_password = false;
 
 	public function get_tag() {
 		$url = PC_Config::url() . '/user/oauth?type=facebook';

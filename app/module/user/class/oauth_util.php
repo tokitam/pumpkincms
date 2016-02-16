@@ -28,6 +28,7 @@ class OAuth_util {
 	}
 
 	static public function load_oauth_class() {
+		var_dump($_POST);
 		if (@$_SESSION['oauth_type'] && preg_match('/^[a-z]+$/', $_SESSION['oauth_type'])) {
 			$type = $_SESSION['oauth_type'];
 			self::require_file($type);
@@ -36,6 +37,12 @@ class OAuth_util {
 
 		if (@$_GET['type'] && preg_match('/^[a-z]+$/', $_GET['type'])) {
 			$type = $_GET['type'];
+			self::require_file($type);
+			return self::get_object($type);
+		}
+
+		if (@$_POST['type'] && preg_match('/^[a-z]+$/', $_POST['type'])) {
+			$type = $_POST['type'];
 			self::require_file($type);
 			return self::get_object($type);
 		}
