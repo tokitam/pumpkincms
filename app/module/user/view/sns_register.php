@@ -6,7 +6,7 @@
                 <input type="hidden" id="base_url" value="<?php echo PC_Config::url() ?>">
               	<input type="hidden" name="post" value="1">
               	<?php if (@$_GET['type']) : ?>
-              	<input type="hidden" name="type" value="<?php echo htmlspecialchars(@$_GET['type']) ?>"> type : <?php echo $_GET['type'] ?>
+              	<input type="hidden" name="type" value="<?php echo htmlspecialchars(@$_GET['type']) ?>">
               	<?php endif ; ?>
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
