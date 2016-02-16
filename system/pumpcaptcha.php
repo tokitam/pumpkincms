@@ -84,7 +84,7 @@ class PumpCaptcha
     {
         $list = array(
             'imagecreate',
-            'iamgettftext',
+            'imagettftext',
             'imagecolorallocate',
             'imageline',
             'imagejpeg',
