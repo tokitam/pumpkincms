@@ -72,8 +72,9 @@ class user_oauth extends PC_Controller {
 				$temp_model = new Temp_Model();
 				$code = mt_rand(1000, 9999) . uniqid();
 				$insert_id = $temp_model->register($_POST['name'], $_POST['email'], $_POST['password'], $code, @$_POST['type']);
-
-				$register_url = PC_Config::get('base_url') . '/user/verifi/?type=twitter&id=' . $insert_id . '_' . $code;
+				$type = @$_POST['type'];
+				$type = preg_replace('/[^0-9A-Za-z]/', '', $type);
+				$register_url = PC_Config::get('base_url') . '/user/verifi/?type=' . $type . '&id=' . $insert_id . '_' . $code;
 
 				$to = $_POST['email'];
 				$subject = _MD_USER_REGISTER_TITLE;

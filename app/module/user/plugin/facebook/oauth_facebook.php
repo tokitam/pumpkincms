@@ -57,7 +57,7 @@ class OAuth_facebook {
 
 		$oauth_facebook_model = new OAuth_facebook_Model();
 		$oauth_facebook_model->register($user_id, 
-			$user['facebook_id'], 
+			$user['id'], 
 			$user['email'], 
 			$user['name'], 
 			$user['link']);

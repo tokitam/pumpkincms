@@ -5,8 +5,8 @@
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/oauth/register/">
                 <input type="hidden" id="base_url" value="<?php echo PC_Config::url() ?>">
               	<input type="hidden" name="post" value="1">
-              	<?php if (@$_GET['type'] || @$_POST['type']) : ?>
-              	<input type="hidden" name="type" value="<?php echo intval(@$_GET['type'] || @$_POST['type']) ?>">
+              	<?php if (@$_GET['type']) : ?>
+              	<input type="hidden" name="type" value="<?php echo htmlspecialchars(@$_GET['type']) ?>"> type : <?php echo $_GET['type'] ?>
               	<?php endif ; ?>
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>

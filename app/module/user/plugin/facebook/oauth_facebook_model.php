@@ -9,7 +9,7 @@ class OAuth_facebook_Model extends PC_Model {
 		$this->table_name = 'user_facebook';
 	}
 	
-	function register($user_id, $faceook_id, $email, $name, $link) {
+	function register($user_id, $facebook_id, $email, $name, $link) {
 	    
 		$db = PC_DBSet::get();
 		

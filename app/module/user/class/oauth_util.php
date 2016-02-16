@@ -28,14 +28,14 @@ class OAuth_util {
 	}
 
 	static public function load_oauth_class() {
-		if (@$_SESSION['oauth_type'] && preg_match('/^[a-z]+$/', $_SESSION['oauth_type'])) {
-			$type = $_SESSION['oauth_type'];
+		if (@$_GET['type'] && preg_match('/^[a-z]+$/', $_GET['type'])) {
+			$type = $_GET['type'];
 			self::require_file($type);
 			return self::get_object($type);
 		}
 
-		if (@$_GET['type'] && preg_match('/^[a-z]+$/', $_GET['type'])) {
-			$type = $_GET['type'];
+		if (@$_SESSION['oauth_type'] && preg_match('/^[a-z]+$/', $_SESSION['oauth_type'])) {
+			$type = $_SESSION['oauth_type'];
 			self::require_file($type);
 			return self::get_object($type);
 		}

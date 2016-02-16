@@ -56,6 +56,7 @@ class user_verifi extends PC_Controller {
 			if (isset($sns_user['id'])) {
 				$oauth->login($sns_user);
 				PC_Notification::set(_MD_USER_LOGINED);
+			    unset($_SESSION['oauth_type']);
 				ActionLog::log(ActionLog::LOGIN);
 			}
 		}
