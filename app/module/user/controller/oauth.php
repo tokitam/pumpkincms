@@ -5,19 +5,30 @@ require_once PUMPCMS_APP_PATH . '/module/user/model/temp_model.php';
 require_once PUMPCMS_APP_PATH . '/module/user/class/oauth_util.php';
 
 class user_oauth extends PC_Controller {
+	public $oauth;
+	public $type;
+
 	public function index() {
 		$oauth = Oauth_util::load_oauth_class();
 		$oauth->get();
 	}
 
 	public function callback() {
-		$oauth = Oauth_util::load_oauth_class();
-		$oauth->callback();
-		$user = $oauth->get_user();
+		$this->oauth = Oauth_util::load_oauth_class();
+		$this->oauth->callback();
+		$user = $this->oauth->get_user();
 
 		if (! empty($user)) {
 			// registered
-			$oauth->login($user);
+			$this->oauth->login($user);
+		}
+
+		$this->type = '';
+		if (! empty($_GET['type'])) {
+			$this->type = $_GET['type'];
+		}
+		if (! empty($_POST['type'])) {
+			$this->type = $_POST['type'];
 		}
 
 		$this->render('sns_register');
@@ -44,11 +55,19 @@ class user_oauth extends PC_Controller {
     }
 
     public function register() {
-		// email, password, name
-		if (@$_POST['email'] == '' ||
-			@$_POST['password'] == '' ||
-			@$_POST['name'] == '') {
+		// name
+		if (@$_POST['name'] == '') {
 			// no good data
+			die();
+		}
+
+		$this->oauth = Oauth_util::load_oauth_class();
+
+		if ($this->oauth->input_email && empty($_POST['email'])) {
+			die();
+		}
+
+		if ($this->oauth->input_password && empty($_POST['password'])) {
 			die();
 		}
 
@@ -65,13 +84,14 @@ class user_oauth extends PC_Controller {
 		if (isset($_POST['post'])) {
 				
 		    $user_model = new user_model();
+		    $user_model->_check_password = false;
 		    $this->error = $user_model->register_validate();
 
 		    if (count($this->error) == 0) {
 
 				$temp_model = new Temp_Model();
 				$code = mt_rand(1000, 9999) . uniqid();
-				$insert_id = $temp_model->register($_POST['name'], $_POST['email'], $_POST['password'], $code, @$_POST['type']);
+				$insert_id = $temp_model->register(@$_POST['name'], @$_POST['email'], @$_POST['password'], $code, @$_POST['type']);
 				$type = @$_POST['type'];
 				$type = preg_replace('/[^0-9A-Za-z]/', '', $type);
 				$register_url = PC_Config::get('base_url') . '/user/verifi/?type=' . $type . '&id=' . $insert_id . '_' . $code;

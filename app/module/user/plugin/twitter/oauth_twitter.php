@@ -5,6 +5,8 @@ require_once PUMPCMS_APP_PATH . '/module/user/plugin/twitter/oauth_twitter_model
 
 class OAuth_twitter {
 	const ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token';
+	public $input_email = true;
+	public $input_password = false;
 
 	public function get_tag() {
 		$url = PC_Config::url() . '/user/oauth?type=twitter';

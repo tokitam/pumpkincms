@@ -7,6 +7,7 @@ class User_Model extends PC_Model {
     const TEMP_ENABLE_TIME = 3600; // 60 * 60 * 10
     
     var $_user_data;
+    var $_check_password = true;
 
 	function __construct() {
 		$this->table_name = 'user_user';
@@ -141,17 +142,19 @@ class User_Model extends PC_Model {
 			}
 		}
 		
-		if (@$_POST['password'] == '') {
-			//array_unshift($error, _MD_USER_INPUT_PASSWORD . '(7)');
-			$error['password'] = _MD_USER_INPUT_PASSWORD . '(7)';
-		} else {
-			if (strlen($_POST['password']) < 3 || 16 < strlen($_POST['password'])) {
-				//array_unshift($error, _MD_USER_ERROR_LENGTH . '(8)');
-				$error['password'] = _MD_USER_ERROR_LENGTH . '(8)';
+		if ($this->_check_password) {
+			if (@$_POST['password'] == '') {
+				//array_unshift($error, _MD_USER_INPUT_PASSWORD . '(7)');
+				$error['password'] = _MD_USER_INPUT_PASSWORD . '(7)';
+			} else {
+				if (strlen($_POST['password']) < 3 || 16 < strlen($_POST['password'])) {
+					//array_unshift($error, _MD_USER_ERROR_LENGTH . '(8)');
+					$error['password'] = _MD_USER_ERROR_LENGTH . '(8)';
+				}
 			}
 		}
 
-	        if ($this->exists_user(@$_POST['name'], @$_POST['email'])) {
+        if ($this->exists_user(@$_POST['name'], @$_POST['email'])) {
 		        //array_unshift($error, _MD_USER_ERROR_USER_EXISTS . '(10)');
 		        $error['name'] = _MD_USER_ERROR_USER_EXISTS . '(10)';
 		}
