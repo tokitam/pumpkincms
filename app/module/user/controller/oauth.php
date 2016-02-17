@@ -9,6 +9,7 @@ class user_oauth extends PC_Controller {
 	public $type;
 
 	public function index() {
+	    unset($_SESSION['oauth_type']);
 		$oauth = Oauth_util::load_oauth_class();
 		$oauth->get();
 	}
@@ -84,8 +85,13 @@ class user_oauth extends PC_Controller {
 		if (isset($_POST['post'])) {
 				
 		    $user_model = new user_model();
-		    $user_model->_check_password = false;
+		    $user_model->_check_password = $this->oauth->input_password;
+		    $user_model->_check_email = $this->oauth->input_email;
 		    $this->error = $user_model->register_validate();
+		    
+		    if (isset($_POST['type'])) {
+			$this->type = $_POST['type'];
+		    }
 
 		    if (count($this->error) == 0) {
 
@@ -96,6 +102,7 @@ class user_oauth extends PC_Controller {
 				$type = preg_replace('/[^0-9A-Za-z]/', '', $type);
 				$register_url = PC_Config::get('base_url') . '/user/verifi/?type=' . $type . '&id=' . $insert_id . '_' . $code;
 
+			if ($this->oauth->input_email) {
 				$to = $_POST['email'];
 				$subject = _MD_USER_REGISTER_TITLE;
 				$message = _MD_USER_REGISTER_MESSAGE;
@@ -113,6 +120,21 @@ class user_oauth extends PC_Controller {
 
 				$this->render('register_do');
 				return;
+			} else {
+			    $user = array();
+			    $user['name'] = $_POST['name'];
+			    
+			    // register pumpkincms uesr
+			    $user_id = $user_model->register($user);
+			    ActionLog::log(ActionLog::REGISTER_FINISH);
+			    $this->message = _MD_USER_REGISTER_OK;
+			    
+			    // register sns user 
+			    $this->oauth->register($user_id);
+			    
+			    $this->render('verifi');
+			    return;
+			}
 				    
 		    }
 		}

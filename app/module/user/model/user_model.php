@@ -8,6 +8,7 @@ class User_Model extends PC_Model {
     
     var $_user_data;
     var $_check_password = true;
+    var $_check_email = true;
 
 	function __construct() {
 		$this->table_name = 'user_user';
@@ -22,9 +23,9 @@ class User_Model extends PC_Model {
 	        $sql .= " ( ";
 	    $sql .= intval(SiteInfo::get_site_id()) . ', ';
 		$sql .= " " . $db->escape($user['name']) . ", ";
-		$sql .= " " . $db->escape($user['password']). ", ";
-		$sql .= " " . $db->escape($user['email']) . ", ";
-		$sql .= " '" . intval($user['type']) . "', ";
+		$sql .= " " . $db->escape(@$user['password']). ", ";
+		$sql .= " " . $db->escape(@$user['email']) . ", ";
+		$sql .= " '" . intval(@$user['type']) . "', ";
 		$sql .= " " . time(). " ";
 	        $sql .= " ) ";
 
@@ -128,6 +129,7 @@ class User_Model extends PC_Model {
 			}
 		}
 	    
+		if ($this->_check_email) {
 		if (@$_POST['email'] == '') {
 			//array_unshift($error, _MD_USER_INPUT_EMAIL . '(4)');
 			$error['email'] = _MD_USER_INPUT_EMAIL . '(4)';
@@ -141,6 +143,13 @@ class User_Model extends PC_Model {
 		        $error['email'] = _MD_USER_ERROR_FORMAT2 . '(6)';
 			}
 		}
+		    
+		    if ($this->exists_name(@$_POST['name'], @$_POST['email'])) {
+		        //array_unshift($error, _MD_USER_ERROR_USER_EXISTS . '(10)');
+		        $error['name'] = _MD_USER_ERROR_USER_EXISTS . '(10)';
+		    }
+	    
+	        }
 		
 		if ($this->_check_password) {
 			if (@$_POST['password'] == '') {
@@ -154,8 +163,7 @@ class User_Model extends PC_Model {
 			}
 		}
 
-        if ($this->exists_user(@$_POST['name'], @$_POST['email'])) {
-		        //array_unshift($error, _MD_USER_ERROR_USER_EXISTS . '(10)');
+	        if ($this->exists_name(@$_POST['name'])) {
 		        $error['name'] = _MD_USER_ERROR_USER_EXISTS . '(10)';
 		}
 	    
@@ -212,6 +220,28 @@ class User_Model extends PC_Model {
 	        $sql .= ' reg_time > ' . intval($t) . ' AND ( ';
 		$sql .= " name = " . $db->escape($name) . " OR ";
 		$sql .= " email = " . $db->escape($email) . " ";
+	        $sql .= ' ) ';
+
+	        $list = $db->fetch_assoc($sql);
+
+	        if (0 < count($list)) {
+		    return true;
+		} else {
+		    return false;
+		}
+	}
+    
+	function exists_name($name) {
+	        $table = 'user_temp';
+	    
+		$db = PC_DBSet::get();
+	    
+	        $t = time() - self::TEMP_ENABLE_TIME;
+		
+		$sql = 'SELECT * FROM ' . $db->prefix($table);
+		$sql .= " WHERE ";
+	        $sql .= ' reg_time > ' . intval($t) . ' AND ( ';
+		$sql .= " name = " . $db->escape($name);
 	        $sql .= ' ) ';
 
 	        $list = $db->fetch_assoc($sql);
