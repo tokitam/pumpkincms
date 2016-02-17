@@ -240,7 +240,7 @@ class PumpORMAP {
 	    		continue;
 	    	}
 	    	if ($column['type'] == PUMPFORM_PASSWORD) {
-	    		$password = md5(@$post[$column['name']]);
+			$password = PC_Util::password_hash(@$post[$column['name']]);
 	    		$values[$p] = $password;
 	    		$types[$p] = PC_Db::T_STRING;
 	    		array_push($params, $p);
@@ -391,7 +391,7 @@ class PumpORMAP {
 	    	$s = '';
 
 	    	if ($column['type'] == PUMPFORM_PASSWORD) {
-	    		$password = md5($_POST[$column['name']]);
+			$password = PC_Util::password_hash($_POST[$column['name']]);
 	    		$s = ' ' . $db->column_escape($column['name']) . ' = ';
 				$values[$p] = $password;
 				$s .= $p;
