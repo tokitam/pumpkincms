@@ -7,6 +7,7 @@ class OAuth_facebook {
 	const ACCESS_TOKEN_URL = 'https://api.twitter.com/oauth/access_token';
 	public $input_email = false;
 	public $input_password = false;
+	private $facebook_user;
 
 	public function get_tag() {
 		$url = PC_Config::url() . '/user/oauth?type=facebook';
@@ -42,7 +43,11 @@ class OAuth_facebook {
 		$facebook = new Facebook($config);
 	}
 
-	public function register($user_id) {
+	public function get_user_raw() {
+		if (! empty($this->user)) {
+			return $this->user;
+		}
+
 		$config = array(
 			'appId'  => PC_Config::get('facebook_app_id'),
 			'secret' => PC_Config::get('facebook_app_secret')
@@ -51,18 +56,29 @@ class OAuth_facebook {
 
 		if ($facebook->getUser()) {
 			try {
-				$user = $facebook->api('/me','GET');
+				$this->user = $facebook->api('/me','GET');
 			} catch(FacebookApiException $e) {
 				throw new Exception('facebook no logind');
 			}
 		}
 
+		return $this->user;
+	}
+
+	public function email() {
+		$this->get_user_raw();
+		return $this->user['email'];
+	}
+
+	public function register($user_id) {
+		$this->get_user_raw();
+
 		$oauth_facebook_model = new OAuth_facebook_Model();
 		$oauth_facebook_model->register($user_id, 
-			$user['id'], 
-			$user['email'], 
-			$user['name'], 
-			$user['link']);
+			$this->user['id'], 
+			$this->user['email'], 
+			$this->user['name'], 
+			$this->user['link']);
 	}
 
 	public function get_user() {

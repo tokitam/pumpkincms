@@ -123,6 +123,7 @@ class user_oauth extends PC_Controller {
 			} else {
 			    $user = array();
 			    $user['name'] = $_POST['name'];
+			    $user['email'] = $this->oauth->get_mail();
 			    
 			    // register pumpkincms uesr
 			    $user_id = $user_model->register($user);
