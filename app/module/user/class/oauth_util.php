@@ -72,18 +72,4 @@ class OAuth_util {
 
 		return new $class_name();
 	}
-/*    
-    static function register($user_id, $sns_user_id) {
-	$oauth = OAuth_util::load_oauth_class();
-	$oauth->register($user_id);
-	$sns_user = $oauth->get_user();
-
-	if (isset($sns_user_id)) {
-	    $oauth->login($sns_user);
-	    PC_Notification::set(_MD_USER_LOGINED);
-	    unset($_SESSION['oauth_type']);
-	    ActionLog::log(ActionLog::LOGIN);
-	}
-    }
- * */
 }

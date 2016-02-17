@@ -52,12 +52,12 @@ class user_verifi extends PC_Controller {
 			$oauth = OAuth_util::load_oauth_class();
 			$oauth->register($user_id);
 			$sns_user = $oauth->get_user();
-			var_dump($sns_user);
+
 			if (isset($sns_user['id'])) {
-				$oauth->login($sns_user);
 				PC_Notification::set(_MD_USER_LOGINED);
 			    unset($_SESSION['oauth_type']);
 				ActionLog::log(ActionLog::LOGIN);
+				$oauth->login($sns_user);
 			}
 		}
 

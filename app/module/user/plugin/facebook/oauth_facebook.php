@@ -65,7 +65,7 @@ class OAuth_facebook {
 		return $this->user;
 	}
 
-	public function email() {
+	public function get_email() {
 		$this->get_user_raw();
 		return $this->user['email'];
 	}

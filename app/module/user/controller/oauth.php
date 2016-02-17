@@ -123,7 +123,7 @@ class user_oauth extends PC_Controller {
 			} else {
 			    $user = array();
 			    $user['name'] = $_POST['name'];
-			    $user['email'] = $this->oauth->get_mail();
+			    $user['email'] = $this->oauth->get_email();
 			    
 			    // register pumpkincms uesr
 			    $user_id = $user_model->register($user);
@@ -132,6 +132,12 @@ class user_oauth extends PC_Controller {
 			    
 			    // register sns user 
 			    $this->oauth->register($user_id);
+			    // login
+			    $sns_user = $this->oauth->get_user();
+			    PC_Notification::set(_MD_USER_LOGINED);
+			    unset($_SESSION['oauth_type']);
+			    ActionLog::log(ActionLog::LOGIN);
+			    $this->oauth->login($sns_user);
 			    
 			    $this->render('verifi');
 			    return;
