@@ -59,14 +59,6 @@ class PC_Debug {
 	static function log_file($log) {
 		$filename = self::get_log_file();
 
-		if (! is_readable($filename)) {
-			return;
-		}
-
-		if (! is_writable($filename)) {
-			return;
-		}
-
 		$fp = @fopen($filename, 'a');
 		if ($fp == false) {
 			return;

@@ -13,11 +13,11 @@ class PumpImage extends PumpUpload {
 	var $_type;
 	var $_target;
 
-	static public function get_type() {
+	public function get_type() {
 		return intval(PC_Config::get('pumpimage_store_type'));
 	}
 
-	static public function get_tag($image_id, $width=0, $height=0, $option=array()) {
+	public function get_tag($image_id, $width=0, $height=0, $option=array()) {
 		$arr = self::get_url_raw($image_id, $width, $height, $option);
 		if ($arr == false) {
 			return self::display_no_image($width, $height, $option);
@@ -39,7 +39,7 @@ class PumpImage extends PumpUpload {
 		return $tag;
 	}
 
-	static public function get_url_raw($image_id, $width=0, $height=0, $option=array()) {
+	public function get_url_raw($image_id, $width=0, $height=0, $option=array()) {
 		global $pumpform_config;
 
 		PC_Util::include_language_file('image');
@@ -102,7 +102,7 @@ class PumpImage extends PumpUpload {
 		return array('url' => $url, 'data' => $image, 'wh' => $wh, 'org_size' => $org_size);
 	}
 
-	static public function get_url($image_id, $width=0, $height=0, $option=array()) {
+	public function get_url($image_id, $width=0, $height=0, $option=array()) {
 		$arr = self::get_url_raw($image_id, $width, $height, $option);
 		if ($arr == false) {
 			return false;
@@ -111,33 +111,44 @@ class PumpImage extends PumpUpload {
 		}
 	}
 
-	static function upload($target) {
+	function upload($target) {
 		global $pumpform_config;
 
 		$this->_target = $target;
-
+echo __FILE__ . ':' . __LINE__ . ' ';
 		if (@$_FILES[$target]['tmp_name'] == '') {
+echo __FILE__ . ':' . __LINE__ . ' ';
 			return 0;
 		}
+echo __FILE__ . ':' . __LINE__ . ' ';
 		if (! isset($_FILES[$target]['tmp_name'])) {
+echo __FILE__ . ':' . __LINE__ . ' ';
 			return 0;
 			//PC_Abort::abort('Image upload error');
 		}
+echo __FILE__ . ':' . __LINE__ . ' ';
 
 		$pumpormap = PumpORMAP_Util::get('image', 'image');
+echo __FILE__ . ':' . __LINE__ . ' ';
 
 		$this->check_type();
+echo __FILE__ . ':' . __LINE__ . ' ';
 		$code = PC_Util::random_code(8);
+echo __FILE__ . ':' . __LINE__ . ' ';
 
-    	//if (self::get_type() == self::STORE_TYPE_LOCAL) {
-			$dir = @$this->mkdir_upload($code);
+	    //if (self::get_type() == self::STORE_TYPE_LOCAL) {
+			$dir = $this->mkdir_upload($code);
 		//}
 
+echo __FILE__ . ':' . __LINE__ . ' ';
 		$db = PC_DBSet::get();
+echo __FILE__ . ':' . __LINE__ . ' ';
 		$table = $pumpormap->get_table();
 		
+echo __FILE__ . ':' . __LINE__ . ' ';
 		if (self::get_type() == self::STORE_TYPE_LOCAL ||
 			self::get_type() == self::STORE_TYPE_S3) {
+echo __FILE__ . ':' . __LINE__ . ' ';
 			$data = array(
 				'site_id' => PC_Config::get('site_id'),
 				'type' => $this->_type,
@@ -147,6 +158,7 @@ class PumpImage extends PumpUpload {
 			$image_id = $pumpormap->insert($data);
 
 		} else if (self::get_type() == self::STORE_TYPE_DB) {
+echo __FILE__ . ':' . __LINE__ . ' ';
 			$site_id = PC_Config::get('site_id');
 			$type = $this->_type;
 			$ip_address = PC_Util::get_ip_address();
@@ -202,6 +214,7 @@ class PumpImage extends PumpUpload {
 			}
 		}
 
+echo __FILE__ . ':' . __LINE__ . ' ';
 		$src_file = $_FILES[$target]['tmp_name'];
 		$dest_file =  $dir . '/' . $image_id . '_' . $code . '.' . self::get_ext($this->_type);
 
@@ -210,11 +223,12 @@ class PumpImage extends PumpUpload {
 		} else if (self::get_type() == self::STORE_TYPE_S3) {
 			PC_S3::put($src_file, basename($dest_file));
 		}
+echo __FILE__ . ':' . __LINE__ . ' ';
 
 		return $image_id;
 	}
 
-	static public function display_image($name) {
+	public function display_image($name) {
 		if (preg_match('/^nc.png$/', $name)) {
 			$this->display_not_found_image();
 			return;
@@ -267,7 +281,7 @@ class PumpImage extends PumpUpload {
 		exit();
 	}
 
-	static public function create_cache_file($image_id, $code, $ext, $r_width, $r_height, $method='i') {
+	public function create_cache_file($image_id, $code, $ext, $r_width, $r_height, $method='i') {
 		$this->mkdir_cache($code);
 
 		$dest_image = $this->get_cache_image($image_id, $code, $ext, $r_width, $r_height, $method);
@@ -434,18 +448,18 @@ class PumpImage extends PumpUpload {
 		return $dest_image;
 	}
 
-	static public function mkdir_upload($code, $subdir='image') {
-		return @$this->mkdir_raw($code, 'upload');
+	public function mkdir_upload($code, $subdir='image') {
+		return $this->mkdir_raw($code, 'upload');
 	}
 
-	static public function mkdir_cache($code) {
+	public function mkdir_cache($code) {
 		$dir = PUMPCMS_PUBLIC_PATH . '/image/i/';
 		if (is_dir($dir) == false) {
 			mkdir($dir);
 		}
 	}
 
-	static public function mkdir_raw($code, $dirname, $subdir='image') {
+	public function mkdir_raw($code, $dirname, $subdir='image') {
 		$dir = PUMPCMS_APP_PATH . '/' . $dirname . '/image/';
 		if (is_dir($dir) == false) {
 			mkdir($dir);
@@ -483,7 +497,7 @@ class PumpImage extends PumpUpload {
 		}
 	}
 
-	static public function get_ext($type) {
+	public function get_ext($type) {
 		if ($type == self::TYPE_JPG) {
 			return 'jpg';
 		}
@@ -495,21 +509,21 @@ class PumpImage extends PumpUpload {
 		}
 	}
 
-	static public function get_upload_image($id, $code, $ext) {
+	public function get_upload_image($id, $code, $ext) {
 		return self::get_raw_image($id, $code, $ext, 'upload');
 	}
 
-	static public function get_cache_image($id, $code, $ext, $r_width=0, $r_height=0, $method) {
+	public function get_cache_image($id, $code, $ext, $r_width=0, $r_height=0, $method) {
 		//return self::get_raw_image($id, $code, $ext, 'cache', $r_width, $r_height);
 		$file = PUMPCMS_PUBLIC_PATH . '/image/i/' . self::get_base_cache_image($id, $code, $ext, 'cache', $r_width, $r_height, $method);
 		return $file;
 	}
 
-	static public function get_raw_image($id, $code, $ext, $dirname, $r_width=0, $r_height=0) {
+	public function get_raw_image($id, $code, $ext, $dirname, $r_width=0, $r_height=0) {
 		return PUMPCMS_APP_PATH . self::get_base_image($id, $code, $ext, $dirname, $r_width, $r_height);
 	}
 
-	static public function get_base_image($id, $code, $ext, $dirname, $r_width=0, $r_height=0) {
+	public function get_base_image($id, $code, $ext, $dirname, $r_width=0, $r_height=0) {
 		$a = substr($code, 0, 1);
 		$b = substr($code, 1, 1);
 
@@ -523,7 +537,7 @@ class PumpImage extends PumpUpload {
 		return $tmp;
 	}
 
-	static public function get_base_cache_image($id, $code, $ext, $dirname, $r_width=0, $r_height=0, $method) {
+	public function get_base_cache_image($id, $code, $ext, $dirname, $r_width=0, $r_height=0, $method) {
 		$tmp = $id . '_' . $code;
 		if ($dirname == 'cache' && (0 < $r_width || 0 < $r_height)) {
 			$tmp .= '_' . intval($r_width) . 'x' . intval($r_height);
@@ -536,13 +550,13 @@ class PumpImage extends PumpUpload {
 		return $tmp;
 	}
 
-    static public function display_no_image($width, $height, $option) {
+    public function display_no_image($width, $height, $option) {
     	$url = PC_Config::url() . '/image/i/nc.png';
     	$tag = sprintf('<img src="%s" width="%d" height="%d">', $url, $width, $height);
     	return $tag;
     }
 
-    static public function display_not_found_image() {
+    public function display_not_found_image() {
     	if (PC_Config::get('under_construction_image')) {
 			$file = PC_Config::get('under_construction_image');
     	} else {
@@ -556,7 +570,7 @@ class PumpImage extends PumpUpload {
    /**
     * 一次ファイルのみ削除する
     */
-   static public function delete_tmp_file($image_file) {
+   public function delete_tmp_file($image_file) {
    		$tmp_dir = sys_get_temp_dir();
    		$pos = strpos($image_file, $tmp_dir);
    		if ($pos === false) {

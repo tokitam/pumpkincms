@@ -5,11 +5,11 @@ class PumpUpload {
 	const STORE_TYPE_DB = 2;
 	const STORE_TYPE_S3 = 3;
 
-	static public function mkdir_upload($code, $subdir='image') {
+	public function mkdir_upload($code, $subdir='image') {
 		return $this->mkdir_raw($code, 'upload', $subdir);
 	}
 
-	static public function mkdir_raw($code, $dirname, $subdir='image') {
+	public function mkdir_raw($code, $dirname, $subdir='image') {
 		$dir = PUMPCMS_APP_PATH . '/' . $dirname . '/' . $subdir . '/';
 		if (is_dir($dir) == false) {
 			mkdir($dir);
@@ -35,7 +35,7 @@ class PumpUpload {
 		return $dir;
 	}
 
-	static public function get_max_size() {
+	public function get_max_size() {
 		$arr[0] = PC_Util::convert_size_rev(ini_get('post_max_size'));
 		$arr[1] = PC_Util::convert_size_rev(ini_get('upload_max_filesize'));
 		if (0 < PC_Config::get('upload_max_filesize')) {
