@@ -39,6 +39,15 @@ class PumpImage extends PumpUpload {
 		return $tag;
 	}
 
+	static public function get_image_url($image_id, $width=0, $height=0, $option=array()) {
+		$arr = self::get_url_raw($image_id, $width, $height, $option);
+		if ($arr == false) {
+			return self::get_no_image_url();
+		}
+
+		return $arr['url'];
+	}
+
 	static public function get_url_raw($image_id, $width=0, $height=0, $option=array()) {
 		global $pumpform_config;
 
@@ -536,8 +545,12 @@ class PumpImage extends PumpUpload {
 		return $tmp;
 	}
 
+	static public function get_no_image_url() {
+		return PC_Config::url() . '/image/i/nc.png';
+	}
+
     static public function display_no_image($width, $height, $option) {
-    	$url = PC_Config::url() . '/image/i/nc.png';
+    	$url = self::get_no_image_url();
     	$tag = sprintf('<img src="%s" width="%d" height="%d">', $url, $width, $height);
     	return $tag;
     }

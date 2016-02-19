@@ -90,5 +90,9 @@ class UserInfo {
         $_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $user;
         self::$_data = null;
     }
+
+    static function get_icon_url() {
+        return PumpImage::get_image_url(self::get('image_id'), 300, 300, array('crop' => true));
+    }
 }
 
