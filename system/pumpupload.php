@@ -35,7 +35,7 @@ class PumpUpload {
 		return $dir;
 	}
 
-	public function get_max_size() {
+	static public function get_max_size() {
 		$arr[0] = PC_Util::convert_size_rev(ini_get('post_max_size'));
 		$arr[1] = PC_Util::convert_size_rev(ini_get('upload_max_filesize'));
 		if (0 < PC_Config::get('upload_max_filesize')) {
