@@ -1,6 +1,7 @@
 <?php
 
 require_once PUMPCMS_SYSTEM_PATH . '/pumpimage.php';
+require_once PUMPCMS_SYSTEM_PATH . '/pumpcaptcha.php';
 require_once PUMPCMS_SYSTEM_PATH . '/pumpfile.php';
 require_once PUMPCMS_APP_PATH . '/config/default.php';
 require_once PUMPCMS_APP_PATH . '/config/config.php';

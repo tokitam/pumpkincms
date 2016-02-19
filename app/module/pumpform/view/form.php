@@ -291,6 +291,10 @@ $form_html .= "
     <div class='form-group'>
       <div class='col-lg-10 col-lg-offset-2'>\n";
 
+if (@$form_config['captcha'] && PumpCaptcha::is_operable()) {
+	echo '<img src="' . PC_Config::url() . '/image/captcha">'; 
+}
+
 if (@$form_config['submit_caption']) {
 	$form_html .= $form_config['submit_caption'] . "<br />\n";
 }
