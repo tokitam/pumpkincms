@@ -443,7 +443,7 @@ class PumpImage extends PumpUpload {
 		return $dest_image;
 	}
 
-	public function mkdir_upload($code) {
+	public function mkdir_upload($code, $subdir='image') {
 		return $this->mkdir_raw($code, 'upload');
 	}
 
@@ -454,7 +454,7 @@ class PumpImage extends PumpUpload {
 		}
 	}
 
-	public function mkdir_raw($code, $dirname) {
+	public function mkdir_raw($code, $dirname, $subdir='image') {
 		$dir = PUMPCMS_APP_PATH . '/' . $dirname . '/image/';
 		if (is_dir($dir) == false) {
 			mkdir($dir);
