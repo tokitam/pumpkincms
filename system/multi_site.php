@@ -60,5 +60,34 @@ class PC_MultiSite {
         SiteInfo::set_site_id($site_id);
 	    
     }
+
+    static function console_setup() {
+        global $argv;
+        global $_SERVER;
+        global $_GET;
+
+        if (isset($_REQUEST['HTTP_HOST'])) {
+            // browser access
+            return;
+        }
+
+        $_SERVER['REQUEST_URI'] = '/';
+
+        if (empty($argv[1])) {
+            return;
+        }
+
+        $url = parse_url($argv[1]);
+        $_SERVER['REQUEST_URI'] = @$url['path'];
+
+        if (isset($url['query'])) {
+            parse_str($url['query'], $query);
+
+            foreach ($query as $key => $val) {
+                $_GET[$key] = $val;
+            }
+        }
+
+    }
 }
 

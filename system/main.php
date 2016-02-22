@@ -49,6 +49,7 @@ class PC_Main {
 	}
 
 	function check_site() {
+		PC_MultiSite::console_setup();
 		PC_MultiSite::check_site();
 	}
     
