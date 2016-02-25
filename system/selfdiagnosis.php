@@ -17,6 +17,9 @@ class PumpSelfDiagnosis {
         if (self::diagnosis_auth_upload() == false) {
             $message .= "APP/upload/ not writable [ # chmod 777 upload ]<br />";
         }
+        if (self::diagnosis_auth_upload_image() == false) {
+            $message .= "APP/upload/image/ not writable [ # chmod 777 upload/image ]<br />";
+        }
         if (self::diagnosis_auth_log() == false) {
             $message .= "APP/log/ not writable [ # chmod 777 log ]<br />";
         }
@@ -71,6 +74,15 @@ class PumpSelfDiagnosis {
     static public function diagnosis_auth_upload() {
         $upload_dir = PUMPCMS_APP_PATH . '/upload';
         if (is_writable($upload_dir) == false) {
+            return false;
+        }
+
+        return true;
+    }
+
+    static public function diagnosis_auth_upload_image() {
+        $upload_dir = PUMPCMS_APP_PATH . '/upload/image';
+        if (is_dir($upload_dir) && is_writable($upload_dir) == false) {
             return false;
         }
 
