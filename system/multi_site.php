@@ -71,7 +71,9 @@ class PC_MultiSite {
             return;
         }
 
-        $_SERVER['REQUEST_URI'] = '/';
+        if (empty($_SERVER['REQUEST_URI'])) {
+            $_SERVER['REQUEST_URI'] = '/';
+        }
 
         if (empty($argv[1])) {
             return;
