@@ -91,8 +91,16 @@ class UserInfo {
         self::$_data = null;
     }
 
-    static function get_icon_url() {
-        return PumpImage::get_image_url(self::get('image_id'), 300, 300, array('crop' => true));
+    static function get_icon_url($user_id=0) {
+	if ($user_id == 0) {
+	    $image_id = self::get('image_id');
+	} else {
+	    require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
+	    $user_model = new User_Model();
+	    $user = $user_model->get_user_by_id($user_id);
+	    $image_id = $user['image_id'];
+	}
+        return PumpImage::get_image_url($image_id, 300, 300, array('crop' => true));
     }
 }
 
