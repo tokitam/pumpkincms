@@ -64,7 +64,7 @@ class PC_Controller {
 		}
     }
     
-	public function scaffold($module, $table, $file) {
+	public function scaffold($module, $table, $file, $api=false) {
 		//PC_Debug::log('PC_Controller::scaffold()', __FILE__, __LINE__);
 
 		PC_Util::include_language_file($module);
@@ -79,7 +79,7 @@ class PC_Controller {
 		$pump_form = new PumpForm();	
 		$this->_data = $pump_form->scaffold($module, $table, $file);
 		$this->title = $pump_form->get_title($module, $table);
-
+echo json_encode($this->_data, JSON_PRETTY_PRINT);
 		if ($file == 'list') {
 			if (@$form_config['list_php']) {
 				$class = $form_config['list_php'];
@@ -125,6 +125,14 @@ class PC_Controller {
 			die('File not found:' . $file . ' ' . __FILE__ .':' . __LINE__);
 		}
 		include $file;
+	}
+
+	public function api() {
+		echo PC_Config::get('dir3');
+		echo ' test test ';
+		if ($this->_flg_scaffold) {
+		    $this->scaffold($this->_module, $this->_table, 'list');
+		}
 	}
 
 	function set_variable() {
