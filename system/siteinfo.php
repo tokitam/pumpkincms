@@ -46,7 +46,7 @@ class SiteInfo {
         $diralias_model = new Diralias_Model();
 	
         if ($dir_name == '/') {
-            $dir_name = 'index';
+            $dir_name = PC_Config::get('default_module');
         }
 
         $d = $diralias_model->get_alias($dir_name);
