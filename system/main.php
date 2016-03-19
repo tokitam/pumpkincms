@@ -156,7 +156,7 @@ class PC_Main {
 			SiteInfo::set('dir', $this->_dir1);
 		}
 		if ($this->_dir2 == '') {
-			$this->_controller = 'index';
+		        $this->_controller = PC_Config::get('default_controller');
 		} else {
 			$this->_controller = $this->_dir2;
 		}
