@@ -1,16 +1,20 @@
 <?php
 
 class PC_Controller {
-	var $base_url;
-	var $form;
+    var $base_url;
+    var $form;
     var $title;
     var $_flg_scaffold = false;
     var $_module;
     var $_table;
     var $_data;
+    var $_javascript_list;
+    var $_css_list;
 
-	function __construct() {
-	}
+    function __construct() {
+	$this->_javascript_list = array();
+	$this->_css_list = array();
+    }
 	
 	function render($class='') {
 		$class_name = get_class($this);
@@ -79,7 +83,7 @@ class PC_Controller {
 		$pump_form = new PumpForm();	
 		$this->_data = $pump_form->scaffold($module, $table, $file);
 		$this->title = $pump_form->get_title($module, $table);
-echo json_encode($this->_data, JSON_PRETTY_PRINT);
+
 		if ($file == 'list') {
 			if (@$form_config['list_php']) {
 				$class = $form_config['list_php'];
@@ -132,11 +136,42 @@ echo json_encode($this->_data, JSON_PRETTY_PRINT);
 		echo ' test test ';
 		if ($this->_flg_scaffold) {
 		    $this->scaffold($this->_module, $this->_table, 'list');
+		    echo json_encode($this->_data, JSON_PRETTY_PRINT);
 		}
 	}
+    
+    public function add_javascript($file) {
+	array_push($this->_javascript_list, $file);
+    }
 
-	function set_variable() {
-		$this->base_url = PC_Config::get('base_url');
+    public function add_css($file) {
+	array_push($this->_css_list, $file);
+    }
+    
+    public function get_header() {
+	$html = '';
+
+	foreach ($this->_javascript as $file) {
+	    if (preg_match('/http/', $file)) {
+		$html .= sprintf('<script src="%s"></script>' . "\n", $file);
+	    } else {
+		$html .= sprintf('<script src="%s%s"></script>' . "\n", PC_Config::url(), $file);
+	    }
 	}
+	
+	foreach ($this->_css as $file) {
+	    if (preg_match('/http/', $file)) {
+		$html .= sprintf('<script src="%s"></script>' . "\n", $file);
+	    } else {
+		$html .= sprintf('<script src="%s%s"></script>' . "\n", PC_Config::url(), $file);
+	    }
+	}
+	
+	return $html;
+    }
+
+    function set_variable() {
+	$this->base_url = PC_Config::get('base_url');
+    }
 }
 

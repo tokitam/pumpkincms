@@ -1,14 +1,16 @@
 <?php
 
 class PC_Render {
-	public $module = '';
-	public $class = '';
-	public $method = '';
-	public $module_output;
-        public static $module_output_static;
+    public $module = '';
+    public $class = '';
+    public $method = '';
+    public $module_output;
+    public static $module_output_static;
+    static $_javascript_list = array();
+    static $_css_list = array();
 
 	function __construct() {
-		$this->set_variable();
+	    $this->set_variable();
 	}
 
 	public function module_render() {
@@ -73,5 +75,35 @@ class PC_Render {
 	function set_variable() {
 		$this->base_url = PC_Config::get('base_url');
 	}
+    
+    public static function add_javascript($file) {
+	array_push(self::$_javascript_list, $file);
+    }
+    
+    public static function add_css($file) {
+	array_push(self::$_css_file, $file);
+    }
+    
+    public function get_header() {
+	$html = '';
+
+	foreach (self::$_javascript_list as $file) {
+	    if (preg_match('/http/', $file)) {
+		$html .= sprintf('<script src="%s"></script>' . "\n", $file);
+	    } else {
+		$html .= sprintf('<script src="%s%s"></script>' . "\n", PC_Config::url(), $file);
+	    }
+	}
+
+	foreach (self::$_css_list as $file) {
+	    if (preg_match('/http/', $file)) {
+		$html .= sprintf('<script src="%s"></script>' . "\n", $file);
+	    } else {
+		$html .= sprintf('<script src="%s%s"></script>' . "\n", PC_Config::url(), $file);
+	    }
+	}
+
+	return $html;
+    }
 }
 
