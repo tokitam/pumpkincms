@@ -27,6 +27,11 @@ class PumpORMAP_Util {
 		//self::load_form_config($module, $table);
         PumpFormConfig::load_config($module, $table);
 
+    	if (empty($GLOBALS['pumpform_config'][$module][$table])) {
+	    echo 'Formdata not found: module:' . $module . ', table:' . $table;
+	    exit();
+	}
+	
     	self::$_ormap[$module][$table] = new PumpORMAP($GLOBALS['pumpform_config'][$module][$table]);
 
         return self::$_ormap[$module][$table];
