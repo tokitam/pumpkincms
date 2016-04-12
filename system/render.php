@@ -81,7 +81,7 @@ class PC_Render {
     }
     
     public static function add_css($file) {
-	array_push(self::$_css_file, $file);
+	array_push(self::$_css_list, $file);
     }
     
     public function get_header() {
