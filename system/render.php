@@ -76,7 +76,12 @@ class PC_Render {
 		$this->base_url = PC_Config::get('base_url');
 	}
     
-    public static function add_javascript($file) {
+    public static function add_javascript($file, $scheme=null) {
+	if ($scheme !== null) {
+	    array_push(self::$_javascript_list, array('path' => $file, 'scheme' => $scheme));
+            return;
+        }
+	
 	array_push(self::$_javascript_list, $file);
     }
     
@@ -88,7 +93,13 @@ class PC_Render {
 	$html = '';
 
 	foreach (self::$_javascript_list as $file) {
-	    if (preg_match('/http/', $file)) {
+            if (is_array($file)) {
+                if ($file['scheme']) {
+		    $html .= sprintf('<script src="%s%s"></script>' . "\n", PC_Config::url(), $file['path']);
+                } else {
+		    $html .= sprintf('<script src="%s"></script>' . "\n", $file['path']);
+                }
+	    } else if (preg_match('/http/', $file)) {
 		$html .= sprintf('<script src="%s"></script>' . "\n", $file);
 	    } else {
 		$html .= sprintf('<script src="%s%s"></script>' . "\n", PC_Config::url(), $file);
