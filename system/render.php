@@ -108,9 +108,9 @@ class PC_Render {
 
 	foreach (self::$_css_list as $file) {
 	    if (preg_match('/http/', $file)) {
-		$html .= sprintf('<script src="%s"></script>' . "\n", $file);
+		$html .= sprintf('<link href="%s" rel="stylesheet">' . "\n", $file);
 	    } else {
-		$html .= sprintf('<script src="%s%s"></script>' . "\n", PC_Config::url(), $file);
+		$html .= sprintf('<link href="%s%s" rel="stylesheet">' . "\n", PC_Config::url(), $file);
 	    }
 	}
 
