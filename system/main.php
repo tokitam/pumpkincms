@@ -96,6 +96,9 @@ class PC_Main {
 				$this->_module = 'user';
 				$this->_controller = 'index';
 				$this->_method = 'index';
+				if (!preg_match('/login/', $_SERVER['REQUEST_URI'])) {
+					$_SESSION['from_url'] = $_SERVER['REQUEST_URI'];
+				}
 				return;
 			}
 		}
