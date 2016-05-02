@@ -42,6 +42,7 @@ class PumpFile extends PumpUpload {
 			'code' => $code,
 			'filename' => $_FILES[$target]['name'],
 		);
+		$file_id = $pumpormap->insert($data);
 
 		$src_file = $_FILES[$target]['tmp_name'];
 
