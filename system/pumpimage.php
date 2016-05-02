@@ -58,7 +58,6 @@ class PumpImage extends PumpUpload {
 		$image = $pumpormap->get_one($image_id, 'id, site_id, width, height, type, code');
 
 		if ($image == false) {
-			PC_Debug::log(' image_id:' . $image_id, __FILE__, __LINE__);
 			return false;
 		}
 
@@ -66,12 +65,9 @@ class PumpImage extends PumpUpload {
 		$code = trim($image['code']);
 		$ext = self::get_ext($image['type']);
 
-		PC_Debug::log('image code:' . $code, __FILE__, __LINE__);
-
 		if (self::get_type() == self::STORE_TYPE_LOCAL) {
 			$file_path = self::get_upload_image($image_id, $code, $ext);
 			if (is_readable($file_path) == false) {
-				PC_Debug::log(sprintf(' file_path:%s', $file_path), __FILE__, __LINE__);
 				return '';
 			}
 		}
@@ -80,6 +76,7 @@ class PumpImage extends PumpUpload {
 		$url = PC_Config::get('base_url') . '/image/i/' . intval($image_id) . '_' . $code;
 		$org_size = $url;
 		$wh = '';
+
 		if (0 < $width) {
 		    $url .= '_' . intval($width) . 'x' . intval($height);
 		    if (@$option['no_wh'] == 0) {

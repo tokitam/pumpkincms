@@ -37,14 +37,12 @@ class PumpForm {
 
         self::$file = $file;
 
-        PC_Debug::log('PumpForm::scaffold() module:' . $module, __FILE__, __LINE__);
-        PC_debug::log('PumpForm::scaffold() table:' . $table, __FILE__, __LINE__);
-
 		PC_Util::include_language_file('pumpform');
 		PC_Util::include_language_file($module);
         PumpFormConfig::load_config($module);
 
         $this->auth_check($module, $table);
+
 		if ($file == '' ||
 			$file == 'list') {
 			return $this->get_list($module, $table);
@@ -353,21 +351,18 @@ class PumpForm {
 						$error[$column['name']] = _MD_PUMPFORM_INPUT;
 						continue;						
 					}
-				} else {
-					if (isset($_FILES[$column['name']]['error']) == false) {
-						$error[$column['name']] = _MD_PUMPFORM_FILE_SIEZ_ORVER;
-						continue;	
-					}
 				}
+                if (isset($_FILES[$column['name']]['error']) == false) {
+                  continue;   
+                }
 
-				if (isset($_FILES[$column['name']]['error'])) {
+				if (isset($_FILES[$column['name']]['error']) && 0 < $_FILES[$column['name']]['size']) {
 					if (@$_FILES[$column['name']]['error'] == UPLOAD_ERR_INI_SIZE) {
 						$error[$column['name']] = _MD_PUMPFORM_FILE_SIEZ_ORVER;
 						continue;						
 					}
-					if (@$_FILES[$column['name']]['error'] != UPLOAD_ERR_NO_FILE &&
-					    @$_FILES[$column['name']]['error'] != UPLOAD_ERR_OK) {
-						$error[$column['name']] = _MD_PUMPFORM_UPLOAD_FAILURE;
+					if (@$_FILES[$column['name']]['error'] != UPLOAD_ERR_OK) {
+						$error[$column['name']] = _MD_PUMPFORM_UPLOAD_FAILURE . '(1)';
 						continue;						
 					}
 				}
@@ -377,20 +372,18 @@ class PumpForm {
 						$error[$column['name']] = _MD_PUMPFORM_INPUT;
 						continue;						
 					}
-				} else {
-					if (isset($_FILES[$column['name']]['error']) == false) {
-						$error[$column['name']] = _MD_PUMPFORM_FILE_SIEZ_ORVER;
-						continue;	
-					}
 				}
+                if (isset($_FILES[$column['name']]['error']) == false) {
+                    continue;   
+                }
 
-				if (isset($_FILES[$column['name']]['error'])) {
+				if (isset($_FILES[$column['name']]['error']) && 0 < $_FILES[$column['name']]['size']) {
 					if (@$_FILES[$column['name']]['error'] == UPLOAD_ERR_INI_SIZE) {
 						$error[$column['name']] = _MD_PUMPFORM_FILE_SIEZ_ORVER;
 						continue;						
 					}
 					if (@$_FILES[$column['name']]['error'] != UPLOAD_ERR_OK) {
-						$error[$column['name']] = _MD_PUMPFORM_UPLOAD_FAILURE;
+						$error[$column['name']] = _MD_PUMPFORM_UPLOAD_FAILURE . '(2)';
 						continue;						
 					}
 				}
