@@ -42,6 +42,7 @@ $pc_config['site_config'] = array(
   'facebook_app_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
 
   // telauth twilio setting
+  'use_tel_auth' => 0,
   'twilio_account_sid' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   'twilio_auth_token' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   'twilio_from_telno' => '+819999999999',
