@@ -21,7 +21,13 @@ $(document).ready(function(){
 			id = $('#target_id').val();
 			var data = {id: id};
 			var url = $('#pumpform_delte_url').val();
-			var ret_url = $('#pumpform_module_url').val();
+
+            var ret_url = '';
+            if ($('#delete_post_redirect').val()) {
+                ret_url = $('#delete_post_redirect').val();
+            } else {
+                ret_url = $('#pumpform_module_url').val();
+            }
 
             $.ajax({
                 type: 'POST',
