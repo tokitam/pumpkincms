@@ -14,12 +14,14 @@
 <?php echo UserInfo::get('name'); ?><br />
 <?php echo UserInfo::get('email') ?><br />
 <?php
-if (UserInfo::get('flg_tel_auth')) {
-    echo _MD_USER_TEL_AUTH_OK . "<br />\n";
-} else {
-    echo _MD_USER_TEL_AUTH_NO . "<br />\n";
-    printf("<a href='%s/user/telauth'>%s</a><br />\n", PC_Config::url(), _MD_USER_TEL_AUTH_DO);
-} 
+if (PC_Config::get('use_tel_auth')) {
+	if (UserInfo::get('flg_tel_auth')) {
+	    echo _MD_USER_TEL_AUTH_OK . "<br />\n";
+	} else {
+	    echo _MD_USER_TEL_AUTH_NO . "<br />\n";
+	    printf("<a href='%s/user/telauth'>%s</a><br />\n", PC_Config::url(), _MD_USER_TEL_AUTH_DO);
+	} 
+}
 ?>
 <br />
 <a href="<?php echo PC_Config::url() ?>/user/edit/" class="btn btn-default"><?php echo _MD_USER_EDIT_PROFILE ?></a>
