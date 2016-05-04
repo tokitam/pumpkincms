@@ -331,6 +331,13 @@ if (PC_Config::get('dir3') == 'edit' && is_numeric(PC_Config::get('dir4')) || Pu
 	}
 
 	$form_html .= "<input type='hidden' id='pumpform_delete_confirm' value='" . htmlspecialchars(_MD_PUMPFORM_DELETE_CONFIRM) . "'>\n";
+
+
+	if (PC_Config::get('delete_post_redirect')) {
+		$delete_post_redirect = PC_Config::get('delete_post_redirect');
+		$form_html .= "<input type='hidden' id='delete_post_redirect' value='" . $delete_post_redirect . "/'>\n";
+	}
+	
 	$form_html .= "<input type='hidden' id='pumpform_module_url' value='" . $module_url . "/'>\n";
 	$form_html .= "<input type='hidden' id='pumpform_delte_url' value='" . $delete_url . "'>\n";
 	$form_html .= "<input type='button' id='pumpform_delete_button' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'><br />\n";
