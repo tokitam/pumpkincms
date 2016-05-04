@@ -12,8 +12,8 @@ class PC_Controller {
     var $_css_list;
 
     function __construct() {
-	$this->_javascript_list = array();
-	$this->_css_list = array();
+		$this->_javascript_list = array();
+		$this->_css_list = array();
     }
 	
 	function render($class='') {
