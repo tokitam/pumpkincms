@@ -21,6 +21,8 @@ class PumpForm {
     static $add_post_process = null;
     static $edit_load_process = null;
     static $edit_pre_process = null;
+    static $edit_post_process = null;
+    static $delete_post_process = null;
 
     static $call_after_update = null;
     static $pagenavi = null;
@@ -248,6 +250,12 @@ class PumpForm {
 		    		$func();
 		    		self::$call_after_update = null;
 	    		}
+
+                if (self::$edit_post_process != null) {
+                    $func = self::$edit_post_process;
+                    $func();
+                }
+
 	    		PC_Notification::set(_MD_PUMPFORM_UPDATED);
 		    	PC_Util::redirect($redirect_url);
 		    }
@@ -303,7 +311,7 @@ class PumpForm {
 
 		$ormap = new PumpORMAP($form_config);
         $form = $pumpform_config[$module][$table]['column'];
-        
+
         if (self::$target_id) {
 			$target_id = self::$target_id;
 			self::$target_id = 0;
@@ -313,7 +321,7 @@ class PumpForm {
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		    $ormap->delete($target_id);
-	    
+
 		   	if (self::$redirect_url) {
 		   		$redirect_url = self::$redirect_url;
 		   		self::$redirect_url = '';
@@ -321,6 +329,12 @@ class PumpForm {
 		   		$module_url = PC_Util::get_module_url();
 		   		$redirect_url = $module_url . '/';
 		   	}
+
+            if (self::$delete_post_process != null) {
+                PC_Debug::log(' delete()1 ', __FILE__, __LINE__);
+                $func = self::$delete_post_process;
+                $func();
+            }
 
 	    	PC_Notification::set(_MD_PUMPFORM_DELETED);
 		    PC_Util::redirect($redirect_url);
