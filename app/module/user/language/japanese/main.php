@@ -3,9 +3,11 @@
 define('_MD_USER_LOGIN', 'ログイン');
 define('_MD_LOGIN_ID', 'ログインID');
 define('_MD_LOGIN_NAME', '名前');
+define('_MD_USER_DISPLAY_NAME', '表示名');
 define('_MD_LOGIN_EMAIL', 'メールアドレス');
 define('_MD_PASSWORD', 'パスワード');
 define('_MD_PASSWORD2', 'パスワード（確認）');
+define('_MD_USER_PROFILE', 'プロフィール');
 define('_MD_OLD_PASSWORD', '古いパスワード');
 define('_MD_NEW_PASSWORD', '新しいパスワード');
 define('_MD_NEW_PASSWORD_CONFIRM', '新しいパスワード（確認）');

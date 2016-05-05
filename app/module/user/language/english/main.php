@@ -3,11 +3,13 @@
 define('_MD_USER_LOGIN', 'USER LOGIN');
 define('_MD_LOGIN_ID', 'LOING ID');
 define('_MD_LOGIN_NAME', 'LOING NAME');
+define('_MD_USER_DISPLAY_NAME', 'DISPLAY NAME');
 define('_MD_LOGIN_EMAIL', 'LOGIN EMAIL');
 define('_MD_PASSWORD', 'PASSWORD');
 define('_MD_PASSWORD2', 'PASSWORD VERIFY');
 define('_MD_OLD_PASSWORD', 'OLD PASSWORD');
 define('_MD_NEW_PASSWORD', 'NEW PASSWORD');
+define('_MD_USER_PROFILE', 'PROFILE');
 define('_MD_NEW_PASSWORD_CONFIRM', 'NEW PASSWORD(confirm)');
 define('_MD_USER_REGISTER', 'Sign Up');
 define('_MD_USER_CONFIRM_REGISTER', 'Sign Up');
