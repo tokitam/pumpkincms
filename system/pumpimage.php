@@ -80,22 +80,30 @@ class PumpImage extends PumpUpload {
 		if (0 < $width) {
 		    $url .= '_' . intval($width) . 'x' . intval($height);
 		    if (@$option['no_wh'] == 0) {
-		    	$wh = sprintf(' width="%d" height="%d" ', $width, $height);
-			    array_push($styles, 'width:' . intval($width));
-			    array_push($styles, 'height:' . intval($height));
+		    	//$wh = sprintf(' width="%d" height="%d" ', $width, $height);
+			    $styles['width'] = intval($width);
+			    $styles['height'] = intval($height);
 			}
 		} else if (@$option['width100p']) {
 			$wh = ' width="100%"';
 		}
+		if (@$option['css_width']) {
+			$styles['width'] = intval($option['css_width']) . 'px';
+			$styles['height'] = intval($option['css_height']) . 'px';
+		}
 		if (@$option['float']) {
 			//$wh .= ' style="float: left;"';
-			array_push($styles, 'float: left;');
+			$styles['float'] = "'left'";
 		}
 		if (@$option['align']) {
 			$wh .= ' align="' . $option['align'] . '" ';
 		}
 		if (0 < count($styles)) {
-			$wh .= ' style="' . implode($styles, '; ') . ';" ';
+			$tmp = array();
+			foreach ($styles as $key => $val) {
+				array_push($tmp, $key . ':' . $val);
+			}
+			$wh .= ' style="' . implode($tmp, '; ') . ';" ';
 		}
 		if (@$option['crop']) {
 			$url .= '_c';
