@@ -31,7 +31,12 @@ class PumpImage extends PumpUpload {
 		$org_size .= '.' . self::get_ext($image['type']);
 
 		if (@$option['link']) {
-			$tag = sprintf('<a href="%s" target="_blank"><img src="%s"%s></a>', $org_size, $url, $wh);
+			$a_option = '';
+			if (@$option['rel']) {
+				$a_option .= ' rel="lightbox" ';
+			}
+
+			$tag = sprintf('<a href="%s" target="_blank" %s><img src="%s"%s></a>', $org_size, $a_option, $url, $wh);
 		} else {
 			$tag = sprintf('<img src="%s"%s>', $url, $wh);
 		}			
