@@ -66,6 +66,26 @@ class PumpImage extends PumpUpload {
 			return false;
 		}
 
+		if ($height == 0) {
+			if ($image['width'] > $width) {
+				$height = $image['height'] * $width / $image['width']
+			} else if ($width > $image['$width']) {
+				$height = $image['height'] * $image['width'] / $width;
+			} else {
+				$heigth = $image['height'];
+			}
+		}
+
+		if ($width == 0) {
+			if ($image['width'] > $height) {
+				$width = $image['width'] * $height / $image['height']
+			} else if ($width > $image['$width']) {
+				$width = $image['width'] * $image['height'] / $height;
+			} else {
+				$width = $image['width'];
+			}
+		}
+
 		$image_id = $image['id'];
 		$code = trim($image['code']);
 		$ext = self::get_ext($image['type']);
