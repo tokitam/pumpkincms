@@ -144,6 +144,10 @@ class PumpImage extends PumpUpload {
 		}
 
 		$pumpormap = PumpORMAP_Util::get('image', 'image');
+	    
+	        $imagesize = getimagesize($_FILES[$target]['tmp_name']);
+	        $width = $imagesize[0];
+	        $height = $imagesize[1];
 
 		$this->check_type();
 		$code = PC_Util::random_code(8);
@@ -161,6 +165,8 @@ class PumpImage extends PumpUpload {
 				'site_id' => PC_Config::get('site_id'),
 				'type' => $this->_type,
 				'code' => $code,
+				'width' => $width,
+				'height' => $height
 				);
 
 			$image_id = $pumpormap->insert($data);
@@ -181,11 +187,13 @@ class PumpImage extends PumpUpload {
 
 			$sql = sprintf(
 				'INSERT INTO %s ' . 
-				'(site_id, type, code, ip_address, ' . 
+				'(site_id, width, height, type, code, ip_address, ' . 
 				'image, reg_time, reg_user) VALUES ' .
-				'(%d, %d, \'%s\', %d, %s, %d, %d)', 
+				'(%d, %d, %d, %d, \'%s\', %d, %s, %d, %d)', 
 				$db->prefix($table),
 				$site_id,
+				$width,
+				$height,
 				$type,
 				$code,
 				$ip_address,
