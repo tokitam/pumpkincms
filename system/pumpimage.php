@@ -68,18 +68,18 @@ class PumpImage extends PumpUpload {
 
 		if ($height == 0) {
 			if ($image['width'] > $width) {
-				$height = $image['height'] * $width / $image['width']
-			} else if ($width > $image['$width']) {
+				$height = $image['height'] * $width / $image['width'];
+			} else if ($width > $image['width']) {
 				$height = $image['height'] * $image['width'] / $width;
 			} else {
-				$heigth = $image['height'];
+				$height = $image['height'];
 			}
 		}
 
 		if ($width == 0) {
-			if ($image['width'] > $height) {
-				$width = $image['width'] * $height / $image['height']
-			} else if ($width > $image['$width']) {
+			if ($image['height'] > $height) {
+				$width = $image['width'] * $height / $image['height'];
+			} else if ($height > $image['height']) {
 				$width = $image['width'] * $image['height'] / $height;
 			} else {
 				$width = $image['width'];
