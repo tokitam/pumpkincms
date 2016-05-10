@@ -21,6 +21,16 @@ class PC_Util {
 		}
 	}
     
+	static function redirect_if_no_login($url='') {
+		if (UserInfo::is_logined() == false) {
+			if ($url == '') {
+				self::redirect_top();
+			} else {
+				self::redirect($url);
+			}
+		}
+	}
+    
 	static function is_email($email) {
 		if (preg_match('|^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$|', $email)) {
 			return true;
