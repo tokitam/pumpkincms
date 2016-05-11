@@ -72,6 +72,7 @@ class PumpCaptcha
     var $font = 'Existence-Light.otf';
     var $border = 5;
     var $pumpcaptcha_text = 'pumpcaptcha_text';
+    var $no_gd_library_image = 'no_gd_library.png';
     
     public function __construct($font=false)
     {
@@ -102,6 +103,9 @@ class PumpCaptcha
     public function output_image() 
     {
         if ($this->is_operable() == false) {
+            header('Content-type: image/png');
+            $file = PUMPCMS_ROOT_PATH . '/resource/' . $this->no_gd_library_image;
+            readfile($file);
             return;
         }
 
