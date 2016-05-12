@@ -91,8 +91,8 @@ class UserInfo {
         self::$_data = null;
     }
 
-    static function get_icon_url($user_id=0) {
-        if ($user_id == 0) {
+    static function get_icon_url($user_id=null) {
+        if ($user_id === null) {
             $image_id = self::get('image_id');
         } else {
             require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
