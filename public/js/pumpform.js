@@ -7,7 +7,7 @@ function pc_notification(message) {
 }
 
 $(document).ready(function(){
-    $('a[rel=tooltip]').tooltip();
+    //$('a[rel=tooltip]').tooltip();
     
     $('#main_form').submit(function(){
     	$('#submit_button').attr('disabled', 'disabled');

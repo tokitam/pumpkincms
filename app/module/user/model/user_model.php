@@ -42,10 +42,12 @@ class User_Model extends PC_Model {
 			$_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $this->_user_data;
 			PC_Notification::set(_MD_USER_LOGINED);
 			ActionLog::log(ActionLog::LOGIN);
+			
 			if (empty($_SESSION['from_url'])) {
 				PC_Util::redirect_top();
 			} else {
-				PC_Util::redirect(PC_Config::url() . $_SESSION['from_url']);
+				PC_Util::redirect_top();
+				//PC_Util::redirect(PC_Config::url() . $_SESSION['from_url']);
 			}
 		} else {
 			return $error;
