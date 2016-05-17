@@ -44,7 +44,7 @@ $pumpform_config['user']['user'] = array(
         'profile' => array('name' => 'profile',
                          'type' => PUMPFORM_MARKDOWN,
                          'title' => _MD_USER_PROFILE,
-                         'required' => 1,
+                         'required' => 0,
                          'visible' => 1,
                          'registable' => 1,
                          'editable' => 1,
