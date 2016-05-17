@@ -40,6 +40,7 @@ foreach ($form as $column) {
 	}
 
 	$form_html .= '<div class="form-group">' . "\n";
+	$form_html .= '  <div class="row">' . "\n";
 	$form_html .= '    <label for="inputEmail" class="col-lg-3 col-md-3 col-sm-3 control-label">' . $column['title'] . '</label>' . "\n";
 	$form_html .= '    <div class="col-lg-9 col-md-9 col-sm-9 ">' . "\n";
 //	if (@$column['hint']) {
@@ -284,6 +285,7 @@ foreach ($form as $column) {
 		$form_html .= "<br /><span class='pumpcms_error_message'>*" . $error[$column['name']] . "</span><br />";
 	}
 	$form_html .= "    </div> <!-- end control-label -->\n";
+	$form_html .= "  </div> <!-- end row -->\n";
 	$form_html .= "</div> <!-- end form-group -->\n";
 }
 
