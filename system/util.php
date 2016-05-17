@@ -133,35 +133,35 @@ class PC_Util {
 		return @$_SERVER['HTTP_USER_AGENT'];
 	}
     
-        static function get_service_base_path() {
+    static function get_service_base_path() {
 	    if (@$_SERVER['REQUEST_URI'] == '' ||
-		$_SERVER['REQUEST_URI'] == '/') {
-		return '';
-	    } else if (@$_SERVER['QUERY_STRING'] == '') {
-		preg_match('@(.+)/?@', $_SERVER['REQUEST_URI'], $r);
-		return self::cut_tail_slash($r[1]);
+			$_SERVER['REQUEST_URI'] == '/') {
+			return '';
+		} else if (@$_SERVER['QUERY_STRING'] == '') {
+			preg_match('@(.+)/?@', $_SERVER['REQUEST_URI'], $r);
+			return self::cut_tail_slash($r[1]);
 	    } else {
-		$q = self::cut_tail_slash($_SERVER['QUERY_STRING']);
-		if (strstr($q, '=')) {
-		    $arr = explode('=', $q);
-		    $q = $arr[1];
-		}
+			$q = self::cut_tail_slash($_SERVER['QUERY_STRING']);
+			if (strstr($q, '=')) {
+			    $arr = explode('=', $q);
+			    $q = $arr[1];
+			}
 
-		$req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
+			$req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
 
-		preg_match('@(.+)/' . $q . '$@', $req, $r);
-		if (isset($r[1])) {
-		    return $r[1];
-		} else {
-		    return '';
-		}
+			preg_match('@(.+)/' . $q . '$@', $req, $r);
+			if (isset($r[1])) {
+			    return $r[1];
+			} else {
+			    return '';
+			}
 	    }
 	}
     
-        static function cut_tail_slash($s) {
+    static function cut_tail_slash($s) {
 	    $l = substr($s, -1, 1);
 	    if ($l == '/') {
-		return substr($s, 0, -1);
+			return substr($s, 0, -1);
 	    }
 	    
 	    return $s;
@@ -230,10 +230,19 @@ class PC_Util {
 
 		return mb_substr($str, 0, $len) . '...';
 	}
-    
+
+	static function mb_chr($num){
+		return ($num < 256) ? chr($num) : mb_chr($num / 256).chr($num % 256);
+	}
+
+	static function mb_ord($char){
+		return (strlen($char) < 2) ?
+			ord($char) : 256 * mb_ord(substr($char, 0, -1)) + ord(substr($char, -1));
+	}
+
 	static function convert_size($size) {
 		if ($size < 1024) {
-			return $size;
+			return $size . 'B';
 		}
 		
 		if ($size < 1024 * 1024) {
@@ -271,36 +280,36 @@ class PC_Util {
 	}
     
     static function password_hash($password) {
-	if (PC_Config::get('password_hash') == 'MD5') {
-	    return md5($password);
-	}
-	
-	if (PC_Config::get('password_hash') == 'SHA1') {
-	    return sha1($password);
-	}
-	
-	$a = password_hash($password, PASSWORD_BCRYPT);
+		if (PC_Config::get('password_hash') == 'MD5') {
+		    return md5($password);
+		}
 
-	return $a;
+		if (PC_Config::get('password_hash') == 'SHA1') {
+		    return sha1($password);
+		}
+
+		$a = password_hash($password, PASSWORD_BCRYPT);
+
+		return $a;
     }
     
     static function password_verify($password, $hash) {
-	if (PC_Config::get('password_hash') == 'MD5') {
-	    if (md5($password) == $hash) {
-		return true;
-	    } else {
-		return false;
-	    }
-	}
-	
-	if (PC_Config::get('password_hash') == 'SHA1') {
-	    if (sha1($password) == $hash) {
-		return true;
-	    } else {
-		return false;
-	    }
-	}
-	
-	return password_verify($password, $hash);
+		if (PC_Config::get('password_hash') == 'MD5') {
+		    if (md5($password) == $hash) {
+				return true;
+			} else {
+				return false;
+		    }
+		}
+		
+		if (PC_Config::get('password_hash') == 'SHA1') {
+		    if (sha1($password) == $hash) {
+				return true;
+		    } else {
+				return false;
+		    }
+		}
+		
+		return password_verify($password, $hash);
     }
 }
