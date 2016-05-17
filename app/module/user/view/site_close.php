@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>PumpkinCMS</title>
+    <title><?php echo SiteInfo::get('site_title'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="http://127.0.0.1/pumpcms/public/themes/default/bootstrap.css" media="screen">
