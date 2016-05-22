@@ -30,6 +30,7 @@
                 <fieldset>
                   <legend><?php echo _MD_USER_REMIND_PASS ?></legend>
                   <div class="form-group">
+                    <div class="row">
                     <label for="inputEmail" class="col-lg-3 control-label"><?php echo _MD_LOGIN_EMAIL ?></label>
                     <div class="col-lg-9">
                       <input required type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" value="<?php echo htmlspecialchars(@$_POST['email']); ?>">
@@ -39,7 +40,8 @@
                       }
                       ?>
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- from-group-->
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                     	<!--

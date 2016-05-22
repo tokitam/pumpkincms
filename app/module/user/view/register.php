@@ -10,6 +10,7 @@
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
                   <div class="form-group">
+                    <div class="row">
                     <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_LOGIN_ID ?></label>
                     <div class="col-lg-9">
                       <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_INPUT_ID ?>" name="name" value="<?php echo htmlspecialchars(@$_POST['name']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_INPUT_ID_FORMAT ?>"><br />
@@ -20,8 +21,10 @@
                       }
                       ?>
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- from-group -->
                   <div class="form-group">
+                    <div class="row">
                     <label for="inputEmail" class="col-lg-3 control-label"><?php echo _MD_LOGIN_EMAIL ?></label>
                     <div class="col-lg-9">
                       <input required type="email" class="form-control" id="inputEmail" placeholder="<?php echo _MD_USER_INPUT_EMAIL ?>" name="email" value="<?php echo htmlspecialchars(@$_POST['email']); ?>">
@@ -31,8 +34,10 @@
                       }
                       ?>
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- form-group -->
                   <div class="form-group">
+                    <div class="row">
                     <label for="inputPassword" class="col-lg-3 control-label"><?php echo _MD_USER_PASSWORD ?></label>
                     <div class="col-lg-9">
                       <input required type="password" class="form-control" id="inputPassword" placeholder="<?php echo _MD_USER_INPUT_PASSWORD ?>" name="password">
@@ -49,8 +54,10 @@
                       </div>
                   		-->
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- from-group -->
                   <div class="form-group">
+                    <div class="row">
                     <div class="col-lg-10 col-lg-offset-2">
 		      <?php echo _MD_UESR_MAIL_DOMAIN_SETTING ?><br />
                       <a href="<?php echo PC_Config::url() ?>/terms" target="_blank" style="font-size: 20px;"><?php echo _MD_USER_TERMS ?></a>
@@ -59,7 +66,8 @@
                       <!--<button class="btn btn-default">Cancel</button>-->
                       <button type="submit" class="btn btn-primary"><?php echo _MD_USER_CONFIRM_REGISTER ?></button>
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- from-group -->
                 </fieldset>
               </form>
             <!--</div>-->

@@ -16,6 +16,7 @@ if (SiteInfo::is_site_close()) {
                 <fieldset>
                   <legend><?php echo _MD_USER_LOGIN ?></legend>
                   <div class="form-group">
+                    <div class="row">
                     <label for="inputEmail" class="col-lg-3 control-label"><?php echo _MD_LOGIN_EMAIL ?></label>
                     <div class="col-lg-9">
                       <input required type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" value="<?php echo htmlspecialchars(@$_POST['email']); ?>">
@@ -25,8 +26,10 @@ if (SiteInfo::is_site_close()) {
                       }
                       ?>
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- form-group -->
                   <div class="form-group">
+                    <div class="row">
                     <label for="inputPassword" class="col-lg-3 control-label"><?php echo _MD_USER_PASSWORD ?></label>
                     <div class="col-lg-9">
                       <input required type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
@@ -43,19 +46,24 @@ if (SiteInfo::is_site_close()) {
                       </div>
                     -->
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- from-group -->
                   <div class="form-group">
+                    <div class="row">
                     <div class="col-lg-10 col-lg-offset-2">
                       <button class="btn btn-default"><?php echo _MD_PUMPFORM_CANCEL ?></button>
                       <button type="submit" class="btn btn-primary"><?php echo _MD_USER_LOGIN ?></button>
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- form-group -->
                   <div class="form-group">
+                    <div class="row">
                     <div class="col-lg-10 col-lg-offset-2">
                       <a href="<?php echo PC_Config::url() ?>/user/remindpass/"><?php echo _MD_USER_REMIND_PASS ?></a>
                       <a href="<?php echo PC_Config::get('base_url'); ?>/user/register/"><?php echo _MD_USER_REGISTER ?></a>
                     </div>
-                  </div>
+                    </div> <!-- row -->
+                  </div> <!-- form-group -->
                 </fieldset>
               </form>
             <!--</div>-->
