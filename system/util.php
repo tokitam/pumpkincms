@@ -240,6 +240,13 @@ class PC_Util {
 			ord($char) : 256 * mb_ord(substr($char, 0, -1)) + ord(substr($char, -1));
 	}
 
+	static function mb_trim($string)
+	{
+		$whitespace = '[\s\0\x0b\p{Zs}\p{Zl}\p{Zp}]';
+		$ret = preg_replace(sprintf('/(^%s+|%s+$)/u', $whitespace, $whitespace), '', $string);
+		return $ret;
+	}
+
 	static function convert_size($size) {
 		if ($size < 1024) {
 			return $size . 'B';
