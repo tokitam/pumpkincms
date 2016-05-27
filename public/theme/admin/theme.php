@@ -71,9 +71,6 @@
         <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/AdminLTE/dashboard.js" type="text/javascript"></script>
         -->
 
-        <!-- AdminLTE for demo purposes -->
-        <script src="<?php echo SiteInfo::get_css_url() ?>/theme/admin/js/AdminLTE/demo.js" type="text/javascript"></script>
-
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="<?php echo SiteInfo::get_css_url() ?>/js/pump_gmap.js"></script>
         <script type="text/javascript" src="<?php echo SiteInfo::get_css_url() ?>/js/jquery-2.1.0.min.js"></script>
