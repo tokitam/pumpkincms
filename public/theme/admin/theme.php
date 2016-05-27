@@ -1,5 +1,5 @@
 <?php if (defined('PUMPCMS_ROOT_PATH') == false) { exit(); } ?><!DOCTYPE html>
-<html>
+<html lang="ja">
     <head>
         <meta charset="UTF-8">
         <title><?php echo PC_Config::get('site_title') ?> | Master Admin</title>
