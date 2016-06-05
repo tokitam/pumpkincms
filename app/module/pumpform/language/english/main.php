@@ -25,3 +25,4 @@ define('_MD_PUMPFORM_UPLOAD_FAILURE', 'Upload failure');
 define('_MD_PUMPFORM_ADDED', 'Posted');
 define('_MD_PUMPFORM_UPDATED', 'Updated');
 define('_MD_PUMPFORM_DELETED', 'Deleted');
+define('_MD_PUMPFORM_OVERLAP_ERROR', 'Overlap error');

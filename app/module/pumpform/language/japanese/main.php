@@ -25,3 +25,4 @@ define('_MD_PUMPFORM_UPLOAD_FAILURE', 'アップロードに失敗しました')
 define('_MD_PUMPFORM_ADDED', '投稿しました');
 define('_MD_PUMPFORM_UPDATED', '更新しました');
 define('_MD_PUMPFORM_DELETED', '削除しました');
+define('_MD_PUMPFORM_OVERLAP_ERROR', '重複エラーです');

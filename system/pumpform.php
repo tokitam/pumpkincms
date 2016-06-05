@@ -409,6 +409,19 @@ class PumpForm {
 					}
 				}
 			}
+
+            if (@$column['check_overlap'] && @$column['check_overlap']['type'] == 'multi_db') {
+                $db = PC_DBSet::get();
+                foreach ($column['check_overlap']['dbs'] as $check) {
+                    $check_ormap = PumpORMAP_Util::get($check['module'], $check['table']);
+                    $list = $check_ormap->get_list($check['column'] . ' = ' . $db->escape($data));
+
+                    if (! empty($list)) {
+                        $error[$column['name']] = _MD_PUMPFORM_OVERLAP_ERROR;
+                        continue;
+                    }
+                }
+            }
 	    
 			if (@$column['minlength'] && mb_strlen($data) < $column['minlength']) {
 				$error[$column['name']] = sprintf(_MD_PUMPFORM_NG_LENGTH . '(1)', intval(@$column['minlength']), intval(@$column['maxlength']));
