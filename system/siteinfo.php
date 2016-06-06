@@ -81,5 +81,14 @@ class SiteInfo {
 
         return false;
     }
-}
 
+    static function add_admin_menu($title, $url) {
+        $admin_menu = PC_Config::get('admin_menu');
+        if (empty($admin_menu)) {
+            $admin_menu = array();
+        }
+        array_push($admin_menu, array('title' => $title, 'url' => $url));
+
+        PC_Config::set('admin_menu', $admin_menu);
+    }
+}
