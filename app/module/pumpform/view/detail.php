@@ -130,7 +130,7 @@ if (UserInfo::is_master_admin() || UserInfo::is_site_admin()) {
 	if (PumpForm::$edit_url) {
 		$form_html .= sprintf('<a href="' . PumpForm::$edit_url . '">' . _MD_PUMPFORM_EDIT . '</a>', $item['id']);
 	} else {
-		$form_html .= "<a href='" . PC_Config::get('base_url') . '/' . PC_Config::get('dir1') . '/' . PC_Config::get('dir2') . "/edit/" . PC_Config::get('dir4') . "/' class='btn btn-default'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
+		$form_html .= "<a href='" . $module_url . '/edit/' . $item['id'] . "/' class='btn btn-default'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
 	}
 }
 $form_html .= "<br />\n";
