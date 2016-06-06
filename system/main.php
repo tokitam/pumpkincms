@@ -80,27 +80,8 @@ class PC_Main {
 		$router_no = PC_Config::get('router_no');
 		$router_list = PC_Config::get('router', $router_no);
 
-		if (SiteInfo::is_site_close()) {
-			if (UserInfo::is_logined() && 
-				UserInfo::is_master_admin() == false) {
-				$user_model = new user_model();
-				$user_model->logout();
-				PC_Util::redirect_top();
-			}
-
-			if (UserInfo::is_master_admin()) {
-				// master admin
-				// do nothing
-			} else {
-				// no master admin
-				$this->_module = 'user';
-				$this->_controller = 'index';
-				$this->_method = 'index';
-				if (!preg_match('/login/', $_SERVER['REQUEST_URI'])) {
-					$_SESSION['from_url'] = $_SERVER['REQUEST_URI'];
-				}
-				return;
-			}
+		if ($this->site_close()) {
+			return;
 		}
 
 		$ret = null;
@@ -125,6 +106,8 @@ class PC_Main {
 			}
 		}
 
+		$this->set_dir($service_url);
+
 		if ($ret != null) {
 			$this->_module = $ret['module'];
 			$this->_controller = $ret['controller'];
@@ -137,6 +120,43 @@ class PC_Main {
 			return;
 		}
 
+		PC_Debug::log("module:" . $this->_module . ', controller:' . $this->_controller . ', method:' . $this->_method, __FILE__, __LINE__);
+	}
+
+	function setup_user() {
+		if (@$_SESSION['user']) {
+			UserInfo::set_data($_SESSION['user']);
+		}
+	}
+
+	function site_close() {
+		if (SiteInfo::is_site_close()) {
+			if (UserInfo::is_logined() && 
+				UserInfo::is_master_admin() == false) {
+				$user_model = new user_model();
+				$user_model->logout();
+				PC_Util::redirect_top();
+			}
+
+			if (UserInfo::is_master_admin()) {
+				// master admin
+				// do nothing
+			} else {
+				// no master admin
+				$this->_module = 'user';
+				$this->_controller = 'index';
+				$this->_method = 'index';
+				if (!preg_match('/login/', $_SERVER['REQUEST_URI'])) {
+					$_SESSION['from_url'] = $_SERVER['REQUEST_URI'];
+				}
+				return true;
+			}
+
+			return false;
+		}		
+	}
+    
+	function set_dir($service_url) {
 		$d = explode('/', @$service_url);
 		if (@$d[0] != '') {
 			$this->_dir1 = $d[0];
@@ -172,17 +192,9 @@ class PC_Main {
 		SiteInfo::set('dir1', $this->_dir1);
 		SiteInfo::set('dir2', $this->_dir2);
 		SiteInfo::set('dir3', $this->_dir3);
-		SiteInfo::set('dir4', $this->_dir4);
-
-		PC_Debug::log("module:" . $this->_module . ', controller:' . $this->_controller . ', method:' . $this->_method, __FILE__, __LINE__);
+		SiteInfo::set('dir4', $this->_dir4);		
 	}
 
-	function setup_user() {
-		if (@$_SESSION['user']) {
-			UserInfo::set_data($_SESSION['user']);
-		}
-	}
-    
 	function execute() {
 		$module = $this->_module;
 		$classfile = $this->_controller;
