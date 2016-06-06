@@ -414,7 +414,13 @@ class PumpForm {
                 $db = PC_DBSet::get();
                 foreach ($column['check_overlap']['dbs'] as $check) {
                     $check_ormap = PumpORMAP_Util::get($check['module'], $check['table']);
-                    $list = $check_ormap->get_list($check['column'] . ' = ' . $db->escape($data));
+                    if (PC_Config::get('dir3') == 'edit') {
+                        $where = $check['column'] . ' = ' . $db->escape($data);
+                        $where .= ' AND id <> ' . intval(PC_Config::get('dir4'));
+                    } else {
+                        $where = $check['column'] . ' = ' . $db->escape($data);
+                    }
+                    $list = $check_ormap->get_list($where);
 
                     if (! empty($list)) {
                         $error[$column['name']] = _MD_PUMPFORM_OVERLAP_ERROR;
