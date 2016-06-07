@@ -288,6 +288,17 @@ class User_Model extends PC_Model {
 	        return $db->fetch_row($sql);
 	}
     
+	function get_user_by_name($name) {
+	    
+		$db = PC_DBSet::get();
+		
+		$sql = 'SELECT * FROM ' . $db->prefix($this->table_name);
+		$sql .= " WHERE ";
+		$sql .= " id = " . $db->escape($name) . " ";
+
+	        return $db->fetch_row($sql);
+	}
+    
 	function get_user_by_email($email) {
 	    
 		$db = PC_DBSet::get();
