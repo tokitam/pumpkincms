@@ -39,6 +39,7 @@ define('_MD_USER_UPDATED_PASSWORD', 'Updated password');
 define('_MD_USER_EDIT_PROFILE', 'Edit profile');
 define('_MD_USER_LOGINED', 'Logined');
 define('_MD_USER_LOGOUT', 'Logout');
+define('_MD_USER_LOGOUT_LABEL', 'Logout');
 define('_MD_USER_MYPAGE', 'My page');
 define('_MD_UESR_SITE_CLOSE', 'Maintenance!!!');
 define('_MD_USER_SITE_CLOSE_INFO', 'administrator only login');

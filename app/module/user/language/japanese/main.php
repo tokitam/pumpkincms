@@ -39,6 +39,7 @@ define('_MD_USER_UPDATED_PASSWORD', 'パスワードを更新しました');
 define('_MD_USER_EDIT_PROFILE', 'プロフィール編集');
 define('_MD_USER_LOGINED', 'ログインしました');
 define('_MD_USER_LOGOUT', 'ログアウトしました');
+define('_MD_USER_LOGOUT_LABEL', 'ログアウト');
 define('_MD_USER_MYPAGE', 'マイページ');
 define('_MD_UESR_MAIL_DOMAIN_SETTING', '登録後 pumpup.jp ドメインから確認メールが送信されます。 pumpup.jp からメールが受信できるように設定してください。');
 define('_MD_USER_SENT_MAIL', '確認メールを送信しました！<br />受信できない場合は迷惑メールフォルダを確認してください。<br />20分経ってメールが届かない場合は再登録か運営チームにお問い合わせください。');
