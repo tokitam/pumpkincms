@@ -294,7 +294,7 @@ class User_Model extends PC_Model {
 		
 		$sql = 'SELECT * FROM ' . $db->prefix($this->table_name);
 		$sql .= " WHERE ";
-		$sql .= " id = " . $db->escape($name) . " ";
+		$sql .= " name = " . $db->escape($name) . " ";
 
 	        return $db->fetch_row($sql);
 	}
