@@ -130,7 +130,7 @@ foreach ($form as $column) {
 	} else if ($column['type'] == PUMPFORM_IMAGE) {
 		if (@$item[$column['name']]) {
 			$tmp = PumpImage::get_url_raw($item[$column['name']]);
-			if (@$item[$column['name']]) {
+			if (@$item[$column['name']] && isset($tmp['url'])) {
 				$form_html .= sprintf('<a href="%s" target="_blank">', $tmp['url']);
 			}
 			$form_html .= PumpImage::get_tag($item[$column['name']], 120, 120);
