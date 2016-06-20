@@ -97,8 +97,12 @@ class PumpImage extends PumpUpload {
 			    $styles['width'] = intval($width);
 			    $styles['height'] = intval($height);
 			}
-		} else if (@$option['width100p']) {
+		}
+		if (@$option['width100p']) {
 			$wh = ' width="100%"';
+			$styles['width'] = '100%';
+			$styles['height'] = '';
+			$styles['max-width'] = '400px';
 		}
 		if (@$option['css_width']) {
 			$styles['width'] = intval($option['css_width']) . 'px';
