@@ -66,11 +66,11 @@ class PumpImage extends PumpUpload {
 			return false;
 		}
 
-		if ($height == 0) {
+		if ($height == 0 && @$image['width'] > 0) {
 			$height = $image['height'] * $width / $image['width'];
 		}
 
-		if ($width == 0) {
+		if ($width == 0 && @$image['height'] > 0) {
 			$width = $image['width'] * $height / $image['height'];
 		}
 
