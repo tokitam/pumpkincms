@@ -295,6 +295,11 @@ if ($dh = opendir($dir)) {
                         </li>
                         <?php endforeach ; ?>
                         <li class="active">
+                            <a href="<?php echo PC_Config::url() ?>/admin/index/phpinfo/">
+                                <i class="fa fa-edit"></i> <span>phpinfo</span>
+                           </a>
+                        </li>
+                        <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/">
                                 <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_WEBSITE ?></span>
                            </a>
