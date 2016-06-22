@@ -6,7 +6,9 @@ $pumpform_config['image']['image'] = array(
     'table' => 'image',
 
 	'list_php' => 'list',
-	'default_sort' => 'd_id',				   
+	'detail_php' => 'detail',
+
+	'default_sort' => 'd_id',	
 
     'column' => array(
 
@@ -17,7 +19,7 @@ $pumpform_config['image']['image'] = array(
 	      'visible' => 1,
 	      'registable' => 1,
 	      'editable' => 0,
-	      'list_visible' => 0,),
+	      'list_visible' => 1,),
 	array('name' => 'height',
 	      'title' => _MD_IMAGE_HEIGHT,
 	      'type' => PUMPFORM_INT,
@@ -25,7 +27,7 @@ $pumpform_config['image']['image'] = array(
 	      'visible' => 1,
 	      'registable' => 1,
 	      'editable' => 0,
-	      'list_visible' => 0,),
+	      'list_visible' => 1,),
 	array('name' => 'type',
 	      'title' => _MD_IMAGE_TYPE,
 	      'type' => PUMPFORM_INT,
@@ -41,7 +43,7 @@ $pumpform_config['image']['image'] = array(
 	      'visible' => 0,
 	      'registable' => 1,
 	      'editable' => 0,
-	      'list_visible' => 0,),
+	      'list_visible' => 1,),
 	array('name' => 'public',
 	      'title' => _MD_IMAGE_PUBLIC,
 	      'type' => PUMPFORM_BOOLEAN,
