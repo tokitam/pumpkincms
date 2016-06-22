@@ -18,17 +18,7 @@ $form = $GLOBALS['pumpform_config'][$this->_module][$this->_table]['column'];
 
 $url = PC_Config::url();
 $css_url = SiteInfo::get_css_url();
-
-if (PumpForm::$scaffold_base_url != '') {
-	$module_url = PumpForm::$scaffold_base_url;
-} else {
-	$module_url = $url . '/' . PC_Config::get('dir1');
-	if (PC_Config::get('dir2') != '') {
-		$module_url .= '/' . PC_Config::get('dir2');
-	} else {
-		$module_url .= '/index';
-	}
-}
+$module_url = PC_Util::get_module_url();
 $url_option = '';
 if (@$form_config['1n_link_id']) {
 	$url_option = '?' . $form_config['1n_link_id'] . '=' . @$_GET[$form_config['1n_link_id']];
@@ -36,7 +26,7 @@ if (@$form_config['1n_link_id']) {
 
 		$html = '';
 
-		$html .= "[<a href='" . $module_url . "/add/" . $url_option . "'>" . _MD_PUMPFORM_ADD . "</a>]\n";
+		$html .= "<a href='" . $module_url . "/add/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
                 $html .= "<br />\n";
 
 		$html .= $pn->get_page_link();
@@ -48,8 +38,7 @@ if (@$form_config['1n_link_id']) {
 		//$form = $form_config['column'];
 
 		$html .= '<tr>';
-
-		// image
+		// for image
 		$html .= "<th></ht>";
 
 		foreach ($form as $column) {
@@ -110,7 +99,7 @@ if (@$form_config['1n_link_id']) {
 		    }
 
 		    $html .= "<td>";
-		    $html .= PumpImage::get_tag($item['id'], 120, 120);
+		    $html .= PumpImage::get_tag($item['id'], 120, 120, array('link' => 1));
 		    $html .= "</td>\n";
 
 		    foreach ($form as $column) {
@@ -144,7 +133,11 @@ if (@$form_config['1n_link_id']) {
 					}
 				}
 			} else if ($column['type'] == PUMPFORM_IMAGE) {
-				$html .= PumpImage::get_tag($value, 120, 120);
+				$o = array();
+				if (@$column['crop']) {
+					$o['crop'] = 1;
+				}
+				$html .= PumpImage::get_tag($value, 60, 60, $o);
 			} else {
 			    $html .= htmlspecialchars(mb_substr($value, 0, 20, 'utf8'));
 			}
@@ -157,8 +150,9 @@ if (@$form_config['1n_link_id']) {
 		$html .= '<td class="odd">';
 	    }
 
-	    $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "'><nobr>" . _MD_PUMPFORM_DETAIL . "</nobr></a> ";
-	    $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
+        $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" ._MD_PUMPFORM_DETAIL . "</a>";
+	    $html .= "&nbsp;";
+	    $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_EDIT . "</a> ";
 	    //$html .= "<a href=''>" . _MD_PUMPFORM_DELETE . "</a> ";
 	    $html .= "</td>\n";
 	    $html .= "</tr>\n";
@@ -169,7 +163,7 @@ if (@$form_config['1n_link_id']) {
 		$html .= $pn->get_page_link();
 		$html .= "<br />\n";
 
-		$html .= "[<a href='" . $module_url . "/add/" . $url_option . "'>" . _MD_PUMPFORM_ADD . "</a>]\n";
+		$html .= "<a href='" . $module_url . "/add/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
 	
 	echo $html;
 
