@@ -11,6 +11,9 @@ $pc_config['default_controller'] = 'index';
 // Password reset mail expire time 60*5 = 5minitus
 $pc_config['remindpass_time'] = (60 * 5);
 
+// Multi account function
+$pc_config['use_multi_account'] = 0;
+
 // Location of upload image
 // PumpUpload::STORE_TYPE_LOCAL : Local disk
 // PumpUpload::STORE_TYPE_DB : Database
