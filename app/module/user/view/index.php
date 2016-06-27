@@ -1,11 +1,3 @@
-<?php
-// ↓ほかのテンプレートを読む可能性があるので注意
-$template_file = PUMPCMS_APP_PATH . '/layout/' . PC_Config::get('layout') . '/template/user_index.php';
-if (is_readable($template_file)) {
-	include $template_file;
-	return;
-}
-?>
 
 <div class="twelve columns">
 <p>
