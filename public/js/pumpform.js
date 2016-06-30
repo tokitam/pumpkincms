@@ -41,7 +41,7 @@ $(document).ready(function(){
 
                 error: function(XMLHttpRequest, textStatus, errorThrown)
                 {
-                    alert('Error : ' + errorThrown);
+                    console.log(errorThrown);
                 }
             });
     	}
