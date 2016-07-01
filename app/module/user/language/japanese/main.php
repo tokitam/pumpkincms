@@ -47,6 +47,7 @@ define('_MD_UESR_SITE_CLOSE', 'メンテナンス中です');
 define('_MD_USER_SITE_CLOSE_INFO', '管理者のみログイン可能です');
 define('_MD_USER_MASTER_ADMIN', 'マスター管理');
 define('_MD_USER_ADD_ACCOUNT', 'アカウント追加');
+define('_MD_USER_ADD', '追加');
 
 define('_MD_USER', 'ユーザ');
 define('_MD_USER_NAME', 'ユーザID');

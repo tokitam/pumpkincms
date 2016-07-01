@@ -255,3 +255,32 @@ $pumpform_config['user']['tel_auth'] = array(
 
         ),
 );
+
+$pumpform_config['user']['user_rel'] = array(
+    'module' => 'user',
+    'title' => 'user_rel',
+    'table' => 'user_rel',
+           
+    'default_sort' => 'd_id',
+           
+    'column' => array(
+
+        'user_id1' => array('name' => 'user_id1',
+                         'type' => PUMPFORM_INT,
+                         'title' => 'user_id1',
+                         'required' => 1,
+                         'visible' => 1,
+                         'registable' => 1,
+                         'editable' => 1,
+                         'list_visible' => 1,),
+        'user_id2' => array('name' => 'user_id2',
+                         'type' => PUMPFORM_INT,
+                         'title' => 'user_id2',
+                         'required' => 1,
+                         'visible' => 1,
+                         'registable' => 1,
+                         'editable' => 1,
+                         'list_visible' => 1,),
+
+        ),
+);
