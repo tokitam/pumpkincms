@@ -11,6 +11,11 @@ class UserInfo {
         return self::get_data($key);
     }
 
+    static function set($key, $value) {
+        $_SESSION['pump_'. PC_Config::get('site_id')]['user'][$key] = $value;
+        self::$_data[$key] = $value;
+    }
+
     static function get_data($key=false) {
         if (self::$_data == null) {
             self::$_data = @$_SESSION['pump_'. PC_Config::get('site_id')]['user'];
@@ -87,11 +92,21 @@ class UserInfo {
     static function reload() {
         $user_model = new User_Model();
         $user = $user_model->get_user_by_id(UserInfo::get_id());
+
+        $rel_user_list = @$_SESSION['pump_'. PC_Config::get('site_id')]['user']['rel_user_list'];
+        if (! is_array($rel_user_list)) {
+            $rel_user_list = array();
+        }
+
         $_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $user;
+        if (@$user) {
+            $_SESSION['pump_'. PC_Config::get('site_id')]['user']['rel_user_list'] = $rel_user_list;
+        }
+        
         self::$_data = null;
     }
 
-    static function get_icon_url($user_id=null) {
+    static function get_icon_url($user_id=null, $width=300, $height=300) {
         if ($user_id === null) {
             $image_id = self::get('image_id');
         } else {
@@ -100,7 +115,7 @@ class UserInfo {
             $user = $user_model->get_user_by_id($user_id);
             $image_id = $user['image_id'];
         }
-        return PumpImage::get_image_url($image_id, 300, 300, array('crop' => true));
+        return PumpImage::get_image_url($image_id, $width, $height, array('crop' => true));
     }
 }
 
