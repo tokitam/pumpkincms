@@ -108,7 +108,7 @@ class User_Model extends PC_Model {
 
 		$this->update_last_login_time($user['id']);
 		$_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $user;
-		PC_Notification::set(_MD_USER_LOGINED);
+		PC_Notification::set(_MD_USER_SWITCH_USER);
 		ActionLog::log(ActionLog::LOGIN);
 
 		$this->load_rel_user($user['id']);
