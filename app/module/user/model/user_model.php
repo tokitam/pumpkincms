@@ -80,7 +80,7 @@ class User_Model extends PC_Model {
 
 		UserInfo::set('rel_user_list', $rel_user_list);
 
-		return $rel_list;
+		return $rel_user_list;
 	}
 
 	function switch($to_user_id) {
