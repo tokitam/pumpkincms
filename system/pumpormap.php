@@ -111,9 +111,9 @@ class PumpORMAP {
 
 		if (is_array($where)) {
 			$sql .= ' AND ';
-			$sql .= $where['where'];
+			$sql .= ' (' . $where['where'] . ' ) ';
 		} else if ($where != '') {
-			$sql .= ' AND ' . $where . ' ';
+			$sql .= ' AND ( ' . $where . ' ) ';
 		}
 		if ($sort != null) {
 			if (is_array($sort)) {
