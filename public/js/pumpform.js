@@ -46,4 +46,40 @@ $(document).ready(function(){
             });
     	}
     });
+
+    $('#pumpform_add_account_button').click(function() {
+        email = $('#inputEmail').val();
+        password = $('#inputPassword').val();
+        url = $('#base_url').val() + '/user/add_account/add';
+        data = {email: email, password: password};
+
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json'
+        }).done(function(data) {
+            console.log(data);
+            if (data.error == 1) {
+                $('#add-account-dialog-title').text(data.message);
+                $('#pumpform-add-account-dialog').modal('show');
+                return;
+            } 
+
+            window.location.reload();
+
+            $('#email').val('');
+            $('#password').val('');
+
+            $('#add-account-dialog-title').text(data.message);
+            $('#pumpform-add-account-dialog').modal('show');
+        }).fail(function(jqXHR, textStatus) {
+            console.log(jqXHR);
+            console.log('error : ' + textStatus);
+        });
+    });
+
+    $('#add-account-button').click(function() {
+        $('#pumpform-add-account-dialog').modal('hide');
+    });
 });

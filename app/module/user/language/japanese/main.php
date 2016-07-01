@@ -42,12 +42,16 @@ define('_MD_USER_LOGOUT', 'ログアウトしました');
 define('_MD_USER_LOGOUT_LABEL', 'ログアウト');
 define('_MD_USER_MYPAGE', 'マイページ');
 define('_MD_UESR_MAIL_DOMAIN_SETTING', '登録後 pumpup.jp ドメインから確認メールが送信されます。 pumpup.jp からメールが受信できるように設定してください。');
-define('_MD_USER_SENT_MAIL', '確認メールを送信しました！<br />受信できない場合は迷惑メールフォルダを確認してください。<br />20分経ってメールが届かない場合は再登録か運営チームにお問い合わせください。');
+define('_MD_USER_SENT_MAIL', '確認メールメールを送信しました！<br />受信できない場合は迷惑メールフォルダを確認してください。<br />20分経ってメールが届かない場合は再登録か運営チームにお問い合わせください。');
 define('_MD_UESR_SITE_CLOSE', 'メンテナンス中です');
 define('_MD_USER_SITE_CLOSE_INFO', '管理者のみログイン可能です');
 define('_MD_USER_MASTER_ADMIN', 'マスター管理');
 define('_MD_USER_ADD_ACCOUNT', 'アカウント追加');
+define('_MD_USER_ADDED_ACCOUNT', 'アカウント追加しました');
+define('_MD_USER_NO_SAME_ACCOUNT', 'ログインユーザと同じアカウントは関連付けできません');
+define('_MD_USER_FOUND_REL_ACCOUNT', '登録済でした');
 define('_MD_USER_ADD', '追加');
+define('_MD_USER_BACK', '戻る');
 
 define('_MD_USER', 'ユーザ');
 define('_MD_USER_NAME', 'ユーザID');

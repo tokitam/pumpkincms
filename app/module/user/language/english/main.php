@@ -45,7 +45,11 @@ define('_MD_UESR_SITE_CLOSE', 'Maintenance!!!');
 define('_MD_USER_SITE_CLOSE_INFO', 'administrator only login');
 define('_MD_USER_MASTER_ADMIN', 'Master admin');
 define('_MD_USER_ADD_ACCOUNT', 'Add account');
+define('_MD_USER_ADDED_ACCOUNT', 'Added account');
+define('_MD_USER_NO_SAME_ACCOUNT', 'No good account');
+define('_MD_USER_FOUND_REL_ACCOUNT', 'No good accout');
 define('_MD_USER_ADD', 'Add');
+define('_MD_USER_BACK', 'Back');
 
 define('_MD_USER', 'USER');
 define('_MD_USER_NAME', 'USER NAME');

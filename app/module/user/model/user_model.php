@@ -42,6 +42,8 @@ class User_Model extends PC_Model {
 			$_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $this->_user_data;
 			PC_Notification::set(_MD_USER_LOGINED);
 			ActionLog::log(ActionLog::LOGIN);
+
+			$this->load_rel_user($this->_user_data['id']);
 			
 			if (empty($_SESSION['from_url'])) {
 				PC_Util::redirect_top();
@@ -59,6 +61,122 @@ class User_Model extends PC_Model {
 		unset($_SESSION['pump_'. PC_Config::get('site_id')]);
 		PC_Notification::set(_MD_USER_LOGOUT);
 		PC_Util::redirect_top();
+	}
+
+	function load_rel_user($user_id) {
+		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
+		$list = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id) . ' OR user_id2 = ' . intval($user_id), 0, 10);
+
+		$rel_user_list = array();
+		foreach ($list as $item) {
+			if ($item['user_id1'] == $user_id) {
+				$tmp_id = $item['user_id2'];
+			} else {
+				$tmp_id = $item['user_id1'];
+			}
+
+			array_push($rel_user_list, $this->get_user_by_id($tmp_id));
+		}
+
+		UserInfo::set('rel_user_list', $rel_user_list);
+
+		return $rel_list;
+	}
+
+	function switch($to_user_id) {
+		if (! UserInfo::is_logined()) {
+			exit();
+		}
+
+		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
+		if (UserInfo::get_id() < $to_user_id) {
+			$user_id1 = UserInfo::get_id();
+			$user_id2 = $to_user_id;
+		} else {
+			$user_id1 = $to_user_id;
+			$user_id2 = UserInfo::get_id();
+		}
+		$list = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id1) . ' OR user_id2 = ' . intval($user_id2), 0, 1);
+
+		if (empty($list)) {
+			exit();
+		}
+
+		$user_id = $to_user_id;
+
+		$user = $this->get_user_by_id($user_id);
+
+		$this->update_last_login_time($user['id']);
+		$_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $user;
+		PC_Notification::set(_MD_USER_LOGINED);
+		ActionLog::log(ActionLog::LOGIN);
+
+		$this->load_rel_user($user['id']);
+		
+		if (empty($_SESSION['from_url'])) {
+			PC_Util::redirect_top();
+		} else {
+			PC_Util::redirect_top();
+		}
+	}
+
+	function add_user_rel($to_user_id) {
+		if (! UserInfo::is_logined()) {
+			exit();
+		}
+
+		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
+
+		$user_id = UserInfo::get_id();
+		$tmp_list = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id) . ' OR user_id2 = ' . intval($user_id));
+
+		$now_rel_list = array();
+
+		foreach ($tmp_list as $item) {
+			if ($item['user_id1'] == UserInfo::get_id()) {
+				array_push($now_rel_list, intval($item['user_id2']));
+			} else {
+				array_push($now_rel_list, intval($item['user_id1']));
+			}
+		}
+
+		$ids = implode(',', $now_rel_list);
+
+		$tmp_list = $user_rel_ormap->get_list('user_id1 IN (' . $ids . ') OR user_id2 IN (' . $ids . ' ) ');
+		$tmp_id_list = array();
+		foreach ($tmp_list as $item) {
+			array_push($tmp_id_list, $item['user_id1']);
+			array_push($tmp_id_list, $item['user_id2']);
+		}
+
+		array_push($tmp_id_list, UserInfo::get_id());
+		$now_rel_list2 = $now_rel_list = $tmp_id_list;
+PC_Debug::log('now_rel_list:' . print_r($now_rel_list, true), __FILE__, __LINE__);
+		foreach ($now_rel_list as $i) {
+			foreach ($now_rel_list2 as $j) {
+				if ($i == $j) {
+
+PC_Debug::log('id hit', __FILE__, __LINE__);
+					continue;
+				}
+
+				if ($i < $j) {
+					$user_id1 = $i;
+					$user_id2 = $j;
+				} else {
+					$user_id1 = $j;
+					$user_id2 = $i;
+				}
+
+				$tmp_list2 = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id1) . ' AND user_id2 = ' . intval($user_id2));
+
+				if (! empty($tmp_list2)) {
+					continue;
+				}
+
+				$user_rel_ormap->insert(array('user_id1' => $user_id1, 'user_id2' => $user_id2));
+			}
+		}
 	}
 
 	function admin_mode($flg) {

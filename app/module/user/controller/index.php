@@ -24,5 +24,4 @@ class user_index extends PC_Controller {
 	public function confirm() {
 		$this->render();
 	}
-
 }
