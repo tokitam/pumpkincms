@@ -82,4 +82,14 @@ $(document).ready(function(){
     $('#add-account-button').click(function() {
         $('#pumpform-add-account-dialog').modal('hide');
     });
+
+    $('.rel-user-edit-link').click(function(event) {
+        console.log(event);
+        message = $('#_MD_USER_DELETE_USER_REL').val();
+        message2 = $('#_MD_USER_DELETED_USER_REL').val();
+        if (confirm(message)) {
+            //console.log($(event).attr('targetid'));
+            alert(message2);
+        }
+    });
 });

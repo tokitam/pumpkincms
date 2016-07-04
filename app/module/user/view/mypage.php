@@ -1,3 +1,6 @@
+<input type="hidden" id="_MD_USER_DELETE_USER_REL" value="<?php echo _MD_USER_DELETE_USER_REL ?>">
+<input type="hidden" id="_MD_USER_DELETED_UESR_REL" value="<?php echo _MD_USER_DELETED_UESR_REL ?>">
+
 <!--<div class="row"> -->
 	<div class="col-lg-4">
 		<!--<div class="polaroid">-->
@@ -27,6 +30,14 @@ if (PC_Config::get('use_tel_auth')) {
 <a href="<?php echo PC_Config::url() ?>/user/edit/" class="btn btn-default"><?php echo _MD_USER_EDIT_PROFILE ?></a><br />
 <?php if (PC_Config::get('use_multi_account')) : ?>
 <a href="<?php echo PC_Config::url() ?>/user/add_account/" class="btn btn-default"><?php echo _MD_USER_ADD_ACCOUNT ?></a><br />
+<?php
+                  $list = UserInfo::get('rel_user_list');
+                  if (! empty($list)) 
+                  foreach ($list as $item) : ?>
+                    <a class="dropdown-item rel-user-edit-link" id="rel-user-<?php echo $item['id'] ?>" targetid="<?php echo $item['id'] ?>">X 
+                    <?php printf('<img class="img-circle" src="%s">', UserInfo::get_icon_url($item['id'], 35, 35)); ?>
+                    <span class="icon-text"><?php echo htmlspecialchars($item['name']) ?></span></a>
+                  <?php endforeach ; ?>
 <?php endif ; ?>
 <hr />
 <a href="<?php echo PC_Config::url() ?>/user/logout/" class="btn btn-default"><?php echo _MD_USER_LOGOUT_LABEL ?></a>
