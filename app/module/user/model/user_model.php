@@ -83,7 +83,7 @@ class User_Model extends PC_Model {
 		return $rel_user_list;
 	}
 
-	function switch($to_user_id) {
+	function switch_user($to_user_id) {
 		if (! UserInfo::is_logined()) {
 			exit();
 		}
