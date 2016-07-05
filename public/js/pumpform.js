@@ -50,7 +50,7 @@ $(document).ready(function(){
     $('#pumpform_add_account_button').click(function() {
         email = $('#inputEmail').val();
         password = $('#inputPassword').val();
-        url = $('#base_url').val() + '/user/add_account/add';
+        url = $('#base_url').val() + '/user/user_rel/add';
         data = {email: email, password: password};
 
         $.ajax({
