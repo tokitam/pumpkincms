@@ -84,9 +84,11 @@ $(document).ready(function(){
     });
 
     $('.rel-user-edit-link').click(function(event) {
-        console.log(event);
+        var target = $(event.target);
+        targetid = target.attr('targetid');
         message = $('#_MD_USER_DELETE_USER_REL').val();
         message2 = $('#_MD_USER_DELETED_USER_REL').val();
+
         if (confirm(message)) {
             //console.log($(event).attr('targetid'));
             alert(message2);

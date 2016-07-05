@@ -39,7 +39,7 @@ define('_MD_USER_UPDATED_PASSWORD', 'パスワードを更新しました');
 define('_MD_USER_EDIT_PROFILE', 'プロフィール編集');
 define('_MD_USER_EDIT_ACCOUNT', 'アカウント編集');
 define('_MD_USER_DELETE_USER_REL', 'アカウント連携を解除しますか？');
-define('_MD_USER_DELETED_UESR_REL', '解除しました');
+define('_MD_USER_DELETED_USER_REL', '解除しました');
 define('_MD_USER_LOGINED', 'ログインしました');
 define('_MD_USER_LOGOUT', 'ログアウトしました');
 define('_MD_USER_LOGOUT_LABEL', 'ログアウト');

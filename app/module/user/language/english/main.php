@@ -39,7 +39,7 @@ define('_MD_USER_UPDATED_PASSWORD', 'Updated password');
 define('_MD_USER_EDIT_PROFILE', 'Edit profile');
 define('_MD_USER_EDIT_ACCOUNT', 'Edit account');
 define('_MD_USER_DELETE_USER_REL', 'Do you delete uesr relation?');
-define('_MD_USER_DELETED_UESR_REL', 'Deleted.');
+define('_MD_USER_DELETED_USER_REL', 'Deleted.');
 define('_MD_USER_LOGINED', 'Logined');
 define('_MD_USER_LOGOUT', 'Logout');
 define('_MD_USER_LOGOUT_LABEL', 'Logout');
