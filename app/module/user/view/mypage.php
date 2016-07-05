@@ -34,9 +34,8 @@ if (PC_Config::get('use_tel_auth')) {
                   $list = UserInfo::get('rel_user_list');
                   if (! empty($list)) 
                   foreach ($list as $item) : ?>
-                    <a class="dropdown-item rel-user-edit-link" id="rel-user-<?php echo $item['id'] ?>">X 
-                    <?php printf('<img class="img-circle" src="%s">', UserInfo::get_icon_url($item['id'], 35, 35)); ?>
-                    <span class="icon-text" targetid="<?php echo $item['id'] ?>"><?php echo htmlspecialchars($item['name']) ?></span></a>
+                    <a class="dropdown-item rel-user-edit-link" id="rel-user-<?php echo $item['id'] ?>"><span class="icon-text" targetid="<?php echo $item['id'] ?>">X<?php printf('<img class="img-circle" src="%s" targetid="%d">', UserInfo::get_icon_url($item['id'], 35, 35), $item['id']); ?>
+                    <?php echo htmlspecialchars($item['name']) ?></span></a>
                   <?php endforeach ; ?>
 <?php endif ; ?>
 <hr />

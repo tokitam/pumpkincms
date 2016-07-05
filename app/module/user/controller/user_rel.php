@@ -74,4 +74,23 @@ class user_user_rel extends PC_Controller {
         echo json_encode(['error' => 1, 'message' => $buf]);
         exit();
     }
+
+    public function delete() {
+        if (UserInfo::is_logined() == false) {
+            exit();
+        }
+
+        if (empty($_POST['id'])) {
+            echo json_encode(['error' => 0, 'message' => 'error']);
+            exit();
+        }
+
+        $delete_user_id = intval($_POST['id']);
+
+        $user_model = new User_Model();
+        $user_model->delete_user_rel(UserInfo::get_id(), $delete_user_id);
+
+        echo json_encode(['successful' => 1]);
+        exit();
+    }
 }

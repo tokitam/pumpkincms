@@ -83,6 +83,7 @@ $(document).ready(function(){
         $('#pumpform-add-account-dialog').modal('hide');
     });
 
+    var targetid;
     $('.rel-user-edit-link').click(function(event) {
         var target = $(event.target);
         targetid = target.attr('targetid');
@@ -90,8 +91,35 @@ $(document).ready(function(){
         message2 = $('#_MD_USER_DELETED_USER_REL').val();
 
         if (confirm(message)) {
-            //console.log($(event).attr('targetid'));
-            alert(message2);
+            url = $('#base_url').val() + '/user/user_rel/delete';
+            data = {id: targetid};
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json'
+            }).done(function(data) {
+                console.log(data);
+                $('#rel-user-' + targetid).hide();
+                alert(message2);
+                /*
+                if (data.error == 1) {
+                    $('#add-account-dialog-title').text(data.message);
+                    $('#pumpform-add-account-dialog').modal('show');
+                    return;
+                } 
+
+                $('#email').val('');
+                $('#password').val('');
+
+                $('#add-account-dialog-title').text(data.message);
+                $('#pumpform-add-account-dialog').modal('show');
+                */
+            }).fail(function(jqXHR, textStatus) {
+                console.log(jqXHR);
+                console.log('error : ' + textStatus);
+            });
         }
     });
 });

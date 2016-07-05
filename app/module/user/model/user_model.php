@@ -179,6 +179,33 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 		}
 	}
 
+	function delete_user_rel($self_user_id, $delete_user_id) {
+		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
+		$tmp_list = $user_rel_ormap->get_list('user_id1 = ' . intval($self_user_id) . ' OR user_id2 = ' . intval($self_user_id));
+
+		$list = array();
+		foreach ($tmp_list as $item) {
+			if ($item['user_id1'] == $self_user_id) {
+				array_push($list, $item['user_id2']);
+			} else {
+				array_push($list, $item['user_id1']);
+			}
+		}
+		array_push($list, $delete_user_id);
+
+		if (count($list) == 1) {
+			$ids = intval($list[0]);
+		} else {
+			$ids = implode(',', $list);
+		}
+
+		$tmp_list = $user_rel_ormap->get_list('user_id1 IN (' . $ids . ') OR user_id2 IN (' . $ids . ' ) ');
+PC_Debug::log(' delete : ' . print_r($tmp_list, true), __FILE__, __LINE__);
+		foreach ($tmp_list as $item) {
+			$user_rel_ormap->delete($item['id']);
+		}
+	}
+
 	function admin_mode($flg) {
 		if ($flg) {
 			$_SESSION['pump_'. PC_Config::get('site_id')]['user']['admin_mode'] = 1;
