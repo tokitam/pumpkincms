@@ -102,20 +102,8 @@ $(document).ready(function(){
             }).done(function(data) {
                 console.log(data);
                 $('#rel-user-' + targetid).hide();
+                $('#dropdown-user-rel-link-' + targetid).hide();
                 alert(message2);
-                /*
-                if (data.error == 1) {
-                    $('#add-account-dialog-title').text(data.message);
-                    $('#pumpform-add-account-dialog').modal('show');
-                    return;
-                } 
-
-                $('#email').val('');
-                $('#password').val('');
-
-                $('#add-account-dialog-title').text(data.message);
-                $('#pumpform-add-account-dialog').modal('show');
-                */
             }).fail(function(jqXHR, textStatus) {
                 console.log(jqXHR);
                 console.log('error : ' + textStatus);

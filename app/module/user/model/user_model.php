@@ -180,17 +180,7 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 	}
 
 	function delete_user_rel($self_user_id, $delete_user_id) {
-		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
-		$tmp_list = $user_rel_ormap->get_list('user_id1 = ' . intval($self_user_id) . ' OR user_id2 = ' . intval($self_user_id));
-
-		$list = array();
-		foreach ($tmp_list as $item) {
-			if ($item['user_id1'] == $self_user_id) {
-				array_push($list, $item['user_id2']);
-			} else {
-				array_push($list, $item['user_id1']);
-			}
-		}
+		$list = $this->get_user_rel_list($self_user_id);
 		array_push($list, $delete_user_id);
 
 		if (count($list) == 1) {
@@ -199,11 +189,28 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 			$ids = implode(',', $list);
 		}
 
+		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
 		$tmp_list = $user_rel_ormap->get_list('user_id1 IN (' . $ids . ') OR user_id2 IN (' . $ids . ' ) ');
-PC_Debug::log(' delete : ' . print_r($tmp_list, true), __FILE__, __LINE__);
+
 		foreach ($tmp_list as $item) {
 			$user_rel_ormap->delete($item['id']);
 		}
+	}
+
+	function get_user_rel_list($user_id) {
+		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
+		$tmp_list = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id) . ' OR user_id2 = ' . intval($user_id));
+
+		$list = array();
+		foreach ($tmp_list as $item) {
+			if ($item['user_id1'] == $user_id) {
+				array_push($list, $item['user_id2']);
+			} else {
+				array_push($list, $item['user_id1']);
+			}
+		}
+
+		return $list;
 	}
 
 	function admin_mode($flg) {

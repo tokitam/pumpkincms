@@ -89,6 +89,7 @@ class user_user_rel extends PC_Controller {
 
         $user_model = new User_Model();
         $user_model->delete_user_rel(UserInfo::get_id(), $delete_user_id);
+        $user_model->load_rel_user(UserInfo::get_id());
 
         echo json_encode(['successful' => 1]);
         exit();
