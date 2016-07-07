@@ -28,7 +28,7 @@ class user_user_rel extends PC_Controller {
         }
 
         if ($_POST['email'] == UserInfo::get('email')) {
-            echo json_encode(['error' => 0, 'message' => _MD_USER_NO_SAME_ACCOUNT]);
+            echo json_encode(['error' => 1, 'message' => _MD_USER_NO_SAME_ACCOUNT]);
             exit();
         }
 
@@ -52,7 +52,7 @@ class user_user_rel extends PC_Controller {
             $list = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id1) . ' AND user_id2 = ' . intval($user_id2));
 
             if (! empty($list)) {
-                echo json_encode(['error' => 0, 'message' => _MD_USER_FOUND_REL_ACCOUNT]);
+                echo json_encode(['error' => 1, 'message' => _MD_USER_FOUND_REL_ACCOUNT]);
                 exit();         
             }
 

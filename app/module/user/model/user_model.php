@@ -193,7 +193,9 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 		$tmp_list = $user_rel_ormap->get_list('user_id1 IN (' . $ids . ') OR user_id2 IN (' . $ids . ' ) ');
 
 		foreach ($tmp_list as $item) {
-			$user_rel_ormap->delete($item['id']);
+			if ($item['user_id1'] == $delete_user_id || $item['user_id2'] == $delete_user_id) {
+				$user_rel_ormap->delete($item['id']);
+			}
 		}
 	}
 

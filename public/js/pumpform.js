@@ -53,6 +53,8 @@ $(document).ready(function(){
         url = $('#base_url').val() + '/user/user_rel/add';
         data = {email: email, password: password};
 
+        $('#pumpform_add_account_button').prop('disabled', true);
+
         $.ajax({
             method: 'POST',
             url: url,
@@ -60,19 +62,23 @@ $(document).ready(function(){
             dataType: 'json'
         }).done(function(data) {
             console.log(data);
+
             if (data.error == 1) {
                 $('#add-account-dialog-title').text(data.message);
                 $('#pumpform-add-account-dialog').modal('show');
+                $('#pumpform_add_account_button').prop('disabled', false);
                 return;
             } 
 
-            window.location.reload();
-
+            /*
             $('#email').val('');
             $('#password').val('');
 
             $('#add-account-dialog-title').text(data.message);
             $('#pumpform-add-account-dialog').modal('show');
+            */
+            window.location.reload();
+
         }).fail(function(jqXHR, textStatus) {
             console.log(jqXHR);
             console.log('error : ' + textStatus);
