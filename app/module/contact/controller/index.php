@@ -20,7 +20,7 @@ class contact_index extends PC_Controller {
 	    	parent::add();
 	    } else {
             $this->contact_mail($_POST['email'], $_POST['name'], $_POST['body']);
-	    	echo 'Thank you for contact!!';
+	    	echo _MD_CONTACT_THANKYOU;
 	    }
     }
 

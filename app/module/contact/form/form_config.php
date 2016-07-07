@@ -2,7 +2,7 @@
 
 $pumpform_config['contact']['contact'] = array(
     'module' => 'contact',
-    'title' => 'contact',
+    'title' => _MD_CONTACT_TITLE,
     'table' => 'contact',
 
     'list_limit' => 4,
@@ -11,7 +11,7 @@ $pumpform_config['contact']['contact'] = array(
     'column' => array(
 
 	array('name' => 'name',
-		'title' => 'name',
+		'title' => _MD_CONTACT_NAME,
 		'type' => PUMPFORM_TEXT,
 		'required' => 0,
 		'visible' => 1,
@@ -21,7 +21,7 @@ $pumpform_config['contact']['contact'] = array(
 		'minlength' => 1,
 		'maxlength' => 256),
 	array('name' => 'email',
-		'title' => 'email',
+		'title' => _MD_CONTACT_EMAIL,
 		'type' => PUMPFORM_EMAIL,
 		'required' => 0,
 		'visible' => 1,
@@ -31,7 +31,7 @@ $pumpform_config['contact']['contact'] = array(
 		'minlength' => 1,
 		'maxlength' => 256),
 	array('name' => 'body',
-		'title' => 'body',
+		'title' => _MD_CONTACT_BODY,
 		'type' => PUMPFORM_TEXTAREA,
 		'cols' => 50,
 		'rows' => 5,
