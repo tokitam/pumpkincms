@@ -7,9 +7,9 @@
 		<!--<p><?php echo htmlspecialchars(UserInfo::get('name')) ?></p>-->
 	<?php
 		echo PumpImage::get_tag(UserInfo::get('image_id'), 
-			180, 
-			180,
-			array('no_wh' => 1));
+			300, 
+			300,
+			array('no_wh' => 1, 'css_width' => 180, 'css_height' => 180));
 	?>
 		<!--</div>-->
 	</div> <!-- end col-lg-6 -->
