@@ -56,6 +56,8 @@ define('_MD_USER_FOUND_REL_ACCOUNT', '登録済でした');
 define('_MD_USER_ADD', '追加');
 define('_MD_USER_BACK', '戻る');
 define('_MD_USER_SWITCH_USER', 'ユーザを切り替えました');
+define('_MD_USER_YES', 'はい');
+define('_MD_USER_NO', 'いいえ');
 
 define('_MD_USER', 'ユーザ');
 define('_MD_USER_NAME', 'ユーザID');

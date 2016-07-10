@@ -43,3 +43,6 @@ if (PC_Config::get('use_tel_auth')) {
 	</div> <!-- end col-lg-6 -->
 
 <!--</div> --><!-- end row -->
+
+<?php include PUMPCMS_APP_PATH . '/module/user/view/confirm_dialog.php'; ?>
+<?php include PUMPCMS_APP_PATH . '/module/user/view/info_dialog.php'; ?>

@@ -93,10 +93,14 @@ $(document).ready(function(){
     $('.rel-user-edit-link').click(function(event) {
         var target = $(event.target);
         targetid = target.attr('targetid');
+
         message = $('#_MD_USER_DELETE_USER_REL').val();
         message2 = $('#_MD_USER_DELETED_USER_REL').val();
 
-        if (confirm(message)) {
+        $('#user-confirm-dialog-title').html(message);
+        $('#user-confirm-dialog').modal('show');
+
+        $('#user-confirm-yes').click(function(event) {
             url = $('#base_url').val() + '/user/user_rel/delete';
             data = {id: targetid};
 
@@ -107,13 +111,25 @@ $(document).ready(function(){
                 dataType: 'json'
             }).done(function(data) {
                 console.log(data);
+                $('#user-confirm-dialog').modal('hide');
                 $('#rel-user-' + targetid).hide();
                 $('#dropdown-user-rel-link-' + targetid).hide();
-                alert(message2);
+                //alert(message2);
+
+                $('#user-info-dialog-title').html(message2);
+                $('#user-info-dialog').modal('show');
             }).fail(function(jqXHR, textStatus) {
                 console.log(jqXHR);
                 console.log('error : ' + textStatus);
             });
-        }
+        });
+        
+        $('#user-confirm-no').click(function(event) {
+            $('#user-confirm-dialog').modal('hide');
+        });
+
+        $('#user-info-ok-button').click(function(event) {
+            $('#user-info-dialog').modal('hide');
+        });
     });
 });

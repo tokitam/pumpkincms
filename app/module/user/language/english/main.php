@@ -54,6 +54,8 @@ define('_MD_USER_FOUND_REL_ACCOUNT', 'No good accout');
 define('_MD_USER_ADD', 'Add');
 define('_MD_USER_BACK', 'Back');
 define('_MD_USER_SWITCH_USER', 'Switch user');
+define('_MD_USER_YES', 'Yes');
+define('_MD_USER_NO', 'No');
 
 define('_MD_USER', 'USER');
 define('_MD_USER_NAME', 'USER NAME');
