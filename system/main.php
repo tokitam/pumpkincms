@@ -28,6 +28,7 @@ class PC_Main {
 		$this->check_site();
 		$this->check_lang();
 		$this->load_config();
+		$this->session_config();
 		$this->render = new PC_Render();
 		$this->analyze_url();
 		$this->execute();
@@ -43,10 +44,37 @@ class PC_Main {
 		mb_internal_encoding('UTF-8');
 		date_default_timezone_set('UTC');
 	}
-
+    
 	function load_config() {
 		PC_Config::load_config();
 	}
+
+    function session_config() {
+	if (PC_Config::get('session_handler') == 'redis') {
+	    require_once PUMPCMS_SYSTEM_PATH . '/session_redis.php';
+
+	    $handler = new Session_Redis_Handler(
+	        PC_Config::get('redis_host'),   // host
+		PC_Config::get('redis_port'),   // port
+                '',            // password
+                2.0,           // Redis timeout (sec)
+                'SESS_REDIS:', // prefix
+                60 * 20        // expire time (sec)
+            );
+
+            session_set_save_handler(
+               array( $handler, 'open' ),
+               array( $handler, 'close' ),
+               array( $handler, 'read' ),
+               array( $handler, 'write' ),
+               array( $handler, 'destroy' ),
+               array( $handler, 'gc' )
+            );
+            register_shutdown_function( 'session_write_close' );
+	}
+	
+        session_start();
+    }
 
 	function check_site() {
 		PC_MultiSite::console_setup();

@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 define('PUMPCMS_ROOT_PATH', dirname(pathinfo(__FILE__, PATHINFO_DIRNAME)));
 define('PUMPCMS_SYSTEM_PATH', PUMPCMS_ROOT_PATH . '/system');
