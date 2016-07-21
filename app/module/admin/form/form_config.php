@@ -106,6 +106,7 @@ $pumpform_config['admin']['config_form'] = array(
 			'registable' => 1,
 			'editable' => 1,
 			'list_visible' => 1,),
+			  /*
 		'cookie_lifetime' => array('name' => 'cookie_lifetime',
 			'title' => 'cookie_lifetime',
 			'type' => PUMPFORM_TEXT,
@@ -122,6 +123,7 @@ $pumpform_config['admin']['config_form'] = array(
 			'editable' => 1,
 			'list_visible' => 1,
 			'default' => (60 * 60 * 24 * 365),),
+			   */
     ),
 );
 

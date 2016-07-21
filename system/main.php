@@ -59,7 +59,7 @@ class PC_Main {
                 '',            // password
                 2.0,           // Redis timeout (sec)
                 'SESS_REDIS:', // prefix
-                60 * 20        // expire time (sec)
+                PC_Config::get('cookie_lifetime')    // expire time (sec)
             );
 
             session_set_save_handler(
