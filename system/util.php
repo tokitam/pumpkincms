@@ -120,12 +120,11 @@ class PC_Util {
 	}
 
 	static function get_ip_address() {
-		/*
 		if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])
 		 	&& $_SERVER['HTTP_X_FORWARDED_FOR'] != @$_SERVER['REMOTE_ADDR']) {
 			  $HTTP_SERVER_VARS['REMOTE_ADDR'] = $REMOTE_ADDR = $_SERVER['REMOTE_ADDR'] = @$_SERVER['HTTP_X_FORWARDED_FOR'];
 		}
-		*/
+
 		return @$_SERVER['REMOTE_ADDR'];
 	}
 
