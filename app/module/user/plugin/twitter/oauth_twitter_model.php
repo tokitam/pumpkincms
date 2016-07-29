@@ -46,6 +46,7 @@ class OAuth_twitter_Model extends PC_Model {
 			$user = $user_model->get_user_by_id($user_id);
 			$user_model->update_last_login_time($user_id);
 			$_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $user;
+			$user_model->load_rel_user($user_id);
 			PC_Notification::set(_MD_USER_LOGINED);
 			ActionLog::log(ActionLog::LOGIN);
 			PC_Util::redirect_top();
