@@ -1,5 +1,7 @@
 <?php
 
+require_once PUMPCMS_ROOT_PATH . '/external/OpenGraph.php';
+
 class PC_Util {
 	static function redirect($url) {
 		header('Location: ' . $url);
@@ -318,4 +320,18 @@ class PC_Util {
 		
 		return password_verify($password, $hash);
     }
+    
+	static function get_opengraph($url) {
+		$graph = OpenGraph::fetch($url);
+		$list = array();
+
+		if (empty($graph)) {
+		    return $list;
+		}
+		foreach ($graph as $key => $value) {
+		    $list[$key] = $value;
+		}
+
+		return $list;
+	}
 }
