@@ -224,6 +224,10 @@ class PC_Util {
 		return false;
 	}
 
+	static public function truncate($str, $len=60) {
+		return self::mb_truncate($str, $len);
+	}
+
 	static public function mb_truncate($str, $len=60) {
 		if (mb_strlen($str) <= $len) {
 			return $str;
