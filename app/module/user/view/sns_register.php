@@ -6,7 +6,6 @@
                 <input type="hidden" id="base_url" value="<?php echo PC_Config::url() ?>">
               	<input type="hidden" name="post" value="1">
               	<input type="hidden" name="type" value="<?php echo htmlspecialchars(@$this->type) ?>">
-                type : <?php echo @$this->type ?>
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
                   <div class="form-group">
