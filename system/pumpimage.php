@@ -583,7 +583,25 @@ class PumpImage extends PumpUpload {
 
     static public function display_no_image($width, $height, $option) {
     	$url = self::get_no_image_url();
-    	$tag = sprintf('<img src="%s" width="%d" height="%d">', $url, $width, $height);
+
+    	$styes = array();
+		if (@$option['css_width']) {
+			$styles['width'] = intval($option['css_width']) . 'px';
+		}
+		if (@$option['css_height']) {
+			$styles['height'] = intval($option['css_height']) . 'px';
+		}
+
+		$wh = '';
+		if (0 < count($styles)) {
+			$tmp = array();
+			foreach ($styles as $key => $val) {
+				array_push($tmp, $key . ':' . $val);
+			}
+			$wh .= ' style="' . implode($tmp, '; ') . ';" ';
+		}
+
+    	$tag = sprintf('<img src="%s" width="%d" height="%d"%s>', $url, $width, $height, $wh);
     	return $tag;
     }
 
