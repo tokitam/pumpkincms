@@ -12,7 +12,12 @@ class OAuth_facebook {
 	public function get_tag() {
 		$url = PC_Config::url() . '/user/oauth?type=facebook';
 		$code = sprintf("location.href = '%s';", $url);
-		$tag = sprintf('<button class="btn btn-default" onclick="%s">facebook認証</button>', $code);
+		if (PC_Config::get('facebook_sign_in_button')) {
+			$button_image = PC_Config::url() . '/theme/sesxion/image/sign_in_facebook.png';
+			$tag = sprintf('<input type="image" src="%s" onclick="%s" />', $button_image, $code);
+		} else {
+			$tag = sprintf('<button class="btn btn-default" onclick="%s">facebook認証</button>', $code);			
+		}
 
 		return $tag;
 	}

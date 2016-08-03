@@ -11,7 +11,12 @@ class OAuth_twitter {
 	public function get_tag() {
 		$url = PC_Config::url() . '/user/oauth?type=twitter';
 		$code = sprintf("location.href = '%s';", $url);
-		$tag = sprintf('<button class="btn btn-default" onclick="%s">twitter認証</button>', $code);
+		if (PC_Config::get('twitter_sign_in_button')) {
+			$button_image = PC_Config::url() . '/theme/sesxion/image/sign_in_twitter.png';
+			$tag = sprintf('<input type="image" src="%s" onclick="%s" />', $button_image, $code);
+		} else {
+			$tag = sprintf('<button class="btn btn-default" onclick="%s">twitter認証</button>', $code);
+		}
 
 		return $tag;
 	}
