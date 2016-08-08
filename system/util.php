@@ -330,12 +330,35 @@ class PC_Util {
 		$list = array();
 
 		if (empty($graph)) {
+		    $ret = self::check_image_url($url);
+		    if ($ret == false) {
+		    	return $list;
+		    }
+		    $list['image_id'] = $ret;
 		    return $list;
 		}
+
 		foreach ($graph as $key => $value) {
 		    $list[$key] = $value;
 		}
 
 		return $list;
+	}
+
+	static function check_image_url($url) {
+		$buf = file_get_contents($url);
+
+		foreach ($http_response_header as $key => $value) {
+			if (preg_match('@Content-Type: (image/.+)@', $value, $r)) {
+				$tmpfile = tempnam(sys_get_temp_dir(), 'pump_ex_image');
+				file_put_contents($tmpfile, $buf);
+				$pumpimage = new PumpImage();
+				$image_id = $pumpimage->upload(null, $tmpfile, $r[1]);
+				unlink($tmpfile);
+				return $image_id;
+			}
+		}
+
+		return false;
 	}
 }
