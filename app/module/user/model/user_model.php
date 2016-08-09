@@ -16,18 +16,25 @@ class User_Model extends PC_Model {
 	
 	function register($user) {
 
+		if (! empty($user['display_name'])) {
+			$display_name = $user['display_name'];
+		} else {
+			$display_name = $user['name'];
+		}
+
 		$db = PC_DBSet::get();
 
 		$sql = 'INSERT INTO ' . $db->prefix($this->table_name);
-		$sql .= " (site_id, name, password, email, type, reg_time ) VALUES ";
-	        $sql .= " ( ";
-	    $sql .= intval(SiteInfo::get_site_id()) . ', ';
+		$sql .= " (site_id, name, display_name, password, email, type, reg_time ) VALUES ";
+		$sql .= " ( ";
+		$sql .= intval(SiteInfo::get_site_id()) . ', ';
 		$sql .= " " . $db->escape($user['name']) . ", ";
+		$sql .= " " . $db->escape($display_name) . ", ";
 		$sql .= " " . $db->escape(@$user['password']). ", ";
 		$sql .= " " . $db->escape(@$user['email']) . ", ";
 		$sql .= " '" . intval(@$user['type']) . "', ";
 		$sql .= " " . time(). " ";
-	        $sql .= " ) ";
+		$sql .= " ) ";
 
 		return $db->query($sql);
 		
