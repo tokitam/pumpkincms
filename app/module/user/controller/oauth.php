@@ -102,46 +102,46 @@ class user_oauth extends PC_Controller {
 				$type = preg_replace('/[^0-9A-Za-z]/', '', $type);
 				$register_url = PC_Config::get('base_url') . '/user/verifi/?type=' . $type . '&id=' . $insert_id . '_' . $code;
 
-			if ($this->oauth->input_email) {
-				$to = $_POST['email'];
-				$subject = _MD_USER_REGISTER_TITLE;
-				$message = _MD_USER_REGISTER_MESSAGE;
-					  
-				$message = preg_replace('/\[register_url\]/', $register_url, $message);
+				if ($this->oauth->input_email) {
+					$to = $_POST['email'];
+					$subject = _MD_USER_REGISTER_TITLE;
+					$message = _MD_USER_REGISTER_MESSAGE;
+						  
+					$message = preg_replace('/\[register_url\]/', $register_url, $message);
 
-				$admin_mail = PC_Config::get('from_email');
-				$admin_subject = '[admin info] ' . $subject;
-				$admin_message = "[admin info]\r\n" . $message;
+					$admin_mail = PC_Config::get('from_email');
+					$admin_subject = '[admin info] ' . $subject;
+					$admin_message = "[admin info]\r\n" . $message;
 
-				PC_Util::mail($to, $subject, $message);
-				PC_Util::mail($admin_mail, $admin_subject, $admin_message);
-						
-				ActionLog::log(ActionLog::REGISTER_TEMP);
+					PC_Util::mail($to, $subject, $message);
+					PC_Util::mail($admin_mail, $admin_subject, $admin_message);
+							
+					ActionLog::log(ActionLog::REGISTER_TEMP);
 
-				$this->render('register_do');
-				return;
-			} else {
-			    $user = array();
-			    $user['name'] = $_POST['name'];
-			    $user['email'] = $this->oauth->get_email();
-			    
-			    // register pumpkincms uesr
-			    $user_id = $user_model->register($user);
-			    ActionLog::log(ActionLog::REGISTER_FINISH);
-			    $this->message = _MD_USER_REGISTER_OK;
-			    
-			    // register sns user 
-			    $this->oauth->register($user_id);
-			    // login
-			    $sns_user = $this->oauth->get_user();
-			    PC_Notification::set(_MD_USER_LOGINED);
-			    unset($_SESSION['oauth_type']);
-			    ActionLog::log(ActionLog::LOGIN);
-			    $this->oauth->login($sns_user);
-			    
-			    $this->render('verifi');
-			    return;
-			}
+					$this->render('register_do');
+					return;
+				} else {
+				    $user = array();
+				    $user['name'] = $_POST['name'];
+				    $user['email'] = $this->oauth->get_email();
+				    
+				    // register pumpkincms uesr
+				    $user_id = $user_model->register($user);
+				    ActionLog::log(ActionLog::REGISTER_FINISH);
+				    $this->message = _MD_USER_REGISTER_OK;
+				    
+				    // register sns user 
+				    $this->oauth->register($user_id);
+				    // login
+				    $sns_user = $this->oauth->get_user();
+				    PC_Notification::set(_MD_USER_LOGINED);
+				    unset($_SESSION['oauth_type']);
+				    ActionLog::log(ActionLog::LOGIN);
+				    $this->oauth->login($sns_user);
+				    
+				    $this->render('verifi');
+				    return;
+				}
 				    
 		    }
 		}
