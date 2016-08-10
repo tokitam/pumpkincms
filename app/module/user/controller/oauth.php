@@ -25,6 +25,19 @@ class user_oauth extends PC_Controller {
 			$this->oauth->login($user);
 		}
 
+	    if (PC_Config::get('sns_register_no_mail')) {
+		$sns_user = array();
+		$sns_user['name'] = $this->oauth->get_name();
+		$user_model = new user_model();
+		$user_id = $user_model->register($sns_user);
+		
+		$this->oauth->register($user_id);
+		
+		$sns_user = $this->oauth->get_user();
+		$this->oauth->login($sns_user);
+		exit();
+	    }
+	    
 		$this->type = '';
 		if (! empty($_GET['type'])) {
 			$this->type = $_GET['type'];
