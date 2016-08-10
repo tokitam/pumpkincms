@@ -19,7 +19,7 @@ $pc_config['site_config'] = array(
   //'css_url' => 'http://127.0.0.1/pumpkincms/public',
 
   'mail_function' => 'mail', // use php mail() function
-  //'mail_function' => 'phpmailer', // use PHPMaiiler library
+  //'mail_function' => 'phpmailer', // use PHPMailer library
 	   
   // from header mail address at sending
   'from_email' => 'admin<example@example.com>',
