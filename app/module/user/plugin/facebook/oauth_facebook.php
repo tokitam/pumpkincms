@@ -109,6 +109,10 @@ class OAuth_facebook {
 		return $oauth_facebook_model->get_user($user['id']);
 	}
 
+	public function get_name() {
+		return $this->user['name'];
+	}
+
 	public function login($facebook_user) {
 		$oauth_facebook_model = new OAuth_facebook_Model();
 		$oauth_facebook_model->login($facebook_user['user_id']);

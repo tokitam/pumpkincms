@@ -83,6 +83,11 @@ class OAuth_twitter {
 		return $oauth_twitter_model->get_user($twitter_id);
 	}
 
+	public function get_name() {
+		parse_str($_SESSION['access_token'], $param);
+		return $param['screen_name'];
+	}
+
 	public function login($twitter_user) {
 		$oauth_twitter_model = new OAuth_twitter_Model();
 		$oauth_twitter_model->login($twitter_user['user_id']);
