@@ -3,6 +3,7 @@
 require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
 require_once PUMPCMS_APP_PATH . '/module/user/model/temp_model.php';
 require_once PUMPCMS_APP_PATH . '/module/user/class/oauth_util.php';
+require_once PUMPCMS_SYSTEM_PATH . '/pumpmailer.php';
 
 class user_oauth extends PC_Controller {
 	public $oauth;
@@ -113,8 +114,14 @@ class user_oauth extends PC_Controller {
 					$admin_subject = '[admin info] ' . $subject;
 					$admin_message = "[admin info]\r\n" . $message;
 
+				    if (PC_Config::get('mail_function') == 'phpmailer') {
+					$mailer = new PumpMailer();
+				        $mailer->send($to, $subject, $message);
+				        $mailer->send($admin_mail, $admin_subject, $admin_message);
+				    } else {
 					PC_Util::mail($to, $subject, $message);
 					PC_Util::mail($admin_mail, $admin_subject, $admin_message);
+				    }
 							
 					ActionLog::log(ActionLog::REGISTER_TEMP);
 
