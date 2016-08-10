@@ -44,7 +44,7 @@ class UserInfo {
         if (self::is_logined() == false) {
             return false;
         }
-        if (self::$_data['auth'] & self::AUTH_MASTER_ADMIN) {
+        if ((@self::$_data['auth']) & self::AUTH_MASTER_ADMIN) {
             return true;
         }
 	
@@ -60,7 +60,7 @@ class UserInfo {
             return true;
         }
 
-        if (self::$_data['auth'] & self::AUTH_SITE_ADMIN) {
+        if ((@self::$_data['auth']) & self::AUTH_SITE_ADMIN) {
             return true;
         }
 
