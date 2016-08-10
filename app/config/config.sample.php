@@ -18,8 +18,17 @@ $pc_config['site_config'] = array(
   // css_url setting
   //'css_url' => 'http://127.0.0.1/pumpkincms/public',
 
+  'mail_function' => 'mail', // use php mail() function
+  //'mail_function' => 'phpmailer', // use PHPMaiiler library
+	   
   // from header mail address at sending
   'from_email' => 'admin<example@example.com>',
+
+  'phpmailer_host' => 'ssl://smtp.gmail.com',
+  'phpmailer_user' => 'user@example.com',
+  'phpmailer_pass' => '[your password]',
+  'phpmailer_secure' => 'tls',
+  'phpmailer_port' => 587,
 
   // custom default user icon url
   //'under_construction_image' => PUMPCMS_PUBLIC_PATH . '/themes/uc.png',
