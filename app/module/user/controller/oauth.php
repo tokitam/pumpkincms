@@ -127,14 +127,14 @@ class user_oauth extends PC_Controller {
 					$admin_subject = '[admin info] ' . $subject;
 					$admin_message = "[admin info]\r\n" . $message;
 
-				    if (PC_Config::get('mail_function') == 'phpmailer') {
-					$mailer = new PumpMailer();
-				        $mailer->send($to, $subject, $message);
-				        $mailer->send($admin_mail, $admin_subject, $admin_message);
-				    } else {
-					PC_Util::mail($to, $subject, $message);
-					PC_Util::mail($admin_mail, $admin_subject, $admin_message);
-				    }
+					if (PC_Config::get('mail_function') == 'phpmailer') {
+						$mailer = new PumpMailer();
+						$mailer->send($to, $subject, $message);
+						$mailer->send($admin_mail, $admin_subject, $admin_message);
+					} else {
+						PC_Util::mail($to, $subject, $message);
+						PC_Util::mail($admin_mail, $admin_subject, $admin_message);
+					}
 							
 					ActionLog::log(ActionLog::REGISTER_TEMP);
 
