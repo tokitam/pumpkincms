@@ -20,7 +20,7 @@ class PumpMailer {
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
 	$mail->Username = PC_Config::get('phpmailer_user');   // SMTP username
 	$mail->Password = PC_Config::get('phpmailer_pass');   // SMTP password
-	$mail->SMTPSecure = PC_Config:get('phpmailer_secure'); // Enable TLS encryption, ssl also accepted
+	$mail->SMTPSecure = PC_Config::get('phpmailer_secure'); // Enable TLS encryption, ssl also accepted
 	$mail->Port = PC_Config::get('phpmailer_port');       // TCP port to connect to
 	
 	$mail->setFrom(PC_Config::get('from_email'));
@@ -35,7 +35,7 @@ class PumpMailer {
 	//$mail->isHTML(true);                                  // Set email format to HTML
 	
 	$mail->Subject = $subject;
-	$mail->Body    = $body
+	$mail->Body    = $body;
 	//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 	
 	return $mail->send();
