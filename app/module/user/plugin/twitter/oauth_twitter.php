@@ -87,6 +87,29 @@ class OAuth_twitter {
 		parse_str($_SESSION['access_token'], $param);
 		return $param['screen_name'];
 	}
+    
+	public function get_icon_url($sns_user) {
+	    PC_Debug::log('sns_user: ' . print_r($sns_user, true), __FILE__, __LINE__);
+		$twitter_id = @$sns_user['twitter_id'];
+		$consumer_key = PC_Config::get('twitter_consumer_key');
+		$consumer_secret = PC_Config::get('twitter_consumer_secret');
+
+		$connection = new TwitterOAuth($consumer_key, $consumer_secret, 
+			$sns_user['access_token'], $sns_user['access_token_secret']);
+	        
+	        $profile = $connection->get('users/show',array('id' => $twitter_id));
+	    PC_Debug::log('profile: ' . print_r($profile, true), __FILE__, __LINE__);
+	    
+	    if (empty($profile->profile_image_url)) {
+		return false;
+	    }
+	    
+	    if (! PC_Util::is_url($profile->profile_image_url)) {
+		return false;
+	    }
+
+	    return $profile->profile_image_url;
+	}
 
 	public function login($twitter_user) {
 		$oauth_twitter_model = new OAuth_twitter_Model();

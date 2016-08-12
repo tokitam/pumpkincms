@@ -524,5 +524,18 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 
 		return $db->query($sql);
 	}
+
+	function update_image_id($user_id, $image_id) {
+		$db = PC_DBSet::get();
+		
+		$sql = 'UPDATE ' . $db->prefix($this->table_name);
+		$sql .= ' SET ';
+		$sql .= ' image_id = ' . intval($image_id);
+	        $sql .= ' WHERE ';
+	        $sql .= ' site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
+	        $sql .= ' id = ' . intval($user_id);
+
+		return $db->query($sql);
+	}
 }
 

@@ -25,7 +25,9 @@ class user_oauth extends PC_Controller {
 			$this->oauth->login($user);
 		}
 
+	    PC_Debug::log('oauthdebug1', __FILE__, __LINE__);
 	    if (PC_Config::get('sns_register_no_mail')) {
+	    PC_Debug::log('oauthdebug2', __FILE__, __LINE__);
 		$sns_user = array();
 		$sns_user['name'] = $this->oauth->get_name();
 		$user_model = new user_model();
@@ -34,7 +36,20 @@ class user_oauth extends PC_Controller {
 		$this->oauth->register($user_id);
 		
 		$sns_user = $this->oauth->get_user();
+		$icon_url = $this->oauth->get_icon_url($sns_user);
+
+		$buf = file_get_contents($icon_url);
+		$tmpfile = tempnam(sys_get_temp_dir(), 'pump_ex_image');
+		file_put_contents($tmpfile, $buf);
+		
+		$pumpimage = new PumpImage();
+		$image_id = $pumpimage->upload(null, $tmpfile, 'image/jpeg');
+		$user_model->update_image_id($user_id, $image_id);
+		
+		unlink($tmpfile);
+		
 		$this->oauth->login($sns_user);
+		
 		exit();
 	    }
 	    

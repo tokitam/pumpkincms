@@ -166,10 +166,26 @@ class PumpImage extends PumpUpload {
         $pumpormap = PumpORMAP_Util::get('image', 'image');
     
         $imagesize = getimagesize($target_file);
+	PC_Debug::log('imgaesize:' . print_r($imagesize, true), __FILE__, __LINE__);
         $width = $imagesize[0];
         $height = $imagesize[1];
 
-        $this->check_type($type);
+	PC_Debug::log('type:' . $type, __FILE__, __LINE__);
+	PC_Debug::log('file:' . $file, __FILE__, __LINE__);
+	//if ($type == null) {
+	//    $type = self::check_ext($file);
+	//}
+	
+        //$this->check_type($type, $file);
+	if ($imagesize[2] == IMAGETYPE_GIF) {
+	    $this->_type = self::TYPE_GIF;
+	} else  if ($imagesize[2] == IMAGETYPE_JPEG || $imagesize[2] == IMAGETYPE_JPEG2000) {
+	    $this->_type = self::TYPE_JPG;
+	} else  if ($imagesize[2] == IMAGETYPE_PNG) {
+	    $this->_type = self::TYPE_PNG;
+	}
+	
+	PC_Debug::log('$this->_type:' . $this->_type, __FILE__, __LINE__);
         $code = PC_Util::random_code(8);
 
         //if (self::get_type() == self::STORE_TYPE_LOCAL) {
@@ -251,7 +267,8 @@ class PumpImage extends PumpUpload {
 
         $src_file = $target_file;
         $dest_file =  $dir . '/' . $image_id . '_' . $code . '.' . self::get_ext($this->_type);
-
+	PC_Debug::log('src_file:' . $src_file . ', dest_file:' . $dest_file, __FILE__, __LINE__);
+	PC_Debug::log('get_type:' . self::get_type(), __FILE__, __LINE__);
         if (self::get_type() == self::STORE_TYPE_LOCAL) {
         	PC_Debug::log('copy: src_file:' . $src_file . ', dest_file:' . $dest_file, __FILE__, __LINE__);
         	if ($file == null) {
@@ -262,7 +279,12 @@ class PumpImage extends PumpUpload {
 	        	copy($src_file, $dest_file);
 	        }
         } else if (self::get_type() == self::STORE_TYPE_S3) {
-            PC_S3::put($src_file, basename($dest_file));
+	    try {
+            $ret = PC_S3::put($src_file, basename($dest_file));
+		PC_Debug::log('s3_ret:' . print_r($ret, true), __FILE__, __LINE__);
+	    } catch (Exception $e) {
+		PC_Debug::log('s3_put:' . $e->getMessage(), __FILE__, __LINE__);
+	    }
         }
 
         return $image_id;
@@ -525,7 +547,12 @@ class PumpImage extends PumpUpload {
         return $dir;
     }
 
-    public function check_type($type=null) {
+    public function check_type($type=null, $file=null) {
+	if ($file != null) {
+	    $this->_type = $this->check_ext($file);
+	    return;
+	}
+	
     	if ($type == null) {
     		$type = $_FILES[$this->_target]['type'];
         }
@@ -538,6 +565,30 @@ class PumpImage extends PumpUpload {
         } else {
             $this->_type = self::TYPE_UNKNOWN;
         }
+    }
+    
+    static public function check_ext($file) {
+	$file = trim($file);
+	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+	if (preg_match('/\.jpg$/i', $file) || preg_match('/\.jpeg$/', $file)) {
+	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+	    return self::TYPE_JPG;
+	}
+	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+	
+	if (preg_match('/\.png$/i', $file)) {
+	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+	    return self::TYPE_PNG;
+	}
+	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+	
+	if (preg_match('/\.gif$/i', $file)) {
+	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+	    return self::TYPE_GIF;
+	}
+	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+	
+	return self::TYPE_UNKNOWN;
     }
 
     static public function get_ext($type) {
