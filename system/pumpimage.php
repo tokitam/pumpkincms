@@ -651,7 +651,7 @@ class PumpImage extends PumpUpload {
     static public function display_no_image($width, $height, $option) {
         $url = self::get_no_image_url();
 
-        $styes = array();
+        $styles = array();
         if (@$option['css_width']) {
             $styles['width'] = intval($option['css_width']) . 'px';
         }
