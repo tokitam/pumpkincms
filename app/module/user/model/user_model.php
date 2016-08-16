@@ -82,7 +82,11 @@ class User_Model extends PC_Model {
 				$tmp_id = $item['user_id1'];
 			}
 
-			array_push($rel_user_list, $this->get_user_by_id($tmp_id));
+			$tmp = $this->get_user_by_id($tmp_id);
+		    if (empty($tmp)) {
+			continue;
+		    }
+			array_push($rel_user_list, $tmp);
 		}
 
 		UserInfo::set('rel_user_list', $rel_user_list);
