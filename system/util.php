@@ -158,6 +158,10 @@ class PC_Util {
 			}
 	    }
 	}
+
+	static function get_url() {
+		return (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . @$_SERVER["HTTP_HOST"] . @$_SERVER["REQUEST_URI"];
+	}
     
     static function cut_tail_slash($s) {
 	    $l = substr($s, -1, 1);

@@ -17,9 +17,12 @@ class PC_Controller {
     }
 	
 	function render($class='') {
+		$_SESSION['last_url'] = PC_Util::get_url();
+		
 		$class_name = get_class($this);
 		$s = explode('_', $class_name);
 		$module = $s[0];
+
 		if ($class == '') {
 		    $class = $s[1];
 		}

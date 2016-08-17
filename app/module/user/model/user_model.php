@@ -124,8 +124,10 @@ class User_Model extends PC_Model {
 
 		$this->load_rel_user($user['id']);
 		
-		if (empty($_SESSION['from_url'])) {
+		if (empty($_SESSION['last_url'])) {
 			PC_Util::redirect_top();
+		} else if (PC_Util::is_url($_SESSION['last_url'])) {
+			PC_Util::redirect($_SESSION['last_url']);
 		} else {
 			PC_Util::redirect_top();
 		}
