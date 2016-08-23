@@ -78,8 +78,12 @@ class PC_Util {
 	    
 	}
 
-	static function random_code($length) {
-		$str = '0123456789abcdefghijklmnopqrstuvwxyz';
+	static function random_code($length, $type=1) {
+		if ($type == 1) {
+			$str = '0123456789abcdefghijklmnopqrstuvwxyz';
+		} else {
+			$str = '0123456789ABCDEFGHIJKLNNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+		}
 
 		$max = strlen($str);
 
