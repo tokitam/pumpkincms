@@ -25,7 +25,11 @@ class User_Model extends PC_Model {
 		$db = PC_DBSet::get();
 
 		$sql = 'INSERT INTO ' . $db->prefix($this->table_name);
-		$sql .= " (site_id, name, display_name, password, email, type, reg_time ) VALUES ";
+		$sql .= " (site_id, name, display_name, password, email, type, reg_time";
+		if (isset($user['image_id']) && is_numeric($user['image_id'])) {
+		    $sql .= ', image_id ';
+		}
+		$sql .= ' ) VALUES ';
 		$sql .= " ( ";
 		$sql .= intval(SiteInfo::get_site_id()) . ', ';
 		$sql .= " " . $db->escape($user['name']) . ", ";
@@ -34,6 +38,9 @@ class User_Model extends PC_Model {
 		$sql .= " " . $db->escape(@$user['email']) . ", ";
 		$sql .= " '" . intval(@$user['type']) . "', ";
 		$sql .= " " . time(). " ";
+		if (isset($user['image_id']) && is_numeric($user['image_id'])) {
+		    $sql .= ', ' . intval($user['image_id']);
+		}
 		$sql .= " ) ";
 
 		return $db->query($sql);

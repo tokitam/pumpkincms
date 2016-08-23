@@ -365,4 +365,13 @@ class PC_Util {
 
 		return false;
 	}
+    
+    static public function get_unset_user_image_id() {    
+        $list = PC_Config::get('unset_user_image_id_list');
+        if (empty($list[0])) {
+            return 0;
+        }
+        shuffle($list);
+        return $list[0];
+    }
 }
