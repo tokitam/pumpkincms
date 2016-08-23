@@ -5,6 +5,7 @@ define('_MD_ADMIN_LOGOUT', 'ログアウト');
 define('_MD_ADMIN_LAST_LOGIN', '最終ログイン');
 define('_MD_ADMIN_TOP', '管理トップ');
 define('_MD_ADMIN_SETTING', '全体設定');
+define('_MD_ADMIN_DISPLAY_CONFIG', '設定一覧');
 define('_MD_ADMIN_USER', 'ユーザ管理');
 define('_MD_ADMIN_IMAGE', '画像管理');
 define('_MD_ADMIN_PAGE', 'ページ管理');

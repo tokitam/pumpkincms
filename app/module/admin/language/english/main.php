@@ -5,6 +5,7 @@ define('_MD_ADMIN_LOGOUT', 'Logout');
 define('_MD_ADMIN_LAST_LOGIN', 'Last login');
 define('_MD_ADMIN_TOP', 'Admin top');
 define('_MD_ADMIN_SETTING', 'Setting');
+define('_MD_ADMIN_DISPLAY_CONFIG', 'Setting list');
 define('_MD_ADMIN_USER', 'User');
 define('_MD_ADMIN_IMAGE', 'Image');
 define('_MD_ADMIN_PAGE', 'Page');
