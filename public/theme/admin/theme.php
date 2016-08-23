@@ -244,7 +244,7 @@ selector:'.pump_tinymce'
                            </a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo PC_Config::url() ?>/admin/index/display_config/">
+                            <a href="<?php echo PC_Config::url() ?>/admin/display_config/">
                                 <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_DISPLAY_CONFIG ?></span>
                            </a>
                         </li>
