@@ -21,6 +21,9 @@ $pc_config['site_config'] = array(
   'mail_function' => 'mail', // use php mail() function
   //'mail_function' => 'phpmailer', // use PHPMailer library
 	   
+  // admin mail
+  'admin_email' => '[your email]',
+
   // from header mail address at sending
   'from_email' => 'admin<example@example.com>',
 
