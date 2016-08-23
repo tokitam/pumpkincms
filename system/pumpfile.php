@@ -102,8 +102,12 @@ class PumpFile extends PumpUpload {
 				$file_id = $db->insert_id();
 			}
 		} else if (self::get_type() == self::STORE_TYPE_S3) {
-			$dest_file =  $dir . '/' . $file_id . '_' . $code;			
+			$dest_file =  $dir . '/' . $file_id . '_' . $code;
+		    if (PC_Config::get('aws_s3_bucket_name_file')) {
+			PC_S3::put($src_file, basename($dest_file), PC_Config::get('aws_s3_bucket_name_file'));
+		    } else {
 			PC_S3::put($src_file, basename($dest_file));
+		    }
 		}
 
 		return $file_id;
@@ -144,7 +148,14 @@ class PumpFile extends PumpUpload {
 			$this->_tmp_file = $dest_file;
 		} else if (self::get_type() == self::STORE_TYPE_S3) {
 			$src_file = $file['id'] . '_' . $file['code'];
-			$dest_file = PC_S3::get($src_file);
+		    
+		    if (PC_Config::get('aws_s3_bucket_name_file')) {
+			$bucket = PC_Config::get('aws_s3_bucket_name_file');
+		    } else {
+			$bucket = '';
+		    }
+		    
+			$dest_file = PC_S3::get($src_file, $bucket);
 			$this->_tmp_file = $dest_file;
 		}
 

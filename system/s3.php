@@ -16,12 +16,16 @@ class PC_S3 {
 			);
 	}
 
-	static public function get($s3_file) {
+	static public function get($s3_file, $bucket='') {
 		self::connect();
 
+	    if (empty($bucket)) {
+		$bucket = PC_Config::get('aws_s3_bucket_name');
+	    }
+	    
 		$temp = tempnam(sys_get_temp_dir(), 'pumpcms');
 		self::$_s3->getObject(
-			PC_Config::get('aws_s3_bucket_name'), 
+			$bucket,
 			$s3_file, 
 			fopen($temp, 'wb')
 			);
@@ -29,12 +33,16 @@ class PC_S3 {
 		return $temp;
 	}
 
-	static public function put($upload_file, $s3_file) {
+	static public function put($upload_file, $s3_file, $bucket='') {
 		self::connect();
+	    
+	    if (empty($bucket)) {
+		$bucket = PC_Config::get('aws_s3_bucket_name');
+	    }
 
 		self::$_s3->putObjectFile(
 			$upload_file, 
-			PC_Config::get('aws_s3_bucket_name'), 
+			$bucket,
 			$s3_file, 
 			S3::ACL_PUBLIC_READ
 			);
