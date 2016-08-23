@@ -31,7 +31,7 @@ class PC_Db_pdo extends PC_Db {
 
 		try {
 		    if ($c['db_driver'] == self::MYSQL) {
-				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'] . ';charset=utf8';
+				$dsn = $c['db_driver'] . ':host=' . $c['db_host'] . ';dbname=' . $c['db_name'] . ';charset=utf8mb4';
 				$user = $c['db_user'];
 				$pass = $c['db_pass'];
 				$options = array();
