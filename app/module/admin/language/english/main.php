@@ -16,6 +16,7 @@ define('_MD_ADMIN_ADMIN_MODE', 'Administrator mode');
 define('_MD_ADMIN_NO_AUTH', 'There is no authority.');
 define('_MD_ADMIN_SITE_TITLE', 'Site title');
 define('_MD_ADMIN_DESCRIPTION', 'Description');
+define('_MD_ADMIN_KEYWORDS', 'Keywords');
 define('_MD_ADMIN_DEBUG_MODE', 'Debug mode');
 define('_MD_ADMIN_SITE_CLOSE', 'Site close');
 define('_MD_ADMIN_SITE_CLOSE_ON', 'OPEN');

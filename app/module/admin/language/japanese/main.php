@@ -16,6 +16,7 @@ define('_MD_ADMIN_ADMIN_MODE', '管理者モードです');
 define('_MD_ADMIN_NO_AUTH', '権限がありません');
 define('_MD_ADMIN_SITE_TITLE', 'サイトタイトル(title)');
 define('_MD_ADMIN_DESCRIPTION', 'サイト概要（description）');
+define('_MD_ADMIN_KEYWORDS', 'キーワード（keywords）');
 define('_MD_ADMIN_DEBUG_MODE', 'デバッグモード');
 define('_MD_ADMIN_SITE_CLOSE', 'サイト閉鎖');
 define('_MD_ADMIN_SITE_CLOSE_ON', '公開');

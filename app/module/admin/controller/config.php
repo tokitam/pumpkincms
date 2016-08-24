@@ -31,6 +31,7 @@ class admin_config extends PC_Controller {
 			$list = array(
 				'site_title',
 				'description',
+				'keywords',
 				'debug_mode',
 				'site_close',
 				'site_close_message',
