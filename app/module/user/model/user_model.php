@@ -3,7 +3,8 @@
 require_once PUMPCMS_SYSTEM_PATH . '/util.php';
 
 class User_Model extends PC_Model {
-    
+
+    const USER_REL_MAX = 20;
     const TEMP_ENABLE_TIME = 3600; // 60 * 60 * 10
     
     var $_user_data;
@@ -79,7 +80,7 @@ class User_Model extends PC_Model {
 
 	function load_rel_user($user_id) {
 		$user_rel_ormap = PumpORMAP_Util::get('user', 'user_rel');
-		$list = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id) . ' OR user_id2 = ' . intval($user_id), 0, 10);
+	    $list = $user_rel_ormap->get_list('user_id1 = ' . intval($user_id) . ' OR user_id2 = ' . intval($user_id), 0, self::USER_REL_MAX);
 
 		$rel_user_list = array();
 		foreach ($list as $item) {
