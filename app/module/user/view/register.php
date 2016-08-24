@@ -72,6 +72,15 @@
               </form>
             <!--</div>-->
           </div> <!-- end col-lg-12 -->
+	
+          <div class="col-lg-12">
+	                    <div class="col-lg-10 col-lg-offset-2">
+                            <?php foreach ($this->oauth_tag as $tag) : ?>
+	                      <?php echo $tag ?>
+	                    <?php endforeach; ?>
+	                    </div>
+	          </div> <!-- end col-lg-12 -->	
+	
         </div> <!-- end row -->
 
 

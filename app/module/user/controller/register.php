@@ -2,9 +2,11 @@
 
 require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
 require_once PUMPCMS_APP_PATH . '/module/user/model/temp_model.php';
+require_once PUMPCMS_APP_PATH . '/module/user/class/oauth_util.php';
 
 class user_register extends PC_Controller {
 	public $error = null;
+        var $oauth_tag;
 	
 	public function index() {
 		if (PC_Config::get('allow_register') != 1) {
@@ -50,7 +52,9 @@ class user_register extends PC_Controller {
 				    
 		    }
 		}
-		
+	    
+	        $this->oauth_tag = OAuth_util::get_tag();
+	    
 		$this->render();
     }
 }
