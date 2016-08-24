@@ -486,7 +486,7 @@ class PumpORMAP {
 				//}
 		
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
-				$values[$p] = $_POST[$column['name']];
+				$values[$p] = @$_POST[$column['name']];
 				$types[$p] = PC_Db::T_STRING;
 				$s .= $p;
 	    	}
