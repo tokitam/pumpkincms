@@ -77,6 +77,14 @@ class PC_Util {
 		@mail($to, $subject, $message, $headers);
 	    
 	}
+    
+        static function admin_mail($subject, $message) {
+	    if (empty(PC_Config::get('admin_email'))) {
+		return;
+	    }
+	    
+	    self::mail(PC_Config::get('admin_email'), $subject, $message);
+	}
 
 	static function random_code($length, $type=1) {
 		if ($type == 1) {
