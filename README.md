@@ -13,6 +13,7 @@ http://pumpkincms.com/
 
 ### example
 http://idoldd.com/
+http://sesxion.com/
 
 ### license
 MIT License
