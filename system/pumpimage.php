@@ -9,6 +9,8 @@ class PumpImage extends PumpUpload {
     const TYPE_PNG = 2;
     const TYPE_GIF = 3;
     const TYPE_UNKNOWN = 4;
+    const MAX_WIDTH_SIZE = 5000;
+    const MAX_HEIGHT_SIZE = 5000;
 
     var $_type;
     var $_target;
@@ -348,7 +350,7 @@ class PumpImage extends PumpUpload {
 
         $dest_image = $this->get_cache_image($image_id, $code, $ext, $r_width, $r_height, $method);
 
-        if (1600 < $r_width || 1600 < $r_height) {
+        if (self::MAX_WIDTH_SIZE < $r_width || self::MAX_HEIGHT_SIZE < $r_height) {
             PC_Abort::error('Image size over');
         }
 
