@@ -291,8 +291,9 @@ if ($dh = opendir($dir)) {
                                 <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_BLOG ?></span>
                            </a>
                         </li>
-                        <?php if (!empty(PC_Config::get('admin_menu'))) ?>
-                        <?php foreach (PC_Config::get('admin_menu') as $menu) : ?>
+                        <?php $menu_list = PC_Config::get('admin_menu'); ?>
+                        <?php if ((!empty($menu_list)) && is_array($menu_list)) ?>
+                        <?php foreach ((array)$menu_list as $menu) : ?>
                         <li class="active">
                             <a href="<?php echo $menu['url'] ?>/">
                                 <i class="fa fa-edit"></i> <span><?php echo htmlspecialchars($menu['title']) ?></span>
