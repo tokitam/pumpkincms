@@ -12,7 +12,7 @@ PumpkinCMS is general simple CMS.
 http://pumpkincms.com/
 
 ### example
-http://idoldd.com/~
+http://idoldd.com/
 http://sesxion.com/
 
 ### license
