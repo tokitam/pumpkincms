@@ -55,11 +55,7 @@ function wp_head() {
 }
 
 function wp_footer() {
-echo <<< EOM
-	<p>
-		tokita test blog is proudly powered by <a href="http://wordpress.org/">WordPress</a>		<br /><a href="http://127.0.0.1/dev/wordpress/?feed=rss2">Entries (RSS)</a> and <a href="http://127.0.0.1/dev/wordpress/?feed=comments-rss2">Comments (RSS)</a>.		<!-- 25 queries. 9.136 seconds. -->
-	</p>
-EOM;
+	return;
 }
 
 function body_class() {
