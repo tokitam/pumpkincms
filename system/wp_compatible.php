@@ -50,7 +50,7 @@ function wp_enqueue_script() {
 function wp_head() {
 	printf('<link rel="stylesheet" href="%s/theme/default/bootstrap.css" media="screen">' ."\n", PC_Config::url());
     printf('<link rel="stylesheet" href="%s/theme/default/assets/css/bootswatch.min.css">' ."\n", PC_Config::url());
-    printf('<link rel="stylesheet" href="%s/theme/default/custom.css">' ."\n", PC_Config::url());
+    //printf('<link rel="stylesheet" href="%s/theme/default/custom.css">' ."\n", PC_Config::url());
     printf('<link href="%s/wptheme/%s/style.css" type="text/css" rel="stylesheet" />' ."\n", PC_Config::url(), PC_Config::get('theme'));
 }
 
