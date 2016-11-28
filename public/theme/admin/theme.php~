@@ -32,7 +32,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        <link rel="shortcut icon" type="image/x-icon" href="<?php echo SiteInfo::get_css_url(); ?>/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo SiteInfo::get_css_url(); ?>/theme/shop/images/favicon.ico" />
 
 
 
@@ -244,7 +244,7 @@ selector:'.pump_tinymce'
                            </a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo PC_Config::url() ?>/admin/display_config/">
+                            <a href="<?php echo PC_Config::url() ?>/admin/index/display_config/">
                                 <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_DISPLAY_CONFIG ?></span>
                            </a>
                         </li>
@@ -291,9 +291,8 @@ if ($dh = opendir($dir)) {
                                 <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_BLOG ?></span>
                            </a>
                         </li>
-                        <?php $menu_list = PC_Config::get('admin_menu'); ?>
-                        <?php if ((!empty($menu_list)) && is_array($menu_list)) ?>
-                        <?php foreach ((array)$menu_list as $menu) : ?>
+                        <?php if (!empty(PC_Config::get('admin_menu'))) ?>
+                        <?php foreach (PC_Config::get('admin_menu') as $menu) : ?>
                         <li class="active">
                             <a href="<?php echo $menu['url'] ?>/">
                                 <i class="fa fa-edit"></i> <span><?php echo htmlspecialchars($menu['title']) ?></span>
