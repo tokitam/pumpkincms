@@ -14,11 +14,16 @@ function bloginfo($key) {
 	}
 }
 
-function get_bloginfo($key) {
+function get_bloginfo($key, $key2='') {
+	if ($key == 'description' && $key2 == 'display') {
+		return PC_Config::get('description');
+	}
+
+	return '';
 }
 
 function __($s) {
-
+	return $s;
 }
 
 function get_header() {
@@ -251,11 +256,11 @@ function is_page() {
 
 }
 
-function esc_url($url, $protocols=null, $context='display') {
-    if (preg_match('/(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/', $url, $r)) {
+function esc_url($s, $protocols=null, $context='display') {
+    if (preg_match('/(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/', $s, $r)) {
 	return $r[1] . $r[2];
     } else {
-	return '';
+	return $s;
     }
 }
 
