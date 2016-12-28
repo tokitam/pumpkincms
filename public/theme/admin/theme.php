@@ -286,11 +286,8 @@ if ($dh = opendir($dir)) {
 }
 
 ?>
-                        <li class="active">
-                            <a href="<?php echo PC_Config::url() ?>/admin/blog/">
-                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_BLOG ?></span>
-                           </a>
-                        </li>
+
+
                         <?php $menu_list = PC_Config::get('admin_menu'); ?>
                         <?php if ((!empty($menu_list)) && is_array($menu_list)) ?>
                         <?php foreach ((array)$menu_list as $menu) : ?>

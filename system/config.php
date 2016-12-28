@@ -17,10 +17,14 @@ class PC_Config {
 			return @$pc_config[$key1][$key2];
 		}
 	    
+		if (! empty($pc_config[$key1])) {
+		    return $pc_config[$key1];
+		}
+		
 		if (SiteInfo::get($key1) != '') {
 		    return SiteInfo::get($key1);
 		}
-		
+
 		return @$pc_config[$key1];
 	}
     
