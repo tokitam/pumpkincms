@@ -47,6 +47,7 @@ class PC_Main {
     
 	function load_config() {
 		PC_Config::load_config();
+		PC_Config::load_module_config();
 	}
 
     function session_config() {
@@ -105,12 +106,55 @@ class PC_Main {
 		$service_url = @$r[2];
 		PC_Config::set('service_url', $service_url);
 
-		$router_no = PC_Config::get('router_no');
-		$router_list = PC_Config::get('router', $router_no);
-
 		if ($this->site_close()) {
 			return;
 		}
+
+		$ret = $this->admin_menu_check($service_url);
+
+		if (!$ret) {
+			$ret = $this->load_router($service_url);
+		}
+
+		$this->set_dir($service_url);
+
+		if (!empty($ret)) {
+			$this->_module = $ret['module'];
+			$this->_controller = $ret['controller'];
+			$this->_method = $ret['method'];
+			$theme = @$ret['theme'];
+			if ($theme != '') {
+				PC_Config::set('theme', $theme);
+			}
+
+			return;
+		}
+
+		PC_Debug::log("module:" . $this->_module . ', controller:' . $this->_controller . ', method:' . $this->_method, __FILE__, __LINE__);
+	}
+
+	function admin_menu_check($service_url) {
+		global $module_config;
+
+		if (preg_match('@admin/([_0-9A-Za-z]+)@', $service_url, $r) == false) {
+			return false;
+		}
+
+		$dir_name = $r[1];
+
+		$ret = null;
+		foreach ($module_config as $c) {
+			if (isset($c['admin_menu'][$dir_name])) {
+				$ret = $c['admin_menu'][$dir_name]; 
+			}
+		}
+
+		return $ret;
+	}
+
+	function load_router($service_url) {
+		$router_no = PC_Config::get('router_no');
+		$router_list = PC_Config::get('router', $router_no);
 
 		$ret = null;
 		if (is_array($router_list)) {
@@ -118,6 +162,7 @@ class PC_Main {
 			    if (is_array($module)) {
 				continue;
 			    }
+
 				$file = PUMPCMS_APP_PATH . '/module/' . $module . '/router/' . $module . '_router.php';
 				if (is_readable($file)) {
 					require_once $file;
@@ -134,21 +179,7 @@ class PC_Main {
 			}
 		}
 
-		$this->set_dir($service_url);
-
-		if ($ret != null) {
-			$this->_module = $ret['module'];
-			$this->_controller = $ret['controller'];
-			$this->_method = $ret['method'];
-			$theme = @$ret['theme'];
-			if ($theme != '') {
-				PC_Config::set('theme', $theme);
-			}
-
-			return;
-		}
-
-		PC_Debug::log("module:" . $this->_module . ', controller:' . $this->_controller . ', method:' . $this->_method, __FILE__, __LINE__);
+		return $ret;
 	}
 
 	function setup_user() {

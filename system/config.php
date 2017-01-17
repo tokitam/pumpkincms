@@ -10,6 +10,26 @@ class PC_Config {
 		}
 	}
 
+	public static function load_module_config() {
+		$d = dir(PUMPCMS_APP_PATH . '/module');
+		while (false !== ($entry = $d->read())) {
+			$file = PUMPCMS_APP_PATH . '/module/' . $entry . '/config/module_config.php';
+
+			if (is_readable($file)) {
+				require_once $file;
+				if (isset($GLOBALS['module_config']) == false || is_array($GLOBALS['module_config']) == false) {
+					$GLOBALS['module_config'] = array();
+				}
+
+				if (is_array($module_config)) {
+					$GLOBALS['module_config'] += $module_config;
+				}
+			}
+		}
+
+		$d->close();
+	}
+
 	public static function get($key1, $key2=null) {
 		global $pc_config;
 
