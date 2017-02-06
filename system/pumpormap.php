@@ -281,6 +281,18 @@ class PumpORMAP {
 				}
 				$types[$p] = PC_Db::T_INT;
 				array_push($params, $p);
+	    	} else if ($column['type'] == PUMPFORM_DOUBLE) {
+				if (@$post[$column['name']] == '') {
+					if (@$column['default']) {
+						$values[$p] = $column['default'];
+					} else {
+						$values[$p] = 0;
+					}
+				} else {
+					$values[$p] = @$post[$column['name']];
+				}
+				$types[$p] = PC_Db::T_DOUBLE;
+				array_push($params, $p);
 	    	} else {
 	    		// integer
 				if (@$post[$column['name']] == '') {

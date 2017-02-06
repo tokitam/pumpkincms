@@ -120,7 +120,7 @@ class PC_Db_pdo extends PC_Db {
 	 */ 
 	function query($sql, $values=array(), $types=array()) {
 		PC_Debug::log($sql, __FILE__, __LINE__);
-		
+
 		try {
 			$this->_sql = $sql;
 
@@ -161,7 +161,12 @@ class PC_Db_pdo extends PC_Db {
 			} else if($types[$key] == PC_Db::T_BLOB) {
 				$type = PDO::PARAM_LOB;
 			}
-			$this->_stmt->bindParam($key, $value, $type);
+		    
+		        if ($types[$key] == PC_Db::T_DOUBLE) {
+			    $this->_stmt->bindParam($key, $value);
+		        } else {
+			    $this->_stmt->bindParam($key, $value, $type);
+			}
 		}
 
 		$ret = $this->_stmt->execute($values);	
