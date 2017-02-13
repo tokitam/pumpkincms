@@ -131,11 +131,15 @@ class PumpRssParser {
     
     function analysis_atom() {
         $body = $this->body['feed'];
-        $this->result['title'] = $body['title']['value'];
+        if (isset($body['title']['value'])) {
+            $this->result['title'] = $body['title']['value'];
+        } else {
+            $this->result['title'] = $body['title'];
+        }
         $this->result['url'] = @$body['link']['_attrs']['href'];
         $this->result['items'] = array();
 
-            $items = $body['entry'];
+        $items = $body['entry'];
         $last_update = 0;
         foreach ($items as $key => $item) {
             $i = array();
@@ -148,7 +152,11 @@ class PumpRssParser {
             if ($i['description'] == '') {
                 $i['description'] = $item['summary']['value'];
             }
-            $i['time'] = $this->date2unixtime($item['published']);
+            if (@$item['issued']) {
+                $i['time'] = $this->date2unixtime($item['issued']);
+            } else {
+                $i['time'] = $this->date2unixtime($item['published']);
+            }
             if ($last_update < $i['time']) {
                 $last_update = $i['time'];
             }
