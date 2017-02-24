@@ -25,8 +25,8 @@ class PC_Main {
 		global $site_info;
 
 		$this->setup();
-		$this->check_site();
 		$this->check_lang();
+		$this->check_site();
 		$this->load_config();
 		$this->session_config();
 		$this->render = new PC_Render();

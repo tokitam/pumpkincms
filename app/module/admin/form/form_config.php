@@ -134,5 +134,50 @@ $pumpform_config['admin']['config_form'] = array(
     ),
 );
 
+$pumpform_config['admin']['site_list'] = array(
+	'module' => 'admin',
+	'title' => 'site_list',
+	'table' => 'site_list',
+	'column' => array(
+
+		'domain_dir' => array('name' => 'domain_dir',
+			'title' => 'domain_dir',
+			'type' => PUMPFORM_TEXT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,),
+		'site_id' => array('name' => 'site_id',
+			'title' => 'site_id',
+			'type' => PUMPFORM_INT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,),
+    ),
+);
+
+$pumpform_config['admin']['site_config'] = array(
+	'module' => 'admin',
+	'title' => 'site_config',
+	'table' => 'site_config',
+	'column' => array(
+
+		'theme' => array('name' => 'theme',
+			'title' => 'theme',
+			'type' => PUMPFORM_TEXT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,),
+		'db_no' => array('name' => 'db_no',
+			'title' => 'db_no',
+			'type' => PUMPFORM_INT,
+			'visible' => 1,
+			'registable' => 1,
+			'editable' => 1,
+			'list_visible' => 1,),
+    ),
+);
 
 
