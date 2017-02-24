@@ -398,6 +398,7 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 		
 		$sql = 'SELECT * FROM ' . $db->prefix($table);
 		$sql .= " WHERE ";
+		$sql .= ' site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
 	        $sql .= ' reg_time > ' . intval($t) . ' AND ( ';
 		$sql .= " name = " . $db->escape($name) . " OR ";
 		$sql .= " email = " . $db->escape($email) . " ";
@@ -421,6 +422,7 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 		
 		$sql = 'SELECT * FROM ' . $db->prefix($table);
 		$sql .= " WHERE ";
+		$sql .= ' site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
 	        $sql .= ' reg_time > ' . intval($t) . ' AND ( ';
 		$sql .= " name = " . $db->escape($name);
 	        $sql .= ' ) ';
@@ -441,6 +443,7 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 		
 		$sql = 'SELECT * FROM ' . $db->prefix($table);
 		$sql .= " WHERE ";
+		$sql .= ' site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
 		$sql .= " email = " . $db->escape($email) . " ";
 
 	        $row = $db->fetch_row($sql);
@@ -469,6 +472,7 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 		
 		$sql = 'SELECT * FROM ' . $db->prefix($this->table_name);
 		$sql .= " WHERE ";
+		$sql .= ' site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
 		$sql .= " name = " . $db->escape($name) . " ";
 
 	        return $db->fetch_row($sql);
@@ -480,6 +484,7 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 		
 		$sql = 'SELECT * FROM ' . $db->prefix($this->table_name);
 		$sql .= " WHERE ";
+		$sql .= ' site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ';
 		$sql .= " email = " . $db->escape($email) . " ";
 
 	        return $db->fetch_row($sql);
