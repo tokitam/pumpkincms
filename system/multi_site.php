@@ -30,7 +30,9 @@ class PC_MultiSite {
     }
     
     static function check_site() {
-        self::load_site_config();
+	if (PC_Config::get('multi_site_db_setting')) {
+	    self::load_site_config();
+	}
         
         $site_list = PC_Config::get('site_list');
 
