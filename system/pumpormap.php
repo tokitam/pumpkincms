@@ -364,7 +364,7 @@ class PumpORMAP {
 		return $insert_id;
     }
 
-    public function update($id, $where='') {
+    public function update($id, $where='', $post=array()) {
 		$db = PC_DBSet::get();
 
 		$table = $this->get_table();
@@ -373,6 +373,12 @@ class PumpORMAP {
 
 		$pumpimage = new PumpImage();
 		$pumpfile = new PumpFile();
+	
+		if (empty($post)) {
+		    $post = $_POST;
+		}
+	
+	
 
 		$sql = 'UPDATE ' . $db->prefix($table);
 		$sql .= ' SET ';
@@ -392,7 +398,7 @@ class PumpORMAP {
 		    } 
 
 		    if ($column['type'] == PUMPFORM_PASSWORD) {
-		    	if (@$_POST[$column['name']] == '') {
+		    	if (@$post[$column['name']] == '') {
 		    		continue;
 		    	}
 		    }
@@ -403,12 +409,12 @@ class PumpORMAP {
 	    	$s = '';
 
 	    	if ($column['type'] == PUMPFORM_PASSWORD) {
-			$password = PC_Util::password_hash($_POST[$column['name']]);
+			$password = PC_Util::password_hash($post[$column['name']]);
 	    		$s = ' ' . $db->column_escape($column['name']) . ' = ';
 				$values[$p] = $password;
 				$s .= $p;
 		    } else if ($column['type'] == PUMPFORM_IMAGE) {
-		    	if (@$_POST[$column['name'] . '_delete']) {
+		    	if (@$post[$column['name'] . '_delete']) {
 			    	$s = ' ' . $db->column_escape($column['name']) . ' = ';
 			    	$image_id = 0;
 					$s .= intval($image_id);
@@ -426,7 +432,7 @@ class PumpORMAP {
 					$s .= intval($image_id);
 				}
 		    } else if ($column['type'] == PUMPFORM_FILE) {
-		    	if (@$_POST[$column['name'] . '_delete']) {
+		    	if (@$post[$column['name'] . '_delete']) {
 			    	$s = ' ' . $db->column_escape($column['name']) . ' = ';
 			    	$file_id = 0;
 					$s .= intval($file_id);
@@ -445,15 +451,15 @@ class PumpORMAP {
 				}
 		    } else if ($column['type'] == PUMPFORM_ADDRESS_AND_GMAP) {
 		    	$s = ' ' . $db->column_escape($column['name']) . ' = ';
-		    	$values[$p] = $_POST[$column['name']];
+		    	$values[$p] = $post[$column['name']];
 		    	$types[$p] = PC_Db::T_STRING;
 		    	$s .= $p;
 		    	array_push($columns, $s);
 		    	$i++;
 		    	$p = ':p' . $i;
 
-		    	$v = preg_replace('/[^0-9\.]/', '', $_POST['geo_lat']);
-		    	$v = $_POST['geo_lat'];
+		    	$v = preg_replace('/[^0-9\.]/', '', $post['geo_lat']);
+		    	$v = $post['geo_lat'];
 		    	$s = ' `geo_lat` = ' . $p . ', ';
 		    	$values[$p] = $v;
 		    	$types[$p] = PC_Db::T_DOUBLE;
@@ -461,15 +467,15 @@ class PumpORMAP {
 		    	$i++;
 		    	$p = ':p' . $i;
 
-		    	$v = preg_replace('/[^0-9\.]/', '', $_POST['geo_lng']);
-		    	$v = $_POST['geo_lng'];
+		    	$v = preg_replace('/[^0-9\.]/', '', $post['geo_lng']);
+		    	$v = $post['geo_lng'];
 		    	$s .= ' `geo_lng` = ' . $p;
 		    	$values[$p] = $v;
 		    	$types[$p] = PC_Db::T_DOUBLE;
 
 		    } else if ($column['type'] == PUMPFORM_CHECKBOX) {
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
-				if (@$_POST[$column['name']]) {
+				if (@$post[$column['name']]) {
 				    $v = 1;
 				} else {
 				    $v = 0;
@@ -483,11 +489,11 @@ class PumpORMAP {
 				$module = $t['module'];
 				$table = $t['table'];
 				$ormap = PumpORMAP_Util::getInstance($module, $table);
-				$list = @$_POST[$column['name']];
+				$list = @$post[$column['name']];
 				$id1 = $column['option']['link_table']['id1'];
 				$id2 = $column['option']['link_table']['id2'];
 				$ormap->delete_where('`' . $id1 . '` = ' . intval($id));
-				$list = @$_POST[$column['name']];
+				$list = @$post[$column['name']];
 				foreach ($list as $value) {
 					$ormap->insert(array($id1 => $id, $id2 => intval($value)));
 				}
@@ -496,9 +502,13 @@ class PumpORMAP {
 				//if (@$_POST[$column['name']] == '') {
 			    	//continue;
 				//}
-		
+
+		    if (!isset($post[$column['name']])) {
+			continue;
+		    }
+		    
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
-				$values[$p] = @$_POST[$column['name']];
+				$values[$p] = @$post[$column['name']];
 				$types[$p] = PC_Db::T_STRING;
 				$s .= $p;
 	    	}
