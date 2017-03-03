@@ -8,6 +8,8 @@ $pc_config['allow_register'] = true;
 $pc_config['default_module'] = 'index';
 $pc_config['default_controller'] = 'index';
 
+$pc_config['multi_site_db_setting'] = true;
+
 // Password reset mail expire time 60*5 = 5minitus
 $pc_config['remindpass_time'] = (60 * 5);
 
