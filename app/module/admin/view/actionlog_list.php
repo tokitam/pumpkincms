@@ -1,6 +1,6 @@
 <table class="table table-striped table-hover">
 <tbody>
-<tr><th>user</th><th>TYPE</th><th>Date</th><th>IP_ADDRESS</th><th>desc</th><th>USER AGENT</th></tr>
+<tr><th>user</th><th>TYPE</th><th>IP_ADDRESS</th><th>Date</th><th>desc</th><th>USER AGENT</th></tr>
 <?php foreach ($this->list as $actionlog) : ?>
 <tr>
 	<td><?php echo $actionlog['user_id'] ?></td>
