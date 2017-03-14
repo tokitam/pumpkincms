@@ -721,11 +721,11 @@ class PumpImage extends PumpUpload {
 	// 変換後の画像の生成（元の画像と同じサイズ）
         $destImage = @imagecreatetruecolor($w,$h);
 	// 逆側から色を取得
-        for($i=($w-1);$i>=0;$i--){
-	    for($j=0;$j<$h;$j++){
-		$color_index = imagecolorat($image,$i,$j);
-		$colors = imagecolorsforindex($image,$color_index);
-		imagesetpixel($destImage,abs($i-$w+1),$j,imagecolorallocate($destImage,$colors["red"],$colors["green"],$colors["blue"]));
+        for($i = ($w-1); $i >= 0; $i--){
+	    for($j = 0; $j < $h; $j++){
+		$color_index = imagecolorat($image, $i, $j);
+		$colors = imagecolorsforindex($image, $color_index);
+		imagesetpixel($destImage, abs($i-$w+1), $j, imagecolorallocate($destImage, $colors["red"], $colors["green"], $colors["blue"]));
 	    }
 	}
 	return $destImage;
@@ -738,13 +738,13 @@ class PumpImage extends PumpUpload {
 	// 画像の高さを取得
 	$h = imagesy($image);
 	// 変換後の画像の生成（元の画像と同じサイズ）
-	$destImage = @imagecreatetruecolor($w,$h);
+	$destImage = @imagecreatetruecolor($w, $h);
 	// 逆側から色を取得
-	for($i=0;$i<$w;$i++){
-	    for($j=($h-1);$j>=0;$j--){
-		$color_index = imagecolorat($image,$i,$j);
-		$colors = imagecolorsforindex($image,$color_index);
-		imagesetpixel($destImage,$i,abs($j-$h+1),imagecolorallocate($destImage,$colors["red"],$colors["green"],$colors["blue"]));
+	for($i=0; $i < $w; $i++){
+	    for($j = ($h-1); $j >= 0; $j--){
+		$color_index = imagecolorat($image, $i, $j);
+		$colors = imagecolorsforindex($image, $color_index);
+		imagesetpixel($destImage, $i, abs($j - $h + 1), imagecolorallocate($destImage, $colors["red"], $colors["green"], $colors["blue"]));
 	    }
 	}
 	return $destImage;
@@ -777,24 +777,24 @@ class PumpImage extends PumpUpload {
 	    $image = self::image_flop($image);
 	    // 180°回転
 	}else if($orientation == 3){
-	    $image = self::image_rotate($image,180, 0);
+	    $image = self::image_rotate($image, 180, 0);
 	    // 上下反転
 	}else if($orientation == 4){
 	    $image = self::image_Flip($image);
 	    // 反時計回りに90°回転 上下反転
 	}else if($orientation == 5){
-	    $image = self::image_rotate($image,270, 0);
+	    $image = self::image_rotate($image, 270, 0);
 	    $image = self::image_flip($image);
 	    // 時計回りに90°回転
 	}else if($orientation == 6){
 	    $image = self::image_rotate($image, 270, 0);
 	    // 時計回りに90°回転 上下反転
 	}else if($orientation == 7){
-	    $image = self::image_rotate($image,90, 0);
+	    $image = self::image_rotate($image, 90, 0);
 	    $image = self::image_flip($image);
 	    // 反時計回りに90°回転
 	}else if($orientation == 8){
-	    $image = self::image_rotate($image,270, 0);
+	    $image = self::image_rotate($image, 270, 0);
 	} else {
 	    return;
 	}
