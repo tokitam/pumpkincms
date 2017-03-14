@@ -757,12 +757,16 @@ class PumpImage extends PumpUpload {
     
     /** 画像の方向を正す */
     static function orientationFixedImage($input_file_name, $ext){
-	$image = ImageCreateFromJPEG($input_file_name);
-	if (empty($image)) {
+	if ($ext != 'jpg') {
 	    return;
 	}
 	$exif_datas = @exif_read_data($input_file_name);
+	PC_Debug::log(' exif: ' . print_r($exif_datas, true), __FILE__, __LINE__);
 	if(isset($exif_datas['Orientation']) == false) {
+	    return;
+	}
+	$image = ImageCreateFromJPEG($input_file_name);
+	if (empty($image)) {
 	    return;
 	}
 
@@ -800,7 +804,12 @@ class PumpImage extends PumpUpload {
 	}
 	
 	// 画像の書き出し
-	ImageJPEG($image, $input_file_name);
-	//return false;
+	if ($ext == 'jpg') {
+	    ImageJPEG($image, $input_file_name);
+	} else if ($ext == 'png') {
+	    ImagePNG($image, $input_file_name);
+	} else if ($ext == 'gif') {
+	    ImageGIF($image, $input_file_name);
+	}
     }
 }
