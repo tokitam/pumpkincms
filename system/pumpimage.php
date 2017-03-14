@@ -14,6 +14,7 @@ class PumpImage extends PumpUpload {
 
     var $_type;
     var $_target;
+    var $_exif;
 
     static public function get_type() {
         return intval(PC_Config::get('pumpimage_store_type'));
@@ -327,6 +328,17 @@ class PumpImage extends PumpUpload {
         } else {
             return;
         }
+	
+	$this->_exif = @exif_read_data($file_path);
+	if (isset($this->_exif['MimeType'])) {
+	    if ($this->_exif['MimeType'] == 'image/gif') {
+		$ext = 'gif';
+	    } else if ($this->_exif['MimeType'] == 'image/png') {
+		$ext = 'png';
+	    } else if ($this->_exif['MimeType'] == 'image/jpeg') {
+		$ext = 'jpg';
+	    }
+	}
 
         if (@$_GET['no_image_header'] == '') {
             $expires = (60 * 60 * 24 * 365);
@@ -375,8 +387,10 @@ class PumpImage extends PumpUpload {
             // from aws s3
             $src_image = $this->get_upload_image($image_id, $code, $ext);
             $src_image = PC_S3::get(basename($src_image));
-           }
+        }
 
+	self::orientationFixedImage($src_image, $ext);
+	
         if ($r_width == null && $r_height == null) {
             copy($src_image, $dest_image);
             if (self::get_type() == self::STORE_TYPE_DB) {
@@ -697,4 +711,96 @@ class PumpImage extends PumpUpload {
             @unlink($image_file);
            }
    }
+
+    /** 画像の左右反転 */
+    static public function image_flop($image){
+	// 画像の幅を取得
+        $w = imagesx($image);
+	// 画像の高さを取得
+        $h = imagesy($image);
+	// 変換後の画像の生成（元の画像と同じサイズ）
+        $destImage = @imagecreatetruecolor($w,$h);
+	// 逆側から色を取得
+        for($i=($w-1);$i>=0;$i--){
+	    for($j=0;$j<$h;$j++){
+		$color_index = imagecolorat($image,$i,$j);
+		$colors = imagecolorsforindex($image,$color_index);
+		imagesetpixel($destImage,abs($i-$w+1),$j,imagecolorallocate($destImage,$colors["red"],$colors["green"],$colors["blue"]));
+	    }
+	}
+	return $destImage;
+    }
+    
+    /** 上下反転 */
+    static function image_flip($image){
+	// 画像の幅を取得
+	$w = imagesx($image);
+	// 画像の高さを取得
+	$h = imagesy($image);
+	// 変換後の画像の生成（元の画像と同じサイズ）
+	$destImage = @imagecreatetruecolor($w,$h);
+	// 逆側から色を取得
+	for($i=0;$i<$w;$i++){
+	    for($j=($h-1);$j>=0;$j--){
+		$color_index = imagecolorat($image,$i,$j);
+		$colors = imagecolorsforindex($image,$color_index);
+		imagesetpixel($destImage,$i,abs($j-$h+1),imagecolorallocate($destImage,$colors["red"],$colors["green"],$colors["blue"]));
+	    }
+	}
+	return $destImage;
+    }
+    
+    /** 画像を回転 */
+    static function image_rotate($image, $angle, $bgd_color){
+	     return imagerotate($image, $angle, $bgd_color, 0);
+    }
+    
+    /** 画像の方向を正す */
+    static function orientationFixedImage($input_file_name, $ext){
+	$image = ImageCreateFromJPEG($input_file_name);
+	if (empty($image)) {
+	    return;
+	}
+	$exif_datas = @exif_read_data($input_file_name);
+	if(isset($exif_datas['Orientation']) == false) {
+	    return;
+	}
+
+	$orientation = $exif_datas['Orientation'];
+
+	// 未定義
+	if($orientation == 0){
+	    // 通常
+	}else if($orientation == 1){
+	    // 左右反転
+	}else if($orientation == 2){
+	    $image = self::image_flop($image);
+	    // 180°回転
+	}else if($orientation == 3){
+	    $image = self::image_rotate($image,180, 0);
+	    // 上下反転
+	}else if($orientation == 4){
+	    $image = self::image_Flip($image);
+	    // 反時計回りに90°回転 上下反転
+	}else if($orientation == 5){
+	    $image = self::image_rotate($image,270, 0);
+	    $image = self::image_flip($image);
+	    // 時計回りに90°回転
+	}else if($orientation == 6){
+	    $image = self::image_rotate($image, 270, 0);
+	    // 時計回りに90°回転 上下反転
+	}else if($orientation == 7){
+	    $image = self::image_rotate($image,90, 0);
+	    $image = self::image_flip($image);
+	    // 反時計回りに90°回転
+	}else if($orientation == 8){
+	    $image = self::image_rotate($image,270, 0);
+	} else {
+	    return;
+	}
+	
+	// 画像の書き出し
+	ImageJPEG($image, $input_file_name);
+	//return false;
+    }
 }
