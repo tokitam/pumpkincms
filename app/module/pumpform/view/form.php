@@ -140,8 +140,9 @@ foreach ($form as $column) {
 			$form_html .= "<br />\n";
 			$form_html .= "<labe><input type='checkbox' name='" . $column['name'] . "_delete' value='1'>" . _MD_PUMPFORM_DELETE . "</label><br />\n";
 		}
-		$form_html .= "<input type='file' name='" . $column['name'] . "'><br />\n";
+		$form_html .= "<input type='file' name='" . $column['name'] . "' class='pumpform_image'><br />\n";
 		$form_html .= 'max size:' . PC_Util::convert_size(PumpUpload::get_max_size());
+	        $form_html .= '<div id="' . $column['name'] . '_preview" />';
 	} else if ($column['type'] == PUMPFORM_FILE) {
 		$form_html .= "<input type='file' name='" . $column['name'] . "'><br />\n";
 		$form_html .= 'max size:' . PC_Util::convert_size(PumpUpload::get_max_size());

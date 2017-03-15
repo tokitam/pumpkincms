@@ -132,4 +132,35 @@ $(document).ready(function(){
             $('#user-info-dialog').modal('hide');
         });
     });
+    
+    $('.pumpform_image').on('change', function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+	t = this;
+        $preview = $('#' + t.name + "_preview");
+
+        if(file.type.indexOf("image") < 0){
+            return false;
+        }
+	
+        // do nothing if not image
+        if(file.type.indexOf("image") < 0){
+            return false;
+        }
+			  
+        reader.onload = (function(file) {
+            return function(e) {
+                $preview.empty();
+                $preview.append($('<img>').attr({
+                    src: e.target.result,
+                    width: "50px",
+                    class: "preview",
+                    title: file.name,
+		    style: 'padding-top: 0px;',
+                }));
+            };
+        })(file);
+      
+        reader.readAsDataURL(file);
+    });
 });
