@@ -264,9 +264,13 @@ class PumpORMAP {
 				}
 				$types[$p] = PC_Db::T_INT;
 				array_push($params, $p);
-			} else if ($column['type'] == PUMPFORM_ADDRESS_AND_GMAP) {
+		} else if ($column['type'] == PUMPFORM_ADDRESS_AND_GMAP) {
 				$geolocation = true;
 				$values[$p] = @$post[$column['name']];
+				$types[$p] = PC_Db::T_STRING;
+				array_push($params, $p);
+		} else if ($column['type'] == PUMPFORM_TAG) {
+				$values[$p] = implode(',', @$post[$column['name']]);
 				$types[$p] = PC_Db::T_STRING;
 				array_push($params, $p);
 	    	} else if ($column['type'] == PUMPFORM_INT) {
@@ -473,6 +477,11 @@ class PumpORMAP {
 		    	$values[$p] = $v;
 		    	$types[$p] = PC_Db::T_DOUBLE;
 
+		    } else if ($column['type'] == PUMPFORM_TAG) {
+				$s = ' ' . $db->column_escape($column['name']) . ' = ';
+				$values[$p] = implode(',', @$post[$column['name']]);
+				$types[$p] = PC_Db::T_STRING;
+				$s .= $p;
 		    } else if ($column['type'] == PUMPFORM_CHECKBOX) {
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
 				if (@$post[$column['name']]) {

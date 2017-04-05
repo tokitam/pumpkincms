@@ -50,6 +50,7 @@
      })();
 
     </script>
+    <?php echo $this->get_header() ?>
   </head>
   <!-- <body> -->
 <?php if (PC_Config::get('bg_image_url')) : ?>  
@@ -163,7 +164,7 @@
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/assets/js/bootswatch.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/notify.min.js"></script>
-    <script src="<?php echo SiteInfo::get_css_url() ?>/js/pumpform.js"></script>
+    <script src="<?php echo SiteInfo::get_css_url() ?>/js/pumpform.js?t=<?php echo time() ?>"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/js/user_module.js"></script>
   </body>
 </html>
