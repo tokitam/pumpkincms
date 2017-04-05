@@ -2,6 +2,11 @@
 $link = $this->_data['item'];
 ?>
 	
+<ul class="breadcrumb">
+    <li><a href="<?php echo PC_Config::url(); ?>">Home</a></li>
+    <li class="active"><?php echo htmlspecialchars($link['title']) ?></li>
+</ul>	
+	
       <div class="bs-docs-section">
         <div class="row">
           <div class="col-lg-12">

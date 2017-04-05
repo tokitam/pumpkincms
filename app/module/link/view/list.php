@@ -1,5 +1,8 @@
 <?php
+$pn = $this->_data['pagenavi'];
 $list = $this->_data['list'];
+
+echo $pn->get_page_link();
 
 foreach ($list as $link) :
 ?>
@@ -35,5 +38,6 @@ foreach ($list as $link) :
 	
 <?php
 endforeach ;
-?>
+
+echo $pn->get_page_link();
 	
