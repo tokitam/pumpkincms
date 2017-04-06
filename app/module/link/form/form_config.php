@@ -11,6 +11,12 @@ $pumpform_config['link']['link'] = array(
     'list_php' => 'list',
     'detail_php' => 'detail',
 
+    'grant_index' => [ 'anonymous' => 1, 'registerd_user' => 1, 'posted_user' => 1],
+    'grant_detail' => [ 'anonymous' => 1, 'registered_user' => 1, 'posted_user' => 1],
+    'grant_add' => [ 'anonymous' => 0, 'registered_user' => 1, 'posted_user' => 1 ], 
+    'grant_update' =>  [ 'anonymous' => 0, 'registered_user' => 0, 'posted_user' => 1 ],
+    'grant_delete' =>  [ 'anonymous' => 0, 'registered_user' => 0, 'posted_user' => 1 ],
+
     'column' => array(
 
 	array('name' => 'title',
@@ -23,6 +29,16 @@ $pumpform_config['link']['link'] = array(
 	      'list_visible' => 1,
 	      'minlenth' => 3,
 	      'maxlength' => 200),
+	'url' => array('name' => 'url',
+	      'title' => 'URL',
+	      'type' => PUMPFORM_URL,
+	      'required' => 1,
+	      'visible' => 1,
+	      'registable' => 1,
+	      'editable' => 1,
+	      'list_visible' => 1,
+	      'minlength' => 3,	   
+	      'maxlength' => 255),
 	array('name' => 'desc',
 	      'title' => '説明',
 	      'type' => PUMPFORM_TEXTAREA,
@@ -79,16 +95,6 @@ $pumpform_config['link']['link'] = array(
 	      'editable' => 1,
 	      'list_visible' => 1,
 	      'crop' => 1),
-	'url' => array('name' => 'url',
-	      'title' => 'URL',
-	      'type' => PUMPFORM_URL,
-	      'required' => 1,
-	      'visible' => 1,
-	      'registable' => 1,
-	      'editable' => 1,
-	      'list_visible' => 1,
-	      'minlength' => 3,	   
-	      'maxlength' => 255),
 
     ),		      
 );

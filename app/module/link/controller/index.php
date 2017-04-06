@@ -9,6 +9,7 @@ class link_index extends PC_Controller {
 	$this->_module = 'link';
 	$this->_table = 'link';
 	
+	PC_Render::add_javascript('/js/pumpform_select2.js');
 	PC_Render::add_javascript('/js/select2/js/select2.full.js');
 	PC_Render::add_css('/js/select2/css/select2.css');
     }
