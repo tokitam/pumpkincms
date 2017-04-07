@@ -42,33 +42,57 @@ class PC_Controller {
 	}
 
     public function index() {
-		if ($this->_flg_scaffold) {
-		    $this->scaffold($this->_module, $this->_table, 'list');
-		}
+        if ($this->_flg_scaffold) {
+	    if (PC_Grant::check($this->_module, $this->_table, 'grant_list') == false) {
+		PC_Util::redirect_top();
+	    }
+	    
+            $this->scaffold($this->_module, $this->_table, 'list');
+        }
     }
     
     public function detail() {
-		if ($this->_flg_scaffold) {
-		    $this->scaffold($this->_module, $this->_table, 'detail');
-		}
+        if ($this->_flg_scaffold) {
+	    if (PC_Grant::check($this->_module, $this->_table, 'grant_detail') == false) {
+		PC_Util::redirect_top();
+	    }
+    
+            $this->scaffold($this->_module, $this->_table, 'detail');
+        }
     }
     
     public function edit() {
-		if ($this->_flg_scaffold) {
-		    $this->scaffold($this->_module, $this->_table, 'form');
-		}
+        if ($this->_flg_scaffold) {
+	    $ormap = PumpORMAP_Util::get($this->_module, $this->_table);
+	    $item = $ormap->get_one(PumpForm::get_target_id());
+	    if (PC_Grant::check($this->_module, $this->_table, 'grant_edit', @$item['reg_user']) == false) {
+		PC_Util::redirect_top();
+	    }
+    
+            $this->scaffold($this->_module, $this->_table, 'form');
+        }
     }
     
     public function add() {
-		if ($this->_flg_scaffold) {
-		    $this->scaffold($this->_module, $this->_table, 'add');
-		}
+        if ($this->_flg_scaffold) {
+	    if (PC_Grant::check($this->_module, $this->_table, 'grant_add') == false) {
+                PC_Util::redirect_top();
+	    }
+    
+            $this->scaffold($this->_module, $this->_table, 'add');
+        }
     }
     
     public function delete() {
-		if ($this->_flg_scaffold) {
-		    $this->scaffold($this->_module, $this->_table, 'delete');
-		}
+        if ($this->_flg_scaffold) {
+	    $ormap = PumpORMAP_Util::get($this->_module, $this->_table);
+	    $item = $ormap->get_one(PumpForm::get_target_id());
+	    if (PC_Grant::check($this->_module, $this->_table, 'grant_delete', @$item['reg_user']) == false) {
+                PC_Util::redirect_top();
+	    }
+    
+            $this->scaffold($this->_module, $this->_table, 'delete');
+        }
     }
     
 	public function scaffold($module, $table, $file, $api=false) {

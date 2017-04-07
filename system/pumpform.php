@@ -451,6 +451,12 @@ class PumpForm {
         return $pumpform_config[$module][$table]['title'];
     }
 
-
+    static public function get_target_id() {
+        if (self::$target_id) {
+            return self::$target_id;
+        } else {
+            return PC_Config::get('dir4');
+        }
+    }
 }
 

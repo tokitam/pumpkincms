@@ -11,10 +11,10 @@ $pumpform_config['link']['link'] = array(
     'list_php' => 'list',
     'detail_php' => 'detail',
 
-    'grant_index' => [ 'anonymous' => 1, 'registerd_user' => 1, 'posted_user' => 1],
-    'grant_detail' => [ 'anonymous' => 1, 'registered_user' => 1, 'posted_user' => 1],
+    'grant_list' => [ 'anonymous' => 1, 'registerd_user' => 1, 'posted_user' => 1],
+    'grant_detail' => [ 'anonymous' => 2, 'registered_user' => 1, 'posted_user' => 1],
     'grant_add' => [ 'anonymous' => 0, 'registered_user' => 1, 'posted_user' => 1 ], 
-    'grant_update' =>  [ 'anonymous' => 0, 'registered_user' => 0, 'posted_user' => 1 ],
+    'grant_edit' =>  [ 'anonymous' => 0, 'registered_user' => 0, 'posted_user' => 1 ],
     'grant_delete' =>  [ 'anonymous' => 0, 'registered_user' => 0, 'posted_user' => 1 ],
 
     'column' => array(

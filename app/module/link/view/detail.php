@@ -33,8 +33,11 @@ $link = $this->_data['item'];
            ?>
 	   <span class="label label-info"><?php echo htmlspecialchars($tag) ?></span>
 	   <?php
-           endforeach ; 
+           endforeach ;
+           if (PC_Grant::check($this->_module, $this->_table, 'grant_edit', $link['reg_user'])) :
            ?>
+	   <br />[ <a href="<?php echo PC_Config::url() . '/link/index/edit/' . $link['id']; ?>">編集</a> ] 
+           <?php endif ; ?>
 	  </div>
         </div> <!-- row -->
 
