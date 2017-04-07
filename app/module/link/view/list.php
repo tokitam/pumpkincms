@@ -15,7 +15,7 @@ foreach ($list as $link) :
             <div class="page-header">
               <h3 id="indicators"><?php echo htmlspecialchars($link['title']) ?></h3>
 	    </div>
-           <?php echo htmlspecialchars($link['desc']) ?><br />
+              <?php echo htmlspecialchars(PC_Util::mb_truncate($link['desc'], 60)) ?><br />
 	   <?php
            $tag_list = explode(',', $link['tag']);
            foreach ($tag_list as $tag) :
