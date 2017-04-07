@@ -10,7 +10,7 @@ class PumpORMAP {
 	static $_ormap = array();
 
     public function __construct($form_data) {
-		$this->form_config = $this->normalization($form_data);
+        $this->form_config = $this->normalization($form_data);
     }
 
     private function normalization($form_data) {
@@ -21,12 +21,11 @@ class PumpORMAP {
     	}
 
     	if (isset($map['id']) == false) {
-    		$c = 
-    		array('name' => 'id',
-			      'type' => PUMPFORM_PRIMARY_ID,
-			      'visible' => 0,
-			      'list_visible' => 0);
-    		$column_list = array_merge($c, $column_list);
+        	$column_list['_id'] =
+        		array('name' => 'id',
+           		   'type' => PUMPFORM_PRIMARY_ID,
+           		   'visible' => 0,
+			   'list_visible' => 0);
     	}
 
     	if (isset($map['site_id']) == false) {
@@ -66,11 +65,32 @@ class PumpORMAP {
 	              'type' => PUMPFORM_TIME,
 	              'visible' => 0,
 	              'list_visible' => 0);
-		}
+        }
 
-		$form_data['column'] = $column_list;
+        $form_data['column'] = $column_list;
 
-		return $form_data;
+	if (@$form_data['grant']) {
+            if (isset($form_data['grant_list']) == false) {
+		$form_data['grant_list'] = [ 'anonymous' => 1, 'registerd_user' => 1, 'posted_user' => 1];
+	    }
+	    if (isset($form_data['grant_detail']) == false) {
+		$form_data['grant_detail'] = [ 'anonymous' => 1, 'registered_user' => 1, 'posted_user' => 1];
+	    }
+	    if (isset($form_data['grant_add']) == false) {
+		$form_data['grant_add'] = [ 'anonymous' => 0, 'registered_user' => 1, 'posted_user' => 1];
+	    }
+	    if (isset($form_data['grant_edit']) == false) {
+		$form_data['grant_edit'] = [ 'anonymous' => 0, 'registered_user' => 0, 'posted_user' => 1];
+	    }
+	    if (isset($form_data['grant_delete']) == false) {
+		$form_data['grant_delete'] = [ 'anonymous' => 0, 'registered_user' => 0, 'posted_user' => 1];
+	    }
+	}
+	
+	global $pumpform_config;
+	$pumpform_config[$form_data['module']][$form_data['table']] = $form_data;
+
+        return $form_data;
     }
     
     public function get_table() {

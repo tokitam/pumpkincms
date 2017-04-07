@@ -19,6 +19,7 @@ require_once PUMPCMS_SYSTEM_PATH . '/pumpform.php';
 require_once PUMPCMS_SYSTEM_PATH . '/pumpformconfig.php';
 require_once PUMPCMS_SYSTEM_PATH . '/pumpormap.php';
 require_once PUMPCMS_SYSTEM_PATH . '/pumpormap_util.php';
+require_once PUMPCMS_SYSTEM_PATH . '/grant.php';
 require_once PUMPCMS_SYSTEM_PATH . '/util.php';
 require_once PUMPCMS_SYSTEM_PATH . '/siteinfo.php';
 require_once PUMPCMS_SYSTEM_PATH . '/userinfo.php';
