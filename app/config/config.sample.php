@@ -46,10 +46,12 @@ $pc_config['site_config'] = array(
     ),
 
   // twitter setting
+  'twitter_auth' => 0,
   'twitter_consumer_key' => 'XXXXXXXXXXXXXXXXXXXXXXXXX',
   'twitter_consumer_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
 
   // facebook setting
+  'facebook_auth' => 0,
   'facebook_app_id' => 'XXXXXXXXXXXXXXX',
   'facebook_app_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
 
