@@ -50,7 +50,7 @@
      })();
 
     </script>
-    <?php echo $this->get_header() ?>
+    <?php if (!empty($this)) { echo $this->get_header(); } ?>
   </head>
   <!-- <body> -->
 <?php if (PC_Config::get('bg_image_url')) : ?>  

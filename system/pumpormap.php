@@ -290,9 +290,13 @@ class PumpORMAP {
 				$types[$p] = PC_Db::T_STRING;
 				array_push($params, $p);
 		} else if ($column['type'] == PUMPFORM_TAG) {
+		    if (@$post[$column['name']]) {
 				$values[$p] = implode(',', @$post[$column['name']]);
-				$types[$p] = PC_Db::T_STRING;
-				array_push($params, $p);
+		    } else {
+				$values[$p] = '';
+		    }
+		    $types[$p] = PC_Db::T_STRING;
+		    array_push($params, $p);
 	    	} else if ($column['type'] == PUMPFORM_INT) {
 				if (@$post[$column['name']] == '') {
 					if (@$column['default']) {
@@ -498,10 +502,12 @@ class PumpORMAP {
 		    	$types[$p] = PC_Db::T_DOUBLE;
 
 		    } else if ($column['type'] == PUMPFORM_TAG) {
+			if (@$post[$column['name']]) {
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
 				$values[$p] = implode(',', @$post[$column['name']]);
 				$types[$p] = PC_Db::T_STRING;
 				$s .= $p;
+			}
 		    } else if ($column['type'] == PUMPFORM_CHECKBOX) {
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
 				if (@$post[$column['name']]) {
