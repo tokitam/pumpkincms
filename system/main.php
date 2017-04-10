@@ -283,7 +283,6 @@ class PC_Main {
 			$this->set_not_found();
 		}
 		
-		$class = new $classname();
 		$method = $this->_method;
 		
 		$this->render->module = $module;

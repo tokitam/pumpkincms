@@ -146,6 +146,8 @@ foreach ($form as $column) {
 	} else if ($column['type'] == PUMPFORM_FILE) {
 		$form_html .= "<input type='file' name='" . $column['name'] . "'><br />\n";
 		$form_html .= 'max size:' . PC_Util::convert_size(PumpUpload::get_max_size());
+	} else if ($column['type'] == PUMPFORM_TAG) {
+	    $form_html .= '<select class="js-pumpform-tag form-control" name="'. $column['name'] . '[]" multiple></select>';
 	} else if ($column['type'] == PUMPFORM_MULTI_CHECKBOX) {
 		$t = $column['option']['type'];
 		$module = $column['option']['option_table']['module'];

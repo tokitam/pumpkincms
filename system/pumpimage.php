@@ -106,6 +106,11 @@ class PumpImage extends PumpUpload {
             $styles['width'] = '100%';
             $styles['height'] = '';
         }
+        if (@$option['width90p']) {
+            $wh = ' width="90%"';
+            $styles['width'] = '90%';
+            $styles['height'] = '';
+        }
         if (@$option['max-width']) {
             $styles['max-width'] = intval($option['max-width']) . 'px';
         }
@@ -667,7 +672,22 @@ class PumpImage extends PumpUpload {
     static public function display_no_image($width, $height, $option) {
         $url = self::get_no_image_url();
 
+        $wh = '';
         $styles = array();
+	if (@$option['width100p']) {
+	    $wh = ' width="100%"';
+	    $styles['width'] = '100%';
+	    $styles['height'] = '';
+	    $width = '';
+	    $height = '';
+	}
+	if (@$option['width90p']) {
+	    $wh = ' width="90%"';
+	    $styles['width'] = '90%';
+	    $styles['height'] = '';
+	    $width = '';
+	    $height = '';
+	}
         if (@$option['css_width']) {
             $styles['width'] = intval($option['css_width']) . 'px';
         }
@@ -675,16 +695,24 @@ class PumpImage extends PumpUpload {
             $styles['height'] = intval($option['css_height']) . 'px';
         }
 
-        $wh = '';
         if (0 < count($styles)) {
             $tmp = array();
             foreach ($styles as $key => $val) {
-                array_push($tmp, $key . ':' . $val);
+		if (! empty($val)) {
+		    array_push($tmp, $key . ':' . $val);
+		}
             }
             $wh .= ' style="' . implode($tmp, '; ') . ';" ';
         }
+	
+	if (! empty($width)) {
+	    $width = sprintf('width="%d"', $width);
+	}
+	if (! empty($height)) {
+	    $height = sprintf('height="%d"', $height);
+	}
 
-        $tag = sprintf('<img src="%s" width="%d" height="%d"%s>', $url, $width, $height, $wh);
+        $tag = sprintf('<img src="%s" %s %s %s>', $url, $width, $height, $wh);
         return $tag;
     }
 

@@ -23,3 +23,4 @@ define('PUMPFORM_TINYMCE', 20);
 define('PUMPFORM_YOUTUBE', 21);
 define('PUMPFORM_MARKDOWN', 22);
 define('PUMPFORM_DOUBLE', 23);
+define('PUMPFORM_TAG', 24);
