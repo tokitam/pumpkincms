@@ -19,7 +19,7 @@ $link = $this->_data['item'];
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6">
 	    <a href="<?php echo $link['url'] ?>">
-            <?php echo PumpImage::get_tag($link['screenshot1'], 500, 500, ['crop' => 1, 'width100p' => 1]); ?>
+            <?php echo PumpImage::get_tag($link['screenshot1'], 500, 375, ['crop' => 0, 'width100p' => 1]); ?>
 	    </a>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6">

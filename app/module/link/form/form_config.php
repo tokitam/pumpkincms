@@ -54,7 +54,9 @@ $pumpform_config['link']['link'] = array(
 	      'visible' => 1,
 	      'registable' => 1,
 	      'editable' => 1,
-	      'list_visible' => 1),
+	      'list_visible' => 1,
+	      'tag_table' => 'tag',
+	      'tag_rel_table' => 'tag_rel'),
 	array('name' => 'screenshot1',
 	      'title' => 'サイトサムネイル',
 	      'type' => PUMPFORM_IMAGE,
@@ -94,4 +96,65 @@ $pumpform_config['link']['link'] = array(
 
     ),		      
 );
+
+$pumpform_config['link']['tag'] = array(
+    'module' => 'link',
+    'title' => 'tag',
+    'table' => 'tag',
+
+    'list_limit' => 10,
+    'default_sort' => 'd_id',
 					 
+    'column' => array(
+
+	array('name' => 'tag',
+	      'title' => 'tag',
+	      'type' => PUMPFORM_TEXT,
+	      'required' => 1,
+	      'visible' => 1,
+	      'registable' => 1,
+	      'editable' => 1,
+	      'list_visible' => 1,
+	      'minlenth' => 0,
+	      'maxlength' => 255),
+	array('name' => 'count',
+	      'title' => 'count',
+	      'type' => PUMPFORM_INT,
+	      'required' => 0,
+	      'visible' => 1,
+	      'registable' => 1,
+	      'editable' => 1,
+	      'list_visible' => 1),
+
+    ),		      
+);
+
+$pumpform_config['link']['tag_rel'] = array(
+    'module' => 'link',
+    'title' => 'tag_rel',
+    'table' => 'tag_rel',
+
+    'list_limit' => 10,
+    'default_sort' => 'd_id',
+					 
+    'column' => array(
+
+	array('name' => 'link_id',
+	      'title' => 'link_id',
+	      'type' => PUMPFORM_INT,
+	      'required' => 1,
+	      'visible' => 1,
+	      'registable' => 1,
+	      'editable' => 1,
+	      'list_visible' => 1),
+	array('name' => 'tag_id',
+	      'title' => 'tag_id',
+	      'type' => PUMPFORM_INT,
+	      'required' => 0,
+	      'visible' => 1,
+	      'registable' => 1,
+	      'editable' => 1,
+	      'list_visible' => 1),
+
+    ),		      
+);

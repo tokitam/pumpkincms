@@ -238,7 +238,8 @@ class PumpORMAP {
 	
 		$values = array();
 		$types = array();
-		$params = array();
+		$params = array();	
+		$tag_column_list = array();	
 		$upload = '';
 		$geolocation = false;
 		$i = 0;
@@ -292,6 +293,7 @@ class PumpORMAP {
 		} else if ($column['type'] == PUMPFORM_TAG) {
 		    if (@$post[$column['name']]) {
 				$values[$p] = implode(',', @$post[$column['name']]);
+				array_push($tag_column_list, $column);
 		    } else {
 				$values[$p] = '';
 		    }
@@ -388,6 +390,27 @@ class PumpORMAP {
 				}
 			}
 		}
+	
+        if (0 < count($tag_column_list)) {
+			foreach ($tag_column_list as $column) {
+				$module = $this->form_config['module'];
+				$tag_table = $column['tag_table'];
+				$tag_rel_table = $column['tag_rel_table'];
+				$tag_ormap = PumpORMAP_Util::get($module, $tag_table);
+				$tag_rel_ormap = PumpORMAP_Util::get($module, $tag_rel_table);
+				foreach (@$post[$column['name']] as $t) {
+					$l = $tag_ormap->get_list($column['name'] . ' LIKE '. $db->escape('%' . $t. '%'));
+					if (is_array($l) && 0 < count($l)) {
+						$a = array_pop($l);
+						$tag_ormap->update($a['id'], '', ['count' => ($a['count'] + 1)]);
+						$tag_id = $a['id'];
+					} else {
+						$tag_id = $tag_ormap->insert(['tag' => $t, 'count' => 1]);
+					}
+					$tag_rel_ormap->insert(['tag_id' => $tag_id, 'link_id' => $insert_id]);
+				}
+			}
+        }
 
 		return $insert_id;
     }
@@ -502,12 +525,32 @@ class PumpORMAP {
 		    	$types[$p] = PC_Db::T_DOUBLE;
 
 		    } else if ($column['type'] == PUMPFORM_TAG) {
-			if (@$post[$column['name']]) {
-				$s = ' ' . $db->column_escape($column['name']) . ' = ';
-				$values[$p] = implode(',', @$post[$column['name']]);
-				$types[$p] = PC_Db::T_STRING;
-				$s .= $p;
-			}
+				if (@$post[$column['name']]) {
+					$s = ' ' . $db->column_escape($column['name']) . ' = ';
+					$values[$p] = implode(',', @$post[$column['name']]);
+					$types[$p] = PC_Db::T_STRING;
+					$s .= $p;
+					
+					$module = $this->form_config['module'];
+					$tag_table = $column['tag_table'];
+					$tag_rel_table = $column['tag_rel_table'];
+					$tag_ormap = PumpORMAP_Util::get($module, $tag_table);
+					$tag_rel_ormap = PumpORMAP_Util::get($module, $tag_rel_table);
+					
+					$tag_rel_ormap->delete_where('link_id = ' . intval($id));
+					
+					foreach (@$post[$column['name']] as $t) {
+						$l = $tag_ormap->get_list($column['name'] . ' LIKE '. $db->escape('%' . $t. '%'));
+						if (is_array($l) && 0 < count($l)) {
+							$a = array_pop($l);
+							$tag_ormap->update($a['id'], '', ['count' => ($a['count'] + 1)]);
+							$tag_id = $a['id'];
+						} else {
+							$tag_id = $tag_ormap->insert(['tag' => $t, 'count' => 1]);
+						}
+						$tag_rel_ormap->insert(['tag_id' => $tag_id, 'link_id' => $id]);
+					}
+				}
 		    } else if ($column['type'] == PUMPFORM_CHECKBOX) {
 				$s = ' ' . $db->column_escape($column['name']) . ' = ';
 				if (@$post[$column['name']]) {

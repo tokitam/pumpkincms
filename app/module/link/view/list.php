@@ -8,7 +8,7 @@ foreach ($list as $link) :
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-3">
 	    <a href="<?php echo PC_Config::url() . '/link/' . intval($link['id']) . '/'; ?>">
-            <?php echo PumpImage::get_tag($link['screenshot1'], 500, 500, ['crop' => 1, 'width100p' => 1]); ?>
+            <?php echo PumpImage::get_tag($link['screenshot1'], 500, 375, ['crop' => 0, 'width100p' => 1]); ?>
 	    </a>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-7">

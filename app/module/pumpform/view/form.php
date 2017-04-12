@@ -147,7 +147,19 @@ foreach ($form as $column) {
 		$form_html .= "<input type='file' name='" . $column['name'] . "'><br />\n";
 		$form_html .= 'max size:' . PC_Util::convert_size(PumpUpload::get_max_size());
 	} else if ($column['type'] == PUMPFORM_TAG) {
-	    $form_html .= '<select class="js-pumpform-tag form-control" name="'. $column['name'] . '[]" multiple></select>';
+		$tag_list = array();
+		if (@$_POST[$column['name']]) {
+		    $tag_list = $_POST[$column['name']];
+		} else if (@$item[$column['name']]) {
+		    $tag_list = explode(',', $item[$column['name']]);
+		}
+		
+	    $form_html .= '<select class="js-pumpform-tag form-control" name="'. $column['name'] . '[]" multiple>';
+		foreach ($tag_list as $tag) {
+			$tag = htmlspecialchars($tag);
+			$form_html .= sprintf("<option value='%s' selected>%s</option>", $tag, $tag);
+		}
+		$form_html .= '</select>';
 	} else if ($column['type'] == PUMPFORM_MULTI_CHECKBOX) {
 		$t = $column['option']['type'];
 		$module = $column['option']['option_table']['module'];
