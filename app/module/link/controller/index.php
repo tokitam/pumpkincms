@@ -1,6 +1,8 @@
 <?php
 
 class link_index extends PC_Controller {
+	var $tag_list = null;
+	
     public function __construct() {
 
 	//PC_Util::redirect_if_not_site_admin();
@@ -22,7 +24,16 @@ class link_index extends PC_Controller {
 	parent::detail();
     }
     
-    public function add() {
-	parent::add();
+    public function index() {
+        if (isset($_GET['tag'])) {
+			$db = PC_DBSet::get();
+			PumpForm::$where = ' ( tag LIKE ' . $db->escape('%' . $_GET['tag']. '%') . ' ) ';
+		}
+		if (PC_Config::get('dir1') == '') {
+			$tag_ormap = PumpORMAP_Util::get('link', 'tag');
+			PC_Config::set('tag_list', $tag_ormap->get_list('', 0, 30, 'count', true));
+		}
+		
+        parent::index();
     }
 }
