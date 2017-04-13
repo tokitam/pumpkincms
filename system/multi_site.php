@@ -30,9 +30,9 @@ class PC_MultiSite {
     }
     
     static function check_site() {
-	if (PC_Config::get('multi_site_db_setting')) {
-	    self::load_site_config();
-	}
+        if (PC_Config::get('multi_site_db_setting')) {
+            self::load_site_config();
+        }
         
         $site_list = PC_Config::get('site_list');
 
@@ -55,7 +55,11 @@ class PC_MultiSite {
                 preg_match('@' . $path . '@', @$_SERVER['REQUEST_URI'])) {
                     
                 PC_Config::set('site_id', $site_id);
-                PC_Config::set('base_url', 'http://' . $site);
+				if (isset($site_data['base_url'])) {
+					PC_Config::set('base_url', $site_data['base_url']);
+                } else {
+					PC_Config::set('base_url', 'http://' . $site);
+				}
                 self::set_site_info($site_data);
                 return;
             }
