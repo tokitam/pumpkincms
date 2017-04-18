@@ -40,6 +40,17 @@ class OAuth_twitter_Model extends PC_Model {
 		return $db->fetch_row($sql);
 	}
 
+	function get_user_by_user_id($user_id) {
+		$db = PC_DBSet::get();
+
+		$sql = ' SELECT * FROM ' . $db->prefix($this->table_name);
+		$sql .= sprintf(' WHERE site_id = %d AND user_id = %d ', SiteInfo::get_site_id(), $user_id);
+		$sql .= ' ORDER BY id DESC ';
+		$sql .= ' LIMIT 1 OFFSET 0 ';
+
+		return $db->fetch_row($sql);
+	}
+
 	function login($user_id) {
 		if (! empty($user_id)) {
 			$user_model = new user_model();

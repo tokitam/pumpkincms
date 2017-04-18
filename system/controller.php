@@ -8,12 +8,10 @@ class PC_Controller {
     var $_module;
     var $_table;
     var $_data;
-    var $_javascript_list;
-    var $_css_list;
+    var $_javascript_list = array();
+    var $_css_list = array();
 
     function __construct() {
-		$this->_javascript_list = array();
-		$this->_css_list = array();
     }
 	
 	function render($class='') {

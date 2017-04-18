@@ -25,6 +25,8 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
     <script type="text/javascript">
+	
+	var base_url = '<?php echo PC_Config::url(); ?>';
 
     $(document).ready(function() {
       
