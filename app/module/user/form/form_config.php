@@ -24,7 +24,7 @@ $pumpform_config['user']['user'] = array(
                          'visible' => 1,
                          'registable' => 1,
                          'editable' => 1,
-                         'list_visible' => 1,),
+                         'list_visible' => 0,),
         'email' => array('name' => 'email',
                          'type' => PUMPFORM_EMAIL,
                          'title' => _MD_USER_EMAIL,
