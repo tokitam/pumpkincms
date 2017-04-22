@@ -9,9 +9,9 @@ class PC_PageNavi {
     var $link_option;
 
     function __construct($total, $offset, $limit, $option=null) {
-    	$this->total = $total;
-    	$this->offset = $offset;
-    	$this->limit = $limit;
+    	$this->total = intval($total);
+    	$this->offset = intval($offset);
+    	$this->limit = intval($limit);
     	$this->navi_html = '';
         $this->option = $option;
 
