@@ -8,12 +8,10 @@ class PC_Controller {
     var $_module;
     var $_table;
     var $_data;
-    var $_javascript_list;
-    var $_css_list;
+    var $_javascript_list = array();
+    var $_css_list = array();
 
     function __construct() {
-		$this->_javascript_list = array();
-		$this->_css_list = array();
     }
 	
 	function render($class='') {
@@ -63,11 +61,13 @@ class PC_Controller {
     
     public function edit() {
         if ($this->_flg_scaffold) {
-	    $ormap = PumpORMAP_Util::get($this->_module, $this->_table);
-	    $item = $ormap->get_one(PumpForm::get_target_id());
-	    if (PC_Grant::check($this->_module, $this->_table, 'grant_edit', @$item['reg_user']) == false) {
-		PC_Util::redirect_top();
-	    }
+			if (PumpForm::get_target_id()) {
+				$ormap = PumpORMAP_Util::get($this->_module, $this->_table);
+				$item = $ormap->get_one(PumpForm::get_target_id());
+				if (PC_Grant::check($this->_module, $this->_table, 'grant_edit', @$item['reg_user']) == false) {
+					PC_Util::redirect_top();
+				}
+			}
     
             $this->scaffold($this->_module, $this->_table, 'form');
         }
