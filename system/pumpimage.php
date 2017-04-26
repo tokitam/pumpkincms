@@ -89,7 +89,7 @@ class PumpImage extends PumpUpload {
         }
 
         $styles = array();
-        $url = PC_Config::get('base_url') . '/image/i/' . intval($image_id) . '_' . $code;
+        $url = PC_Config::url() . '/image/i/' . intval($image_id) . '_' . $code;
         $org_size = $url;
         $wh = '';
 
