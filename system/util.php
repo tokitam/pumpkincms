@@ -386,4 +386,40 @@ class PC_Util {
         shuffle($list);
         return $list[0];
     }
+	
+	static public function convert_url2link($text) {
+		return mb_ereg_replace('(https?://[-_.!~*\'()a-zA-Z0-9;/?:@&=+$,%#]+)', '<a href="\1" target="_blank">\1</a>', $text);
+	}
+	
+	static public function in_text_short_url2long_url($text) {
+		if (empty($text)) {
+			return '';
+		}
+		
+		if (preg_match_all('/(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/', $text, $r)) {
+			foreach ($r[0] as $short_url) {
+				$long_url = self::short_url2long_url($short_url);
+				$text = str_replace($short_url, $long_url, $text);
+			}
+		}
+		
+		return $text;
+	}
+	
+	static public function short_url2long_url($short_url) {
+		if (empty($short_url)) {
+			return '';
+		}
+
+		$headers = get_headers($short_url);
+		foreach ($headers as $header) {
+			if (preg_match('/^location: (.+)$/', $header, $r)) {
+				if (isset($r[1])) {
+					return $r[1];
+				}
+			}
+		}
+		
+		return $short_url;
+	}
 }
