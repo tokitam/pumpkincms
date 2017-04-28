@@ -19,8 +19,10 @@ $(document).ready(function(){
 
     	if (confirm(confirm_text)) {
 			id = $('#target_id').val();
-			var data = {id: id};
-			var url = $('#pumpform_delte_url').val();
+			csrf_token = $('#csrf_token').val();
+			
+			var data = { id: id, csrf_token : csrf_token };
+			var url = $('#pumpform_delete_url').val();
 
             var ret_url = '';
             if ($('#delete_post_redirect').val()) {

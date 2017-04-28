@@ -168,11 +168,12 @@ class PumpForm {
     
     public function get_add_form($module, $table) {
         global $pumpform_config;
-        
+		
         $form = $pumpform_config[$module][$table]['column'];
 
 		$error = array();
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
 	    	$error = $this->validate($module, $table);
 
 			if (count($error) == 0) {
@@ -212,7 +213,7 @@ class PumpForm {
     
     public function get_edit_form($module, $table) {
         global $pumpform_config;
-        
+		
         $form = $pumpform_config[$module][$table]['column'];
 		$form_config = $pumpform_config[$module][$table];
         $data = array();
@@ -355,6 +356,10 @@ class PumpForm {
 
 		$error = array();
         $form = $pumpform_config[$module][$table]['column'];
+		
+		if (Csrf_protection::validate() == false) {
+			$error['csrf'] = 'CSRF check failure';
+		}
 
         foreach ($form as $column) {
 			$data = @$_POST[$column['name']];

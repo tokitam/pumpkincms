@@ -87,6 +87,11 @@ class PC_Controller {
         if ($this->_flg_scaffold) {
 	    $ormap = PumpORMAP_Util::get($this->_module, $this->_table);
 	    $item = $ormap->get_one(PumpForm::get_target_id());
+			
+		if (Csrf_protection::validate() == false) {
+			PC_Util::redirect_top();
+		}
+			
 	    if (PC_Grant::check($this->_module, $this->_table, 'grant_delete', @$item['reg_user']) == false) {
                 PC_Util::redirect_top();
 	    }
@@ -126,6 +131,7 @@ class PC_Controller {
 				$module = 'pumpform';
 				$class = 'form';
 			}
+			Csrf_protection::set_csrf_token();
 		}
 		if ($file == 'detail') {
 			if (@$form_config['detail_php']) {
@@ -142,6 +148,7 @@ class PC_Controller {
 				$module = 'pumpform';
 				$class = $file;
 			}
+			Csrf_protection::set_csrf_token();
 		}
 
 		$theme_template = PUMPCMS_PUBLIC_PATH . '/theme/' . PC_Config::get('theme') . '/template/' . $module_org . '_' . $class . '.php';

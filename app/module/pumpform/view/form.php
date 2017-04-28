@@ -28,6 +28,8 @@ if (isset($target_id)) {
 $form_html .= "<form id='main_form' class='form-horizontal' method='post' enctype='multipart/form-data'>\n";
 $form_html .= '<input type="hidden" name="MAX_FILE_SIZE" value="' . PumpFile::get_max_size() . '" />' . "\n";
 
+$form_html .= Csrf_protection::get_form_part();
+
 $form_html .= "<fieldset>\n";
 $form_html .= "<legend>" . $this->title .  "</legend>\n";
 
@@ -356,7 +358,7 @@ if (PC_Config::get('dir3') == 'edit' && is_numeric(PC_Config::get('dir4')) || Pu
 	}
 	
 	$form_html .= "<input type='hidden' id='pumpform_module_url' value='" . $module_url . "/'>\n";
-	$form_html .= "<input type='hidden' id='pumpform_delte_url' value='" . $delete_url . "'>\n";
+	$form_html .= "<input type='hidden' id='pumpform_delete_url' value='" . $delete_url . "'>\n";
 	$form_html .= "<input type='button' id='pumpform_delete_button' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'><br />\n";
 }
 
