@@ -158,13 +158,18 @@ class PumpORMAP {
 			}
 		} else if (@$this->form_config['default_sort']) {
 
-			$s = explode('_', $this->form_config['default_sort']);
+			if (preg_match('/^d_(.+)$/', $this->form_config['default_sort'], $r)) {
+				$d = true;
+				$column = $r[1];
+			} else {
+				$d = false;
+				$column = $r[1];
+			}
 
 			$sql .= ' ORDER BY ';
-			//$sql .= '`' . $db->escape($s[1]) . '`';
-			$sql .= $db->column_escape($s[1]);
+			$sql .= $db->column_escape($column);
 
-			if ($s[0] == 'd') {
+			if ($d) {
 				$sql .= ' DESC ';
 			}
 		}
