@@ -48,6 +48,14 @@ class PC_Util {
 			return false;
 		}
 	}
+	
+	static function is_domain($domain) {
+		if (preg_match('/^[a-z][0-9a-z\.]+$/i', $domain)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	static function is_twitterid($twitterid) {
 		if (preg_match('/^\@([0-9A-Za-z]+)$/', $twitterid, $r)) {
