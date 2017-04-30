@@ -139,10 +139,10 @@ class TwitterOAuth {
   /**
    * GET wrapper for oAuthRequest.
    */
-  function get($url, $parameters = array()) {
+  function get($url, $parameters = array(), $assoc=false) {
     $response = $this->oAuthRequest($url, 'GET', $parameters);
     if ($this->format === 'json' && $this->decode_json) {
-      return json_decode($response);
+      return json_decode($response, $assoc);
     }
     return $response;
   }
@@ -150,10 +150,10 @@ class TwitterOAuth {
   /**
    * POST wrapper for oAuthRequest.
    */
-  function post($url, $parameters = array()) {
+  function post($url, $parameters = array(), $assoc=false) {
     $response = $this->oAuthRequest($url, 'POST', $parameters);
     if ($this->format === 'json' && $this->decode_json) {
-      return json_decode($response);
+      return json_decode($response, $assoc);
     }
     return $response;
   }
