@@ -60,6 +60,7 @@ if (SiteInfo::is_site_close()) {
               </form>
             <!--</div>-->
           </div> <!-- end col-lg-12 -->
+          <?php if (!empty($this->oauth_tag)) : ?>
           <div class="col-lg-12">
                     <div class="col-lg-10 col-lg-offset-2">
                     <?php foreach ($this->oauth_tag as $tag) : ?>
@@ -67,4 +68,5 @@ if (SiteInfo::is_site_close()) {
                     <?php endforeach; ?>
                     </div>
           </div> <!-- end col-lg-12 -->
+          <?php endif ; ?>
         </div> <!-- end row -->
