@@ -447,4 +447,12 @@ class PC_Util {
 					   mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535)
 					   );
 	}
+	
+	static public function convert_twitter_icon_url($url) {
+		if (preg_match('@(.+)_normal\.(jpeg|jpg|png|gif)$@', $url, $r)) {
+			return $r[1] . '.' . $r[2];
+		}
+		
+		return $url;
+	}
 }

@@ -11,7 +11,7 @@ if (SiteInfo::is_site_close()) {
         <div class="row">
           <div class="col-lg-12">
             <!--<div class="well bs-component">-->
-              <form class="form-horizontal" method="post" action="<?php echo PC_Config::get('base_url'); ?>/user/login">
+              <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/login">
               	<input type="hidden" name="login" value="1">
                 <fieldset>
                   <legend><?php echo _MD_USER_LOGIN ?></legend>
