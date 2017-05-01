@@ -32,6 +32,12 @@ class PC_Util {
 			}
 		}
 	}
+	
+	static function check_batch() {
+		if (isset($_SERVER['REQUEST_METHOD'])) {
+			die();
+		}
+	}
     
 	static function is_email($email) {
 		if (preg_match('|^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$|', $email)) {
