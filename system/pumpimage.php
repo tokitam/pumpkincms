@@ -624,6 +624,18 @@ class PumpImage extends PumpUpload {
         }
     }
 
+    static public function get_mime($type) {
+        if ($type == self::TYPE_JPG) {
+            return 'image/jpg';
+        }
+        if ($type == self::TYPE_PNG) {
+            return 'image/png';
+        }
+        if ($type == self::TYPE_GIF) {
+            return 'imgae/gif';
+        }
+    }
+
     static public function get_upload_image($id, $code, $ext) {
         return self::get_raw_image($id, $code, $ext, 'upload');
     }
