@@ -10,6 +10,9 @@ class Csrf_protection {
 	}
 	
 	static public function get_form_part() {
+		if (empty($_SESSION[self::TOKEN_NAME])) {
+			self::set_csrf_token();
+		}
 		if (PC_Config::get('csrf_protection')) {
 			return sprintf('<input type="hidden" id="%s" name="%s" value="%s" />' . "\n", self::TOKEN_NAME, self::TOKEN_NAME, $_SESSION[self::TOKEN_NAME]);
 		}
