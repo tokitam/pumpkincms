@@ -108,7 +108,7 @@ class OAuth_twitter {
 		return false;
 	    }
 
-	    return $profile->profile_image_url;
+	    return PC_Util::convert_twitter_icon_url($profile->profile_image_url);
 	}
 
 	public function login($twitter_user) {
