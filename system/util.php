@@ -1,6 +1,7 @@
 <?php
 
 require_once PUMPCMS_ROOT_PATH . '/external/OpenGraph.php';
+require_once PUMPCMS_SYSTEM_PATH . '/pumpmailer.php';
 
 class PC_Util {
 	static function redirect($url) {
@@ -56,7 +57,7 @@ class PC_Util {
 	}
 	
 	static function is_domain($domain) {
-		if (preg_match('/^[a-z][0-9a-z\.]+$/i', $domain)) {
+		if (preg_match('/^[a-z][0-9a-z\.\-]+$/i', $domain)) {
 			return true;
 		} else {
 			return false;
@@ -72,7 +73,12 @@ class PC_Util {
 	}
     
 	static function mail($to, $subject, $message) {
-
+		if (PC_Config::get('mail_function') == 'phpmailer') {
+			$mailer = new PumpMailer();
+			$mailer->send($to, $subject, $message);
+			return;
+		}
+		
 		mb_internal_encoding('UTF-8');
 
 		$subject = preg_replace('/\[site_title\]/', PC_Config::get('site_title'), $subject);
