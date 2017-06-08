@@ -4,7 +4,7 @@
 <?php foreach ($this->list as $actionlog) : ?>
 <tr>
 	<td><?php echo $actionlog['user_id'] ?></td>
-	<td><?php echo $actionlog['type'] ?></td>
+	<td><?php echo ActionLog::type_text($actionlog['type']) ?></td>
 	<td><?php echo long2ip($actionlog['ip_address']) ?></td>
 	<td><?php echo date('Y-m-d H:i', $actionlog['reg_time']) ?></td>
 	<td><?php echo htmlspecialchars($actionlog['desc']) ?></td>	

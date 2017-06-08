@@ -7,6 +7,15 @@ class ActionLog {
 	const REGISTER_FINISH = 4;
 	const TEL_AUTH_TEMP = 5;
 	const TEL_AUTH_FINISH = 6;
+	
+	static $type_list = [
+						 self::LOGIN => 'login',
+						 self::LOGOUT => 'logout',
+						 self::REGISTER_TEMP => 'register temp',
+						 self::REGISTER_FINISH => 'register finish',
+						 self::TEL_AUTH_TEMP => 'tel auth temp',
+						 self::TEL_AUTH_FINISH => 'tel auth finish',
+						 ];
 
 	static public function log($type, $desc='', $param1=0, $param2=0, $param3=0, $param4=0) {
 
@@ -33,5 +42,13 @@ class ActionLog {
 			'user_agent' => $user_agent);
 
 		$ormap->insert($arr);
+	}
+	
+	static function type_text($type) {
+		if (empty(self::$type_list[$type])) {
+			return '';
+		}
+		
+		return self::$type_list[$type];
 	}
 }
