@@ -81,6 +81,11 @@
               <a href="<?php echo PC_Config::url() ?>/admin/"><?php echo _MD_USER_MASTER_ADMIN ?></a>
             </li>
 <?php endif ;  ?>
+<?php if (UserInfo::is_admin_switch()) : ?>
+            <li>
+              <a href="<?php echo PC_Config::url() ?>/user/admin_switch"><?php echo _MD_USER_MASTER_ADMIN_SWITCH ?></a>
+            </li>
+<?php endif ;  ?>
 
                     <li class="dropdown user user-menu">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo UserInfo::get('name') ?> <b class="caret"></b></a>

@@ -16,6 +16,12 @@ class UserInfo {
         self::$_data[$key] = $value;
     }
 
+    static function set_all($tmp) {
+        $_SESSION['pump_'. PC_Config::get('site_id')]['user'] = $tmp;
+        $_SESSION['user'] = $tmp;
+        self::$_data = $value;
+    }
+
     static function get_data($key=false) {
         if (self::$_data == null) {
             self::$_data = @$_SESSION['pump_'. PC_Config::get('site_id')]['user'];
@@ -69,6 +75,14 @@ class UserInfo {
     
     static function is_admin_mode() {
         if (PC_Config::get('dir1') == 'admin') {
+            return true;
+        }
+	
+        return false;
+    }
+
+    static function is_admin_switch() {
+        if (isset($_SESSION['pump_'. PC_Config::get('site_id')]['admin_user'])) {
             return true;
         }
 	

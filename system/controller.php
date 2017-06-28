@@ -153,7 +153,9 @@ class PC_Controller {
 
 		$theme_template = PUMPCMS_PUBLIC_PATH . '/theme/' . PC_Config::get('theme') . '/template/' . $module_org . '_' . $class . '.php';
 
-		if (is_readable($theme_template)) {
+		if (preg_match('@/@', $class)) {
+			$file = $class;
+		} else if (is_readable($theme_template)) {
 			$file = $theme_template;
 		} else {
 			$file = PUMPCMS_APP_PATH . '/module/' . $module . '/view/' . $class . '.php';
