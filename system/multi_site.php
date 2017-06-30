@@ -55,11 +55,11 @@ class PC_MultiSite {
                 preg_match('@' . $path . '@', @$_SERVER['REQUEST_URI'])) {
                     
                 PC_Config::set('site_id', $site_id);
-				if (isset($site_data['base_url'])) {
-					PC_Config::set('base_url', $site_data['base_url']);
+                if (isset($site_data['base_url'])) {
+                    PC_Config::set('base_url', $site_data['base_url']);
                 } else {
-					PC_Config::set('base_url', 'http://' . $site);
-				}
+                    PC_Config::set('base_url', 'http://' . $site);
+                }
                 self::set_site_info($site_data);
                 return;
             }

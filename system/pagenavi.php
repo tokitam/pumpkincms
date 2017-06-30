@@ -1,18 +1,18 @@
 <?php
 
 class PC_PageNavi {
-	var $total;
-	var $offset;
-	var $limit;
-	var $navi_html;
+    var $total;
+    var $offset;
+    var $limit;
+    var $navi_html;
     var $option;
     var $link_option;
 
     function __construct($total, $offset, $limit, $option=null) {
-    	$this->total = intval($total);
-    	$this->offset = intval($offset);
-    	$this->limit = intval($limit);
-    	$this->navi_html = '';
+        $this->total = intval($total);
+        $this->offset = intval($offset);
+        $this->limit = intval($limit);
+        $this->navi_html = '';
         $this->option = $option;
 
         if ($this->total <= $this->offset) {
@@ -91,11 +91,11 @@ class PC_PageNavi {
 
         for ($i=1; $i <= $num_of_page; $i++) {
             if ($i == $now_page || $i == 1 || $i == $num_of_page || ($i < $now_page + 4 && $now_page - 4 < $i)) {
-		if ($i == $now_page) {
-		    array_push($list, array('page' => $i, 'value' => ($this->limit * ($i - 1))));
-		    continue;
-		}
-		
+                if ($i == $now_page) {
+                    array_push($list, array('page' => $i, 'value' => ($this->limit * ($i - 1))));
+                    continue;
+                }
+
                 if ($i == $num_of_page && $now_page < $num_of_page - 4) {
                     array_push($list, array('page' => $i, 'value' => -1));
                 }
@@ -103,40 +103,40 @@ class PC_PageNavi {
                 if ($i == 1 & 4 + 1 < $now_page) {
                     array_push($list, array('page' => $i, 'value' => -1));
                 }
-                
+
             }
-          
+
         }
 
         return $list;
     }
 
     function get_page_link() {
-    	if ($this->navi_html != '') {
-    		return $this->navi_html;
-    	}
-	if ($this->total < $this->limit) {
-	    $this->navi_html = '';
-	    return $this->navi_html;
-	}
-	
-	if (preg_match('/^[ud]_[_0-9A-Za-z]+$/', @$_GET['sort'])) {
-	    $sort = '&sort=' . $_GET['sort'];
-	} else {
-	    $sort = '';
-	}
+        if ($this->navi_html != '') {
+            return $this->navi_html;
+        }
+        if ($this->total < $this->limit) {
+            $this->navi_html = '';
+            return $this->navi_html;
+        }
 
-    	$html = '<ul class="pagination">' . "\n";
+        if (preg_match('/^[ud]_[_0-9A-Za-z]+$/', @$_GET['sort'])) {
+            $sort = '&sort=' . $_GET['sort'];
+        } else {
+            $sort = '';
+        }
 
-    	if ($this->need_prev_link()) {
+        $html = '<ul class="pagination">' . "\n";
+
+        if ($this->need_prev_link()) {
             $html .= sprintf('<li><a href="?offset=%d&limit=%d%s%s">&lt;</a></li> ' . "\n", $this->get_prev(), $this->limit, $this->link_option, $sort);
         } else {
             $html .= sprintf('<li class="disabled"><a>&lt;</a></li> ' . "\n", $this->get_prev(), $this->limit, $sort);
         }
 
-    	$list = $this->get_page_list();
+        $list = $this->get_page_list();
 
-    	foreach ($list as $key => $item) {
+        foreach ($list as $key => $item) {
             $offset = $item['value'];
             $page = $item['page'];
 
@@ -145,26 +145,23 @@ class PC_PageNavi {
                 continue;
             }
 
-    		if ($offset == $this->offset) {
-	    		$html .= sprintf('<li class="active"><a>%d</a></li> ' . "\n", $page);
-	    	} else {
-	    		$html .= sprintf('<li><a href="?offset=%d&limit=%d%s%s">%d</a></li> ' . "\n", $offset, $this->limit, $this->link_option, $sort, $page);
-	    	}
-    	}
+            if ($offset == $this->offset) {
+                $html .= sprintf('<li class="active"><a>%d</a></li> ' . "\n", $page);
+            } else {
+                $html .= sprintf('<li><a href="?offset=%d&limit=%d%s%s">%d</a></li> ' . "\n", $offset, $this->limit, $this->link_option, $sort, $page);
+            }
+        }
 
-    	if ($this->need_next_link()) {
+        if ($this->need_next_link()) {
             $html .= sprintf('<li><a href="?offset=%d&limit=%d%s%s">&gt;</a></li> ' . "\n", $this->get_next(), $this->limit, $this->link_option, $sort);
-    	} else {
+        } else {
             $html .= sprintf('<li class="disabled"><a>&gt;</a></li> ' . "\n", $this->get_next(), $this->limit, $sort);
         }
 
         $html .= '</ul>' . "\n";
 
-    	$this->navi_html = $html;
+        $this->navi_html = $html;
 
-    	return $html;
+        return $html;
     }
 }
-
-
-

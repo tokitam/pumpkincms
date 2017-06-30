@@ -1,241 +1,217 @@
 <?php
 
 class PC_Db_mysql extends PC_Db {
-	private $_con;
-	private $_result;
-	private $_config;
-	private $_row_count = 0;
+    private $_con;
+    private $_result;
+    private $_config;
+    private $_row_count = 0;
 
-	const MYSQLI = 'mysqli';
-	
-	function __construct() {
-	}
-	
-	function connect() {
+    const MYSQLI = 'mysqli';
 
-	        $c = PC_Config::get('database', PC_Config::get('db_no'));
-		$this->_config = $c;
+    function __construct() {
+    }
 
-		$this->_con = new mysqli($c['db_host'],
-								$c['db_user'],
-								$c['db_pass'],
-								$c['db_name']);
-								
-		if ($this->_con->connect_error) {
-			PC_Abort::abort('Connect Error (' . $this->_con->connect_errno . ') ' . $this->_con->connect_error);
-		}
-	    
-	    $this->_con->set_charset('utf8');
-	}
+    function connect() {
 
-	function get_driver() {
-		return self::MYSQLI;
-	}
+        $c = PC_Config::get('database', PC_Config::get('db_no'));
+        $this->_config = $c;
 
-	function prefix($table) {
-		return $this->_config['db_prefix'] . '_' . $table;
-	}
-	
-	function close() {
-		$this->_con->close();
-	}
+        $this->_con = new mysqli($c['db_host'],
+            $c['db_user'],
+            $c['db_pass'],
+            $c['db_name']);
 
-	function prepare($sql) {
-		PC_Debug::log($sql, __FILE__, __LINE__);
+        if ($this->_con->connect_error) {
+            PC_Abort::abort('Connect Error (' . $this->_con->connect_errno . ') ' . $this->_con->connect_error);
+        }
 
-		try {
-			$this->_stmt = $this->_con->prepare($sql);
-		} catch (Exception $e) {
-			$this->abort($sql);
-		}
+        $this->_con->set_charset('utf8');
+    }
 
-		if ($this->_stmt == false) {
-			$this->abort($sql, __FILE__ . ':' . __LINE__ . ' ' . print_r($this->_con->errno, true) . ':' . print_r($this->_con->error, true));
-		}
+    function get_driver() {
+        return self::MYSQLI;
+    }
 
-		return $this->_stmt;
-	}
+    function prefix($table) {
+        return $this->_config['db_prefix'] . '_' . $table;
+    }
 
-	/*
-	function query($sql) {
-		PC_Debug::log($sql, __FILE__, __LINE__);
-		
-		$this->_result = $this->_con->query($sql, MYSQLI_USE_RESULT);
+    function close() {
+        $this->_con->close();
+    }
 
-		if ($this->_result == false) {
-			$str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
-			if (UserInfo::is_master_admin()) {
-				$str .= ' SQL:' . $sql;
-			}
-			PC_Abort::abort($str);
-		}
+    function prepare($sql) {
+        PC_Debug::log($sql, __FILE__, __LINE__);
 
-	}
-*/
-	function query($sql, $values=array(), $types=array()) {
-		PC_Debug::log($sql, __FILE__, __LINE__);
+        try {
+            $this->_stmt = $this->_con->prepare($sql);
+        } catch (Exception $e) {
+            $this->abort($sql);
+        }
 
-		$sql = preg_replace('/:p\d\d?/', '?', $sql);
-		
-		$stmt = $this->_con->prepare($sql);
+        if ($this->_stmt == false) {
+            $this->abort($sql, __FILE__ . ':' . __LINE__ . ' ' . print_r($this->_con->errno, true) . ':' . print_r($this->_con->error, true));
+        }
 
-		if ($stmt == false) {
-			$str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
-			if (UserInfo::is_master_admin()) {
-				$str .= ' SQL:' . $sql;
-			}
-			PC_Abort::abort($str);
-		}
+        return $this->_stmt;
+    }
 
-		$t = '';
-		$v = array();
-		foreach ($values as $key => $value) {
-			$t .= $types[$key];
-			array_push($v, $value);
-		}
+    function query($sql, $values=array(), $types=array()) {
+        PC_Debug::log($sql, __FILE__, __LINE__);
 
-		$p = array_merge(array($t), $v);
-		if (0 < count($values)) {
-			call_user_func_array(array($stmt, 'bind_param'), PC_Util::ref_values($p));
-		}
+        $sql = preg_replace('/:p\d\d?/', '?', $sql);
 
-		$ret = $stmt->execute();
-		if ($ret == false) {
-			$str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
-			if (UserInfo::is_master_admin()) {
-				$str .= ' SQL:' . $sql;
-			}
-			PC_Abort::abort($str);
-		}
+        $stmt = $this->_con->prepare($sql);
 
-		$this->_result = $stmt->get_result();
+        if ($stmt == false) {
+            $str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
+            if (UserInfo::is_master_admin()) {
+                $str .= ' SQL:' . $sql;
+            }
+            PC_Abort::abort($str);
+        }
 
-		$this->_row_count = $this->_con->affected_rows;
-	}
+        $t = '';
+        $v = array();
+        foreach ($values as $key => $value) {
+            $t .= $types[$key];
+            array_push($v, $value);
+        }
 
-	function exec($sql, $values, $types) {
-		PC_Debug::log($sql, __FILE__, __LINE__);
+        $p = array_merge(array($t), $v);
+        if (0 < count($values)) {
+            call_user_func_array(array($stmt, 'bind_param'), PC_Util::ref_values($p));
+        }
 
-		$sql = preg_replace('/:p\d\d?/', '?', $sql);
+        $ret = $stmt->execute();
+        if ($ret == false) {
+            $str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
+            if (UserInfo::is_master_admin()) {
+                $str .= ' SQL:' . $sql;
+            }
+            PC_Abort::abort($str);
+        }
 
-		$stmt = $this->_con->prepare($sql);
+        $this->_result = $stmt->get_result();
 
-		if ($stmt == false) {
-			$str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
-			if (UserInfo::is_master_admin()) {
-				$str .= ' SQL:' . $sql;
-			}
-			PC_Abort::abort($str);
-		}
+        $this->_row_count = $this->_con->affected_rows;
+    }
 
-		$t = '';
-		$v = array();
-		foreach ($values as $key => $value) {
-			$t .= $types[$key];
-			array_push($v, $value);
-		}
-		//$stmt->bind_param($t, $v);
-		$p = array_merge(array($t), $v);
-		call_user_func_array(array($stmt, 'bind_param'), PC_Util::ref_values($p));
+    function exec($sql, $values, $types) {
+        PC_Debug::log($sql, __FILE__, __LINE__);
 
-		$ret = $stmt->execute();
-		if ($ret == false) {
-			$str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
-			if (UserInfo::is_master_admin()) {
-				$str .= ' SQL:' . $sql;
-			}
-			PC_Abort::abort($str);
-		}
+        $sql = preg_replace('/:p\d\d?/', '?', $sql);
 
-		$stmt->close();
+        $stmt = $this->_con->prepare($sql);
 
-		$this->_row_count = $this->_con->affected_rows;
-	}
+        if ($stmt == false) {
+            $str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
+            if (UserInfo::is_master_admin()) {
+                $str .= ' SQL:' . $sql;
+            }
+            PC_Abort::abort($str);
+        }
 
-	function execute_with_upload($sql, $upload) {
-	    echo " sql : $sql ";
-	    $stmt = $this->_con->prepare($sql);
+        $t = '';
+        $v = array();
+        foreach ($values as $key => $value) {
+            $t .= $types[$key];
+            array_push($v, $value);
+        }
 
-	    if ($stmt == false) {
-		PC_Abort::abort('Query Error (' . $this->_con->errno . ') ' . $this->_con->error);
-	    }
-	    /*
-	    $null = NULL;
-	    $stmt->bind_param('b', $null);
-	    $fp = fopen($_FILES[$upload]['tmp_name'], 'r');
-	    while (! feof($fp)) {
-		$stmt->send_long_data(0, fread($fp, 8192));
-	    }
-	    fclose($fp);
-	     * */
-	    $s = 'hello';
-	    $stmt->bind_param('b', $s);
-	    
-	    $this->_result = $stmt->execute();
+        $p = array_merge(array($t), $v);
+        call_user_func_array(array($stmt, 'bind_param'), PC_Util::ref_values($p));
 
-	    if ($this->_result == false) {
-	    	$str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
-	    	if (UserInfo::is_master_admin()) {
-	    		$str . ' ' . $sql;
-	    	}
-			PC_Abort::abort($str);
-	    }
+        $ret = $stmt->execute();
+        if ($ret == false) {
+            $str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
+            if (UserInfo::is_master_admin()) {
+                $str .= ' SQL:' . $sql;
+            }
+            PC_Abort::abort($str);
+        }
 
-	}
-	
-	function fetch_row($sql, $values=array(), $types=array()) {
-		$this->query($sql, $values, $types);
+        $stmt->close();
 
-		$row = $this->_result->fetch_assoc();
-		
-		$this->_result->close();
+        $this->_row_count = $this->_con->affected_rows;
+    }
 
-		return $row;
-		
-	}
-	
-	function fetch_assoc($sql, $values=array(), $types=array()) {
-		$this->query($sql, $values, $types);
-		
-		$list = array();
-		while ($row = $this->_result->fetch_assoc()) {
-			array_push($list, $row);
-		}
-		
-		$this->_result->close();
+    function execute_with_upload($sql, $upload) {
+        echo " sql : $sql ";
+        $stmt = $this->_con->prepare($sql);
 
-		return $list;
-		
-	}
-	
+        if ($stmt == false) {
+            PC_Abort::abort('Query Error (' . $this->_con->errno . ') ' . $this->_con->error);
+        }
+
+        $s = 'hello';
+        $stmt->bind_param('b', $s);
+
+        $this->_result = $stmt->execute();
+
+        if ($this->_result == false) {
+            $str = 'Query Error (' . $this->_con->errno . ') ' . $this->_con->error;
+            if (UserInfo::is_master_admin()) {
+                $str . ' ' . $sql;
+            }
+            PC_Abort::abort($str);
+        }
+
+    }
+
+    function fetch_row($sql, $values=array(), $types=array()) {
+        $this->query($sql, $values, $types);
+
+        $row = $this->_result->fetch_assoc();
+
+        $this->_result->close();
+
+        return $row;
+
+    }
+
+    function fetch_assoc($sql, $values=array(), $types=array()) {
+        $this->query($sql, $values, $types);
+
+        $list = array();
+        while ($row = $this->_result->fetch_assoc()) {
+            array_push($list, $row);
+        }
+
+        $this->_result->close();
+
+        return $list;
+
+    }
+
     function insert_id() {
-	    return $this->_con->insert_id;
-	}
+        return $this->_con->insert_id;
+    }
 
-	function row_count() {
-		return $this->_row_count;
-	}
+    function row_count() {
+        return $this->_row_count;
+    }
 
     function escape($str) {
-		return "'" . $this->_con->real_escape_string($str) . "'"; 
-	}
+        return "'" . $this->_con->real_escape_string($str) . "'"; 
+    }
 
     function column_escape($str) {
-		$s = $this->_con->real_escape_string($str);
+        $s = $this->_con->real_escape_string($str);
 
-		return '`' . $s . '`';
-	}
+        return '`' . $s . '`';
+    }
 
-	function abort($sql='', $err='') {
-	    $str = 'Query Error (' . @$this->_con->errno . ') ' . @$this->_con->error;
+    function abort($sql='', $err='') {
+        $str = 'Query Error (' . @$this->_con->errno . ') ' . @$this->_con->error;
 
-	    if (UserInfo::is_master_admin()) {
-			$str .= ' ' . $this->_sql . ' ' . $sql;
-			$str .= ' err:' . $err . ' ';
+        if (UserInfo::is_master_admin()) {
+            $str .= ' ' . $this->_sql . ' ' . $sql;
+            $str .= ' err:' . $err . ' ';
 
-			PC_Debug::log('err:' . $str, __FILE__, __LINE__);
-			PC_Debug::log(print_r(debug_backtrace(), true), __FILE__, __LINE__);
-	    }
-	    PC_Abort::abort();
-	}
+            PC_Debug::log('err:' . $str, __FILE__, __LINE__);
+            PC_Debug::log(print_r(debug_backtrace(), true), __FILE__, __LINE__);
+        }
+        PC_Abort::abort();
+    }
 }
