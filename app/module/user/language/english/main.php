@@ -47,6 +47,7 @@ define('_MD_USER_MYPAGE', 'My page');
 define('_MD_UESR_SITE_CLOSE', 'Maintenance!!!');
 define('_MD_USER_SITE_CLOSE_INFO', 'administrator only login');
 define('_MD_USER_MASTER_ADMIN', 'Master admin');
+define('_MD_USER_MASTER_ADMIN_SWITCH', 'Admin switch');
 define('_MD_USER_ADD_ACCOUNT', 'Add account');
 define('_MD_USER_ADDED_ACCOUNT', 'Added account');
 define('_MD_USER_NO_SAME_ACCOUNT', 'No good account');

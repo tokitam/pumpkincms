@@ -49,6 +49,7 @@ define('_MD_USER_SENT_MAIL', '確認メールメールを送信しました！<b
 define('_MD_UESR_SITE_CLOSE', 'メンテナンス中です');
 define('_MD_USER_SITE_CLOSE_INFO', '管理者のみログイン可能です');
 define('_MD_USER_MASTER_ADMIN', 'マスター管理');
+define('_MD_USER_MASTER_ADMIN_SWITCH', '管理者切替');
 define('_MD_USER_ADD_ACCOUNT', 'アカウント連携');
 define('_MD_USER_ADDED_ACCOUNT', 'アカウント追加しました');
 define('_MD_USER_NO_SAME_ACCOUNT', 'ログインユーザと同じアカウントは関連付けできません');
