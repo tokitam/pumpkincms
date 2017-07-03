@@ -19,7 +19,7 @@ class admin_user extends PC_Controller {
         parent::index();
     }
 
-    public function switch() {
+    public function switch_user() {
         if (empty($_GET['user_id']) || is_numeric($_GET['user_id']) == false) {
             PC_Util::redirect_top();
         }

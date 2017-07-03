@@ -147,7 +147,7 @@ if (@$form_config['1n_link_id']) {
         $html .= "&nbsp;";
         $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_EDIT . "</a> ";
         $html .= "&nbsp;";
-        $html .= "<a href='" . $module_url . "/switch/?user_id=" . $item['id'] . "' class='btn btn-default'>switch</a> ";
+        $html .= "<a href='" . $module_url . "/switch_user/?user_id=" . $item['id'] . "' class='btn btn-default'>switch</a> ";
         $html .= "</td>\n";
         $html .= "</tr>\n";
     }
