@@ -2,7 +2,7 @@
 
 class index_loadjs extends PC_Controller {
     public function index() {
-		
+
         if (empty($_GET['module']) || empty($_GET['file'])) {
             exit();
         }

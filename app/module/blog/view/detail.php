@@ -1,7 +1,7 @@
 <?php
 if (PC_Util::is_admin_dir()) {
-	include PUMPCMS_APP_PATH . '/module/pumpform/view/detail.php';
-	return;
+    include PUMPCMS_APP_PATH . '/module/pumpform/view/detail.php';
+    return;
 }
 
 require_once PUMPCMS_APP_PATH . '/module/blog/class/blogutil.php';

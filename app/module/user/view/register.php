@@ -3,17 +3,17 @@
           <div class="col-lg-12">
             <!--<div class="well bs-component">-->
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/register/">
-              	<input type="hidden" name="post" value="1">
-              	<?php if (@$_GET['type'] || @$_POST['type']) : ?>
-              	<input type="hidden" name="type" value="<?php echo intval(@$_GET['type'] || @$_POST['type']) ?>">
-              	<?php endif ; ?>
+                  <input type="hidden" name="post" value="1">
+                  <?php if (@$_GET['type'] || @$_POST['type']) : ?>
+                  <input type="hidden" name="type" value="<?php echo intval(@$_GET['type'] || @$_POST['type']) ?>">
+                  <?php endif ; ?>
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
                   <div class="form-group">
                     <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_LOGIN_ID ?></label>
                     <div class="col-lg-9">
                       <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_INPUT_ID ?>" name="name" value="<?php echo htmlspecialchars(@$_POST['name']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_INPUT_ID_FORMAT ?>"><br />
-			<small><?php echo _MD_USER_INPUT_ID_FORMAT ?></small>
+            <small><?php echo _MD_USER_INPUT_ID_FORMAT ?></small>
                       <?php
                       if (@$this->error['name']) {
                         echo $this->error['name'];
@@ -47,12 +47,12 @@
                           <input type="checkbox"> Checkbox
                         </label>
                       </div>
-                  		-->
+                          -->
                     </div>
                   </div> <!-- from-group -->
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-		      <?php echo _MD_UESR_MAIL_DOMAIN_SETTING ?><br />
+              <?php echo _MD_UESR_MAIL_DOMAIN_SETTING ?><br />
                       <a href="<?php echo PC_Config::url() ?>/terms" target="_blank" style="font-size: 20px;"><?php echo _MD_USER_TERMS ?></a>
                     </div>
                     <div class="col-lg-10 col-lg-offset-2">
@@ -64,15 +64,15 @@
               </form>
             <!--</div>-->
           </div> <!-- end col-lg-12 -->
-	
+    
           <div class="col-lg-12">
-	                    <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-10 col-lg-offset-2">
                             <?php foreach ($this->oauth_tag as $tag) : ?>
-	                      <?php echo $tag ?>
-	                    <?php endforeach; ?>
-	                    </div>
-	          </div> <!-- end col-lg-12 -->	
-	
+                          <?php echo $tag ?>
+                        <?php endforeach; ?>
+                        </div>
+              </div> <!-- end col-lg-12 -->    
+    
         </div> <!-- end row -->
 
 

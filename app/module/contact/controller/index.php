@@ -30,7 +30,7 @@ class contact_index extends PC_Controller {
         if (empty($to)) {
             return;
         }
-	
+
         $subject = 'You got contact';
         $body = 'mail:' . $mail . ' name:' . $name . ' body:' . $body;
         PC_Util::mail($to, $subject, $body);
