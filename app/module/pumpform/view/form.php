@@ -233,6 +233,8 @@ foreach ($form as $column) {
 			$form_html .=  $option . '</label> ';
 		}
 		$form_html .= '';
+	} else if ($column['type'] == PUMPFORM_WEEK_CHECKBOX) {
+		$form_html .= sprintf('<input type="checkbox" name="%s" value="0" />%s ', $column['name'], _MD_PUMPFORM_WEEK_SUNDAY);
 	} else {
 			PC_Debug::log($column['name'] . ' OK1 ', __FILE__ , __LINE__);
 		if ($column['type'] == PUMPFORM_URL) {
