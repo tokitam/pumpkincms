@@ -30,10 +30,10 @@ require_once PUMPCMS_SYSTEM_PATH . '/debug.php';
 
 class PC_Batch {
     function __construct() {
-	$router = new PC_Router();
-	$router->setup();
-	$router->check_site();
-	$router->check_lang();
+        $router = new PC_Router();
+        $router->setup();
+        $router->check_site();
+        $router->check_lang();
     }
 }
 

@@ -4,9 +4,9 @@ $pumpform_config['user']['user'] = array(
     'module' => 'user',
     'title' => _MD_USER,
     'table' => 'user',
-					 
+
     'default_sort' => 'd_id',
-					 
+
     'column' => array(
 
         'name' => array('name' => 'name',
@@ -50,10 +50,10 @@ $pumpform_config['user']['user'] = array(
                          'editable' => 1,
                          'list_visible' => 0,),
         'last_login_time' => array('name' => 'last_login_time',
-			 'title' => 'last_log_time',
+                         'title' => 'last_log_time',
                          'type' => PUMPFORM_TIME,
                          'display' => 0,
-	                 'visible' => 1, ),
+                         'visible' => 1, ),
 
     'image_id' => array('name' => 'image_id',
           'title' => _MD_USER_ICON,

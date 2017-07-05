@@ -44,16 +44,16 @@ class SiteInfo {
     static function dir2module($dir_name) {
 
         $diralias_model = new Diralias_Model();
-	
+
         if ($dir_name == '/') {
             $dir_name = PC_Config::get('default_module');
         }
 
         $d = $diralias_model->get_alias($dir_name);
-	
-    	if (@$d['module']) {
-	       return $d['module'];
-    	}
+
+        if (@$d['module']) {
+            return $d['module'];
+        }
 
         if (is_dir(PUMPCMS_APP_PATH . '/module/' . $dir_name)) {
             return $dir_name;

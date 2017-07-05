@@ -2,36 +2,30 @@
 
 class installer_index extends PC_Controller {
     public function __construct() {
-	$file = PUMPCMS_APP_PATH . '/config/config.php';
-	if (is_readable($file)) {
-	    //PC_Util::redirect_top();
-	}
+        $file = PUMPCMS_APP_PATH . '/config/config.php';
+        if (is_readable($file)) {
+            //PC_Util::redirect_top();
+        }
     }
     
     public function index() {
-
-	$this->content_file = 's1_start.php';
-	
-	$this->render('index');
-	exit();
+        $this->content_file = 's1_start.php';
+        $this->render('index');
+        exit();
     }
     
     public function s2() {
-
-	$this->content_file = 's2_start.php';
-	
-	$this->render('index');
-	exit();
+        $this->content_file = 's2_start.php';
+        $this->render('index');
+        exit();
     }
     
     private function set_start() {
-
-	
     }
     
     private function set_form() {
-	
-	$this->body = <<<EOM
+    
+        $this->body = <<<EOM
 
     <fieldset>
       <legend>Legend</legend>
@@ -103,9 +97,9 @@ class installer_index extends PC_Controller {
         </div>
       </div>
     </fieldset>
-	  
-	  
+      
+      
 EOM;
-	
+    
     }
 }

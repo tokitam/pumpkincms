@@ -27,16 +27,16 @@ require_once PUMPCMS_APP_PATH . '/module/user/class/actionlog.php';
 require_once PUMPCMS_SYSTEM_PATH . '/debug.php';
 
 class Installer {
-	public function run() {
-		echo ' ok run() ';
-		$router = new PC_Router();
-		$router->setup();
-		$router->check_site();
-		$router->check_lang();
-		$router->render = new PC_Render();
-		//$router->analyze_url();
-		//$router->execute();
-		$router->render->render();
-		exit();
-	}
+    public function run() {
+        echo ' ok run() ';
+        $router = new PC_Router();
+        $router->setup();
+        $router->check_site();
+        $router->check_lang();
+        $router->render = new PC_Render();
+        //$router->analyze_url();
+        //$router->execute();
+        $router->render->render();
+        exit();
+    }
 }

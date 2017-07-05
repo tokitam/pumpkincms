@@ -8,33 +8,33 @@ class page_index extends PC_Controller {
 
     public function index() {
 
-		$page_model = new page_model();
-		$this->page_data = $page_model->get_page(SiteInfo::get('dir'));
+        $page_model = new page_model();
+        $this->page_data = $page_model->get_page(SiteInfo::get('dir'));
 
-		$this->mkdir();
+        $this->mkdir();
 
-		$this->file = $this->get_dir() . '/' . urlencode($this->page_data['dir_name']) . '.php';
-		PC_Debug::log('file:' . $this->file, __LINE__, __LINE__);
-		file_put_contents($this->file, $this->page_data['body']);
+        $this->file = $this->get_dir() . '/' . urlencode($this->page_data['dir_name']) . '.php';
+        PC_Debug::log('file:' . $this->file, __LINE__, __LINE__);
+        file_put_contents($this->file, $this->page_data['body']);
 
-		$this->render();
-	    
+        $this->render();
+
     }
 
     private function mkdir() {
-    	$dir = PUMPCMS_APP_PATH . '/cache/page';
-    	if (is_dir($dir) == false) {
-    		mkdir($dir);
-    	}
+        $dir = PUMPCMS_APP_PATH . '/cache/page';
+        if (is_dir($dir) == false) {
+           mkdir($dir);
+       }
 
-    	$dir .= '/' . PC_Config::get('site_id');
-    	if (is_dir($dir) == false) {
-    		mkdir($dir);
-    	}
-    }
+       $dir .= '/' . PC_Config::get('site_id');
+       if (is_dir($dir) == false) {
+           mkdir($dir);
+       }
+   }
 
-    private function get_dir() {
-    	$dir = PUMPCMS_APP_PATH . '/cache/page/' . PC_Config::get('site_id');
-    	return $dir;
-    }
+   private function get_dir() {
+    $dir = PUMPCMS_APP_PATH . '/cache/page/' . PC_Config::get('site_id');
+    return $dir;
+}
 }

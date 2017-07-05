@@ -172,37 +172,37 @@ class PumpImage extends PumpUpload {
         }
 
         $pumpormap = PumpORMAP_Util::get('image', 'image');
-    
+
         $imagesize = getimagesize($target_file);
-	PC_Debug::log('imgaesize:' . print_r($imagesize, true), __FILE__, __LINE__);
+        PC_Debug::log('imgaesize:' . print_r($imagesize, true), __FILE__, __LINE__);
         $width = $imagesize[0];
         $height = $imagesize[1];
 
-	PC_Debug::log('type:' . $type, __FILE__, __LINE__);
-	PC_Debug::log('file:' . $file, __FILE__, __LINE__);
-	//if ($type == null) {
-	//    $type = self::check_ext($file);
-	//}
-	
+        PC_Debug::log('type:' . $type, __FILE__, __LINE__);
+        PC_Debug::log('file:' . $file, __FILE__, __LINE__);
+        //if ($type == null) {
+        //    $type = self::check_ext($file);
+        //}
+
         //$this->check_type($type, $file);
-	if ($imagesize[2] == IMAGETYPE_GIF) {
-	    $this->_type = self::TYPE_GIF;
-	} else  if ($imagesize[2] == IMAGETYPE_JPEG || $imagesize[2] == IMAGETYPE_JPEG2000) {
-	    $this->_type = self::TYPE_JPG;
-	} else  if ($imagesize[2] == IMAGETYPE_PNG) {
-	    $this->_type = self::TYPE_PNG;
-	}
-	
-	PC_Debug::log('$this->_type:' . $this->_type, __FILE__, __LINE__);
+        if ($imagesize[2] == IMAGETYPE_GIF) {
+            $this->_type = self::TYPE_GIF;
+        } else  if ($imagesize[2] == IMAGETYPE_JPEG || $imagesize[2] == IMAGETYPE_JPEG2000) {
+            $this->_type = self::TYPE_JPG;
+        } else  if ($imagesize[2] == IMAGETYPE_PNG) {
+            $this->_type = self::TYPE_PNG;
+        }
+
+        PC_Debug::log('$this->_type:' . $this->_type, __FILE__, __LINE__);
         $code = PC_Util::random_code(8);
 
         //if (self::get_type() == self::STORE_TYPE_LOCAL) {
-            $dir = $this->mkdir_upload($code);
+        $dir = $this->mkdir_upload($code);
         //}
 
         $db = PC_DBSet::get();
         $table = $pumpormap->get_table();
-        
+
         if (self::get_type() == self::STORE_TYPE_LOCAL ||
             self::get_type() == self::STORE_TYPE_S3) {
             $data = array(
@@ -247,7 +247,7 @@ class PumpImage extends PumpUpload {
                 );
 
             $stmt = $db->prepare($sql);
-            
+
             $fp = fopen($target_file, 'rb');
 
             try {
@@ -275,24 +275,24 @@ class PumpImage extends PumpUpload {
 
         $src_file = $target_file;
         $dest_file =  $dir . '/' . $image_id . '_' . $code . '.' . self::get_ext($this->_type);
-	PC_Debug::log('src_file:' . $src_file . ', dest_file:' . $dest_file, __FILE__, __LINE__);
-	PC_Debug::log('get_type:' . self::get_type(), __FILE__, __LINE__);
+        PC_Debug::log('src_file:' . $src_file . ', dest_file:' . $dest_file, __FILE__, __LINE__);
+        PC_Debug::log('get_type:' . self::get_type(), __FILE__, __LINE__);
         if (self::get_type() == self::STORE_TYPE_LOCAL) {
-        	PC_Debug::log('copy: src_file:' . $src_file . ', dest_file:' . $dest_file, __FILE__, __LINE__);
-        	if ($file == null) {
-        		// upload file
-	            move_uploaded_file($src_file, $dest_file);
-	        } else {
-	        	// from local file
-	        	copy($src_file, $dest_file);
-	        }
+            PC_Debug::log('copy: src_file:' . $src_file . ', dest_file:' . $dest_file, __FILE__, __LINE__);
+            if ($file == null) {
+                // upload file
+                move_uploaded_file($src_file, $dest_file);
+            } else {
+                // from local file
+                copy($src_file, $dest_file);
+            }
         } else if (self::get_type() == self::STORE_TYPE_S3) {
-	    try {
-            $ret = PC_S3::put($src_file, basename($dest_file));
-		PC_Debug::log('s3_ret:' . print_r($ret, true), __FILE__, __LINE__);
-	    } catch (Exception $e) {
-		PC_Debug::log('s3_put:' . $e->getMessage(), __FILE__, __LINE__);
-	    }
+            try {
+                $ret = PC_S3::put($src_file, basename($dest_file));
+                PC_Debug::log('s3_ret:' . print_r($ret, true), __FILE__, __LINE__);
+            } catch (Exception $e) {
+                PC_Debug::log('s3_put:' . $e->getMessage(), __FILE__, __LINE__);
+            }
         }
 
         return $image_id;
@@ -308,10 +308,10 @@ class PumpImage extends PumpUpload {
             $code = $r[2];
             $ext = $r[3];
 
-            //$file_path = $this->get_upload_image($image_id, $code, $ext);
+    //$file_path = $this->get_upload_image($image_id, $code, $ext);
             $file_path = $this->create_cache_file($image_id, $code, $ext, null, null);
 
-            
+
         } else if (preg_match('/^(\d+)_([0-9A-Za-z]+)_(\d+)x(\d+)\.(jpg|png|gif)/', $name, $r)) {
             $image_id = $r[1];
             $code = $r[2];
@@ -328,22 +328,22 @@ class PumpImage extends PumpUpload {
             $height = $r[4];
             $method = $r[5];
             $ext = $r[6];
-            
+
             $file_path = $this->create_cache_file($image_id, $code, $ext, $width, $height, $method);
         } else {
             return;
         }
-	
-	$this->_exif = @exif_read_data($file_path);
-	if (isset($this->_exif['MimeType'])) {
-	    if ($this->_exif['MimeType'] == 'image/gif') {
-		$ext = 'gif';
-	    } else if ($this->_exif['MimeType'] == 'image/png') {
-		$ext = 'png';
-	    } else if ($this->_exif['MimeType'] == 'image/jpeg') {
-		$ext = 'jpg';
-	    }
-	}
+
+        $this->_exif = @exif_read_data($file_path);
+        if (isset($this->_exif['MimeType'])) {
+            if ($this->_exif['MimeType'] == 'image/gif') {
+                $ext = 'gif';
+            } else if ($this->_exif['MimeType'] == 'image/png') {
+                $ext = 'png';
+            } else if ($this->_exif['MimeType'] == 'image/jpeg') {
+                $ext = 'jpg';
+            }
+        }
 
         if (@$_GET['no_image_header'] == '') {
             $expires = (60 * 60 * 24 * 365);
@@ -386,16 +386,16 @@ class PumpImage extends PumpUpload {
                 file_put_contents($src_image, $image['image']);
             }
         } else if (self::get_type() == self::STORE_TYPE_LOCAL) {
-            // from local disk
+    // from local disk
             $src_image = $this->get_upload_image($image_id, $code, $ext);
         } else if (self::get_type() == self::STORE_TYPE_S3) {
-            // from aws s3
+    // from aws s3
             $src_image = $this->get_upload_image($image_id, $code, $ext);
             $src_image = PC_S3::get(basename($src_image));
         }
 
-	self::orientationFixedImage($src_image, $ext);
-	
+        self::orientationFixedImage($src_image, $ext);
+
         if ($r_width == null && $r_height == null) {
             copy($src_image, $dest_image);
             if (self::get_type() == self::STORE_TYPE_DB) {
@@ -409,11 +409,11 @@ class PumpImage extends PumpUpload {
         if ($ext == 'jpg'){
             $function_image_create = 'ImageCreateFromJpeg';
             $function_image = 'ImageJpeg';
-         } else if ($ext == 'png') {
-              $function_image_create = 'ImageCreateFromPng';
-             //$function_image = 'ImagePng';
-             $function_image = 'ImageJpeg';
-             $ext = 'jpg';
+        } else if ($ext == 'png') {
+            $function_image_create = 'ImageCreateFromPng';
+    //$function_image = 'ImagePng';
+            $function_image = 'ImageJpeg';
+            $ext = 'jpg';
         } else if ($ext == 'gif') {
             $function_image_create = 'ImageCreateFromGif';
             $function_image = 'ImageGif';
@@ -423,7 +423,7 @@ class PumpImage extends PumpUpload {
         $size = getimagesize($src_image);
 
         if ($size == false) {
-            // not image file
+    // not image file
 
             if (self::get_type() == self::STORE_TYPE_DB) {
                 self::delete_tmp_file($src_image);
@@ -439,8 +439,8 @@ class PumpImage extends PumpUpload {
         $src_h = $height;
 
         if ($method == 'i') {
-            // be inscribed.
-            // 内接するように拡大する
+    // be inscribed.
+    // 内接するように拡大する
 
             if (($r_width / $width) * $height < $r_height) {
                 $dest_w = $r_width;
@@ -472,7 +472,7 @@ class PumpImage extends PumpUpload {
             }
 
         } else if ($method == 'c') {
-            // 中心を拡大する
+    // 中心を拡大する
 
             $dest_w = $r_width;
             $dest_h = $r_height;
@@ -486,9 +486,9 @@ class PumpImage extends PumpUpload {
                 $dest_y = 0;
                 $src_x = 0;
                 $src_y = $cut;
-                //$dest_w 
-                //$dest_h  
-                //$src_w
+    //$dest_w 
+    //$dest_h  
+    //$src_w
                 $src_h = $src_h - ($cut * 2);
 
             } else if ($gap_h < $gap_w) {
@@ -497,19 +497,19 @@ class PumpImage extends PumpUpload {
                 $dest_y = 0;
                 $src_x = $cut;
                 $src_y = 0;
-                //$dest_w
-                //$dest_h
+    //$dest_w
+    //$dest_h
                 $src_w = $src_w - ($cut * 2);
-                //$src_h
+    //$src_h
             } else {
                 $dest_x = 0;
                 $dest_y = 0;
                 $src_x = 0;
                 $src_y = 0;
-                //$dest_w 
-                //$dest_h
-                //$src_w
-                //$src_h
+    //$dest_w 
+    //$dest_h
+    //$src_w
+    //$src_h
             }
         }
 
@@ -518,7 +518,7 @@ class PumpImage extends PumpUpload {
         imagefilledrectangle($im_out, 0, 0, $r_width, $r_height, $white);
 
         $resize = imagecopyresampled($im_out, $im_in, $dest_x, $dest_y, $src_x, $src_y, $dest_w, $dest_h, $src_w, $src_h);
-        //$resize = imagecopyresized($im_out, $im_in, $dest_x, $dest_y, $src_x, $src_y, $dest_w, $dest_h, $src_w, $src_h);
+    //$resize = imagecopyresized($im_out, $im_in, $dest_x, $dest_y, $src_x, $src_y, $dest_w, $dest_h, $src_w, $src_h);
         $function_image($im_out, $dest_image, 90);
 
         imagedestroy($im_in);
@@ -569,13 +569,13 @@ class PumpImage extends PumpUpload {
     }
 
     public function check_type($type=null, $file=null) {
-	if ($file != null) {
-	    $this->_type = $this->check_ext($file);
-	    return;
-	}
-	
-    	if ($type == null) {
-    		$type = $_FILES[$this->_target]['type'];
+        if ($file != null) {
+            $this->_type = $this->check_ext($file);
+            return;
+        }
+
+        if ($type == null) {
+            $type = $_FILES[$this->_target]['type'];
         }
         if ($type == 'image/jpeg') {
             $this->_type = self::TYPE_JPG;
@@ -587,29 +587,29 @@ class PumpImage extends PumpUpload {
             $this->_type = self::TYPE_UNKNOWN;
         }
     }
-    
+
     static public function check_ext($file) {
-	$file = trim($file);
-	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
-	if (preg_match('/\.jpg$/i', $file) || preg_match('/\.jpeg$/', $file)) {
-	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
-	    return self::TYPE_JPG;
-	}
-	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
-	
-	if (preg_match('/\.png$/i', $file)) {
-	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
-	    return self::TYPE_PNG;
-	}
-	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
-	
-	if (preg_match('/\.gif$/i', $file)) {
-	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
-	    return self::TYPE_GIF;
-	}
-	PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
-	
-	return self::TYPE_UNKNOWN;
+        $file = trim($file);
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+        if (preg_match('/\.jpg$/i', $file) || preg_match('/\.jpeg$/', $file)) {
+            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+            return self::TYPE_JPG;
+        }
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+
+        if (preg_match('/\.png$/i', $file)) {
+            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+            return self::TYPE_PNG;
+        }
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+
+        if (preg_match('/\.gif$/i', $file)) {
+            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+            return self::TYPE_GIF;
+        }
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+
+        return self::TYPE_UNKNOWN;
     }
 
     static public function get_ext($type) {
@@ -641,7 +641,7 @@ class PumpImage extends PumpUpload {
     }
 
     static public function get_cache_image($id, $code, $ext, $r_width=0, $r_height=0, $method) {
-        //return self::get_raw_image($id, $code, $ext, 'cache', $r_width, $r_height);
+    //return self::get_raw_image($id, $code, $ext, 'cache', $r_width, $r_height);
         $file = PUMPCMS_PUBLIC_PATH . '/image/i/' . self::get_base_cache_image($id, $code, $ext, 'cache', $r_width, $r_height, $method);
         return $file;
     }
@@ -686,20 +686,20 @@ class PumpImage extends PumpUpload {
 
         $wh = '';
         $styles = array();
-	if (@$option['width100p']) {
-	    $wh = ' width="100%"';
-	    $styles['width'] = '100%';
-	    $styles['height'] = '';
-	    $width = '';
-	    $height = '';
-	}
-	if (@$option['width90p']) {
-	    $wh = ' width="90%"';
-	    $styles['width'] = '90%';
-	    $styles['height'] = '';
-	    $width = '';
-	    $height = '';
-	}
+        if (@$option['width100p']) {
+            $wh = ' width="100%"';
+            $styles['width'] = '100%';
+            $styles['height'] = '';
+            $width = '';
+            $height = '';
+        }
+        if (@$option['width90p']) {
+            $wh = ' width="90%"';
+            $styles['width'] = '90%';
+            $styles['height'] = '';
+            $width = '';
+            $height = '';
+        }
         if (@$option['css_width']) {
             $styles['width'] = intval($option['css_width']) . 'px';
         }
@@ -710,19 +710,19 @@ class PumpImage extends PumpUpload {
         if (0 < count($styles)) {
             $tmp = array();
             foreach ($styles as $key => $val) {
-		if (! empty($val)) {
-		    array_push($tmp, $key . ':' . $val);
-		}
+                if (! empty($val)) {
+                    array_push($tmp, $key . ':' . $val);
+                }
             }
             $wh .= ' style="' . implode($tmp, '; ') . ';" ';
         }
-	
-	if (! empty($width)) {
-	    $width = sprintf('width="%d"', $width);
-	}
-	if (! empty($height)) {
-	    $height = sprintf('height="%d"', $height);
-	}
+
+        if (! empty($width)) {
+            $width = sprintf('width="%d"', $width);
+        }
+        if (! empty($height)) {
+            $height = sprintf('height="%d"', $height);
+        }
 
         $tag = sprintf('<img src="%s" %s %s %s>', $url, $width, $height, $wh);
         return $tag;
@@ -737,119 +737,119 @@ class PumpImage extends PumpUpload {
         header('Content-type: image/png');
         readfile($file);
         exit();
-   }
+    }
 
-   /**
+    /**
     * 一次ファイルのみ削除する
     */
-   static public function delete_tmp_file($image_file) {
-           $tmp_dir = sys_get_temp_dir();
-           $pos = strpos($image_file, $tmp_dir);
-           if ($pos === false) {
-               // do nothing
-           } else {
+    static public function delete_tmp_file($image_file) {
+        $tmp_dir = sys_get_temp_dir();
+        $pos = strpos($image_file, $tmp_dir);
+        if ($pos === false) {
+    // do nothing
+        } else {
             @unlink($image_file);
-           }
-   }
+        }
+    }
 
     /** 画像の左右反転 */
     static public function image_flop($image){
-	// 画像の幅を取得
+    // 画像の幅を取得
         $w = imagesx($image);
-	// 画像の高さを取得
+    // 画像の高さを取得
         $h = imagesy($image);
-	// 変換後の画像の生成（元の画像と同じサイズ）
+    // 変換後の画像の生成（元の画像と同じサイズ）
         $destImage = @imagecreatetruecolor($w,$h);
-	// 逆側から色を取得
+    // 逆側から色を取得
         for($i = ($w-1); $i >= 0; $i--){
-	    for($j = 0; $j < $h; $j++){
-		$color_index = imagecolorat($image, $i, $j);
-		$colors = imagecolorsforindex($image, $color_index);
-		imagesetpixel($destImage, abs($i-$w+1), $j, imagecolorallocate($destImage, $colors["red"], $colors["green"], $colors["blue"]));
-	    }
-	}
-	return $destImage;
+            for($j = 0; $j < $h; $j++){
+                $color_index = imagecolorat($image, $i, $j);
+                $colors = imagecolorsforindex($image, $color_index);
+                imagesetpixel($destImage, abs($i-$w+1), $j, imagecolorallocate($destImage, $colors["red"], $colors["green"], $colors["blue"]));
+            }
+        }
+        return $destImage;
     }
-    
+
     /** 上下反転 */
     static function image_flip($image){
-	// 画像の幅を取得
-	$w = imagesx($image);
-	// 画像の高さを取得
-	$h = imagesy($image);
-	// 変換後の画像の生成（元の画像と同じサイズ）
-	$destImage = @imagecreatetruecolor($w, $h);
-	// 逆側から色を取得
-	for($i=0; $i < $w; $i++){
-	    for($j = ($h-1); $j >= 0; $j--){
-		$color_index = imagecolorat($image, $i, $j);
-		$colors = imagecolorsforindex($image, $color_index);
-		imagesetpixel($destImage, $i, abs($j - $h + 1), imagecolorallocate($destImage, $colors["red"], $colors["green"], $colors["blue"]));
-	    }
-	}
-	return $destImage;
+    // 画像の幅を取得
+        $w = imagesx($image);
+    // 画像の高さを取得
+        $h = imagesy($image);
+    // 変換後の画像の生成（元の画像と同じサイズ）
+        $destImage = @imagecreatetruecolor($w, $h);
+    // 逆側から色を取得
+        for($i=0; $i < $w; $i++){
+            for($j = ($h-1); $j >= 0; $j--){
+                $color_index = imagecolorat($image, $i, $j);
+                $colors = imagecolorsforindex($image, $color_index);
+                imagesetpixel($destImage, $i, abs($j - $h + 1), imagecolorallocate($destImage, $colors["red"], $colors["green"], $colors["blue"]));
+            }
+        }
+        return $destImage;
     }
-    
+
     /** 画像を回転 */
     static function image_rotate($image, $angle, $bgd_color){
-	     return imagerotate($image, $angle, $bgd_color, 0);
+        return imagerotate($image, $angle, $bgd_color, 0);
     }
-    
+
     /** 画像の方向を正す */
     static function orientationFixedImage($input_file_name, $ext){
-	if ($ext != 'jpg') {
-	    return;
-	}
-	$exif_datas = @exif_read_data($input_file_name);
-	PC_Debug::log(' exif: ' . print_r($exif_datas, true), __FILE__, __LINE__);
-	if(isset($exif_datas['Orientation']) == false) {
-	    return;
-	}
-	$image = ImageCreateFromJPEG($input_file_name);
-	if (empty($image)) {
-	    return;
-	}
+        if ($ext != 'jpg') {
+            return;
+        }
+        $exif_datas = @exif_read_data($input_file_name);
+        PC_Debug::log(' exif: ' . print_r($exif_datas, true), __FILE__, __LINE__);
+        if(isset($exif_datas['Orientation']) == false) {
+            return;
+        }
+        $image = ImageCreateFromJPEG($input_file_name);
+        if (empty($image)) {
+            return;
+        }
 
-	$orientation = $exif_datas['Orientation'];
+        $orientation = $exif_datas['Orientation'];
 
-	// 未定義
-	if($orientation == 0){
-	    // 通常
-	}else if($orientation == 1){
-	    // 左右反転
-	}else if($orientation == 2){
-	    $image = self::image_flop($image);
-	    // 180°回転
-	}else if($orientation == 3){
-	    $image = self::image_rotate($image, 180, 0);
-	    // 上下反転
-	}else if($orientation == 4){
-	    $image = self::image_Flip($image);
-	    // 反時計回りに90°回転 上下反転
-	}else if($orientation == 5){
-	    $image = self::image_rotate($image, 270, 0);
-	    $image = self::image_flip($image);
-	    // 時計回りに90°回転
-	}else if($orientation == 6){
-	    $image = self::image_rotate($image, 270, 0);
-	    // 時計回りに90°回転 上下反転
-	}else if($orientation == 7){
-	    $image = self::image_rotate($image, 90, 0);
-	    $image = self::image_flip($image);
-	    // 反時計回りに90°回転
-	}else if($orientation == 8){
-	    $image = self::image_rotate($image, 270, 0);
-	} else {
-	    return;
-	}
-	
-	// 画像の書き出し
-	if ($ext == 'jpg') {
-	    ImageJPEG($image, $input_file_name);
-	} else if ($ext == 'png') {
-	    ImagePNG($image, $input_file_name);
-	} else if ($ext == 'gif') {
-	    ImageGIF($image, $input_file_name);
-	}
+    // 未定義
+        if($orientation == 0){
+    // 通常
+        }else if($orientation == 1){
+    // 左右反転
+        }else if($orientation == 2){
+            $image = self::image_flop($image);
+    // 180°回転
+        }else if($orientation == 3){
+            $image = self::image_rotate($image, 180, 0);
+    // 上下反転
+        }else if($orientation == 4){
+            $image = self::image_Flip($image);
+    // 反時計回りに90°回転 上下反転
+        }else if($orientation == 5){
+            $image = self::image_rotate($image, 270, 0);
+            $image = self::image_flip($image);
+    // 時計回りに90°回転
+        }else if($orientation == 6){
+            $image = self::image_rotate($image, 270, 0);
+    // 時計回りに90°回転 上下反転
+        }else if($orientation == 7){
+            $image = self::image_rotate($image, 90, 0);
+            $image = self::image_flip($image);
+    // 反時計回りに90°回転
+        }else if($orientation == 8){
+            $image = self::image_rotate($image, 270, 0);
+        } else {
+            return;
+        }
+
+    // 画像の書き出し
+        if ($ext == 'jpg') {
+            ImageJPEG($image, $input_file_name);
+        } else if ($ext == 'png') {
+            ImagePNG($image, $input_file_name);
+        } else if ($ext == 'gif') {
+            ImageGIF($image, $input_file_name);
+        }
     }
 }

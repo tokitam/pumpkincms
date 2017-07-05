@@ -12,10 +12,10 @@
 <ul class="nav nav-pills">
   <li><a href="#">PumpkinCMS Version <span class="badge"><?php echo PUMPCMS_VERSION ?></span></a></li>
 </ul>
-		
+
 <?php include 'actionlog_list.php'; ?>
 
 <br />
-	
+
 </p>
 </div>

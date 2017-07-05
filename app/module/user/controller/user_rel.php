@@ -4,22 +4,22 @@ require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
 
 class user_user_rel extends PC_Controller {
     public function __construct() {
-		$this->_flg_scaffold = true;
-		$this->_module = 'user';
-		$this->_table = 'user_rel';
+        $this->_flg_scaffold = true;
+        $this->_module = 'user';
+        $this->_table = 'user_rel';
     }
 
     public function index() {
-    	if (UserInfo::is_logined() == false) {
-    		PC_Util::redirect_top();
-    	}
+        if (UserInfo::is_logined() == false) {
+            PC_Util::redirect_top();
+        }
 
         $this->render('add_account');
         return;
 
-    	$method = 'add';
+        $method = 'add';
 
-    	$this->scaffold($this->_module, $this->_table, $method);
+        $this->scaffold($this->_module, $this->_table, $method);
     }
 
     public function add() {
