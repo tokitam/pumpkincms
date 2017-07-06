@@ -169,7 +169,7 @@ class PC_Db_pdo extends PC_Db {
             }
         }
 
-        $ret = $this->_stmt->execute($values);	
+        $ret = $this->_stmt->execute($values);
         if ($ret == false) {
             $tmp = $this->_stmt->errorInfo();
             $this->abort($sql, $tmp[2]);

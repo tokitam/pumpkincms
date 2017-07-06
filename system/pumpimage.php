@@ -590,24 +590,24 @@ class PumpImage extends PumpUpload {
 
     static public function check_ext($file) {
         $file = trim($file);
-        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);
         if (preg_match('/\.jpg$/i', $file) || preg_match('/\.jpeg$/', $file)) {
-            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);
             return self::TYPE_JPG;
         }
-        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);
 
         if (preg_match('/\.png$/i', $file)) {
-            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);
             return self::TYPE_PNG;
         }
-        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);
 
         if (preg_match('/\.gif$/i', $file)) {
-            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+            PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);
             return self::TYPE_GIF;
         }
-        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);	
+        PC_Debug::log('check_ext file:' . $file, __FILE__, __LINE__);
 
         return self::TYPE_UNKNOWN;
     }

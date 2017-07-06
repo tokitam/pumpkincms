@@ -302,10 +302,10 @@ function get_template_part($arg1, $arg2=null) {
                <h1 class="entry-title"><a href="http://127.0.0.1/wordpress/2015/10/10/hello-world/" rel="bookmark">%s</a></h1>
                <div class="entry-meta entry-header-meta">
                   <span class="posted-on">
-                     <a href="http://127.0.0.1/wordpress/2015/10/10/hello-world/" rel="bookmark"><time class="entry-date published" datetime="2015-10-10T18:27:22+00:00">2015年10月10日</time></a>		</span>
+                     <a href="http://127.0.0.1/wordpress/2015/10/10/hello-world/" rel="bookmark"><time class="entry-date published" datetime="2015-10-10T18:27:22+00:00">2015年10月10日</time></a>                </span>
                      <span class="byline"><span class="meta-sep"> / </span>
                      <span class="author vcard">
-                        <a class="url fn n" href="http://127.0.0.1/wordpress/author/tokitapumpup-jp/">tokita@pumpup.jp</a>			</span>
+                        <a class="url fn n" href="http://127.0.0.1/wordpress/author/tokitapumpup-jp/">tokita@pumpup.jp</a>                        </span>
                     </span>
                     <span class="comments-link"><span class="meta-sep"> / </span> <a href="http://127.0.0.1/wordpress/2015/10/10/hello-world/#comments">1件のコメント</a></span>
                 </div><!-- .entry-meta -->
@@ -331,10 +331,10 @@ function get_template_part($arg1, $arg2=null) {
 
    </main><!-- #main -->
 </div><!-- #primary -->', PC_Render::$module_output_static);
-// 	echo '';
-// 	echo PC_Render::$module_output_static;
-// 	echo '</p>
-// 		</div><!-- .entry-content -->
+//         echo '';
+//         echo PC_Render::$module_output_static;
+//         echo '</p>
+//                 </div><!-- .entry-content -->
 // </article><!-- #post-## -->';
     }
 }

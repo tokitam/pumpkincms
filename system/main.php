@@ -249,7 +249,7 @@ class PC_Main {
         SiteInfo::set('dir1', $this->_dir1);
         SiteInfo::set('dir2', $this->_dir2);
         SiteInfo::set('dir3', $this->_dir3);
-        SiteInfo::set('dir4', $this->_dir4);		
+        SiteInfo::set('dir4', $this->_dir4);
     }
 
     function execute() {

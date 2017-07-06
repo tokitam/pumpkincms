@@ -123,7 +123,7 @@ class PumpFile extends PumpUpload {
 
     static public function get_raw_url($file_id) {
         $ormap = PumpORMAP_Util::get('file', 'file');
-        $file = $ormap->get_one($file_id);	
+        $file = $ormap->get_one($file_id);
 
         $code = $file['code'];
 
