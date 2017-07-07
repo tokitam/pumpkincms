@@ -530,7 +530,7 @@ class PumpORMAP {
             } else if ($column['type'] == PUMPFORM_TAG) {
                 if (@$post[$column['name']]) {
                     $s = ' ' . $db->column_escape($column['name']) . ' = ';
-                    $values[$p] = implode(',', @$post[$column['name']]);
+                    $values[$p] = @$post[$column['name']];
                     $types[$p] = PC_Db::T_STRING;
                     $s .= $p;
 
@@ -553,6 +553,11 @@ class PumpORMAP {
                         }
                         $tag_rel_ormap->insert(['tag_id' => $tag_id, 'link_id' => $id]);
                     }
+                } else {
+                    $s = ' ' . $db->column_escape($column['name']) . ' = ';
+                    $values[$p] = @$post[$column['name']];
+                    $types[$p] = PC_Db::T_STRING;
+                    $s .= $p;
                 }
             } else if ($column['type'] == PUMPFORM_CHECKBOX) {
                 $s = ' ' . $db->column_escape($column['name']) . ' = ';

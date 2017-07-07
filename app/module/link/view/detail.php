@@ -29,11 +29,15 @@ $link = $this->_data['item'];
            <?php echo htmlspecialchars($link['desc']) ?><br />
            <?php
            $tag_list = explode(',', $link['tag']);
+           if (!empty($tag_list)) {
            foreach ($tag_list as $tag) :
+		       if (!empty($tag)) {
            ?>
            <span class="label label-info label-link"><a href="<?php echo PC_Config::url() ?>/link/?tag=<?php echo htmlspecialchars($tag) ?>"><?php echo htmlspecialchars($tag) ?></a></span>
            <?php
+               }
            endforeach ;
+           }
            if (PC_Grant::check($this->_module, $this->_table, 'grant_edit', $link['reg_user'])) :
            ?>
            <br />[ <a href="<?php echo PC_Config::url() . '/link/index/edit/' . $link['id']; ?>">編集</a> ] 
