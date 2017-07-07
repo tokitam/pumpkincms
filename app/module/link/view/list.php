@@ -20,7 +20,7 @@ foreach ($list as $link) :
            $tag_list = explode(',', $link['tag']);
            foreach ($tag_list as $tag) :
            ?>
-           <span class="label label-info"><?php echo htmlspecialchars($tag) ?></span>
+           <span class="label label-info label-link"><a href="<?php echo PC_Config::url() ?>/link/?tag=<?php echo htmlspecialchars($tag) ?>"><?php echo htmlspecialchars($tag) ?></a></span>
            <?php
            endforeach ;
            ?>
