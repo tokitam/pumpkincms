@@ -73,6 +73,16 @@ class PC_Main {
                 );
             register_shutdown_function( 'session_write_close' );
         }
+		
+		if (0 < PC_Config::get('session.cookie_lifetime')) {
+			ini_set('session.cookie_lifetime', PC_Config::get('session.cookie_lifetime'));
+		}
+		if (0 < PC_Config::get('session.gc_maxlifetime')) {
+			ini_set('session.gc_maxlifetime', PC_Config::get('session.gc_maxlifetime'));
+		}
+		
+		ini_set('display_errors', true);
+		error_reporting(E_ALL);
 
         session_start();
     }
