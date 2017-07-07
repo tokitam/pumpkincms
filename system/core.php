@@ -5,7 +5,6 @@ require_once PUMPCMS_SYSTEM_PATH . '/pumpcaptcha.php';
 require_once PUMPCMS_SYSTEM_PATH . '/pumpfile.php';
 require_once PUMPCMS_APP_PATH . '/config/default.php';
 require_once PUMPCMS_APP_PATH . '/config/config.php';
-require_once PUMPCMS_SYSTEM_PATH . '/systeminit.php';
 require_once PUMPCMS_SYSTEM_PATH . '/db.php';
 require_once PUMPCMS_SYSTEM_PATH . '/db_pdo.php';
 require_once PUMPCMS_SYSTEM_PATH . '/benchmark.php';

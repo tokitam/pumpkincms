@@ -42,7 +42,6 @@ foreach ($form as $column) {
     }
 
     $form_html .= '<div class="form-group">' . "\n";
-    //$form_html .= '  <div class="row">' . "\n";
     $form_html .= '    <label for="inputEmail" class="col-lg-3 col-md-3 col-sm-3 control-label">' . $column['title'] . '</label>' . "\n";
     $form_html .= '    <div class="col-lg-9 col-md-9 col-sm-9 ">' . "\n";
 //    if (@$column['hint']) {
@@ -149,19 +148,22 @@ foreach ($form as $column) {
         $form_html .= "<input type='file' name='" . $column['name'] . "'><br />\n";
         $form_html .= 'max size:' . PC_Util::convert_size(PumpUpload::get_max_size());
     } else if ($column['type'] == PUMPFORM_TAG) {
-        $tag_list = array();
+        $tag = '';
         if (@$_POST[$column['name']]) {
-            $tag_list = $_POST[$column['name']];
+            $tag = $_POST[$column['name']];
         } else if (@$item[$column['name']]) {
-            $tag_list = explode(',', $item[$column['name']]);
+            $tag = $item[$column['name']];
         }
         
+        $form_html .= '<input type="text" class="js-pumpform-tag form-control" name="'. $column['name'] . '" value="' . htmlspecialchars($tag) . '"multiple>';
+		/*
         $form_html .= '<select class="js-pumpform-tag form-control" name="'. $column['name'] . '[]" multiple>';
         foreach ($tag_list as $tag) {
             $tag = htmlspecialchars($tag);
             $form_html .= sprintf("<option value='%s' selected>%s</option>", $tag, $tag);
         }
         $form_html .= '</select>';
+		 */
     } else if ($column['type'] == PUMPFORM_MULTI_CHECKBOX) {
         $t = $column['option']['type'];
         $module = $column['option']['option_table']['module'];
@@ -302,7 +304,6 @@ foreach ($form as $column) {
         $form_html .= "<br /><span class='pumpcms_error_message'>*" . $error[$column['name']] . "</span><br />";
     }
     $form_html .= "    </div> <!-- end control-label -->\n";
-    //$form_html .= "  </div> <!-- end row -->\n";
     $form_html .= "</div> <!-- end form-group -->\n";
 }
 

@@ -73,6 +73,16 @@ class PC_Main {
                 );
             register_shutdown_function( 'session_write_close' );
         }
+		
+		if (0 < PC_Config::get('session.cookie_lifetime')) {
+			ini_set('session.cookie_lifetime', PC_Config::get('session.cookie_lifetime'));
+		}
+		if (0 < PC_Config::get('session.gc_maxlifetime')) {
+			ini_set('session.gc_maxlifetime', PC_Config::get('session.gc_maxlifetime'));
+		}
+		
+		ini_set('display_errors', true);
+		error_reporting(E_ALL);
 
         session_start();
     }
@@ -249,7 +259,7 @@ class PC_Main {
         SiteInfo::set('dir1', $this->_dir1);
         SiteInfo::set('dir2', $this->_dir2);
         SiteInfo::set('dir3', $this->_dir3);
-        SiteInfo::set('dir4', $this->_dir4);		
+        SiteInfo::set('dir4', $this->_dir4);
     }
 
     function execute() {

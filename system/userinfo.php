@@ -26,7 +26,7 @@ class UserInfo {
         if (self::$_data == null) {
             self::$_data = @$_SESSION['pump_'. PC_Config::get('site_id')]['user'];
         }
-	
+
         if ($key == false) {
             return self::$_data;
         } else {
@@ -38,7 +38,7 @@ class UserInfo {
         if (self::get_data()) {
             return true;
         }
-	
+
         return false;
     }
    
@@ -53,7 +53,7 @@ class UserInfo {
         if ((@self::$_data['auth']) & self::AUTH_MASTER_ADMIN) {
             return true;
         }
-	
+
         return false;
     }
 
@@ -77,7 +77,7 @@ class UserInfo {
         if (PC_Config::get('dir1') == 'admin') {
             return true;
         }
-	
+
         return false;
     }
 
@@ -85,7 +85,7 @@ class UserInfo {
         if (isset($_SESSION['pump_'. PC_Config::get('site_id')]['admin_user'])) {
             return true;
         }
-	
+
         return false;
     }
 

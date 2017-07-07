@@ -12,8 +12,10 @@ class link_index extends PC_Controller {
         $this->_table = 'link';
 
         PC_Render::add_javascript('/js/pumpform_select2.js');
-        PC_Render::add_javascript('/js/select2/js/select2.full.js');
-        PC_Render::add_css('/js/select2/css/select2.css');
+        PC_Render::add_javascript('/js/jquery-ui.min.js');
+        PC_Render::add_javascript('/js/tag-it/tag-it.min.js');
+        PC_Render::add_css('/css/jquery-ui.css');
+        PC_Render::add_css('/js/tag-it/jquery.tagit.css');
     }
 
     public function detail() {
