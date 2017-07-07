@@ -22,7 +22,7 @@ class admin_display_config extends PC_Controller {
         $i = 0;
         echo '<table class="table table-striped table-hover">';
         echo '<tbody>';
-		echo '<tr><td style="background-color: #ddeeff;" colspan="2">system init parameter</td></tr>';
+		echo '<tr><th colspan="2">system init parameter</th></tr>';
 		foreach ($ini_param as $p) {
             if ($i++ % 1) {
                 echo '<tr>';
@@ -36,7 +36,7 @@ class admin_display_config extends PC_Controller {
             echo '</td>';
             echo '</tr>';
 		}
-		echo '<tr><td style="background-color: #ddeeff;" colspan="2">config parameter</td></tr>';
+		echo '<tr><th colspan="2">config parameter</th></tr>';
         foreach ($pc_config as $key => $config) {
             if ($i++ % 1) {
                 echo '<tr>';
