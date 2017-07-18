@@ -2,7 +2,7 @@
 $(document).ready(function(){
 
     $('#user_submit_button').click(function (){
-		var id = $('#inputId').val();
+        var id = $('#inputId').val();
         var email = $('#inputEmail').val()
 
         if (id == '') {
@@ -15,8 +15,8 @@ $(document).ready(function(){
             return;
         }
 
-    	if (true) {
-			var data = {id: id};
+        if (true) {
+            var data = {id: id};
             var base_url = $('#base_url').val();
             var url = base_url + '/user/oauth/check_id?id=' + encodeURIComponent(id);
             //alert(' url '  + url);
@@ -53,7 +53,7 @@ $(document).ready(function(){
             }).fail(function(data){
                     alert('Error : ' + errorThrown);
             });
-    	}
+        }
 
         return false;
     });

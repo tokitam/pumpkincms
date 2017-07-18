@@ -1,8 +1,8 @@
 <?php
 
 if (PC_Util::is_admin_dir()) {
-	include PUMPCMS_APP_PATH . '/module/pumpform/view/list.php';
-	return;
+    include PUMPCMS_APP_PATH . '/module/pumpform/view/list.php';
+    return;
 }
 
 $pn = $this->_data['pagenavi'];
@@ -15,10 +15,10 @@ echo $pn->get_page_link();
 $pagebreak = true;
 
 foreach ($list as $item) {
-	include 'list_item.php';
-	if (preg_match('/<!-- pagebreak -->/s', $item['body'])) {
-		printf("<a href='%s' class='morelink'>続きを読む</a><br />\n", BlogUtil::get_blog_entry_url($item['id']));
-	}
+    include 'list_item.php';
+    if (preg_match('/<!-- pagebreak -->/s', $item['body'])) {
+        printf("<a href='%s' class='morelink'>続きを読む</a><br />\n", BlogUtil::get_blog_entry_url($item['id']));
+    }
 }
 
 echo $pn->get_page_link();

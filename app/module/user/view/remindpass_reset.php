@@ -31,7 +31,7 @@
           <div class="col-lg-12">
             <!--<div class="well bs-component">-->
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/remindpass/reset/?id=<?php echo $_GET['id']; ?>">
-              	<input type="hidden" name="login" value="1">
+                <input type="hidden" name="login" value="1">
                 <fieldset>
                   <legend><?php echo _MD_USER_REMIND_PASS ?></legend>
                   <div class="form-group">
@@ -85,6 +85,6 @@
 
 
 <br />
-	
+
 </p>
 </div>

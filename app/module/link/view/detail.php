@@ -31,7 +31,7 @@ $link = $this->_data['item'];
            $tag_list = explode(',', $link['tag']);
            if (!empty($tag_list)) {
            foreach ($tag_list as $tag) :
-		       if (!empty($tag)) {
+              if (!empty($tag)) {
            ?>
            <span class="label label-info label-link"><a href="<?php echo PC_Config::url() ?>/link/?tag=<?php echo htmlspecialchars($tag) ?>"><?php echo htmlspecialchars($tag) ?></a></span>
            <?php

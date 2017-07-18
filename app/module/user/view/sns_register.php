@@ -4,8 +4,8 @@
             <!--<div class="well bs-component">-->
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/oauth/register/">
                 <input type="hidden" id="base_url" value="<?php echo PC_Config::url() ?>">
-              	<input type="hidden" name="post" value="1">
-              	<input type="hidden" name="type" value="<?php echo htmlspecialchars(@$this->type) ?>">
+                <input type="hidden" name="post" value="1">
+                <input type="hidden" name="type" value="<?php echo htmlspecialchars(@$this->type) ?>">
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
                   <div class="form-group">
@@ -14,7 +14,7 @@
                       <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_INPUT_ID ?>" name="name" value="<?php echo htmlspecialchars(@$_POST['name']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_INPUT_ID_FORMAT ?>"><br />
                       <span class="label label-danger" id="input_id_label" style="display: none;">* Input ID<br /></span>
                       <span class="label label-danger" id="duplicate_id_label" style="display: none;">* Duplicate ID<br /></span>
-                			<small><?php echo _MD_USER_INPUT_ID_FORMAT ?></small>
+                      <small><?php echo _MD_USER_INPUT_ID_FORMAT ?></small>
                       <?php
                       if (@$this->error['name']) {
                         echo $this->error['name'];
@@ -59,7 +59,7 @@
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                   <?php if ($this->oauth->input_email) : ?>
-		      <?php echo _MD_UESR_MAIL_DOMAIN_SETTING ?><br />
+                    <?php echo _MD_UESR_MAIL_DOMAIN_SETTING ?><br />
                   <?php endif ; ?>
                       <a href="<?php echo PC_Config::url() ?>/terms" target="_blank" style="font-size: 20px;"><?php echo _MD_USER_TERMS ?></a>
                     </div>

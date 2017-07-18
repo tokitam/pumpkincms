@@ -1,28 +1,28 @@
 // pumpform.js
 
 function pc_notification(message) {
-	$.notify.defaults({ className: "success" });
-	//$.notify(message, { globalPosition:"top center" });
-	$.notify(message, { globalPosition:"top right" });
+    $.notify.defaults({ className: "success" });
+    //$.notify(message, { globalPosition:"top center" });
+    $.notify(message, { globalPosition:"top right" });
 }
 
 $(document).ready(function(){
     //$('a[rel=tooltip]').tooltip();
     
     $('#main_form').submit(function(){
-    	$('#submit_button').attr('disabled', 'disabled');
-    	$('#main_form').submit();
+        $('#submit_button').attr('disabled', 'disabled');
+        $('#main_form').submit();
     });
 
     $('#pumpform_delete_button').click(function (){
-		var confirm_text = $('#pumpform_delete_confirm').val();
+        var confirm_text = $('#pumpform_delete_confirm').val();
 
-    	if (confirm(confirm_text)) {
-			id = $('#target_id').val();
-			csrf_token = $('#csrf_token').val();
-			
-			var data = { id: id, csrf_token : csrf_token };
-			var url = $('#pumpform_delete_url').val();
+        if (confirm(confirm_text)) {
+            id = $('#target_id').val();
+            csrf_token = $('#csrf_token').val();
+            
+            var data = { id: id, csrf_token : csrf_token };
+            var url = $('#pumpform_delete_url').val();
 
             var ret_url = '';
             if ($('#delete_post_redirect').val()) {
@@ -46,7 +46,7 @@ $(document).ready(function(){
                     console.log(errorThrown);
                 }
             });
-    	}
+        }
     });
 
     $('#pumpform_add_account_button').click(function() {
@@ -138,18 +138,18 @@ $(document).ready(function(){
     $('.pumpform_image').on('change', function(e) {
         var file = e.target.files[0];
         var reader = new FileReader();
-	t = this;
+    t = this;
         $preview = $('#' + t.name + "_preview");
 
         if(file.type.indexOf("image") < 0){
             return false;
         }
-	
+    
         // do nothing if not image
         if(file.type.indexOf("image") < 0){
             return false;
         }
-			  
+              
         reader.onload = (function(file) {
             return function(e) {
                 $preview.empty();
@@ -158,7 +158,7 @@ $(document).ready(function(){
                     width: "50px",
                     class: "preview",
                     title: file.name,
-		    style: 'padding-top: 0px;',
+            style: 'padding-top: 0px;',
                 }));
             };
         })(file);

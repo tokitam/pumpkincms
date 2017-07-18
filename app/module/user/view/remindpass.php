@@ -1,7 +1,7 @@
 <div class="twelve columns">
 <!-- <h3><?php echo _MD_USER_REMIND_PASS ?></h3> -->
 <p>
-	
+
 <?php if ($this->sent == false) : ?>	
 
 <?php if (0 < count($this->message)) : ?>
@@ -10,7 +10,7 @@
 </div>
 <br />
 <?php endif ; ?>
-	
+
 <!--	
 <form action="<?php echo $this->base_url;?>/user/remindpass/" method="post">
 <input type="hidden" name="post" value="1">
@@ -26,7 +26,7 @@
           <div class="col-lg-12">
             <!--<div class="well bs-component">-->
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/remindpass/">
-              	<input type="hidden" name="login" value="1">
+                <input type="hidden" name="login" value="1">
                 <fieldset>
                   <legend><?php echo _MD_USER_REMIND_PASS ?></legend>
                   <div class="form-group">
@@ -64,12 +64,12 @@
 
 
 <?php else : ?>
-	
+
 <?php echo @$this->message[0]; ?><br />
 <br />
-	
+
 <?php endif ; ?>
-	
+
 <br />
 </p>
 </div>
