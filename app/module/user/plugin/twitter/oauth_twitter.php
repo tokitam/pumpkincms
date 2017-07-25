@@ -41,6 +41,10 @@ class OAuth_twitter {
     }
 
     public function callback() {
+		if (empty($_REQUEST['oauth_verifier']) || empty($_REQUEST['oauth_token'])) {
+			PC_Util::redirect_top();
+		}
+		
         $request_token = array();
         $request_token['oauth_token'] = $_SESSION['oauth_token'];
         $request_token['oauth_token_secret'] = $_SESSION['oauth_token_secret'];
