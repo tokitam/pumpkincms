@@ -125,8 +125,14 @@ class PC_PageNavi {
         } else {
             $sort = '';
         }
+		
+		if (!empty($this->option['class'])) {
+			$class = ' ' . $this->option['class'];
+		} else {
+			$class = '';
+		}
 
-        $html = '<ul class="pagination">' . "\n";
+        $html = '<ul class="pagination'. $class . '">' . "\n";
 
         if ($this->need_prev_link()) {
             $html .= sprintf('<li><a href="?offset=%d&limit=%d%s%s">&lt;</a></li> ' . "\n", $this->get_prev(), $this->limit, $this->link_option, $sort);
