@@ -9,6 +9,9 @@ class PumpMailer {
 
     public function send($to, $subject, $message) {
         $mail = new PHPMailer();
+		
+		$subject = PC_Util::mail_convert_subject($subject);
+		$message = PC_Util::mail_convert_body($message);
 
         //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 

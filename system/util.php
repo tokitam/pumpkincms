@@ -71,7 +71,7 @@ class PC_Util {
             return false;
         }
     }
-
+	
     static function mail($to, $subject, $message) {
         if (PC_Config::get('mail_function') == 'phpmailer') {
             $mailer = new PumpMailer();
@@ -81,13 +81,9 @@ class PC_Util {
 
         mb_internal_encoding('UTF-8');
 
-        $subject = preg_replace('/\[site_title\]/', PC_Config::get('site_title'), $subject);
-        $subject = preg_replace('/\[base_url\]/', PC_Config::get('base_url'), $subject);
-        $subject = mb_encode_mimeheader($subject, 'ISO-2022-JP-MS');
-        $message = preg_replace('/\[site_title\]/', PC_Config::get('site_title'), $message);
-        $message = preg_replace('/\[base_url\]/', PC_Config::get('base_url'), $message);
+		$subject = self::mail_convert_subject($subject);
+		$message = self::mail_convert_body($message);
         $message = mb_convert_encoding($message, 'ISO-2022-JP-MS');
-
 
         $headers = 'From: ' . PC_Config::get('from_email') . "\r\n" .
         'Reply-To: ' . PC_Config::get('from_email') . "\r\n" . 
@@ -97,6 +93,19 @@ class PC_Util {
         @mail($to, $subject, $message, $headers);
 
     }
+
+	static function mail_convert_subject($subject) {
+        $subject = preg_replace('/\[site_title\]/', PC_Config::get('site_title'), $subject);
+        $subject = preg_replace('/\[base_url\]/', PC_Config::get('base_url'), $subject);
+        $subject = mb_encode_mimeheader($subject, 'ISO-2022-JP-MS');
+		return $subject;
+	}
+	
+	static function mail_convert_body($body) {
+        $body = preg_replace('/\[site_title\]/', PC_Config::get('site_title'), $body);
+        $body = preg_replace('/\[base_url\]/', PC_Config::get('base_url'), $body);
+		return $body;
+	}
 
     static function admin_mail($subject, $message) {
         if (empty(PC_Config::get('admin_email'))) {
