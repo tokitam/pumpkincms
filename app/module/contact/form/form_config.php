@@ -7,6 +7,8 @@ $pumpform_config['contact']['contact'] = array(
 
     'list_limit' => 4,
     'default_sort' => 'd_id',
+											   
+    'no_back_button' => true,											   
 
     'column' => array(
 
