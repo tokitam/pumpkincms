@@ -91,7 +91,6 @@ class PC_Util {
         'Content-Type: text/plain; charset="iso-2022-jp"' . "\r\n";
 
         @mail($to, $subject, $message, $headers);
-
     }
 
 	static function mail_convert_subject($subject) {
