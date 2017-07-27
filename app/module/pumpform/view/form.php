@@ -155,15 +155,7 @@ foreach ($form as $column) {
             $tag = $item[$column['name']];
         }
         
-        $form_html .= '<input type="text" class="js-pumpform-tag form-control" name="'. $column['name'] . '" value="' . htmlspecialchars($tag) . '"multiple>';
-		/*
-        $form_html .= '<select class="js-pumpform-tag form-control" name="'. $column['name'] . '[]" multiple>';
-        foreach ($tag_list as $tag) {
-            $tag = htmlspecialchars($tag);
-            $form_html .= sprintf("<option value='%s' selected>%s</option>", $tag, $tag);
-        }
-        $form_html .= '</select>';
-		 */
+        $form_html .= '<input type="text" class="js-pumpform-tag form-control" name="'. $column['name'] . '" value="' . htmlspecialchars($tag) . '">';
     } else if ($column['type'] == PUMPFORM_MULTI_CHECKBOX) {
         $t = $column['option']['type'];
         $module = $column['option']['option_table']['module'];

@@ -219,7 +219,6 @@ class PumpORMAP {
 
         $multi_checkbox_list = array();
 
-
         if (count($post) == 0) {
             $post = $_POST;
         }
@@ -297,7 +296,7 @@ class PumpORMAP {
                 array_push($params, $p);
             } else if ($column['type'] == PUMPFORM_TAG) {
                 if (@$post[$column['name']]) {
-                    $values[$p] = implode(',', @$post[$column['name']]);
+                    $values[$p] = @$post[$column['name']];
                     array_push($tag_column_list, $column);
                 } else {
                     $values[$p] = '';
@@ -329,7 +328,7 @@ class PumpORMAP {
                 $types[$p] = PC_Db::T_DOUBLE;
                 array_push($params, $p);
             } else {
-// integer
+                // integer
                 if (@$post[$column['name']] == '') {
                     if (@$column['default']) {
                         $values[$p] = $column['default'];
@@ -360,11 +359,11 @@ class PumpORMAP {
 
         $sql .= $c . ' ) VALUES ( ';
 
-// site_id
+        // site_id
         $sql .= intval(PC_Config::get('site_id')) . ', ';
-// reg_time, reg_user
+        // reg_time, reg_user
         $sql .= time() . ' , ' . intval(UserInfo::get_id()) . ', ';
-// mod_time, mod_user
+        // mod_time, mod_user
         $sql .= '0, 0, ';
 
         $c = implode(", ", $params);
