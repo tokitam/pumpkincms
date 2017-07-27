@@ -325,10 +325,12 @@ echo $form_html;
 $form_html = '';
 ?>
 
-<?php if (PumpForm::$redirect_url) : ?>
-<a href="<?php echo PumpForm::$redirect_url; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
-<?php else : ?>
-<a href="<?php echo PC_Config::get('base_url') . '/' . PC_Config::get('dir1') . '/' . PC_Config::get('dir2') . '/'; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
+<?php if (@$form_config['no_backup_button']) : ?>
+  <?php if (PumpForm::$redirect_url) : ?>
+    <a href="<?php echo PumpForm::$redirect_url; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
+  <?php else : ?>
+    <a href="<?php echo PC_Config::get('base_url') . '/' . PC_Config::get('dir1') . '/' . PC_Config::get('dir2') . '/'; ?>" class='btn btn-default'><?php echo _MD_PUMPFORM_BACK ?></a>
+  <?php endif ; ?>
 <?php endif ; ?>
 
 <?php
