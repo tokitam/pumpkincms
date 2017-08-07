@@ -115,7 +115,7 @@ class PC_PageNavi {
         if ($this->navi_html != '') {
             return $this->navi_html;
         }
-        if ($this->total < $this->limit) {
+        if ($this->total <= $this->limit) {
             $this->navi_html = '';
             return $this->navi_html;
         }
