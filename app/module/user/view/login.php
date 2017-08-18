@@ -53,7 +53,10 @@ if (SiteInfo::is_site_close()) {
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                       <a href="<?php echo PC_Config::url() ?>/user/remindpass/"><?php echo _MD_USER_REMIND_PASS ?></a>
+                      <?php if (PC_Config::get('allow_register')) : ?>
+
                       <a href="<?php echo PC_Config::get('base_url'); ?>/user/register/"><?php echo _MD_USER_REGISTER ?></a>
+                      <?php endif ; ?>  
                     </div>
                   </div> <!-- form-group -->
                 </fieldset>

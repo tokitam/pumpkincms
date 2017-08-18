@@ -163,7 +163,7 @@ class PumpORMAP {
                 $column = $r[1];
             } else {
                 $d = false;
-                $column = $r[1];
+                $column = $this->form_config['default_sort'];
             }
 
             $sql .= ' ORDER BY ';
