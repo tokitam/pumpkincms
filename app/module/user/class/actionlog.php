@@ -7,6 +7,9 @@ class ActionLog {
     const REGISTER_FINISH = 4;
     const TEL_AUTH_TEMP = 5;
     const TEL_AUTH_FINISH = 6;
+    const ERROR = 7;
+    const INFO = 8;
+    const MESSAGE_MAX_SIZE = 255;
     
     static $type_list = [
                          self::LOGIN => 'login',
@@ -15,6 +18,8 @@ class ActionLog {
                          self::REGISTER_FINISH => 'register finish',
                          self::TEL_AUTH_TEMP => 'tel auth temp',
                          self::TEL_AUTH_FINISH => 'tel auth finish',
+                         self::ERROR => 'error',
+                         self::INFO => 'info',
                          ];
 
     static public function log($type, $desc='', $param1=0, $param2=0, $param3=0, $param4=0) {
