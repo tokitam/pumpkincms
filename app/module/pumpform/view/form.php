@@ -97,7 +97,7 @@ foreach ($form as $column) {
             $form_html .= " value = '" . $key . "' ";
             if (@$_POST[$column['name']] == $key ||
                 @$item[$column['name']] == $key ||
-                @$column['default'] == $key) {
+                (isset($column['default']) && @$column['default'] == $key)) {
                 $form_html .= ' checked ';
             }
             $form_html .= ">";

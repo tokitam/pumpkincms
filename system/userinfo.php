@@ -34,12 +34,16 @@ class UserInfo {
         }
     }
     
-    static function is_logined() {
+    static function is_loggedin() {
         if (self::get_data()) {
             return true;
         }
 
         return false;
+    }
+   
+    static function is_logined() {
+        return self::is_loggedin();   
     }
    
     static function get_type() {
