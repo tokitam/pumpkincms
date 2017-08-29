@@ -24,14 +24,18 @@ class PC_Util {
         }
     }
 
-    static function redirect_if_no_login($url='') {
-        if (UserInfo::is_logined() == false) {
+    static function redirect_if_no_loggedin($url='') {
+        if (UserInfo::is_loggedin() == false) {
             if ($url == '') {
                 self::redirect_top();
             } else {
                 self::redirect($url);
             }
         }
+    }
+
+    static function redirect_if_no_login($url='') {
+        self::redirect_if_no_loggedin($url);
     }
 
     static function check_batch() {
