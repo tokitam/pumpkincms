@@ -244,11 +244,6 @@ selector:'.pump_tinymce'
                            </a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo PC_Config::url() ?>/admin/display_config/">
-                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_DISPLAY_CONFIG ?></span>
-                           </a>
-                        </li>
-                        <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/user/">
                                 <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_USER ?></span>
                            </a>
@@ -297,6 +292,11 @@ if ($dh = opendir($dir)) {
                            </a>
                         </li>
                         <?php endforeach ; ?>
+                        <li class="active">
+                            <a href="<?php echo PC_Config::url() ?>/admin/display_config/">
+                                <i class="fa fa-edit"></i> <span><?php echo _MD_ADMIN_DISPLAY_CONFIG ?></span>
+                           </a>
+                        </li>
                         <li class="active">
                             <a href="<?php echo PC_Config::url() ?>/admin/index/phpinfo/">
                                 <i class="fa fa-edit"></i> <span>phpinfo</span>
