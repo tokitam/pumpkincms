@@ -118,7 +118,8 @@ if (@$form_config['1n_link_id']) {
                 }
             } else if ($column['type'] == PUMPFORM_PRIMARY_ID) {
                 $html .= intval($value);
-            } else if ($column['type'] == PUMPFORM_SELECT) {
+            } else if ($column['type'] == PUMPFORM_SELECT ||
+		       $column['type'] == PUMPFORM_RADIO) {
                 foreach ($column['option'] as $k => $v) {
                     if ($k == $value) {
                         $html .= $v;

@@ -65,6 +65,9 @@ define('_MD_USER_NAME', 'ユーザID');
 define('_MD_USER_EMAIL', 'メールアドレス');
 define('_MD_USER_PASSWORD', 'パスワード');
 define('_MD_USER_ICON', 'ユーザアイコン');
+define('_MD_USER_AUTH', '権限');
+define('_MD_USER_AUTH_GENERAL_USER', ' 一般ユーザ');
+define('_MD_USER_AUTH_ADMIN_USER', '管理者ユーザ');
 define('_MD_USER_COUNT_GOOD', 'GOODカウント');
 define('_MD_USER_COUNT_BAD', 'BADカウント');
 

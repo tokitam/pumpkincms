@@ -74,7 +74,8 @@ foreach ($form as $column) {
         $form_html .= "<div id='map' style='width:400px; height:400px;'><br>\n</div>\n";
         $form_html .= "<div id='gmap_address' style='display: none;'>". $item['geolocation'] . "</div>\n";
         $form_html .= sprintf('<a href="https://maps.google.com/maps?q=%s&z=15" target="_blank">%s</a>', $item['geolocation'], _MD_PUMPFORM_LARGE_MAP);
-    } else if ($column['type'] == PUMPFORM_SELECT) {
+    } else if ($column['type'] == PUMPFORM_SELECT ||
+	       $column['type'] == PUMPFORM_RADIO) {
         foreach ($column['option'] as $k => $v) {
             if ($k == $value) {
                 $form_html .= $v;
