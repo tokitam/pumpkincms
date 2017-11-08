@@ -26,7 +26,7 @@ if (@$form_config['1n_link_id']) {
 
         $html = '';
 
-    if (@$form_config['do_not_show_inesrt_button'] == true) {
+    if (empty($form_config['do_not_show_insert_button']) || $form_config['do_not_show_insert_button'] == false) {
         $html .= "<a href='" . $module_url . "/add/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
                 $html .= "<br />\n";
     }
@@ -146,11 +146,11 @@ if (@$form_config['1n_link_id']) {
         $html .= '<td class="odd">';
         }
 
-    if (@$form_config['do_not_show_detail_button'] == true) {
+    if (empty($form_config['do_not_show_detail_button']) || $form_config['do_not_show_detail_button'] == false) {
         $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" ._MD_PUMPFORM_DETAIL . "</a>";
         $html .= "&nbsp;";
     }
-    if (@$form_config['do_not_show_edit_button'] == true) {
+    if (empty($form_config['do_not_show_edit_button']) || @$form_config['do_not_show_edit_button'] == false) {
         $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_EDIT . "</a> ";
     }
         //$html .= "<a href=''>" . _MD_PUMPFORM_DELETE . "</a> ";
@@ -163,7 +163,7 @@ if (@$form_config['1n_link_id']) {
         $html .= $pn->get_page_link();
         $html .= "<br />\n";
 
-    if (@$form_config['do_not_show_inesrt_button'] == true) {
+    if (empty($form_config['do_not_show_insert_button']) || $form_config['do_not_show_insert_button'] == false) {
         $html .= "<a href='" . $module_url . "/add/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
     }
     
