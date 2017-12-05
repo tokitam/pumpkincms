@@ -57,13 +57,13 @@ data-label='今すぐ申し込む'>
 				  'email' => $_POST['stripeEmail'],
 				  'source' => $_POST['stripeToken'],
 				  ];
-		$post = true;
+		$method = 'POST';
 		$option = [
 				   'user_password' => $sk,
 				   'output_request_header' => false,
 				   'output_response_header' => false,
 				   ];
-		$ret = PC_Util::curl($url, $param, $post, $option);
+		$ret = PC_Util::curl($url, $param, $method, $option);
 		$ret = json_decode($ret, true);
 		
 		// ここでエラー判定
@@ -90,14 +90,14 @@ data-label='今すぐ申し込む'>
 				  'customer' => $ret['id'],
 				  'items[0][plan]' => 'basic-monthly',
 				  ];
-		$post = true;
+		$method = 'POST';
 		$option = [
 				   'user_password' => $sk,
 				   'output_request_header' => false,
 				   'output_response_header' => false,
 				   ];
 		echo '<pre>';
-		$ret = PC_Util::curl($url, $param, $post, $option);
+		$ret = PC_Util::curl($url, $param, $method, $option);
 		var_dump($ret);
 		$ret = json_decode($ret, true);
 		//var_dump($ret);
@@ -133,13 +133,22 @@ data-label='今すぐ申し込む'>
 		PC_Debug::log('stdin:' . $stdin, __FILE__, __LINE__);
 		PC_Debug::log('get:' . print_r($_GET, true), __FILE__, __LINE__);
 		PC_Debug::log('post:' . print_r($_POST, true), __FILE__, __LINE__);
-		var_dump($stdin);
-		var_dump($_GET);
-		var_dump($_POST);
-		//var_dump(getallheaders());
-		//var_dump($_POST);
+		$webhook = json_decode($stdin, true);
 		
-		echo ' webhook ';
+		if (empty($webhook['type'])) {
+			exit();
+		}
+
+		$monthly_stripe_model = new monthly_stripe_model();
+		$webhook = $monthly_stripe_model->arrangement_webhook($webhook);
+
+		if (!empty($webhook['customer_id'])) {
+			$customer = $monthly_stripe_model->get_customer($webhook['customer_id']);
+			$webhook['user_id'] = intval($customer['user_id']);
+		}
+		$monthly_stripe_model->add_webhook($webhook);
+		
+		echo ' OK ';
 		exit();
 	}
 
@@ -162,7 +171,7 @@ data-label='今すぐ申し込む'>
 		$sk = PC_Config::get('monthly_stripe_secret_key') . ':';
 		$url = 'https://api.stripe.com/v1/subscriptions/' . $subscription['subscription_id'];
 		$param = [];
-		$post = true;
+		$method = 'DELETE';
 		$option = [
 				   'user_password' => $sk,
 				   'output_request_header' => false,
@@ -170,7 +179,7 @@ data-label='今すぐ申し込む'>
 				   'CURLOPT_CUSTOMREQUEST' => 'DELETE',
 				   ];
 		echo '<pre>';
-		$ret = PC_Util::curl($url, $param, $post, $option);
+		$ret = PC_Util::curl($url, $param, $method, $option);
 		var_dump($ret);
 		$ret = json_decode($ret, true);
 		
