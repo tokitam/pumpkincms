@@ -20,7 +20,8 @@ class Csrf_protection {
     }
 
     static public function validate() {
-        if (empty(PC_Config::get('csrf_protection'))) {
+        $csrf_protection = PC_Config::get('csrf_protection');
+        if (empty($csrf_protection)) {
             return true;
         }
 

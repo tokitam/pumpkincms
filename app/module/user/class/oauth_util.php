@@ -13,8 +13,9 @@ class OAuth_util {
         if (is_dir($dir)) {
             if ($dh = opendir($dir)) {
                 while (($file = readdir($dh)) !== false) {
-                    if (empty(PC_Config::get($file . '_auth'))) {
-                    continue;
+                    $auth = PC_Config::get($file . '_auth');
+                    if (empty($auth)) {
+                        continue;
                     }
                     if (preg_match('/^[a-z]+$/', $file)) {
                         self::require_file($file);

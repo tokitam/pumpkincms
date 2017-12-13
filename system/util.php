@@ -97,21 +97,22 @@ class PC_Util {
         @mail($to, $subject, $message, $headers);
     }
 
-	static function mail_convert_subject($subject) {
+    static function mail_convert_subject($subject) {
         $subject = preg_replace('/\[site_title\]/', PC_Config::get('site_title'), $subject);
         $subject = preg_replace('/\[base_url\]/', PC_Config::get('base_url'), $subject);
         $subject = mb_encode_mimeheader($subject, 'ISO-2022-JP-MS');
-		return $subject;
-	}
-	
-	static function mail_convert_body($body) {
+        return $subject;
+    }
+
+    static function mail_convert_body($body) {
         $body = preg_replace('/\[site_title\]/', PC_Config::get('site_title'), $body);
         $body = preg_replace('/\[base_url\]/', PC_Config::get('base_url'), $body);
-		return $body;
-	}
+        return $body;
+    }
 
     static function admin_mail($subject, $message) {
-        if (empty(PC_Config::get('admin_email'))) {
+        $admin_email = PC_Config::get('admin_email');
+        if (empty($admin_email)) {
             return;
         }
 
