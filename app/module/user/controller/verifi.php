@@ -33,9 +33,10 @@ class user_verifi extends PC_Controller {
             return;
         }
     
-    if (empty(PC_Config::get('unset_user_image_id_list')) == false) {
-        $user['image_id'] = PC_Util::get_unset_user_image_id();
-    }
+        $unset_user_image_id_list = PC_Config::get('unset_user_image_id_list');
+        if (empty($unset_user_image_id_list) == false) {
+            $user['image_id'] = PC_Util::get_unset_user_image_id();
+        }
         
         $user_id = $user_model->register($user);
         $db = PC_DBSet::get();

@@ -8,7 +8,7 @@ class PC_MultiSite {
         PC_Config::set('db_no', 1);
         PC_Config::set('site_id', 1);
 
-        $site_list_ormap = PumpORMAP_Util::get('admin', 'site_list');
+        $site_list_ormap = PumpORMAP_Util::get('system', 'site_list');
         $site_list = $site_list_ormap->get_list('', 0, 1000);
         
         $all_site_list = PC_Config::get('site_list');
@@ -18,7 +18,7 @@ class PC_MultiSite {
         }
         PC_Config::set('site_list', $all_site_list);
         
-        $site_config_ormap = PumpORMAP_Util::get('admin', 'site_config');
+        $site_config_ormap = PumpORMAP_Util::get('system', 'site_config');
         $site_config = $site_config_ormap->get_list('', 0, 1000);
         
         $all_site_config = PC_Config::get('site_config');

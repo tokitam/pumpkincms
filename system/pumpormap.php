@@ -604,7 +604,7 @@ class PumpORMAP {
         if ($where == '') {
             $sql .= ' WHERE id = ' . intval($id);
         } else {
-            $sql .= ' WHERE ' . $where;
+            $sql .= ' WHERE site_id = ' . intval(SiteInfo::get_site_id()) . ' AND ' . $where;
         }
 
         $db->exec($sql, $values, $types);
