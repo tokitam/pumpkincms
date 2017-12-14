@@ -7,9 +7,9 @@ class monthly_stripe {
     const PAYMENT_TYPE = 201;
     
     public function get_subscription_link() {
-		return $this->get_form();
-	}
-	
+        return $this->get_form();
+    }
+
     public function get_form() {
         $url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=subscription';
         $pk = PC_Config::get('monthly_stripe_public_key');
@@ -36,30 +36,30 @@ data-label='今すぐ申し込む'>
     }
 
     public function get_cancel_link() {
-		$url = PC_Config::url() . '/user/payment?type=monthly_stripe&action=cancel';
-		$form = "<a href='" . $url . "' class='btn btn-default' >解約する</a>";
-		
-		return $form;
-	}
-	
+        $url = PC_Config::url() . '/user/payment?type=monthly_stripe&action=cancel';
+        $form = "<a href='" . $url . "' class='btn btn-default' >解約する</a>";
+
+        return $form;
+    }
+
     public function subscription() {
 
         if (UserInfo::is_loggedin() == false) {
-			echo _MD_USER_PLEASE_LOGIN;
+            echo _MD_USER_PLEASE_LOGIN;
             return;
         }
         
         if (UserInfo::is_premium()) {
             // すでにプレミアムユーザである
-			echo _MD_USER_ALREADY_PREMIUM;
+            echo _MD_USER_ALREADY_PREMIUM;
             return;
         }
         
         // この辺で値のチェック
         if (empty($_POST['stripeEmail']) ||
-			empty($_POST['stripeToken']) ||
-			PC_Util::is_email($_POST['stripeEmail']) == false) {
-			echo _MD_USER_VALUE_IS_INVALID;
+            empty($_POST['stripeToken']) ||
+            PC_Util::is_email($_POST['stripeEmail']) == false) {
+            echo _MD_USER_VALUE_IS_INVALID;
             return;
         }
         
@@ -169,13 +169,13 @@ data-label='今すぐ申し込む'>
     public function cancel() {
 
         if (UserInfo::is_loggedin() == false) {
-			echo _MD_USER_PLEASE_LOGIN;
+            echo _MD_USER_PLEASE_LOGIN;
             return;
         }
         
         if (UserInfo::is_premium() == false) {
             // すでにプレミアムユーザではない
-			echo _MD_USER_NOT_PREMIUM;
+            echo _MD_USER_NOT_PREMIUM;
             return;
         }
         
