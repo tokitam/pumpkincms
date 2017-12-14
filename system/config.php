@@ -3,7 +3,7 @@
 class PC_Config {
     public static function load_config() {
 
-        $ormap = PumpORMAP_Util::get('admin', 'config');
+        $ormap = PumpORMAP_Util::get('system', 'config');
         $list = $ormap->get_list();
         foreach ($list as $key => $value) {
             self::set($value['name'], $value['value']);

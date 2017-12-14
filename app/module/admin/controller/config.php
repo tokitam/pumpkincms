@@ -19,7 +19,7 @@ class admin_config extends PC_Controller {
                 $_POST['name'] = $name;
                 $_POST['value'] = $value;
                 $db = PC_Dbset::get();
-                $ormap = PumpORMAP_Util::get('admin', 'config');
+                $ormap = PumpORMAP_Util::get('system', 'config');
                 $ormap->update(null, "name = " . $db->escape($name));
 
                 if ($ormap->row_count() == 0) {
@@ -47,7 +47,7 @@ class admin_config extends PC_Controller {
         };
 
         PumpForm::$edit_load_process = function($target_id) {
-            $ormap = PumpORMAP_Util::get('admin', 'config');
+            $ormap = PumpORMAP_Util::get('system', 'config');
             $list = $ormap->get_list('site_id = ' . intval(PC_Config::get('site_id')));
 
             $tmp = array();
