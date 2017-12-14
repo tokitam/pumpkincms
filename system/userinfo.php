@@ -93,9 +93,10 @@ class UserInfo {
         return false;
     }
 	
-	static public function is_premium() {
-		return empty(self::get_data('flg_premium')) ? false : true;
-	}
+    static public function is_premium() {
+        $flg_premium = self::get_data('flg_premium');
+        return empty($flg_premium) ? false : true;
+    }
 
     static function check_auth($auth) {
         $user_auth = self::get_data('auth');
