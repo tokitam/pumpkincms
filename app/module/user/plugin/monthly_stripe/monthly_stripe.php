@@ -6,6 +6,10 @@ require_once(PUMPCMS_APP_PATH . '/module/user/model/user_model.php');
 class monthly_stripe {
     const PAYMENT_TYPE = 201;
     
+    public function get_subscription_link() {
+		return $this->get_form();
+	}
+	
     public function get_form() {
         $url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=subscription';
         $pk = PC_Config::get('monthly_stripe_public_key');
@@ -30,23 +34,32 @@ data-label='今すぐ申し込む'>
         
         return $form;
     }
-    
+
+    public function get_cancel_link() {
+		$url = PC_Config::url() . '/user/payment?type=monthly_stripe&action=cancel';
+		$form = "<a href='" . $url . "' class='btn btn-default' >解約する</a>";
+		
+		return $form;
+	}
+	
     public function subscription() {
 
         if (UserInfo::is_loggedin() == false) {
-            echo 'ログインしてください';
+			echo _MD_USER_PLEASE_LOGIN;
             return;
         }
         
         if (UserInfo::is_premium()) {
             // すでにプレミアムユーザである
-            echo 'プレアミムユーザです';
+			echo _MD_USER_ALREADY_PREMIUM;
             return;
         }
         
         // この辺で値のチェック
-        if (empty($_POST['stripeEmail']) || empty($_POST['stripeToken']) || PC_Util::is_email($_POST['stripeEmail']) == false) {
-            echo '値が不正です';
+        if (empty($_POST['stripeEmail']) ||
+			empty($_POST['stripeToken']) ||
+			PC_Util::is_email($_POST['stripeEmail']) == false) {
+			echo _MD_USER_VALUE_IS_INVALID;
             return;
         }
         
@@ -126,13 +139,14 @@ data-label='今すぐ申し込む'>
         $user_model->update_flg_premium(UserInfo::get_id(), true, self::PAYMENT_TYPE);
         UserInfo::reload();
     }
-    
+
     public function webhook() {
         $stdin = file_get_contents('php://input');
-        var_dump(json_decode($stdin));
+
         PC_Debug::log('stdin:' . $stdin, __FILE__, __LINE__);
         PC_Debug::log('get:' . print_r($_GET, true), __FILE__, __LINE__);
         PC_Debug::log('post:' . print_r($_POST, true), __FILE__, __LINE__);
+
         $webhook = json_decode($stdin, true);
         
         if (empty($webhook['type'])) {
@@ -155,13 +169,13 @@ data-label='今すぐ申し込む'>
     public function cancel() {
 
         if (UserInfo::is_loggedin() == false) {
-            echo 'ログインしてください';
+			echo _MD_USER_PLEASE_LOGIN;
             return;
         }
         
         if (UserInfo::is_premium() == false) {
             // すでにプレミアムユーザではない
-            echo 'プレアミムユーザではありません';
+			echo _MD_USER_NOT_PREMIUM;
             return;
         }
         
