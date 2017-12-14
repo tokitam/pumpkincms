@@ -101,8 +101,6 @@ class PC_Controller {
     }
 
     public function scaffold($module, $table, $file, $api=false) {
-//PC_Debug::log('PC_Controller::scaffold()', __FILE__, __LINE__);
-
         PC_Util::include_language_file($module);
         $module_org = $module;
 
@@ -165,6 +163,12 @@ class PC_Controller {
             die('File not found:' . $file . ' ' . __FILE__ .':' . __LINE__);
         }
         include $file;
+    }
+
+    public function set_scaffold($module, $table) {
+        $this->_flg_scaffold = true;
+        $this->_module = $module;
+        $this->_table = $table;
     }
 
     public function api() {

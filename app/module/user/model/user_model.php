@@ -556,5 +556,21 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 
         return $db->query($sql);
     }
+	
+    function update_flg_premium($id, $flg_premium, $payment_type=false) {
+        $db = PC_DBSet::get();
+		
+		$flg_premium = $flg_premium ? 1 : 0;
+        
+        $sql = 'UPDATE ' . $db->prefix($this->table_name);
+        $sql .= ' SET ';
+        $sql .= ' flg_premium = ' . intval($flg_premium);
+		if ($payment_type) {
+			$sql .= ', payment_type = ' . intval($payment_type);
+		}
+        $sql .= ' WHERE id = ' . intval($id);
+
+        return $db->query($sql);
+    }
 }
 
