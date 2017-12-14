@@ -76,6 +76,11 @@ define('_MD_USER_TEL_AUTH_NO', '電話認証未登録です');
 define('_MD_USER_TEL_AUTH_OK', '電話認証済です');
 define('_MD_USER_TEL_AUTH_DO', '電話認証を行う');
 
+define('_MD_USER_PLEASE_LOGIN', 'ログインしてください');
+define('_MD_USER_ALREADY_PREMIUM', 'すでにプレミアムユーザです');
+define('_MD_USER_VALUE_IS_INVALID', '値が不正です');
+define('_MD_USER_NOT_PREMIUM', 'プレアミムユーザではありません');
+
 // --- admin --- 
 define('_MD_USER_ADMIN_MODE', '管理者モードです');
 define('_MD_USER_NO_AUTH', '権限がありません');

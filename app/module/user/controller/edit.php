@@ -30,6 +30,8 @@ class user_edit extends PC_Controller {
 
         unset($pumpform_config['user']['user']['column']['name']);
         unset($pumpform_config['user']['user']['column']['email']);
+        unset($pumpform_config['user']['user']['column']['flg_premium']);
+        unset($pumpform_config['user']['user']['column']['payment_type']);
 
         $this->scaffold($this->_module, $this->_table, $method);
 /*

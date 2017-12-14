@@ -480,4 +480,67 @@ class PC_Util {
 
         return $url;
     }
+
+	/**
+	 * call curl library
+	 * @param $url string URL
+	 * @param $param array URL parameter
+	 * @param $method string method, GET, POST, DELETE, OPTION
+	 * @param $option array option parameter
+	 */
+	static public function curl($url, $param=[], $method='GET', $option=[]) {
+		if (empty($url) || self::is_url($url) == false) {
+			throw new Exception('PC_Util::curl() $url wrong');
+		}
+		
+		$method = strtoupper($method);
+		
+		if ($method != 'GET' && $method != 'POST' && $method != 'DELETE' && $method != 'OPTION') {
+			throw new Exception('PC_Util::curl() $method wrong');
+		}
+		
+		$user_password = @$option['user_password'];
+
+		if (is_array($param)) {
+			$param = http_build_query($param);
+		}
+		if ($method == 'GET') {
+			$url .= '?' . $param;
+		}
+
+		$curl = curl_init($url);
+		
+		if ($method == 'POST') {
+			// POST method
+			curl_setopt($curl, CURLOPT_POST, TRUE);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $param);
+		}
+		if (!empty($user_password)) {
+			curl_setopt($curl, CURLOPT_USERPWD, $user_password);
+		}
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		if (isset($option['output_request_header']) && $option['output_request_header']) {
+			curl_setopt($curl, CURLINFO_HEADER_OUT,true);
+		}
+		if (isset($option['output_response_header']) && $option['output_response_header']) {
+			curl_setopt($curl, CURLOPT_HEADER, true);
+		}
+		if (isset($option['CURLOPT_CUSTOMREQUEST'])) {
+			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $option['CURLOPT_CUSTOMREQUEST']);
+		}
+		if (isset($option['CURLOPT_SSL_VERIFYPEER'])) {
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, $option['CURLOPT_SSL_VERIFYPEER']);
+		}
+		if (isset($option['CURLOPT_SSL_VERIFYHOST'])) {
+			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, $option['CURLOPT_SSL_VERIFYHOST']);
+		}
+		$res = curl_exec($curl);
+		if (isset($option['output_request_header']) && $option['output_request_header']) {
+			$request_header = curl_getinfo($curl, CURLINFO_HEADER_OUT);
+			var_dump($request_header);
+		}
+		curl_close($curl);
+		
+		return $res;
+	}
 }

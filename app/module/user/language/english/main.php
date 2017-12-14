@@ -76,6 +76,11 @@ define('_MD_USER_TEL_AUTH_NO', 'No telephone auth');
 define('_MD_USER_TEL_AUTH_OK', 'Ok telephone auth');
 define('_MD_USER_TEL_AUTH_DO', 'Telephone auth');
 
+define('_MD_USER_PLEASE_LOGIN', 'Please login');
+define('_MD_USER_ALREADY_PREMIUM', 'Already a premium user');
+define('_MD_USER_VALUE_IS_INVALID', 'Value is invalid');
+define('_MD_USER_NOT_PREMIUM', 'Not a premium user');
+
 // --- admin --- 
 define('_MD_USER_ADMIN_MODE', 'Administrator mode');
 define('_MD_USER_NO_AUTH', 'There is no authority.');
