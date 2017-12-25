@@ -183,25 +183,25 @@ class PC_Util {
         if (@$_SERVER['REQUEST_URI'] == '' ||
             $_SERVER['REQUEST_URI'] == '/') {
             return '';
-    } else if (@$_SERVER['QUERY_STRING'] == '') {
-        preg_match('@(.+)/?@', $_SERVER['REQUEST_URI'], $r);
-        return self::cut_tail_slash($r[1]);
-    } else {
-        $q = self::cut_tail_slash($_SERVER['QUERY_STRING']);
-        if (strstr($q, '=')) {
-            $arr = explode('=', $q);
-            $q = $arr[1];
-        }
-
-        $req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
-
-        preg_match('@(.+)/' . $q . '$@', $req, $r);
-        if (isset($r[1])) {
-            return $r[1];
+        } else if (@$_SERVER['QUERY_STRING'] == '') {
+            preg_match('@(.+)/?@', $_SERVER['REQUEST_URI'], $r);
+            return self::cut_tail_slash($r[1]);
         } else {
-            return '';
+            $q = self::cut_tail_slash($_SERVER['QUERY_STRING']);
+            if (strstr($q, '=')) {
+                $arr = explode('=', $q);
+                $q = $arr[1];
+            }
+
+            $req = self::cut_tail_slash($_SERVER['REQUEST_URI']);
+
+            preg_match('@(.+)/' . $q . '$@', $req, $r);
+            if (isset($r[1])) {
+                return $r[1];
+            } else {
+                return '';
+            }
         }
-    }
     }
 
     static function get_url() {
