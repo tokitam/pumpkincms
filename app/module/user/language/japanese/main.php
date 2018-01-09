@@ -115,3 +115,6 @@ define('_MD_USER_REMINDPASS_MESSAGE', 'パスワードを再設定します。
 
 ');
 
+define('_MD_MULTI_SITE_NAME', 'サイト名');
+define('_MD_USER_SITE_ID', 'サイトID');
+define('_MD_USER_SITE_ID_INFO', 'サイトIDは半角英数字および-（ハイフン）のみで入力してください。');

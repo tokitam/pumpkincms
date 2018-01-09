@@ -1,29 +1,5 @@
 <?php
 
-$pumpform_config['admin']['config'] = array(
-    'module' => 'admin',
-    'title' => 'config',
-    'table' => 'config',
-    'column' => array(
-
-        'name' => array('name' => 'name',
-            'title' => 'name',
-            'type' => PUMPFORM_TEXT,
-            'visible' => 1,
-            'registable' => 1,
-            'editable' => 1,
-            'list_visible' => 1,),
-        'value' => array('name' => 'value',
-            'title' => 'value',
-            'type' => PUMPFORM_TEXT,
-            'visible' => 1,
-            'registable' => 1,
-            'editable' => 1,
-            'list_visible' => 1,),
-        ),
-    );
-
-
 $pumpform_config['admin']['config_form'] = array(
     'module' => 'admin',
     'title' => _MD_ADMIN_SETTING,
@@ -54,7 +30,6 @@ $pumpform_config['admin']['config_form'] = array(
         'debug_mode' => array('name' => 'debug_mode',
             'title' => _MD_ADMIN_DEBUG_MODE,
             'type' => PUMPFORM_SELECT,
-            //'placeholder' => _MD_SHOP_STATUS,
             'required' => 0,
             'visible' => 1,
             'registable' => 1,
@@ -68,7 +43,6 @@ $pumpform_config['admin']['config_form'] = array(
         'site_close' => array('name' => 'site_close',
             'title' => _MD_ADMIN_SITE_CLOSE,
             'type' => PUMPFORM_SELECT,
-            //'placeholder' => _MD_SHOP_STATUS,
             'required' => 0,
             'visible' => 1,
             'registable' => 1,
@@ -82,7 +56,6 @@ $pumpform_config['admin']['config_form'] = array(
         'site_close_message' => array('name' => 'site_close_message',
             'title' => _MD_ADMIN_SITE_CLOSE_MESSAGE,
             'type' => PUMPFORM_TEXTAREA,
-            //'placeholder' => _MD_SHOP_STATUS,
             'required' => 0,
             'visible' => 1,
             'registable' => 1,
@@ -113,71 +86,31 @@ $pumpform_config['admin']['config_form'] = array(
             'registable' => 1,
             'editable' => 1,
             'list_visible' => 1,),
-        /*
-        'cookie_lifetime' => array('name' => 'cookie_lifetime',
-            'title' => 'cookie_lifetime',
-            'type' => PUMPFORM_TEXT,
+        'flg_multi_site' => array('name' => 'flg_multi_site',
+            'title' => _MD_ADMIN_MULTI_SITE_FUNCTION,
+            'type' => PUMPFORM_SELECT,
+            'required' => 0,
             'visible' => 1,
             'registable' => 1,
             'editable' => 1,
-            'list_visible' => 1,
-            'default' => (60 * 60 * 24 * 365)),
-            'gc_maxlifetime' => array('name' => 'gc_maxlifetime',
-            'title' => 'gc_maxlifetime',
-            'type' => PUMPFORM_TEXT,
+            'list_visible' => 0,
+            'option' => array(
+                0 => 'OFF',
+                1 => 'ON',
+                )
+            ),
+        'multi_site_type' => array('name' => 'multi_site_type',
+            'title' => _MD_ADMIN_MULTI_SITE_TYPE,
+            'type' => PUMPFORM_SELECT,
+            'required' => 0,
             'visible' => 1,
             'registable' => 1,
             'editable' => 1,
-            'list_visible' => 1,
-            'default' => (60 * 60 * 24 * 365),),
-        */
+            'list_visible' => 0,
+            'option' => array(
+                1 => _MD_ADMIN_MULTI_SITE_TYPE_DIRECTORY,
+                0 => _MD_ADMIN_MULTI_SITE_TYPE_SUB_DOMAIN,
+                )
+            ),
     ),
 );
-
-$pumpform_config['admin']['site_list'] = array(
-    'module' => 'admin',
-    'title' => 'site_list',
-    'table' => 'site_list',
-    'column' => array(
-
-        'domain_dir' => array('name' => 'domain_dir',
-            'title' => 'domain_dir',
-            'type' => PUMPFORM_TEXT,
-            'visible' => 1,
-            'registable' => 1,
-            'editable' => 1,
-            'list_visible' => 1,),
-        'site_id' => array('name' => 'site_id',
-            'title' => 'site_id',
-            'type' => PUMPFORM_INT,
-            'visible' => 1,
-            'registable' => 1,
-            'editable' => 1,
-            'list_visible' => 1,),
-    ),
-);
-
-$pumpform_config['admin']['site_config'] = array(
-    'module' => 'admin',
-    'title' => 'site_config',
-    'table' => 'site_config',
-    'column' => array(
-
-        'theme' => array('name' => 'theme',
-            'title' => 'theme',
-            'type' => PUMPFORM_TEXT,
-            'visible' => 1,
-            'registable' => 1,
-            'editable' => 1,
-            'list_visible' => 1,),
-        'db_no' => array('name' => 'db_no',
-            'title' => 'db_no',
-            'type' => PUMPFORM_INT,
-            'visible' => 1,
-            'registable' => 1,
-            'editable' => 1,
-            'list_visible' => 1,),
-    ),
-);
-
-

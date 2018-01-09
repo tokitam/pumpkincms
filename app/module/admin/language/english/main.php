@@ -25,4 +25,7 @@ define('_MD_ADMIN_SITE_CLOSE_MESSAGE', 'Site close Message');
 define('_MD_ADMIN_ALLOW_REGISTER', 'Allow register user');
 define('_MD_ADMIN_ALLOW_REGISTER_OK', 'Allow');
 define('_MD_ADMIN_ALLOW_REGISTER_NG', 'deny');
-
+define('_MD_ADMIN_MULTI_SITE_FUNCTION', 'Use multi site func');
+define('_MD_ADMIN_MULTI_SITE_TYPE', 'Multi site type');
+define('_MD_ADMIN_MULTI_SITE_TYPE_DIRECTORY', 'Directory');
+define('_MD_ADMIN_MULTI_SITE_TYPE_SUB_DOMAIN', 'Sub domain');

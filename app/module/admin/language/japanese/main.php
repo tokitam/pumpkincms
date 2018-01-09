@@ -25,4 +25,7 @@ define('_MD_ADMIN_SITE_CLOSE_MESSAGE', 'サイト閉鎖メッセージ');
 define('_MD_ADMIN_ALLOW_REGISTER', 'ユーザ登録を許可する');
 define('_MD_ADMIN_ALLOW_REGISTER_OK', '許可');
 define('_MD_ADMIN_ALLOW_REGISTER_NG', '許可しない');
-
+define('_MD_ADMIN_MULTI_SITE_FUNCTION', 'マルチサイト機能を使う');
+define('_MD_ADMIN_MULTI_SITE_TYPE', 'マルチサイトのタイプ');
+define('_MD_ADMIN_MULTI_SITE_TYPE_DIRECTORY', 'ディレクトリ');
+define('_MD_ADMIN_MULTI_SITE_TYPE_SUB_DOMAIN', 'サブドメイン');

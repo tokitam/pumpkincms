@@ -115,3 +115,6 @@ Please access URL and reset password.
 
 ');
 
+define('_MD_MULTI_SITE_NAME', 'Site name');
+define('_MD_USER_SITE_ID', 'Site ID');
+define('_MD_USER_SITE_ID_INFO', 'Please enter the site name with alphanumeric characters and hyphens.');

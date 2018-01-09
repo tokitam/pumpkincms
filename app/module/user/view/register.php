@@ -10,6 +10,26 @@
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
                   <div class="form-group">
+                    <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_MULTI_SITE_NAME ?></label>
+             <?php if (PC_Config::get('flg_multi_site')) : ?>
+                    <div class="col-lg-9">
+             <?php if (PC_Config::get('multi_site_type') == user_register::MULTI_SITE_TYPE_DIRECTORY) : ?>
+             <p><b>example.com/(<?php echo _MD_USER_SITE_ID ?>)</b></p>
+                      <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_SITE_ID ?>" pattern="^[0-9A-Za-z\-]+$" maxlegth="20" name="site_screen_id" value="<?php echo htmlspecialchars(@$_POST['site_screen_id']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_SITE_ID ?>"><br />
+             <?php else : ?>
+                      <p><b>(<?php echo _MD_USER_SITE_ID ?>).example.com</b></p>
+                      <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_SITE_ID ?>" pattern="^[0-9A-Za-z\-]+$" maxlegth="20" name="site_screen_id" value="<?php echo htmlspecialchars(@$_POST['site_screen_id']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_SITE_ID ?>"><br />
+             <?php endif ; ?>
+            <small><?php echo _MD_USER_SITE_ID_INFO ?></small>
+                      <?php
+                      if (@$this->error['site_screen_id']) {
+                        echo $this->error['site_screen_id'];
+                      }
+                      ?>
+                    </div>
+                  </div> <!-- from-group -->
+                  <?php endif ; ?>
+                  <div class="form-group">
                     <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_LOGIN_ID ?></label>
                     <div class="col-lg-9">
                       <input required type="text" class="form-control" id="inputId" placeholder="<?php echo _MD_USER_INPUT_ID ?>" name="name" value="<?php echo htmlspecialchars(@$_POST['name']); ?>" pattern="^[0-9A-Za-z]+$" title="<?php echo _MD_USER_INPUT_ID_FORMAT ?>"><br />

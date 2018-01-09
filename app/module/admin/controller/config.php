@@ -10,8 +10,6 @@ class admin_config extends PC_Controller {
         $this->_table = 'config_form';
 
         PumpForm::$add_pre_process = function() {
-            echo ' OK ';
-            exit();
         };
 
         PumpForm::$edit_pre_process = function() {
@@ -38,6 +36,9 @@ class admin_config extends PC_Controller {
                 'allow_register',
                 'bg_image_url',
                 );
+            if (SiteInfo::get_site_id() == 1) {
+                array_push($list, 'flg_multi_site', 'multi_site_type');
+            }
             foreach ($list as $value) {
                 update_or_insert($value, $data[$value]);
             }
@@ -59,6 +60,13 @@ class admin_config extends PC_Controller {
     }
 
     public function index() {
+        if (SiteInfo::get_site_id() != 1) {
+            PumpFormConfig::load_config('admin');
+            global $pumpform_config;
+            unset($pumpform_config['admin']['config_form']['column']['flg_multi_site']);
+            unset($pumpform_config['admin']['config_form']['column']['multi_site_type']);
+        }
+
         self::edit();
     }
 }
