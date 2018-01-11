@@ -55,6 +55,11 @@ $pc_config['site_config'] = array(
   'facebook_app_id' => 'XXXXXXXXXXXXXXX',
   'facebook_app_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
 
+  // google oaotuh
+  'google_auth' => 0,
+  'google_client_id' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  'google_client_secret' => 'XXXXXXXXXXXXXXXXXXXXXXXX',
+
   // telauth twilio setting
   'use_tel_auth' => 0,
   'twilio_account_sid' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',

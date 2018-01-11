@@ -27,30 +27,38 @@ class user_oauth extends PC_Controller {
 
         PC_Debug::log('oauthdebug1', __FILE__, __LINE__);
         if (PC_Config::get('sns_register_no_mail')) {
-        PC_Debug::log('oauthdebug2', __FILE__, __LINE__);
-        $sns_user = array();
-        $sns_user['name'] = $this->oauth->get_name();
-        $user_model = new user_model();
-        $user_id = $user_model->register($sns_user);
+            PC_Debug::log('oauthdebug2', __FILE__, __LINE__);
+            $sns_user = array();
+            $sns_user['name'] = $this->oauth->get_name();
+            $user_model = new user_model();
+            $user_id = $user_model->register($sns_user);
         
-        $this->oauth->register($user_id);
+            $this->oauth->register($user_id);
         
-        $sns_user = $this->oauth->get_user();
-        $icon_url = $this->oauth->get_icon_url($sns_user);
+            $sns_user = $this->oauth->get_user();
+            $icon_url = $this->oauth->get_icon_url($sns_user);
 
-        $buf = file_get_contents($icon_url);
-        $tmpfile = tempnam(sys_get_temp_dir(), 'pump_ex_image');
-        file_put_contents($tmpfile, $buf);
+            $buf = file_get_contents($icon_url);
+            $tmpfile = tempnam(sys_get_temp_dir(), 'pump_ex_image');
+            file_put_contents($tmpfile, $buf);
         
-        $pumpimage = new PumpImage();
-        $image_id = $pumpimage->upload(null, $tmpfile, 'image/jpeg');
-        $user_model->update_image_id($user_id, $image_id);
+            $pumpimage = new PumpImage();
+            $image_id = $pumpimage->upload(null, $tmpfile);
+            $user_model->update_image_id($user_id, $image_id);
         
-        unlink($tmpfile);
+            unlink($tmpfile);
+
+            if (method_exists($this->oauth, 'get_email')) {
+                $user_model->update_email($user_id, $this->oauth->get_email());
+            }
         
-        $this->oauth->login($sns_user);
+            if (method_exists($this->oauth, 'finish')) {
+                $this->oauth->finish();
+            }
         
-        exit();
+            $this->oauth->login($sns_user);
+        
+            exit();
         }
         
         $this->type = '';
@@ -119,7 +127,7 @@ class user_oauth extends PC_Controller {
             $this->error = $user_model->register_validate();
             
             if (isset($_POST['type'])) {
-            $this->type = $_POST['type'];
+                $this->type = $_POST['type'];
             }
 
             if (count($this->error) == 0) {

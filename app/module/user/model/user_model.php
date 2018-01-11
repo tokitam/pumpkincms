@@ -518,6 +518,17 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
             return $db->query($sql);
     }
     
+    function update_email($id, $email) {
+        $db = PC_DBSet::get();
+        
+        $sql = 'UPDATE ' . $db->prefix($this->table_name);
+        $sql .= " SET ";
+        $sql .= " email = " . $db->escape($email) . " ";
+        $sql .= " WHERE id = '" . intval($id) . "' ";
+
+        return $db->query($sql);
+    }
+    
     function update_flg_tel_auth($id, $flg_tel_auth, $tel_country='', $tel_no='', $vote_disable_time=0) {
         $db = PC_DBSet::get();
         
