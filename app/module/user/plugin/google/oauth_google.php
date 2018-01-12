@@ -58,13 +58,13 @@ class OAuth_google {
         parse_str($_SESSION['google_param'], $param);
 
         if(empty($response) || isset($response->error)){
-            return null;
+            throw new Exception('Invalid response');
         }
     }
 
     private function get_google_user_info($asscess_token) {
         if (empty($asscess_token)) {
-            return null;
+            throw new Exception('Invalid access token');
         }
 
         $user_info = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo?'.
@@ -73,7 +73,6 @@ class OAuth_google {
 
         if (empty($user_info)) {
             throw new Exception('Invalid response oauth2/v1/userinfo');
-            return null;
         }
 
         return $user_info;
@@ -103,7 +102,7 @@ class OAuth_google {
         $google_id = @$param['id'];
 
         if (empty($google_id) || !is_numeric($google_id)) {
-            return false;
+            throw new Exception('google_id is invalid');
         }
 
         $oauth_google_model = new OAuth_google_Model();
