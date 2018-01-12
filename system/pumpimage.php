@@ -386,10 +386,10 @@ class PumpImage extends PumpUpload {
                 file_put_contents($src_image, $image['image']);
             }
         } else if (self::get_type() == self::STORE_TYPE_LOCAL) {
-    // from local disk
+            // from local disk
             $src_image = $this->get_upload_image($image_id, $code, $ext);
         } else if (self::get_type() == self::STORE_TYPE_S3) {
-    // from aws s3
+            // from aws s3
             $src_image = $this->get_upload_image($image_id, $code, $ext);
             $src_image = PC_S3::get(basename($src_image));
         }
@@ -411,7 +411,7 @@ class PumpImage extends PumpUpload {
             $function_image = 'ImageJpeg';
         } else if ($ext == 'png') {
             $function_image_create = 'ImageCreateFromPng';
-    //$function_image = 'ImagePng';
+            //$function_image = 'ImagePng';
             $function_image = 'ImageJpeg';
             $ext = 'jpg';
         } else if ($ext == 'gif') {
@@ -423,7 +423,7 @@ class PumpImage extends PumpUpload {
         $size = getimagesize($src_image);
 
         if ($size == false) {
-    // not image file
+            // not image file
 
             if (self::get_type() == self::STORE_TYPE_DB) {
                 self::delete_tmp_file($src_image);
