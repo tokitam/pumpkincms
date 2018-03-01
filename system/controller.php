@@ -129,7 +129,9 @@ class PC_Controller {
                 $module = 'pumpform';
                 $class = 'form';
             }
-            Csrf_protection::set_csrf_token();
+            if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+                Csrf_protection::set_csrf_token();
+            }
         }
         if ($file == 'detail') {
             if (@$form_config['detail_php']) {
