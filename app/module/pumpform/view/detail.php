@@ -121,15 +121,9 @@ if (@PC_Config::get('dir3') == 'delete' || PumpForm::$file == 'delete') {
 </form>
 <?php
 $form_html = '';
-//if (@PC_Config::get('dir3') == 'delete' || PumpForm::$file == 'delete') {
-//    $form_html .= "<form method='post'>\n";
-//    $form_html .= "<input type='submit' onclick='return confirm(\"" . _MD_PUMPFORM_DELETE_CONFIRM . "\");' value='" . _MD_PUMPFORM_DELETE . "'  class='btn btn-default'>";
-//    $form_html .= "</form>\n";
-//}
-
 if (UserInfo::is_master_admin() || UserInfo::is_site_admin()) {
     if (PumpForm::$edit_url) {
-        $form_html .= sprintf('<a href="' . PumpForm::$edit_url . '">' . _MD_PUMPFORM_EDIT . '</a>', $item['id']);
+        $form_html .= "<a href='" . PumpForm::$edit_url . "' class='btn btn-default'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
     } else {
         $form_html .= "<a href='" . $module_url . '/edit/' . $item['id'] . "/' class='btn btn-default'><nobr>" . _MD_PUMPFORM_EDIT . "</nobr></a> ";
     }

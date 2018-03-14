@@ -1,5 +1,12 @@
 // pumpform.js
 
+function pump_loading() {
+    b = document.querySelector('body');
+    newDiv = document.createElement("div");
+    newDiv.innerHTML = "<div style='position: fixed; width: 300px; height: 300px; text-align: center; vertical-align: middle; background-color: white; color: white;'>test test test</div>";
+    //b.append(newDiv);
+}
+
 function pc_notification(message) {
     $.notify.defaults({ className: "success" });
     //$.notify(message, { globalPosition:"top center" });
@@ -7,6 +14,8 @@ function pc_notification(message) {
 }
 
 $(document).ready(function(){
+    pump_loading();
+	
     //$('a[rel=tooltip]').tooltip();
     
     $('#main_form').submit(function(){

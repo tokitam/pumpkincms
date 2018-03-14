@@ -3,7 +3,7 @@
 require_once(PUMPCMS_APP_PATH . '/module/user/plugin/monthly_stripe/monthly_stripe_model.php');
 require_once(PUMPCMS_APP_PATH . '/module/user/model/user_model.php');
 
-class monthly_stripe {
+class monthly_stripe extends PC_Controller {
     const PAYMENT_TYPE = 201;
     
     public function get_subscription_link() {
@@ -206,4 +206,39 @@ data-label='今すぐ申し込む'>
         $user_model->update_flg_premium(UserInfo::get_id(), false, 0);
         UserInfo::reload();
     }
+	
+	public function plan_list() {
+		PC_Util::redirect_if_not_site_admin();
+		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
+		$this->index();
+	}
+	
+	public function plan_add() {
+		PC_Util::redirect_if_not_site_admin();
+		PumpForm::$redirect_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_list';
+		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
+		$this->add();
+	}
+	
+	public function plan_detail() {
+		PC_Util::redirect_if_not_site_admin();
+		PumpForm::$edit_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_edit&id=' . intval($_GET['id']);
+		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
+		$this->detail();
+	}
+	
+	public function plan_edit() {
+		PC_Util::redirect_if_not_site_admin();
+		PumpForm::$target_id = intval($_GET['id']);
+		PumpForm::$redirect_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_list';
+		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
+		$this->edit();
+	}
+	
+	public function plan_delete() {
+		PC_Util::redirect_if_not_site_admin();
+		PumpForm::$target_id = intval($_GET['id']);
+		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
+		$this->delete();
+	}
 }

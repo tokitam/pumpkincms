@@ -293,6 +293,8 @@ class PumpForm {
         if (self::$target_id) {
             $target_id = self::$target_id;
             self::$target_id = 0;
+        } else if (isset($_GET['id'])) {
+            $target_id = intval($_GET['id']);
         } else {
             $target_id = PC_Config::get('dir4');
         }

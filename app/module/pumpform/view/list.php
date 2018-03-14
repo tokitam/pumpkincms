@@ -10,7 +10,7 @@ $form = $form_config['column'];
 
 
 <?php
-    
+
 $list = $this->_data['list'];
 $pn = $this->_data['pagenavi'];
 
@@ -24,11 +24,18 @@ if (@$form_config['1n_link_id']) {
     $url_option = '?' . $form_config['1n_link_id'] . '=' . @$_GET[$form_config['1n_link_id']];
 }
 
+$add_url = '';
+if (!empty($form_config['add_path'])) {
+	$add_url = PC_Config::url() . $form_config['add_path'];
+} else if (empty($form_config['do_not_show_insert_button']) || $form_config['do_not_show_insert_button'] == false) {
+	$add_url = $module_url . "/add/" . $url_option;
+}
+
         $html = '';
 
-    if (empty($form_config['do_not_show_insert_button']) || $form_config['do_not_show_insert_button'] == false) {
-        $html .= "<a href='" . $module_url . "/add/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
-                $html .= "<br />\n";
+    if (!empty($add_url)) {
+        $html .= "<a href='" . $add_url . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
+		$html .= "<br />\n";
     }
 
         $html .= $pn->get_page_link();
@@ -91,6 +98,19 @@ if (@$form_config['1n_link_id']) {
 
         $i = 0;
         foreach ($list as $item) {
+			$edit_url = '';
+			if (!empty($form_config['edit_path'])) {
+				$edit_url = PC_Config::url() . sprintf($form_config['edit_path'], $item['id']);
+			} else if (empty($form_config['do_not_show_edit_button']) || $form_config['do_not_show_edit_button'] == false) {
+				$edit_url = $module_url . "/edit/" . $item['id'] . "/" . $url_option;
+			}
+			$detail_url = '';
+			if (!empty($form_config['detail_path'])) {
+				$detail_url = PC_Config::url() . sprintf($form_config['detail_path'], $item['id']);
+			} else if (empty($form_config['do_not_show_detail_button']) || $form_config['do_not_show_detail_button'] == false) {
+				$detail_url = $module_url . "/detail/" . $item['id'] . "/" . $url_option;
+			}
+			
             $i++;
             if ($i % 2) {
             $html .= '<tr>';
@@ -146,13 +166,20 @@ if (@$form_config['1n_link_id']) {
         $html .= '<td class="odd">';
         }
 
-    if (empty($form_config['do_not_show_detail_button']) || $form_config['do_not_show_detail_button'] == false) {
-        $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" ._MD_PUMPFORM_DETAIL . "</a>";
+	if (!empty($edit_url)) {
+        $html .= "<a href='" . $edit_url . "' class='btn btn-default'>" ._MD_PUMPFORM_EDIT . "</a>";
         $html .= "&nbsp;";
+	}
+    //if (empty($form_config['do_not_show_detail_button']) || $form_config['do_not_show_detail_button'] == false) {
+    //    $html .= "<a href='" . $module_url . "/detail/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" ._MD_PUMPFORM_DETAIL . "</a>";
+    //    $html .= "&nbsp;";
+    //}
+    If (!empty($detail_url)) {
+        $html .= "<a href='" . $detail_url . "' class='btn btn-default'>" . _MD_PUMPFORM_DETAIL . "</a> ";
     }
-    if (empty($form_config['do_not_show_edit_button']) || @$form_config['do_not_show_edit_button'] == false) {
-        $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_EDIT . "</a> ";
-    }
+    //If (empty($form_config['do_not_show_edit_button']) || @$form_config['do_not_show_edit_button'] == false) {
+    //    $html .= "<a href='" . $module_url . "/edit/" . $item['id'] . "/" . $url_option . "' class='btn btn-default'>" . _MD_PUMPFORM_EDIT . "</a> ";
+    //}
         //$html .= "<a href=''>" . _MD_PUMPFORM_DELETE . "</a> ";
         $html .= "</td>\n";
         $html .= "</tr>\n";
