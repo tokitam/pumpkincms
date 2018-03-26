@@ -29,6 +29,7 @@ class PumpForm {
     static $where = '';
     static $file = '';
     static $insert_id = 0;
+	static $link_option = '';
 
     public function __construct() {
 
@@ -148,7 +149,9 @@ class PumpForm {
             $link_id = preg_replace('/[^0-9A-Za-z_]/', '', $form_config['1n_link_id']);
             $where = ' ' . $link_id . ' = ' . intval($_GET[$link_id]);
             $option = array('link_option' => $link_id . '=' . intval($_GET[$link_id]));
-        }
+        } else if (!empty(self::$link_option)) {
+			$option['link_option'] = self::$link_option;
+		}
 
         if (@self::$where != '') {
             if ($where != '') {

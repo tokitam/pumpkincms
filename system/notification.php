@@ -3,7 +3,9 @@
 class PC_Notification {
 
     static public function set($message) {
-        $_SESSION['pump_'. PC_Config::get('site_id')]['notification'] = $message;
+		if (empty($_SESSION['pump_'. PC_Config::get('site_id')]['notification'])) {
+			$_SESSION['pump_'. PC_Config::get('site_id')]['notification'] = $message;
+		}
     }
 
     static public function get() {

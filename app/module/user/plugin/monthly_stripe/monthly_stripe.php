@@ -7,9 +7,9 @@ class monthly_stripe extends PC_Controller {
     const PAYMENT_TYPE = 201;
     
     public function get_subscription_link() {
-		return $this->get_form();
-	}
-	
+        return $this->get_form();
+    }
+    
     public function get_form() {
         $url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=subscription';
         $pk = PC_Config::get('monthly_stripe_public_key');
@@ -36,30 +36,30 @@ data-label='今すぐ申し込む'>
     }
 
     public function get_cancel_link() {
-		$url = PC_Config::url() . '/user/payment?type=monthly_stripe&action=cancel';
-		$form = "<a href='" . $url . "' class='btn btn-default' >解約する</a>";
-		
-		return $form;
-	}
-	
+        $url = PC_Config::url() . '/user/payment?type=monthly_stripe&action=cancel';
+        $form = "<a href='" . $url . "' class='btn btn-default' >解約する</a>";
+        
+        return $form;
+    }
+    
     public function subscription() {
 
         if (UserInfo::is_loggedin() == false) {
-			echo _MD_USER_PLEASE_LOGIN;
+            echo _MD_USER_PLEASE_LOGIN;
             return;
         }
         
         if (UserInfo::is_premium()) {
             // すでにプレミアムユーザである
-			echo _MD_USER_ALREADY_PREMIUM;
+            echo _MD_USER_ALREADY_PREMIUM;
             return;
         }
         
         // この辺で値のチェック
         if (empty($_POST['stripeEmail']) ||
-			empty($_POST['stripeToken']) ||
-			PC_Util::is_email($_POST['stripeEmail']) == false) {
-			echo _MD_USER_VALUE_IS_INVALID;
+            empty($_POST['stripeToken']) ||
+            PC_Util::is_email($_POST['stripeEmail']) == false) {
+            echo _MD_USER_VALUE_IS_INVALID;
             return;
         }
         
@@ -96,12 +96,17 @@ data-label='今すぐ申し込む'>
         
         $monthly_stripe_model = new monthly_stripe_model();
         $monthly_stripe_model->add_customer($ret);
+
+        $plan = PC_Config::get('monthly_stripe_plan');
+        if (empty($plan)) {
+            $plan = 'basic-monthly';
+        }
         
         $sk = PC_Config::get('monthly_stripe_secret_key') . ':';
         $url = 'https://api.stripe.com/v1/subscriptions';
         $param = [
                   'customer' => $ret['id'],
-                  'items[0][plan]' => 'basic-monthly',
+                  'items[0][plan]' => $plan,
                   ];
         $method = 'POST';
         $option = [
@@ -169,13 +174,13 @@ data-label='今すぐ申し込む'>
     public function cancel() {
 
         if (UserInfo::is_loggedin() == false) {
-			echo _MD_USER_PLEASE_LOGIN;
+            echo _MD_USER_PLEASE_LOGIN;
             return;
         }
         
         if (UserInfo::is_premium() == false) {
             // すでにプレミアムユーザではない
-			echo _MD_USER_NOT_PREMIUM;
+            echo _MD_USER_NOT_PREMIUM;
             return;
         }
         
@@ -206,39 +211,39 @@ data-label='今すぐ申し込む'>
         $user_model->update_flg_premium(UserInfo::get_id(), false, 0);
         UserInfo::reload();
     }
-	
-	public function plan_list() {
-		PC_Util::redirect_if_not_site_admin();
-		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
-		$this->index();
-	}
-	
-	public function plan_add() {
-		PC_Util::redirect_if_not_site_admin();
-		PumpForm::$redirect_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_list';
-		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
-		$this->add();
-	}
-	
-	public function plan_detail() {
-		PC_Util::redirect_if_not_site_admin();
-		PumpForm::$edit_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_edit&id=' . intval($_GET['id']);
-		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
-		$this->detail();
-	}
-	
-	public function plan_edit() {
-		PC_Util::redirect_if_not_site_admin();
-		PumpForm::$target_id = intval($_GET['id']);
-		PumpForm::$redirect_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_list';
-		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
-		$this->edit();
-	}
-	
-	public function plan_delete() {
-		PC_Util::redirect_if_not_site_admin();
-		PumpForm::$target_id = intval($_GET['id']);
-		$this->set_scaffold('user', 'payment_monthly_stripe_plan');
-		$this->delete();
-	}
+    
+    public function plan_list() {
+        PC_Util::redirect_if_not_site_admin();
+        $this->set_scaffold('user', 'payment_monthly_stripe_plan');
+        $this->index();
+    }
+    
+    public function plan_add() {
+        PC_Util::redirect_if_not_site_admin();
+        PumpForm::$redirect_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_list';
+        $this->set_scaffold('user', 'payment_monthly_stripe_plan');
+        $this->add();
+    }
+    
+    public function plan_detail() {
+        PC_Util::redirect_if_not_site_admin();
+        PumpForm::$edit_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_edit&id=' . intval($_GET['id']);
+        $this->set_scaffold('user', 'payment_monthly_stripe_plan');
+        $this->detail();
+    }
+    
+    public function plan_edit() {
+        PC_Util::redirect_if_not_site_admin();
+        PumpForm::$target_id = intval($_GET['id']);
+        PumpForm::$redirect_url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=plan_list';
+        $this->set_scaffold('user', 'payment_monthly_stripe_plan');
+        $this->edit();
+    }
+    
+    public function plan_delete() {
+        PC_Util::redirect_if_not_site_admin();
+        PumpForm::$target_id = intval($_GET['id']);
+        $this->set_scaffold('user', 'payment_monthly_stripe_plan');
+        $this->delete();
+    }
 }

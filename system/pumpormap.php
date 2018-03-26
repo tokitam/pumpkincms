@@ -303,7 +303,7 @@ class PumpORMAP {
                 }
                 $types[$p] = PC_Db::T_STRING;
                 array_push($params, $p);
-            } else if ($column['type'] == PUMPFORM_INT) {
+            } else if ($column['type'] == PUMPFORM_INT || $column['type'] == PUMPFORM_SELECT) {
                 if (@$post[$column['name']] == '') {
                     if (@$column['default']) {
                         $values[$p] = $column['default'];
@@ -311,7 +311,7 @@ class PumpORMAP {
                         $values[$p] = 0;
                     }
                 } else {
-                    $values[$p] = @$post[$column['name']];
+                    $values[$p] = intval($post[$column['name']]);
                 }
                 $types[$p] = PC_Db::T_INT;
                 array_push($params, $p);
