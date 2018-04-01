@@ -5,13 +5,19 @@ require_once(PUMPCMS_APP_PATH . '/module/user/model/user_model.php');
 
 class monthly_stripe extends PC_Controller {
     const PAYMENT_TYPE = 201;
+    public $add_post_process = null;
+    public $subscription_post_url = null;
     
     public function get_subscription_link() {
         return $this->get_form();
     }
     
     public function get_form() {
-        $url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=subscription';
+        if (empty($this->subscription_post_url)) {
+            $url = PC_Config::url() . '/user/payment/?type=monthly_stripe&action=subscription';
+        } else {
+            $url = $this->subscription_post_url;
+        }
         $pk = PC_Config::get('monthly_stripe_public_key');
         $amount = PC_Config::get('monthly_stripe_amount');
         $brand_name = htmlspecialchars(PC_Config::get('monthly_stripe_brand_name'));
@@ -27,6 +33,7 @@ data-description='" . $description . "'
 data-image='https://stripe.com/img/documentation/checkout/marketplace.png'
 data-locale='ja'
 data-zip-code='true'
+data-currency='jpy'
 data-label='今すぐ申し込む'>
 </script>
 </form>
@@ -115,11 +122,14 @@ data-label='今すぐ申し込む'>
                    'output_response_header' => false,
                    ];
         echo '<pre>';
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         $ret = PC_Util::curl($url, $param, $method, $option);
         var_dump($ret);
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         $ret = json_decode($ret, true);
         //var_dump($ret);
         echo '</pre>';
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         
         // ここでエラー判定
         if (empty($ret['id'])) {
@@ -129,19 +139,30 @@ data-label='今すぐ申し込む'>
             return;
         }
         
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         if (isset($ret['error'])) {
             // エラーがある
             echo 'stripe api error';
             PC_Debug::log('stripe api customer error:' . print_r($ret, true), __FILE__, __LINE__);
             return;
         }
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         
         $monthly_stripe_model = new monthly_stripe_model();
         $monthly_stripe_model->add_subscription($ret);
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
 
         // flg_premium をオンにする
         $user_model = new User_Model();
         $user_model->update_flg_premium(UserInfo::get_id(), true, self::PAYMENT_TYPE);
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
+var_dump($this->add_post_process);
+        if (!empty($this->add_post_process)) {
+            $func = $this->add_post_process;
+            $func();
+        }
+        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
+
         UserInfo::reload();
     }
 
