@@ -7,6 +7,7 @@ class monthly_stripe extends PC_Controller {
     const PAYMENT_TYPE = 201;
     public $add_post_process = null;
     public $subscription_post_url = null;
+    public $premium_check_func = null;
     
     public function get_subscription_link() {
         return $this->get_form();
@@ -56,10 +57,15 @@ data-label='今すぐ申し込む'>
             return;
         }
         
-        if (UserInfo::is_premium()) {
-            // すでにプレミアムユーザである
-            echo _MD_USER_ALREADY_PREMIUM;
-            return;
+        if (empty($this->premium_check_func)) {
+            if (UserInfo::is_premium()) {
+                // すでにプレミアムユーザである
+                echo _MD_USER_ALREADY_PREMIUM;
+                return;
+            }    
+        } else {
+            $func = $this->premium_check_func;
+            $func();
         }
         
         // この辺で値のチェック
