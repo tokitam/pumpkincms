@@ -7,6 +7,7 @@ class monthly_stripe extends PC_Controller {
     const PAYMENT_TYPE = 201;
     public $add_post_process = null;
     public $subscription_post_url = null;
+    public $unsubscription_post_url = null;
     public $premium_check_func = null;
     
     public function get_subscription_link() {
@@ -44,8 +45,12 @@ data-label='今すぐ申し込む'>
     }
 
     public function get_cancel_link() {
-        $url = PC_Config::url() . '/user/payment?type=monthly_stripe&action=cancel';
-        $form = "<a href='" . $url . "' class='btn btn-default' >解約する</a>";
+        if (empty($this->subscription_post_url)) {
+            $url = PC_Config::url() . '/user/payment?type=monthly_stripe&action=cancel';
+        } else {
+            $url = $this->subscription_post_url;
+        }
+        $form = "<a href='" . $url . "' class='btn btn-default' >" . _MD_USER_UNSUBSCRIBE . "</a>";
         
         return $form;
     }
@@ -127,16 +132,10 @@ data-label='今すぐ申し込む'>
                    'output_request_header' => false,
                    'output_response_header' => false,
                    ];
-        echo '<pre>';
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
+
         $ret = PC_Util::curl($url, $param, $method, $option);
-        var_dump($ret);
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         $ret = json_decode($ret, true);
-        //var_dump($ret);
-        echo '</pre>';
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
-        
+
         // ここでエラー判定
         if (empty($ret['id'])) {
             // 応答が正しくない
@@ -145,29 +144,24 @@ data-label='今すぐ申し込む'>
             return;
         }
         
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         if (isset($ret['error'])) {
             // エラーがある
             echo 'stripe api error';
             PC_Debug::log('stripe api customer error:' . print_r($ret, true), __FILE__, __LINE__);
             return;
         }
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
         
         $monthly_stripe_model = new monthly_stripe_model();
         $monthly_stripe_model->add_subscription($ret);
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
 
         // flg_premium をオンにする
         $user_model = new User_Model();
         $user_model->update_flg_premium(UserInfo::get_id(), true, self::PAYMENT_TYPE);
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
-var_dump($this->add_post_process);
+
         if (!empty($this->add_post_process)) {
             $func = $this->add_post_process;
             $func();
         }
-        echo ' ' . __FILE__ . ':' . __LINE__ . "<br />\n";
 
         UserInfo::reload();
     }
@@ -205,10 +199,15 @@ var_dump($this->add_post_process);
             return;
         }
         
-        if (UserInfo::is_premium() == false) {
-            // すでにプレミアムユーザではない
-            echo _MD_USER_NOT_PREMIUM;
-            return;
+        if (empty($this->premium_check_func)) {
+            if (UserInfo::is_premium() == false) {
+                // すでにプレミアムユーザではない
+                echo _MD_USER_NOT_PREMIUM;
+                return;
+            }    
+        } else {
+            $func = $this->premium_check_func;
+            $func();
         }
         
         $monthly_stripe_model = new monthly_stripe_model();
@@ -236,6 +235,12 @@ var_dump($this->add_post_process);
         // flg_premium をオフにする
         $user_model = new User_Model();
         $user_model->update_flg_premium(UserInfo::get_id(), false, 0);
+
+        if (!empty($this->add_post_process)) {
+            $func = $this->add_post_process;
+            $func();
+        }
+
         UserInfo::reload();
     }
     

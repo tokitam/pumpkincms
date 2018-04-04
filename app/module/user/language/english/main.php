@@ -80,6 +80,7 @@ define('_MD_USER_PLEASE_LOGIN', 'Please login');
 define('_MD_USER_ALREADY_PREMIUM', 'Already a premium user');
 define('_MD_USER_VALUE_IS_INVALID', 'Value is invalid');
 define('_MD_USER_NOT_PREMIUM', 'Not a premium user');
+define('_MD_USER_UNSUBSCRIBE', 'Unsubscribe');
 
 // --- admin --- 
 define('_MD_USER_ADMIN_MODE', 'Administrator mode');

@@ -80,6 +80,7 @@ define('_MD_USER_PLEASE_LOGIN', 'ログインしてください');
 define('_MD_USER_ALREADY_PREMIUM', 'すでにプレミアムユーザです');
 define('_MD_USER_VALUE_IS_INVALID', '値が不正です');
 define('_MD_USER_NOT_PREMIUM', 'プレアミムユーザではありません');
+define('_MD_USER_UNSUBSCRIBE', '解約する');
 
 // --- admin --- 
 define('_MD_USER_ADMIN_MODE', '管理者モードです');
