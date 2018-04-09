@@ -140,5 +140,20 @@ class UserInfo {
         }
         return PumpImage::get_image_url($image_id, $width, $height, array('crop' => true));
     }
+
+    static function set_session($key, $value) {
+        $_SESSION[$key] = $value;
+    }
+
+    static function get_session($key, $value) {
+        if (empty($_SESSION[$key])) {
+            return '';
+        }
+        return $_SESSION[$key];
+    }
+
+    static function unset_session($key) {
+        unset($_SESSION[$key]);
+    }
 }
 
