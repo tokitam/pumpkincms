@@ -26,14 +26,18 @@ if (@$form_config['1n_link_id']) {
 
 $add_url = '';
 if (!empty($form_config['add_path'])) {
-	$add_url = PC_Config::url() . $form_config['add_path'];
+    if (PC_Util::is_url($form_config['add_path'])) {
+    	$add_url = $form_config['add_path'];
+    } else {
+    	$add_url = PC_Config::url() . $form_config['add_path'];
+    }
 } else if (empty($form_config['do_not_show_insert_button']) || $form_config['do_not_show_insert_button'] == false) {
 	$add_url = $module_url . "/add/" . $url_option;
 }
 
         $html = '';
 
-    if (!empty($add_url)) {
+    if (!empty($add_url) && empty($form_config['do_not_show_insert_button'])) {
         $html .= "<a href='" . $add_url . "' class='btn btn-default'>" . _MD_PUMPFORM_ADD . "</a>\n";
 		$html .= "<br />\n";
     }
@@ -100,13 +104,21 @@ if (!empty($form_config['add_path'])) {
         foreach ($list as $item) {
 			$edit_url = '';
 			if (!empty($form_config['edit_path'])) {
-				$edit_url = PC_Config::url() . sprintf($form_config['edit_path'], $item['id']);
+                if (PC_Util::is_url($form_config['edit_path'])) {
+    				$edit_url = sprintf($form_config['edit_path'], $item['id']);
+                } else {
+    				$edit_url = PC_Config::url() . sprintf($form_config['edit_path'], $item['id']);
+                }
 			} else if (empty($form_config['do_not_show_edit_button']) || $form_config['do_not_show_edit_button'] == false) {
 				$edit_url = $module_url . "/edit/" . $item['id'] . "/" . $url_option;
 			}
 			$detail_url = '';
 			if (!empty($form_config['detail_path'])) {
-				$detail_url = PC_Config::url() . sprintf($form_config['detail_path'], $item['id']);
+                if (PC_Util::is_url($form_config['detail_path'])) {
+    				$detail_url = sprintf($form_config['detail_path'], $item['id']);
+                } else {
+    				$detail_url = PC_Config::url() . sprintf($form_config['detail_path'], $item['id']);
+                }
 			} else if (empty($form_config['do_not_show_detail_button']) || $form_config['do_not_show_detail_button'] == false) {
 				$detail_url = $module_url . "/detail/" . $item['id'] . "/" . $url_option;
 			}
