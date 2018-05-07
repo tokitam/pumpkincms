@@ -89,6 +89,8 @@ foreach ($form as $column) {
         $form_html .= $Parsedown->text($value); 
     } else if ($column['type'] == PUMPFORM_TINYMCE) {
         $form_html .= PC_Util::strip_tags($value);
+    } else if ($column['type'] == PUMPFORM_CKEDITOR4) {
+        $form_html .= PC_Util::html_sanitize($value);
     } else if ($column['type'] == PUMPFORM_YOUTUBE) {
         @preg_match('/v=([_0-9A-Za-z\-]+)/', $value, $r);
         if (@$r[1]) {

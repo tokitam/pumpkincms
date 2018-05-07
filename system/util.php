@@ -542,5 +542,37 @@ class PC_Util {
 		curl_close($curl);
 		
 		return $res;
-	}
+    }
+    
+    /**
+     * HTML sanitize
+     * @param $html HTML
+     * @param $allow_tag allow tag ex:['br', 'img', 'a']
+     */
+    public static function html_sanitize($html, $allow_tag = array()) {
+        $html = htmlspecialchars($html);
+
+        if (empty($allow_tag)) {
+            $allow_tag = array('p', 'img', 'br', 'a', 'ol', 'li');
+        }
+
+        foreach($allow_tag as $tag) {
+            $html = preg_replace_callback("/(\&lt\;$tag\&gt\;)/i", 'PC_Util::unhtmlescape', $html);
+            $html = preg_replace_callback("/(\&lt\;$tag .*?\&gt\;)/i", 'PC_Util::unhtmlescape', $html);
+            $html = preg_replace_callback("/(\&lt\;\/$tag\&gt\;)/i", 'PC_Util::unhtmlescape', $html);
+        }   
+        $html = nl2br($html);
+        return $html;
+    }
+
+    public static function unhtmlescape($value) {
+  
+        $text = $value[0];
+        
+        $text = str_replace('&lt;', '<', $text);
+        $text = str_replace('&gt;', '>', $text);
+        $text = str_replace('&quot;', '"', $text);
+        
+        return $text;
+    }
 }

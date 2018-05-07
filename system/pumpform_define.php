@@ -24,3 +24,4 @@ define('PUMPFORM_YOUTUBE', 21);
 define('PUMPFORM_MARKDOWN', 22);
 define('PUMPFORM_DOUBLE', 23);
 define('PUMPFORM_TAG', 24);
+define('PUMPFORM_CKEDITOR4', 25);

@@ -13,9 +13,18 @@ function pc_notification(message) {
     $.notify(message, { globalPosition:"top right" });
 }
 
+
+
 $(document).ready(function(){
     pump_loading();
-	
+    
+    if (document.getElementById('ckeditor4_text') != null) {
+        CKEDITOR.replace( 'ckeditor4_text', {
+            filebrowserImageUploadUrl: '/image/upload/add/'
+        } );
+        $('ckeditor4_text').css('display', 'block');
+    }
+
     //$('a[rel=tooltip]').tooltip();
     
     $('#main_form').submit(function(){

@@ -50,12 +50,17 @@ foreach ($form as $column) {
 
     if ($column['type'] == PUMPFORM_TEXTAREA || 
         $column['type'] == PUMPFORM_TINYMCE ||
-        $column['type'] == PUMPFORM_MARKDOWN) {
+        $column['type'] == PUMPFORM_MARKDOWN ||
+        $column['type'] == PUMPFORM_CKEDITOR4) {
         $form_html .= "<textarea ";
         if ($column['type'] == PUMPFORM_TEXTAREA) {
             $form_html .= "class='form-control' ";
-        } else {
+        } else if ($column['type'] == PUMPFORM_TINYMCE) {
             $form_html .= "class='form-control pump_tinymce' ";
+        } else if ($column['type'] == PUMPFORM_CKEDITOR4) {
+            $form_html .= " id='ckeditor4_text' ";
+        } else {
+            $form_html .= "class='form-control' ";
         }
         $form_html .= "name='" . $column['name'] . "'";
         if (@$column['cols']) {
@@ -67,7 +72,7 @@ foreach ($form as $column) {
         if (@$column['required']) {
             $form_html .= ' required ';
         }
-            if (@$column['maxlength']) {
+        if (@$column['maxlength']) {
             $form_html .= " maxlength='" . intval($column['maxlength']) . "' ";
         }
         $form_html .= ">";
