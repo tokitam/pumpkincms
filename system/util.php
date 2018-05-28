@@ -549,11 +549,12 @@ class PC_Util {
      * @param $html HTML
      * @param $allow_tag allow tag ex:['br', 'img', 'a']
      */
-    public static function html_sanitize($html, $allow_tag = array()) {
+    public static function html_sanitize($html, $allow_tag = array(), $flg_nsl2br=true) {
         $html = htmlspecialchars($html);
 
         if (empty($allow_tag)) {
-            $allow_tag = array('p', 'img', 'br', 'a', 'ol', 'li');
+            $allow_tag = array('p', 'img', 'br', 'a', 'ol', 'li', 'ul', 'h1', 'h2', 'h3', 'b',
+                'strong', 'em', 'pre', 'span', 'blockquote', 'table', 'tbody', 'tr', 'td');
         }
 
         foreach($allow_tag as $tag) {
@@ -561,7 +562,10 @@ class PC_Util {
             $html = preg_replace_callback("/(\&lt\;$tag .*?\&gt\;)/i", 'PC_Util::unhtmlescape', $html);
             $html = preg_replace_callback("/(\&lt\;\/$tag\&gt\;)/i", 'PC_Util::unhtmlescape', $html);
         }   
-        $html = nl2br($html);
+        $html = str_replace('&amp;nbsp;', '&nbsp;', $html);
+        if ($flg_nsl2br) {
+            $html = nl2br($html);
+        }
         return $html;
     }
 
@@ -572,7 +576,7 @@ class PC_Util {
         $text = str_replace('&lt;', '<', $text);
         $text = str_replace('&gt;', '>', $text);
         $text = str_replace('&quot;', '"', $text);
-        
+
         return $text;
     }
 }
