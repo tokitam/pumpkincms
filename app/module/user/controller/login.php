@@ -11,7 +11,7 @@ class user_login extends PC_Controller {
 
         $this->error = array();
         
-        if (isset($_POST['login'])) {
+        if (isset($_POST['login']) && Csrf_protection::validate()) {
             $user_model = new user_model();
             $this->oauth_tag = OAuth_util::get_tag();
 
@@ -20,6 +20,7 @@ class user_login extends PC_Controller {
     
         ActionLog::log(ActionLog::LOGIN);
 
+        Csrf_protection::set_csrf_token();
         $this->render('login');
     }
 }

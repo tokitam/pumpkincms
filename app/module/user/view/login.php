@@ -13,6 +13,7 @@ if (SiteInfo::is_site_close()) {
             <!--<div class="well bs-component">-->
               <form class="form-horizontal" method="post" action="<?php echo PC_Config::url(); ?>/user/login">
                 <input type="hidden" name="login" value="1">
+                <?php Csrf_protection::set_csrf_token(); echo Csrf_protection::get_form_part(); ?>
                 <fieldset>
                   <legend><?php echo _MD_USER_LOGIN ?></legend>
                   <div class="form-group">
