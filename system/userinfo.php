@@ -145,7 +145,7 @@ class UserInfo {
         $_SESSION[$key] = $value;
     }
 
-    static function get_session($key, $value) {
+    static function get_session($key) {
         if (empty($_SESSION[$key])) {
             return '';
         }
