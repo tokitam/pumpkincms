@@ -2,7 +2,7 @@
 <input type="hidden" id="_MD_USER_DELETED_USER_REL" value="<?php echo _MD_USER_DELETED_USER_REL ?>">
 
 <!--<div class="row"> -->
-    <div class="col-lg-4">
+    <div class="col-lg-4 profile_image">
         <!--<div class="polaroid">-->
         <!--<p><?php echo htmlspecialchars(UserInfo::get('name')) ?></p>-->
     <?php
@@ -41,8 +41,21 @@ if (PC_Config::get('use_tel_auth')) {
 <hr />
 <a href="<?php echo PC_Config::url() ?>/user/logout/" class="btn btn-default"><?php echo _MD_USER_LOGOUT_LABEL ?></a>
     </div> <!-- end col-lg-6 -->
-
 <!--</div> --><!-- end row -->
 
 <?php include PUMPCMS_APP_PATH . '/module/user/view/confirm_dialog.php'; ?>
 <?php include PUMPCMS_APP_PATH . '/module/user/view/info_dialog.php'; ?>
+
+<div class="col-lg-6">
+<?php
+PC_Hook::hook('user_mypage');
+/*
+$file = PUMPCMS_APP_PATH . '/module/fanclub/hook/fanclub_hook.php';
+if (is_readable($file)) {
+    require_once $file;
+    $func = $pumpform_config['fanclub']['fanclub']['hook']['user_profile'];
+    echo $func();
+}
+*/
+?>
+</div>

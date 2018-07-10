@@ -169,6 +169,15 @@ $GLOBALS['pumpform_config']['user']['payment_monthly_stripe_subscription'] = arr
                          'registable' => 1,
                          'editable' => 1,
                          'list_visible' => 0,),
+        'project_id' => array('name' => 'project_id',
+                         'type' => PUMPFORM_INT,
+                         'title' => 'project_id',
+                         'required' => 0,
+                         'visible' => 1,
+                         'registable' => 1,
+                         'editable' => 1,
+                         'list_visible' => 0,
+                         'default' => 0),
         ),
 );
 

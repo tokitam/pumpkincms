@@ -152,7 +152,8 @@ data-label='今すぐ申し込む'>
         }
         
         $monthly_stripe_model = new monthly_stripe_model();
-        $monthly_stripe_model->add_subscription($ret);
+        $subscription_id = $monthly_stripe_model->add_subscription($ret);
+        PC_Config::set('subscription_id', $subscription_id);
 
         // flg_premium をオンにする
         $user_model = new User_Model();
@@ -231,6 +232,7 @@ data-label='今すぐ申し込む'>
         // subscriptionテーブルの canceled_at を更新する
         $monthly_stripe_model = new monthly_stripe_model();
         $monthly_stripe_model->update_subscription_canceled_at($subscription['id']);
+        PC_Config::set('subscription_id', $subscription['id']);
 
         // flg_premium をオフにする
         $user_model = new User_Model();

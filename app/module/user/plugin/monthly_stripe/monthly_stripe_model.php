@@ -48,7 +48,7 @@ class monthly_stripe_model {
             $data['subscription_item_id'] = '';
         }
         $data['plan_id'] = $subscription['plan']['id'];
-        $ormap->insert($data);
+        return $ormap->insert($data);
     }
     
     function get_last_subscription($user_id) {
