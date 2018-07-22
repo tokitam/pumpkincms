@@ -55,23 +55,27 @@ data-label='今すぐ申し込む'>
         return $form;
     }
     
-    public function subscription() {
-
+    public function subscription($project_id=null) {
+        PC_Debug::log('aaabbb OK', __FILE__, __LINE__);
         if (UserInfo::is_loggedin() == false) {
             echo _MD_USER_PLEASE_LOGIN;
+        PC_Debug::log('aaabbb OK', __FILE__, __LINE__);
             return;
         }
+        PC_Debug::log('aaabbb OK', __FILE__, __LINE__);
         
         if (empty($this->premium_check_func)) {
             if (UserInfo::is_premium()) {
                 // すでにプレミアムユーザである
                 echo _MD_USER_ALREADY_PREMIUM;
+        PC_Debug::log('OK', __FILE__, __LINE__);
                 return;
             }    
         } else {
             $func = $this->premium_check_func;
             $func();
         }
+        PC_Debug::log('OK', __FILE__, __LINE__);
         
         // この辺で値のチェック
         if (empty($_POST['stripeEmail']) ||
@@ -80,6 +84,7 @@ data-label='今すぐ申し込む'>
             echo _MD_USER_VALUE_IS_INVALID;
             return;
         }
+        PC_Debug::log('OK', __FILE__, __LINE__);
         
         $sk = PC_Config::get('monthly_stripe_secret_key');
         
@@ -96,6 +101,7 @@ data-label='今すぐ申し込む'>
                    ];
         $ret = PC_Util::curl($url, $param, $method, $option);
         $ret = json_decode($ret, true);
+        PC_Debug::log('OK', __FILE__, __LINE__);
         
         // ここでエラー判定
         if (empty($ret['id'])) {
@@ -104,6 +110,7 @@ data-label='今すぐ申し込む'>
             PC_Debug::log('stripe api customer error:' . print_r($ret, true), __FILE__, __LINE__);
             return;
         }
+        PC_Debug::log('OK', __FILE__, __LINE__);
         
         if (isset($ret['error'])) {
             // エラーがある
@@ -132,6 +139,7 @@ data-label='今すぐ申し込む'>
                    'output_request_header' => false,
                    'output_response_header' => false,
                    ];
+        PC_Debug::log('OK', __FILE__, __LINE__);
 
         $ret = PC_Util::curl($url, $param, $method, $option);
         $ret = json_decode($ret, true);
@@ -143,7 +151,8 @@ data-label='今すぐ申し込む'>
             PC_Debug::log('stripe api customer error:' . print_r($ret, true), __FILE__, __LINE__);
             return;
         }
-        
+                PC_Debug::log('OK', __FILE__, __LINE__);
+
         if (isset($ret['error'])) {
             // エラーがある
             echo 'stripe api error';
@@ -152,12 +161,13 @@ data-label='今すぐ申し込む'>
         }
         
         $monthly_stripe_model = new monthly_stripe_model();
-        $subscription_id = $monthly_stripe_model->add_subscription($ret);
+        $subscription_id = $monthly_stripe_model->add_subscription($ret, $project_id);
         PC_Config::set('subscription_id', $subscription_id);
 
         // flg_premium をオンにする
         $user_model = new User_Model();
         $user_model->update_flg_premium(UserInfo::get_id(), true, self::PAYMENT_TYPE);
+        PC_Debug::log('OK', __FILE__, __LINE__);
 
         if (!empty($this->add_post_process)) {
             $func = $this->add_post_process;
@@ -175,25 +185,32 @@ data-label='今すぐ申し込む'>
         PC_Debug::log('post:' . print_r($_POST, true), __FILE__, __LINE__);
 
         $webhook = json_decode($stdin, true);
+        PC_Debug::log('post:', __FILE__, __LINE__);
         
         if (empty($webhook['type'])) {
+        PC_Debug::log('post:', __FILE__, __LINE__);
             exit();
         }
+        PC_Debug::log('post:', __FILE__, __LINE__);
 
         $monthly_stripe_model = new monthly_stripe_model();
+        PC_Debug::log('post:', __FILE__, __LINE__);
         $webhook = $monthly_stripe_model->arrangement_webhook($webhook);
+        PC_Debug::log('post:', __FILE__, __LINE__);
 
         if (!empty($webhook['customer_id'])) {
+        PC_Debug::log('post:', __FILE__, __LINE__);
             $customer = $monthly_stripe_model->get_customer($webhook['customer_id']);
             $webhook['user_id'] = intval($customer['user_id']);
         }
         $monthly_stripe_model->add_webhook($webhook);
+        PC_Debug::log('post:', __FILE__, __LINE__);
         
         echo ' OK ';
         exit();
     }
 
-    public function cancel() {
+    public function cancel($project_id=null) {
 
         if (UserInfo::is_loggedin() == false) {
             echo _MD_USER_PLEASE_LOGIN;
@@ -210,10 +227,11 @@ data-label='今すぐ申し込む'>
             $func = $this->premium_check_func;
             $func();
         }
-        
+        PC_Debug::log(' project_id : ' . $project_id, __FILE__, __LINE__);
         $monthly_stripe_model = new monthly_stripe_model();
-        $subscription = $monthly_stripe_model->get_last_subscription(UserInfo::get_id());
+        $subscription = $monthly_stripe_model->get_last_subscription(UserInfo::get_id(), $project_id);
         
+        PC_Debug::log(' subscription : ' . print_r($subscription, true), __FILE__, __LINE__);
         $sk = PC_Config::get('monthly_stripe_secret_key') . ':';
         $url = 'https://api.stripe.com/v1/subscriptions/' . $subscription['subscription_id'];
         $param = [];

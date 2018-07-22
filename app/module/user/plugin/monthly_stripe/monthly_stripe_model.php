@@ -31,7 +31,7 @@ class monthly_stripe_model {
         return $list[0];
     }
     
-    function add_subscription($subscription) {
+    function add_subscription($subscription, $project_id=null) {
         $ormap = PumpORMAP_Util::get('user', 'payment_monthly_stripe_subscription');
         $data['user_id'] = UserInfo::get_id();
         $data['subscription_id'] = $subscription['id'];
@@ -48,12 +48,18 @@ class monthly_stripe_model {
             $data['subscription_item_id'] = '';
         }
         $data['plan_id'] = $subscription['plan']['id'];
+        if (!empty($project_id)) {
+            $data['project_id'] = intval($project_id);
+        }
         return $ormap->insert($data);
     }
     
-    function get_last_subscription($user_id) {
+    function get_last_subscription($user_id, $project_id=null) {
         $ormap = PumpORMAP_Util::get('user', 'payment_monthly_stripe_subscription');
         $where = ' user_id = '. intval($user_id);
+        if (!empty($project_id)) {
+            $where .= ' AND project_id = ' . intval($project_id);
+        }
         $list = $ormap->get_list($where, 0, 1, 'id', true);
         if (empty($list[0]['id'])) {
             return null;
