@@ -6,6 +6,7 @@ class UserInfo {
     static private $_data = null;
     const AUTH_MASTER_ADMIN = 1;
     const AUTH_SITE_ADMIN = 2;
+    const BACKTO_URL = 'backto_url';
     
     static function get($key) {
         return self::get_data($key);
@@ -149,11 +150,23 @@ class UserInfo {
         if (empty($_SESSION[$key])) {
             return '';
         }
-        return $_SESSION[$key];
+        return @$_SESSION[$key];
     }
 
     static function unset_session($key) {
         unset($_SESSION[$key]);
+    }
+
+    static function set_backto_url($url) {
+        self::set_session(self::BACKTO_URL, $url);
+    }
+
+    static function get_backto_url() {
+        return self::get_session(self::BACKTO_URL);
+    }
+
+    static function unset_backto_url() {
+        self::unset_session(self::BACKTO_URL);
     }
 }
 

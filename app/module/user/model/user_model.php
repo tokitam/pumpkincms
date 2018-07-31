@@ -49,7 +49,6 @@ class User_Model extends PC_Model {
     }
     
     function login() {
-    
         $error = $this->login_validate();
         
         if (count($error) == 0) {
@@ -60,15 +59,14 @@ class User_Model extends PC_Model {
 
             $this->load_rel_user($this->_user_data['id']);
             
-            $backto_url = UserInfo::get_session('backto_url');
+            $backto_url = UserInfo::get_backto_url();
             if (!empty($backto_url)) {
-                UserInfo::unset_session('backto_url');
+                UserInfo::unset_backto_url();
                 PC_Util::redirect($backto_url);
             } else if (empty($_SESSION['from_url'])) {
                 PC_Util::redirect_top();
             } else {
                 PC_Util::redirect_top();
-                //PC_Util::redirect(PC_Config::url() . $_SESSION['from_url']);
             }
         } else {
             return $error;
