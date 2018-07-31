@@ -15,6 +15,9 @@ $pc_config['site_config'] = array(
   // router setting
   //'router_no' => 1,
 
+  // hook setting
+  //'hook' => ['anymodule'],
+
   // css_url setting
   //'css_url' => 'http://127.0.0.1/pumpkincms/public',
 
