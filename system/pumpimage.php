@@ -47,8 +47,12 @@ class PumpImage extends PumpUpload {
         return $tag;
     }
 
-    static public function get_image_url($image_id, $width=0, $height=0, $option=array()) {
-        $arr = self::get_url_raw($image_id, $width, $height, $option);
+    static public function get_image_path($image_id, $width=0, $height=0, $option=array()) {
+        return self::get_image_url($image_id, $width, $height, $option, true);
+    }
+
+    static public function get_image_url($image_id, $width=0, $height=0, $option=array(), $only_path=false) {
+            $arr = self::get_url_raw($image_id, $width, $height, $option, $only_path);
         if ($arr == false) {
             return self::get_no_image_url();
         }
@@ -56,7 +60,7 @@ class PumpImage extends PumpUpload {
         return $arr['url'];
     }
 
-    static public function get_url_raw($image_id, $width=0, $height=0, $option=array()) {
+    static public function get_url_raw($image_id, $width=0, $height=0, $option=array(), $only_path=false) {
         global $pumpform_config;
 
         PC_Util::include_language_file('image');
@@ -89,7 +93,11 @@ class PumpImage extends PumpUpload {
         }
 
         $styles = array();
-        $url = PC_Config::url() . '/image/i/' . intval($image_id) . '_' . $code;
+        if ($only_path) {
+            $url = '/image/i/' . intval($image_id) . '_' . $code;
+        } else {
+            $url = PC_Config::url() . '/image/i/' . intval($image_id) . '_' . $code;
+        }
         $org_size = $url;
         $wh = '';
 

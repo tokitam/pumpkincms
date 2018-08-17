@@ -18,14 +18,15 @@ class image_upload extends PC_Controller {
         }
 
         $json = [];
-        $json['fileName'] = $_FILES[$column]['tmp_name'];
+        $url = PC_Config::url() . PumpImage::get_image_path($image_id);
+        $json['fileName'] = basename($url);
         if (empty($json['fileName'])) {
             $json['fileName'] = 'image_file';
         }
         $json['uploaded'] = 1;
-        $json['url'] = PumpImage::get_image_url($image_id);
+        $json['url'] = $url;
         header('Content-type: application/json');
-        echo json_encode($json);
+        echo json_encode($json, JSON_UNESCAPED_SLASHES);
         exit();
     }
 }
