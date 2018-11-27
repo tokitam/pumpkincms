@@ -9,9 +9,10 @@
                   <?php endif ; ?>
                 <fieldset>
                   <legend><?php echo _MD_USER_REGISTER ?></legend>
+	
+                 <?php if (false && PC_Config::get('flg_multi_site')) : ?>
                   <div class="form-group">
                     <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_MULTI_SITE_NAME ?></label>
-             <?php if (PC_Config::get('flg_multi_site')) : ?>
                     <div class="col-lg-9">
              <?php if (PC_Config::get('multi_site_type') == user_register::MULTI_SITE_TYPE_DIRECTORY) : ?>
              <p><b>example.com/(<?php echo _MD_USER_SITE_ID ?>)</b></p>
@@ -28,7 +29,8 @@
                       ?>
                     </div>
                   </div> <!-- from-group -->
-                  <?php endif ; ?>
+                  <?php endif ; ?> <!-- flg_multi_site --> 
+	
                   <div class="form-group">
                     <label for="inputId" class="col-lg-3 control-label"><?php echo _MD_LOGIN_ID ?></label>
                     <div class="col-lg-9">
