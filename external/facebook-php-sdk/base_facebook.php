@@ -162,6 +162,20 @@ abstract class BaseFacebook
    * @var array
    */
   public static $DOMAIN_MAP = array(
+    //'api'         => 'https://api.facebook.com/',
+    //'api_video'   => 'https://api-video.facebook.com/',
+    //'api_read'    => 'https://api-read.facebook.com/',
+    //'graph'       => 'https://graph.facebook.com/',
+    //'graph_video' => 'https://graph-video.facebook.com/',
+    //'www'         => 'https://www.facebook.com/',
+									
+    //'api'         => 'https://api.facebook.com/v3.2/',
+    //'api_video'   => 'https://api-video.facebook.com/v3.2/',
+    //'api_read'    => 'https://api-read.facebook.com/v3.2/',
+    //'graph'       => 'https://graph.facebook.com/v3.2/',
+    //'graph_video' => 'https://graph-video.facebook.com/v3.2/',
+    //'www'         => 'https://www.facebook.com/v3.2/',
+									
     'api'         => 'https://api.facebook.com/v2.8/',
     'api_video'   => 'https://api-video.facebook.com/v2.8/',
     'api_read'    => 'https://api-read.facebook.com/v2.8/',
@@ -625,6 +639,7 @@ abstract class BaseFacebook
     if ($scopeParams && is_array($scopeParams)) {
       $params['scope'] = implode(',', $scopeParams);
     }
+    $currentUrl = isset($params['currentUrl']) ? $params['currentUrl'] : $currentUrl;
 
     return $this->getUrl(
       'www',

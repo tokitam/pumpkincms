@@ -9,12 +9,12 @@ class OAuth_facebook_Model extends PC_Model {
         $this->table_name = 'user_facebook';
     }
     
-    function register($user_id, $facebook_id, $email, $name, $link) {
+    function register($user_id, $facebook_id, $email, $name, $link, $icon_url) {
         
         $db = PC_DBSet::get();
         
         $sql = 'INSERT INTO ' . $db->prefix($this->table_name);
-        $sql .= ' ( site_id, user_id, facebook_id, email, name, link, ';
+        $sql .= ' ( site_id, user_id, facebook_id, email, name, link, icon_url, ';
         $sql .= ' reg_time, mod_time, reg_user, mod_user) ';
         $sql .= ' VALUES ( ';
         $sql .= intval(SiteInfo::get_site_id()) . ', ';
@@ -23,6 +23,7 @@ class OAuth_facebook_Model extends PC_Model {
         $sql .= $db->escape($email) . ', ';
         $sql .= $db->escape($name) . ', ';
         $sql .= $db->escape($link) . ', ';
+        $sql .= $db->escape($icon_url) . ', ';
         $sql .= time();
         $sql .= ',  0, 0, 0 )';
         

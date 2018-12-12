@@ -509,6 +509,19 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
             return $db->fetch_row($sql);
     }
     
+    function update($id, $params) {
+        $db = PC_DBSet::get();
+        
+        $sql = 'UPDATE ' . $db->prefix($this->table_name);
+        $sql .= " SET ";
+        foreach ($params as $column => $val) {
+            $sql .= " " . $db->column_escape($column) . " = " . $db->escape($val) . " ";
+        }
+        $sql .= " WHERE id = '" . intval($id) . "' ";
+
+        return $db->query($sql);
+    }
+
     function update_password($id, $password) {
         $db = PC_DBSet::get();
         

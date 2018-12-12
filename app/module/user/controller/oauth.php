@@ -25,28 +25,29 @@ class user_oauth extends PC_Controller {
             $this->oauth->login($user);
         }
 
-        PC_Debug::log('oauthdebug1', __FILE__, __LINE__);
         if (PC_Config::get('sns_register_no_mail')) {
-            PC_Debug::log('oauthdebug2', __FILE__, __LINE__);
             $sns_user = array();
-            $sns_user['name'] = $this->oauth->get_name();
+            $name = $sns_user['name'] = $this->oauth->get_name();
             $user_model = new user_model();
             $user_id = $user_model->register($sns_user);
         
             $this->oauth->register($user_id);
-        
             $sns_user = $this->oauth->get_user();
+
+            $user_model->update($user_id, ['name' => $name]);
             $icon_url = $this->oauth->get_icon_url($sns_user);
 
-            $buf = file_get_contents($icon_url);
-            $tmpfile = tempnam(sys_get_temp_dir(), 'pump_ex_image');
-            file_put_contents($tmpfile, $buf);
+			if (!empty($icon_url)) {
+                $buf = file_get_contents($icon_url);
+                $tmpfile = tempnam(sys_get_temp_dir(), 'pump_ex_image');
+                file_put_contents($tmpfile, $buf);
         
-            $pumpimage = new PumpImage();
-            $image_id = $pumpimage->upload(null, $tmpfile);
-            $user_model->update_image_id($user_id, $image_id);
+                $pumpimage = new PumpImage();
+                $image_id = $pumpimage->upload(null, $tmpfile);
+                $user_model->update_image_id($user_id, $image_id);
         
-            unlink($tmpfile);
+                unlink($tmpfile);
+			}
 
             if (method_exists($this->oauth, 'get_email')) {
                 $user_model->update_email($user_id, $this->oauth->get_email());
@@ -55,12 +56,12 @@ class user_oauth extends PC_Controller {
             if (method_exists($this->oauth, 'finish')) {
                 $this->oauth->finish();
             }
-        
+
             $this->oauth->login($sns_user);
-        
+
             exit();
         }
-        
+
         $this->type = '';
         if (! empty($_GET['type'])) {
             $this->type = $_GET['type'];
@@ -177,6 +178,7 @@ class user_oauth extends PC_Controller {
                     $this->oauth->register($user_id);
                     // login
                     $sns_user = $this->oauth->get_user();
+                    $user_model->update($user_id, ['name' => $sns_user['name']]);
                     PC_Notification::set(_MD_USER_LOGINED);
                     unset($_SESSION['oauth_type']);
                     ActionLog::log(ActionLog::LOGIN);
