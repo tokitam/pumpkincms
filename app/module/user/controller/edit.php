@@ -1,14 +1,22 @@
 <?php
 
 require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
+require_once PUMPCMS_APP_PATH . '/module/user/class/user_util.php';
 
 class user_edit extends PC_Controller {
     public function __construct() {
-        //PumpForm::$redirect_url = PC_Config::url() . '/simplebbs/';
-
         $this->_flg_scaffold = true;
         $this->_module = 'user';
         $this->_table = 'user';
+
+        PumpForm::$delete_post_process = function() {
+            PC_Config::set('delete_post_redirect', PC_Config::url());
+            $user_id = PC_Config::get('dir4');
+            User_Util::delete_user($user_id);
+            ActionLog::log(ActionLog::USER_DELETE);
+            $user_model = new user_model();
+            $user_model->logout();
+        };
     }
 
     public function index() {

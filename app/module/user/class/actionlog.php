@@ -9,6 +9,7 @@ class ActionLog {
     const TEL_AUTH_FINISH = 6;
     const ERROR = 7;
     const INFO = 8;
+    const USER_DELETE = 9;
     const MESSAGE_MAX_SIZE = 255;
     
     static $type_list = [

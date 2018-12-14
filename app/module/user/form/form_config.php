@@ -311,3 +311,49 @@ $pumpform_config['user']['user_rel'] = array(
 
         ),
 );
+
+$pumpform_config['user']['temp_update_mail'] = array(
+    'module' => 'user',
+    'title' => 'temp_update_mail',
+    'table' => 'temp_update_mail',
+           
+    'default_sort' => 'd_id',
+           
+    'column' => array(
+
+        'user_id' => array('name' => 'user_id',
+                         'type' => PUMPFORM_INT,
+                         'title' => 'user_id',
+                         'required' => 0,
+                         'visible' => 1,
+                         'registable' => 1,
+                         'editable' => 1,
+                         'list_visible' => 1,),
+        'email' => array('name' => 'email',
+                         'type' => PUMPFORM_EMAIL,
+                         'title' => 'email',
+                         'required' => 1,
+                         'visible' => 1,
+                         'registable' => 1,
+                         'editable' => 1,
+                         'list_visible' => 1,),
+        'flg_processed' => array('name' => 'flg_processed',
+                         'type' => PUMPFORM_INT,
+                         'title' => 'flg_processed',
+                         'required' => 0,
+                         'visible' => 1,
+                         'registable' => 1,
+                         'editable' => 1,
+                         'list_visible' => 1,),
+        'code' => array('name' => 'code',
+                         'type' => PUMPFORM_TEXT,
+                         'title' => 'code',
+                         'required' => 0,
+                         'visible' => 1,
+                         'registable' => 1,
+                         'editable' => 1,
+                         'list_visible' => 1,
+                         'maxlength' => 32),
+
+        ),
+);
