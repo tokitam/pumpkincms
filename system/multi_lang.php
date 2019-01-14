@@ -6,6 +6,8 @@ class PC_MultiLang {
         if (isset($_GET['pump_lang'])) {
             if ($_GET['pump_lang'] == 'japanese') {
                 $_SESSION['lang'] = 'japanese';
+            } else if ($_GET['pump_lang'] == 'chinese') {
+                $_SESSION['lang'] = 'chinese';
             } else {
                 $_SESSION['lang'] = 'english';
             }
