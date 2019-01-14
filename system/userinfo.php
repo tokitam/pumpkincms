@@ -7,6 +7,7 @@ class UserInfo {
     const AUTH_MASTER_ADMIN = 1;
     const AUTH_SITE_ADMIN = 2;
     const BACKTO_URL = 'backto_url';
+    static private $_other_data = [];
     
     static function get($key) {
         return self::get_data($key);
@@ -140,6 +141,16 @@ class UserInfo {
             $image_id = $user['image_id'];
         }
         return PumpImage::get_image_url($image_id, $width, $height, array('crop' => true));
+    }
+
+    static function get_user_data($user_id, $param) {
+        require_once PUMPCMS_APP_PATH . '/module/user/model/user_model.php';
+        $user_model = new User_Model();
+        $user = $user_model->get_user_by_id($user_id);
+        if (empty($user[$param])) {
+            return '';
+        }
+        return $user[$param];
     }
 
     static function set_session($key, $value) {
