@@ -196,12 +196,13 @@ foreach ($form as $column) {
         } else {
             $target_id = PC_Config::get('dir4');
         }
+        $target_id = $column['option']['link_table']['target_id'];
         $link_column = $column['option']['link_table']['id1'];
         $link_list = $link_pumpormap->get_list('`' . $link_column . '` = ' . intval($target_id), 0, 1000);
 
         $link = array();
         foreach ($link_list as $value) {
-            @$link[$value['option_id']] = 1;
+            @$link[$value[$column['option']['link_table']['id2']]] = 1;
         }
 
         foreach ($options as $key => $option) {

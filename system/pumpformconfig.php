@@ -26,6 +26,9 @@ class PumpFormConfig {
             $c = PC_Config::get('extra_user_profile');
             $module = $c['module'];
             $extra_file = PUMPCMS_APP_PATH . '/module/' . $module . '/form/extra_form_config_user.php';
+            if (is_readable($extra_file)) {
+                require_once $extra_file;
+            }    
         }
 
         $file = PUMPCMS_APP_PATH . '/module/' . $module . '/form/form_config.php';
@@ -35,11 +38,6 @@ class PumpFormConfig {
         }
 
         self::$_files[$module] = 1;
-
-        if (is_readable($extra_file)) {
-            require_once $extra_file;
-            return;
-        }
 
         require_once $file;
     }
