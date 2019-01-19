@@ -14,6 +14,7 @@
     <title><?php echo SiteInfo::get('site_title'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/bootstrap.css" media="screen">
     <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/assets/css/bootswatch.css">
     <link rel="stylesheet" href="<?php echo SiteInfo::get_css_url(); ?>/theme/<?php echo SiteInfo::get('theme') ?>/custom.css">
@@ -64,6 +65,7 @@
       <div class="container">
         <div class="navbar-header" style="border: 1px;">
           <a href="<?php echo PC_Config::url() ?>" class="navbar-brand">PumpkinCMS</a>
+          
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -75,7 +77,11 @@
           <ul class="nav navbar-nav navbar-right">
 
 <?php if (UserInfo::is_logined()) : ?>
-
+<?php if (PC_Config::get('use_direct_message')) : ?>
+            <li class="nav-item visible-xs visible-sm visible-md visible-lg">
+              <a class="nav-link " style="padding-bottom: 0px;" data-caret="false" role="button" aria-haspopup="false" aria-expanded="false" data-toggle="modal" onclick="$('#myModal').modal('show');"><i class="material-icons email">mail_outline</i><span class="pumpkin-notification-badge" id="pumpkin-notification-badge"><?php echo PC_Config::get('num_of_dm') ?></span></a>
+            </li>
+<?php endif ; ?>
 <?php if (UserInfo::is_master_admin()) : ?>
             <li>
               <a href="<?php echo PC_Config::url() ?>/admin/"><?php echo _MD_USER_MASTER_ADMIN ?></a>
@@ -167,6 +173,103 @@
         </div>
         </div>
       </footer>
+
+    <!-- Modal -->
+    <div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><?php echo _MD_MESSAE_TITLE ?></h4>
+          </div>
+          <div class="modal-body">
+          <ul class="list-group list-group-fit">
+        
+        <li class="list-group-item" style="background-color: #EEE;">
+          <div class="media">
+            <div class="media-left media-middle hidden-sm-down">
+              <a class="user-dialog-link">
+              <img src="http://sesxion.com/image/i/29_6gacf4jx_300x300_c.jpg" alt="" class="img-circle" width="40" targetid="3">
+              </a>
+            </div>
+            <div class="media-body media-middle">
+              <h4 class="card-title m-b-0"><a class="comment-author user-dialog-link"><span targetid="3">toipu</span></a><span class="hidden-sm-down"> <small> | 2018/12/27 14:32 | aaa</small></span> </h4>
+              <!--
+              <small> <span class="text-muted">created</span>: 4 days ago</small>
+              <small class="m-l-1">
+                <span class="text-muted">by</span>: <a href="#">Andrew Brain</a>
+              </small>
+              -->
+            </div>
+            <div class="media-right media-middle right">
+              <div class="text-muted center">
+                <a type="button" class="btn btn-primary btn-rounded sesxion-member-kick" href="http://sesxion.com/dm/?u=toipu" authflg="1">メッセージ</a>
+              </div>
+
+            </div>
+          </div>
+        </li>
+      
+        <li class="list-group-item" style="background-color: #EEE;">
+          <div class="media">
+            <div class="media-left media-middle hidden-sm-down">
+              <a class="user-dialog-link">
+              <img src="http://sesxion.com/image/i/11_j6j00pvk_300x300_c.jpg" alt="" class="img-circle" width="40" targetid="147">
+              </a>
+            </div>
+            <div class="media-body media-middle">
+              <h4 class="card-title m-b-0"><a class="comment-author user-dialog-link"><span targetid="147">inajey</span></a><span class="hidden-sm-down"> <small> | 2017/09/25 10:07 | セッションへ招待されました！ http:...</small></span> </h4>
+              <!--
+              <small> <span class="text-muted">created</span>: 4 days ago</small>
+              <small class="m-l-1">
+                <span class="text-muted">by</span>: <a href="#">Andrew Brain</a>
+              </small>
+              -->
+            </div>
+            <div class="media-right media-middle right">
+              <div class="text-muted center">
+                <a type="button" class="btn btn-primary btn-rounded sesxion-member-kick" href="http://sesxion.com/dm/?u=inajey" authflg="1">メッセージ</a>
+              </div>
+
+            </div>
+          </div>
+        </li>
+      
+        <li class="list-group-item" style="background-color: #EEE;">
+          <div class="media">
+            <div class="media-left media-middle hidden-sm-down">
+              <a class="user-dialog-link">
+              <img src="http://sesxion.com/image/i/45_z1127k6j_300x300_c.jpg" alt="" class="img-circle" width="40" targetid="5">
+              </a>
+            </div>
+            <div class="media-body media-middle">
+              <h4 class="card-title m-b-0"><a class="comment-author user-dialog-link"><span targetid="5">tokitafb</span></a><span class="hidden-sm-down"> <small> | 2016/08/01 07:59 | gっっt</small></span> </h4>
+              <!--
+              <small> <span class="text-muted">created</span>: 4 days ago</small>
+              <small class="m-l-1">
+                <span class="text-muted">by</span>: <a href="#">Andrew Brain</a>
+              </small>
+              -->
+            </div>
+            <div class="media-right media-middle right">
+              <div class="text-muted center">
+                <a type="button" class="btn btn-primary btn-rounded sesxion-member-kick" href="http://sesxion.com/dm/?u=tokitafb" authflg="1">メッセージ</a>
+              </div>
+
+            </div>
+          </div>
+        </li>
+      </ul>
+          </div>
+          <!--
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
 
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo SiteInfo::get_css_url() ?>/theme/default/assets/js/bootswatch.js"></script>

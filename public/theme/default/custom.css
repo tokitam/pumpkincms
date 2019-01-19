@@ -671,4 +671,9 @@ footer a:active {
   border-radius: 15px;
 }
 
+.pumpkin-notification-badge {
+	color: red;
+	font-weight: bold;
+	vertical-align: super;
+}
 

@@ -196,4 +196,56 @@ $(document).ready(function(){
       
         reader.readAsDataURL(file);
     });
+
+    $('.pump_message_item').click(function(event){
+        var target = $(event.target);
+        message_id = target.attr('messageid');
+        //alert('ok ' + targetid);
+
+        url = $('#base_url').val() + '/message/ajax_get_modal';
+
+        $.ajax({
+            url: url,
+            type:'GET',
+            data:{
+                'messageid': message_id
+            }
+        })
+        // Ajaxリクエストが成功した時発動
+        .done( (data) => {
+            //alert(data);
+            $('#pump-message-modal-default').remove();
+            $('body').append(data);
+            $('#pump-message-modal-default').modal('show');
+            //console.log(data);
+        })
+        // Ajaxリクエストが失敗した時発動
+        .fail( (data) => {
+            //$('.result').html(data);
+            console.log(data);
+        });
+return;
+        url = $('#base_url').val() + '/message/ajax_get_timeline';
+
+        $.ajax({
+            url: url,
+            type:'GET',
+            data:{
+                'messageid': message_id
+            }
+        })
+        // Ajaxリクエストが成功した時発動
+        .done( (data) => {
+            //alert(data);
+            $('#pump-message-modal-default').remove();
+            $('body').append(data);
+            $('#pump-message-modal-default').modal('show');
+            //console.log(data);
+        })
+        // Ajaxリクエストが失敗した時発動
+        .fail( (data) => {
+            //$('.result').html(data);
+            console.log(data);
+        });
+    });
 });

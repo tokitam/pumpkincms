@@ -165,7 +165,7 @@ if (!empty($form_config['add_path'])) {
                 if (@$column['crop']) {
                     $o['crop'] = 1;
                 }
-                $html .= PumpImage::get_tag($value, 60, 60, $o);
+                $html .= PumpImage::get_tag($value, 120, 120, $o);
             } else {
                 $html .= htmlspecialchars(mb_substr($value, 0, 20, 'utf8'));
             }

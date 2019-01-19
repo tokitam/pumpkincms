@@ -31,6 +31,7 @@ require_once PUMPCMS_SYSTEM_PATH . '/debug.php';
 require_once PUMPCMS_ROOT_PATH . '/external/password_compat/lib/password.php';
 require_once PUMPCMS_SYSTEM_PATH . '/csrf_protection.php';
 require_once PUMPCMS_SYSTEM_PATH . '/hook.php';
+require_once PUMPCMS_APP_PATH . '/module/message/class/message_util.php';
 
 $main = new PC_Main();
 $main->run();
