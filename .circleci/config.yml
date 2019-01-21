@@ -1,3 +1,6 @@
 version: 2
+jobs:
+  build:
+      working_directory: ~/canary-python
 
 
