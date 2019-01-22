@@ -1,5 +1,0 @@
-test:
-  override:
-    - echo Hello World
-
-
