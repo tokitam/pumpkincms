@@ -31,6 +31,7 @@ class PC_Main {
         $this->session_config();
         $this->render = new PC_Render();
         $this->analyze_url();
+        $this->check_hook();
         $this->execute();
         $this->render->render();
 
@@ -260,6 +261,13 @@ class PC_Main {
         SiteInfo::set('dir2', $this->_dir2);
         SiteInfo::set('dir3', $this->_dir3);
         SiteInfo::set('dir4', $this->_dir4);
+    }
+
+    function check_hook() {
+        if (UserInfo::is_loggedin() && PC_Config::get('use_direct_message')) {
+            $num = Message_Util::get_notification_count();
+            PC_Config::set('num_of_dm', $num);
+        }
     }
 
     function execute() {

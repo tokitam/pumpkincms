@@ -37,6 +37,7 @@ define('_MD_USER_TIME_OVER', 'It is past expiration date');
 define('_MD_USER_PASSWORD_NOT_ACCORD', 'A password does not accord');
 define('_MD_USER_UPDATED_PASSWORD', 'Updated password');
 define('_MD_USER_EDIT_PROFILE', 'Edit profile');
+define('_MD_USER_UPDATE_MAIL', 'Update mail');
 define('_MD_USER_EDIT_ACCOUNT', 'Edit account');
 define('_MD_USER_DELETE_USER_REL', 'Do you delete uesr relation?');
 define('_MD_USER_DELETED_USER_REL', 'Deleted.');
@@ -119,3 +120,17 @@ Please access URL and reset password.
 define('_MD_MULTI_SITE_NAME', 'Site name');
 define('_MD_USER_SITE_ID', 'Site ID');
 define('_MD_USER_SITE_ID_INFO', 'Please enter the site name with alphanumeric characters and hyphens.');
+define('_MD_USER_UPDATE_MAIL_TITLE', '[[site_title]] Update mail address confirm');
+define('_MD_USER_UPDATE_MAIL_MESSAGE', 'Mail address confirm.
+Access to this URL.
+
+[update_mail_url]
+
+---
+
+[site_title]
+[base_url]
+
+');
+define('_MD_USER_UPDATE_MAIL_ERROR_CODE', 'Code not found.');
+define('_MD_USER_UPDATED_MAIL', 'Updated mail address.');

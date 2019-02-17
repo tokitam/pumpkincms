@@ -269,6 +269,10 @@ class PumpORMAP {
                 $values[$p] = $password;
                 $types[$p] = PC_Db::T_STRING;
                 array_push($params, $p);
+            } else if ($column['type'] == PUMPFORM_DATETIME) {
+                $values[$p] = strtotime(@$post[$column['name']]);
+                $types[$p] = PC_Db::T_STRING;
+                array_push($params, $p);
             } else if ($column['type'] == PUMPFORM_IMAGE) {
 
                 $image_id = $pumpimage->upload($column['name']);
@@ -465,6 +469,10 @@ class PumpORMAP {
                 $password = PC_Util::password_hash($post[$column['name']]);
                 $s = ' ' . $db->column_escape($column['name']) . ' = ';
                 $values[$p] = $password;
+                $s .= $p;
+            } else if ($column['type'] == PUMPFORM_DATETIME) {
+                $s = ' ' . $db->column_escape($column['name']) . ' = ';
+                $values[$p] = strtotime($post[$column['name']]);
                 $s .= $p;
             } else if ($column['type'] == PUMPFORM_IMAGE) {
                 if (@$post[$column['name'] . '_delete']) {

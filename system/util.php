@@ -139,6 +139,16 @@ class PC_Util {
     static function include_language_file($module) {
         $lang_file = PUMPCMS_APP_PATH . '/module/' . $module . '/language/' . PC_Config::get('language') . '/main.php';
         $english_file = PUMPCMS_APP_PATH . '/module/' . $module . '/language/english/main.php';
+        $extra_lang_file = '';
+
+        if ($module == 'user' && PC_Config::get('extra_user_profile')) {
+            $c = PC_Config::get('extra_user_profile');
+            $module = $c['module'];
+            $extra_lang_file = PUMPCMS_APP_PATH . '/module/' . $module . '/language/' . PC_Config::get('language') . '/extra_main.php';
+            if (file_exists($extra_lang_file)) {
+                require_once $extra_lang_file;
+            }
+        }
 
         if (file_exists($lang_file)) {
             require_once $lang_file;

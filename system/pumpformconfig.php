@@ -21,15 +21,24 @@ class PumpFormConfig {
 
         $module = preg_replace('/[^0-9A-Za-z_]/', '', $module);
 
+        $extra_file = '';
+        if ($module == 'user' && PC_Config::get('extra_user_profile')) {
+            $c = PC_Config::get('extra_user_profile');
+            $module = $c['module'];
+            $extra_file = PUMPCMS_APP_PATH . '/module/' . $module . '/form/extra_form_config_user.php';
+            if (is_readable($extra_file)) {
+                require_once $extra_file;
+            }    
+        }
+
         $file = PUMPCMS_APP_PATH . '/module/' . $module . '/form/form_config.php';
 
-        if (is_readable($file) == false) {
+        if (is_readable($extra_file) == false && is_readable($file) == false) {
             PC_Abort::error('File not found:' . $file, __FILE__, __LINE__);
         }
 
-        require_once $file;
-
         self::$_files[$module] = 1;
 
+        require_once $file;
     }
 }

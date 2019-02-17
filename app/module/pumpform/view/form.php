@@ -196,12 +196,13 @@ foreach ($form as $column) {
         } else {
             $target_id = PC_Config::get('dir4');
         }
+        $target_id = $column['option']['link_table']['target_id'];
         $link_column = $column['option']['link_table']['id1'];
         $link_list = $link_pumpormap->get_list('`' . $link_column . '` = ' . intval($target_id), 0, 1000);
 
         $link = array();
         foreach ($link_list as $value) {
-            @$link[$value['option_id']] = 1;
+            @$link[$value[$column['option']['link_table']['id2']]] = 1;
         }
 
         foreach ($options as $key => $option) {
@@ -247,8 +248,20 @@ foreach ($form as $column) {
                 $form_html .= ' pattern="' . $column['pattern'] . '" ';
             }
             $form_html .= ' placeholder="'. @$column['placeholder'] . '" autocomplete="off" ';
+        } else if ($column['type'] == PUMPFORM_TIME) {
+            $form_html .= '<input class="form-control" type="datetime" ';
+            if (@$column['pattern']) {
+                $form_html .= ' pattern="' . $column['pattern'] . '" ';
+            }
+            $form_html .= ' placeholder="'. @$column['placeholder'] . '" autocomplete="off" ';
         } else if ($column['type'] == PUMPFORM_EMAIL) {
             $form_html .= '<input class="form-control" class="form-control"  type="email"';
+        } else if ($column['type'] == PUMPFORM_DATETIME) {
+            $form_html .= '<input class="form-control" class="form-control"  type="datetime"';
+            if (@$column['pattern']) {
+                $form_html .= ' pattern="' . $column['pattern'] . '" ';
+            }
+            $form_html .= ' placeholder="'. @$column['placeholder'] . '" autocomplete="off" ';
         } else if ($column['type'] == PUMPFORM_YOUTUBE) {
             $form_html .= '<input class="form-control" class="form-control"  type="text"';
         } else if ($column['type'] == PUMPFORM_PASSWORD) {
@@ -258,6 +271,12 @@ foreach ($form as $column) {
         $form_html .= " name='" . $column['name'] . "' ";
         if ($column['type'] == PUMPFORM_PASSWORD) {
             // do nothing
+        } else if ($column['type'] == PUMPFORM_DATETIME) {
+            if (@$_POST[$column['name']]) {
+                $form_html .= " value='". htmlspecialchars(strftime('%Y/%m/%d %H:%M', $_POST[$column['name']])) . "'";
+            } else if (@$item[$column['name']]) {
+                $form_html .= " value='". htmlspecialchars(strftime('%Y/%m/%d %H:%M', $item[$column['name']])) . "'";
+            }
         } else if (@$_POST[$column['name']]) {
             $form_html .= " value='". htmlspecialchars($_POST[$column['name']]) . "'";
         } else if (@$item[$column['name']]) {

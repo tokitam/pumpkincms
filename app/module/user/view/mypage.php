@@ -27,7 +27,9 @@ if (PC_Config::get('use_tel_auth')) {
 }
 ?>
 <br />
-<a href="<?php echo PC_Config::url() ?>/user/edit/" class="btn btn-default"><?php echo _MD_USER_EDIT_PROFILE ?></a><br />
+<a href="<?php echo PC_Config::url() ?>/user/edit/" class="btn btn-default"><?php echo _MD_USER_EDIT_PROFILE ?></a>
+
+<a href="<?php echo PC_Config::url() ?>/user/update_mail/" class="btn btn-default"><?php echo _MD_USER_UPDATE_MAIL ?></a><br />
 <?php if (PC_Config::get('use_multi_account')) : ?>
 <a href="<?php echo PC_Config::url() ?>/user/user_rel/" class="btn btn-default"><?php echo _MD_USER_ADD_ACCOUNT ?></a><br />
 <?php

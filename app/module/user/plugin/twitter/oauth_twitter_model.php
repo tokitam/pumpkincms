@@ -63,4 +63,13 @@ class OAuth_twitter_Model extends PC_Model {
             PC_Util::redirect_top();
         }
     }
+
+    function delete_user($user_id) {
+        $db = PC_DBSet::get();
+
+        $sql = 'DELETE FROM ' . $db->prefix($this->table_name);
+        $sql .= ' WHERE user_id = ' . intval($user_id);
+        
+        $db->query($sql);
+    }
 }

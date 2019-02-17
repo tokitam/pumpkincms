@@ -37,6 +37,7 @@ define('_MD_USER_TIME_OVER', '有効期限切れです');
 define('_MD_USER_PASSWORD_NOT_ACCORD', 'パスワードが一致しません');
 define('_MD_USER_UPDATED_PASSWORD', 'パスワードを更新しました');
 define('_MD_USER_EDIT_PROFILE', 'プロフィール編集');
+define('_MD_USER_UPDATE_MAIL', 'メール変更');
 define('_MD_USER_EDIT_ACCOUNT', 'アカウント編集');
 define('_MD_USER_DELETE_USER_REL', 'アカウント連携を解除しますか？');
 define('_MD_USER_DELETED_USER_REL', '解除しました');
@@ -119,3 +120,17 @@ define('_MD_USER_REMINDPASS_MESSAGE', 'パスワードを再設定します。
 define('_MD_MULTI_SITE_NAME', 'サイト名');
 define('_MD_USER_SITE_ID', 'サイトID');
 define('_MD_USER_SITE_ID_INFO', 'サイトIDは半角英数字および-（ハイフン）のみで入力してください。');
+define('_MD_USER_UPDATE_MAIL_TITLE', '[[site_title]]メール再設定確認');
+define('_MD_USER_UPDATE_MAIL_MESSAGE', 'メールアドレスの確認を行います。
+以下のURLへアクセスしてください。
+
+[update_mail_url]
+
+---
+
+[site_title]
+[base_url]
+
+');
+define('_MD_USER_UPDATE_MAIL_ERROR_CODE', 'コードが見つかりませんでした');
+define('_MD_USER_UPDATED_MAIL', 'メールアドレスを更新しました');
