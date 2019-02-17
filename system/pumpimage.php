@@ -832,10 +832,10 @@ class PumpImage extends PumpUpload {
             $image = self::image_rotate($image, 180, 0);
     // 上下反転
         }else if($orientation == 4){
-            $image = self::image_Flip($image);
+            $image = self::image_flip($image);
     // 反時計回りに90°回転 上下反転
         }else if($orientation == 5){
-            $image = self::image_rotate($image, 270, 0);
+            $image = self::image_rotate($image, 0, 0);
             $image = self::image_flip($image);
     // 時計回りに90°回転
         }else if($orientation == 6){
@@ -846,7 +846,7 @@ class PumpImage extends PumpUpload {
             $image = self::image_flip($image);
     // 反時計回りに90°回転
         }else if($orientation == 8){
-            $image = self::image_rotate($image, 270, 0);
+            $image = self::image_rotate($image, 90, 0);
         } else {
             return;
         }
