@@ -160,6 +160,8 @@ if (!empty($form_config['add_path'])) {
                         break;
                     }
                 }
+            } else if ($column['type'] == PUMPFORM_DATETIME) {
+                $html .= strftime('%Y/%m/%d', $value);
             } else if ($column['type'] == PUMPFORM_IMAGE) {
                 $o = array();
                 if (@$column['crop']) {
