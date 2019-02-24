@@ -148,6 +148,10 @@ class PumpImage extends PumpUpload {
         }
         $url .= '.' . self::get_ext($image['type']);
 
+        if (!empty($option['text'])) {
+            $url .= '?text=' . $option['text'];
+        }
+
         return array('url' => $url, 'data' => $image, 'wh' => $wh, 'org_size' => $org_size);
     }
 
@@ -527,6 +531,21 @@ class PumpImage extends PumpUpload {
 
         $resize = imagecopyresampled($im_out, $im_in, $dest_x, $dest_y, $src_x, $src_y, $dest_w, $dest_h, $src_w, $src_h);
     //$resize = imagecopyresized($im_out, $im_in, $dest_x, $dest_y, $src_x, $src_y, $dest_w, $dest_h, $src_w, $src_h);
+
+
+        if (isset($_GET['text'])) {
+            $fontsize = 17;
+            $text = '2019/02/16 12:56';
+            $font = '/usr/share/fonts/google-droid/DroidSans.ttf';
+            //$font = null;
+            $black = imagecolorallocate($im_out, 0, 0, 0);
+            $white = imagecolorallocate($im_out, 255, 255, 255);
+            
+            imagettftext($im_out, $fontsize, 0, 21, $r_height - 19, $black, $font, $_GET['text']);
+            imagettftext($im_out, $fontsize, 0, 20, $r_height - 20, $white, $font, $_GET['text']);
+        }
+
+
         $function_image($im_out, $dest_image, 90);
 
         imagedestroy($im_in);
