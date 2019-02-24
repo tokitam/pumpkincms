@@ -50,7 +50,12 @@ class PC_Render {
         }
 
         if (SiteInfo::get('dir1') == 'admin') {
-            include PUMPCMS_PUBLIC_PATH . '/theme/admin/theme.php';
+            if (PC_Config::get('admin_theme')) {
+                $admin_theme = PUMPCMS_PUBLIC_PATH . '/theme/' . PC_Config::get('admin_theme') . '/theme.php';
+            } else {
+                $admin_theme = PUMPCMS_PUBLIC_PATH . '/theme/admin/theme.php';
+            }
+            include $admin_theme;
         } else {
             ob_start();
             $file1 = PUMPCMS_PUBLIC_PATH . '/wptheme/'  . PC_Config::get('theme') . '/index.php';
