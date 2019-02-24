@@ -42,6 +42,12 @@ class user_edit extends PC_Controller {
         unset($pumpform_config['user']['user']['column']['flg_premium']);
         unset($pumpform_config['user']['user']['column']['payment_type']);
 
+        $func = PC_Config::get('user_edit_index_unset_hook');
+        if (!empty($func)) {
+            $func();
+        }
+
+
         $this->scaffold($this->_module, $this->_table, $method);
 /*
         if (@$_POST['name']) {
