@@ -12,7 +12,12 @@ class admin_user extends PC_Controller {
 
         PumpFormConfig::load_config($this->_module, $this->_table);
         $pumpform_config['user']['user']['column']['password']['required'] = 0;
-        $pumpform_config['user']['user']['list_php'] = PUMPCMS_APP_PATH . '/module/admin/view/user_list.php';
+        if (!empty($pumpform_config['user']['user']['admin_list_php'])) {
+            $pumpform_config['user']['user']['list_php'] = $pumpform_config['user']['user']['admin_list_php'];
+        } else {
+            $pumpform_config['user']['user']['list_php'] = PUMPCMS_APP_PATH . '/module/admin/view/user_list.php';
+        }
+
     }
 
     public function index() {
