@@ -150,6 +150,12 @@ if (!empty($form_config['add_path'])) {
                 } else {
                     $html .= strftime('%Y/%m/%d %H:%M', $value);
                 }
+            } else if ($column['type'] == PUMPFORM_DATE) {
+                if ($value == 0) {
+                    $html .= 'N/A';
+                } else {
+                    $html .= strftime('%Y/%m/%d', $value);
+                }
             } else if ($column['type'] == PUMPFORM_PRIMARY_ID) {
                 $html .= intval($value);
             } else if ($column['type'] == PUMPFORM_SELECT ||

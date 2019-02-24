@@ -34,6 +34,12 @@ foreach ($form as $column) {
         } else {
             $form_html .= strftime('%Y/%m/%d %H:%M', $value);
         }
+    } else if ($column['type'] == PUMPFORM_DATE) {
+        if ($value == 0) {
+            $form_html .= 'N/A';
+        } else {
+            $form_html .= strftime('%Y/%m/%d', $value);
+        }
     } else if ($column['type'] == PUMPFORM_URL) {
         $form_html .= sprintf('<a href="%s" target="_blank">%s</a>', $value, $value);
     } else if ($column['type'] == PUMPFORM_IMAGE) {

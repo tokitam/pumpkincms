@@ -269,7 +269,8 @@ class PumpORMAP {
                 $values[$p] = $password;
                 $types[$p] = PC_Db::T_STRING;
                 array_push($params, $p);
-            } else if ($column['type'] == PUMPFORM_DATETIME) {
+            } else if ($column['type'] == PUMPFORM_DATETIME ||
+                       $column['type'] == PUMPFORM_DATE) {
                 $values[$p] = strtotime(@$post[$column['name']]);
                 $types[$p] = PC_Db::T_STRING;
                 array_push($params, $p);
@@ -470,7 +471,8 @@ class PumpORMAP {
                 $s = ' ' . $db->column_escape($column['name']) . ' = ';
                 $values[$p] = $password;
                 $s .= $p;
-            } else if ($column['type'] == PUMPFORM_DATETIME) {
+            } else if ($column['type'] == PUMPFORM_DATETIME ||
+                       $column['type'] == PUMPFORM_DATE) {
                 $s = ' ' . $db->column_escape($column['name']) . ' = ';
                 $values[$p] = strtotime($post[$column['name']]);
                 $s .= $p;

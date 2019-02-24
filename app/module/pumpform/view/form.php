@@ -262,6 +262,12 @@ foreach ($form as $column) {
                 $form_html .= ' pattern="' . $column['pattern'] . '" ';
             }
             $form_html .= ' placeholder="'. @$column['placeholder'] . '" autocomplete="off" ';
+        } else if ($column['type'] == PUMPFORM_DATE) {
+            $form_html .= '<input class="form-control" class="form-control"  type="date"';
+            if (@$column['pattern']) {
+                $form_html .= ' pattern="' . $column['pattern'] . '" ';
+            }
+            $form_html .= ' placeholder="'. @$column['placeholder'] . '" autocomplete="off" ';
         } else if ($column['type'] == PUMPFORM_YOUTUBE) {
             $form_html .= '<input class="form-control" class="form-control"  type="text"';
         } else if ($column['type'] == PUMPFORM_PASSWORD) {
@@ -276,6 +282,12 @@ foreach ($form as $column) {
                 $form_html .= " value='". htmlspecialchars(strftime('%Y/%m/%d %H:%M', $_POST[$column['name']])) . "'";
             } else if (@$item[$column['name']]) {
                 $form_html .= " value='". htmlspecialchars(strftime('%Y/%m/%d %H:%M', $item[$column['name']])) . "'";
+            }
+        } else if ($column['type'] == PUMPFORM_DATE) {
+            if (@$_POST[$column['name']]) {
+                $form_html .= " value='". htmlspecialchars(strftime('%Y-%m-%d', $_POST[$column['name']])) . "'";
+            } else if (@$item[$column['name']]) {
+                $form_html .= " value='". htmlspecialchars(strftime('%Y-%m-%d', $item[$column['name']])) . "'";
             }
         } else if (@$_POST[$column['name']]) {
             $form_html .= " value='". htmlspecialchars($_POST[$column['name']]) . "'";
