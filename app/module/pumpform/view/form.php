@@ -285,7 +285,7 @@ foreach ($form as $column) {
             }
         } else if ($column['type'] == PUMPFORM_DATE) {
             if (@$_POST[$column['name']]) {
-                $form_html .= " value='". htmlspecialchars(strftime('%Y-%m-%d', $_POST[$column['name']])) . "'";
+                $form_html .= " value='". htmlspecialchars($_POST[$column['name']]) . "'";
             } else if (@$item[$column['name']]) {
                 $form_html .= " value='". htmlspecialchars(strftime('%Y-%m-%d', $item[$column['name']])) . "'";
             }
