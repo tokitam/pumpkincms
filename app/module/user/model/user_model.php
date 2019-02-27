@@ -251,29 +251,29 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
 
         if (!isset($_POST['email'])) {
             //array_unshift($error, _MD_USER_INPUT_EMAIL . '(1)');
-            $error['email'] = _MD_USER_INPUT_EMAIL . '(1)';
+            $error['email'] = _MD_USER_INPUT_EMAIL;
         } else {
             if (strlen($_POST['email']) < 3 || 127 < strlen($_POST['email'])) {
                 //array_unshift($error, _MD_USER_ERROR_LENGTH . '(2)');
-                $error['email'] = _MD_USER_ERROR_LENGTH . '(2)';
+                $error['email'] = _MD_USER_ERROR_LENGTH;
             }
             if (!preg_match('/[0-9A-Za-z]+/', $_POST['email'])) {
                 //array_unshift($error, _MD_USER_ERROR_LENGTH . '(3)');
-                $error['email'] = _MD_USER_ERROR_LENGTH . '(3)';
+                $error['email'] = _MD_USER_ERROR_LENGTH;
             }
         }
         
         if (!isset($_POST['password'])) {
             //array_unshift($error, _MD_USER_INPUT_PASSWORD . '(4)');
-            $error['password'] = _MD_USER_INPUT_PASSWORD . '(4)';
+            $error['password'] = _MD_USER_INPUT_PASSWORD;
         } else {
             if (strlen($_POST['password']) < 3 || 127 < strlen($_POST['password'])) {
                 //array_unshift($error, _MD_USER_ERROR_LENGTH . '(5)');
-                $error['password'] = _MD_USER_ERROR_LENGTH . '(5)';
+                $error['password'] = _MD_USER_ERROR_LENGTH;
             }
             if (!preg_match('/[0-9A-Za-z]+/', $_POST['password'])) {
                 //array_unshift($error, _MD_USER_ERROR_LENGTH . '(6)');
-                $error['password'] = _MD_USER_ERROR_LENGTH . '(6)';
+                $error['password'] = _MD_USER_ERROR_LENGTH;
             }
         }
         
@@ -288,7 +288,7 @@ PC_Debug::log('id hit', __FILE__, __LINE__);
             
             if ($this->_user_data == false || $pass_check == false) {
                 //array_unshift($error, _MD_USER_ERROR_NOTFOUND . '(7)');
-                $error['email'] = _MD_USER_ERROR_NOTFOUND . '(7)';
+                $error['email'] = _MD_USER_ERROR_NOTFOUND;
             }
         }
         
