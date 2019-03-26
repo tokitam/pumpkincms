@@ -536,8 +536,8 @@ class PumpImage extends PumpUpload {
         if (isset($_GET['text'])) {
             $fontsize = 17;
             $text = '2019/02/16 12:56';
-            $font = '/usr/share/fonts/google-droid/DroidSans.ttf';
-            //$font = null;
+            //$font = '/usr/share/fonts/google-droid/DroidSans.ttf';
+            $font = '/usr/share/fonts/dejavu/DejaVuSans.ttf';
             $black = imagecolorallocate($im_out, 0, 0, 0);
             $white = imagecolorallocate($im_out, 255, 255, 255);
             
